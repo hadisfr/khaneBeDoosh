@@ -26,7 +26,7 @@
                 </div>
             <% } %>
         <% } else { %>
-            <div class="outbox">No Result Found.</div>
+            <div class="outbox">نتیجه‌ای پیدا نشد.</div>
         <% } %>
     </body>
 </html>
