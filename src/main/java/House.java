@@ -48,7 +48,7 @@ public class House{
     }
 
     private void getDetailFromOwner(){
-        this.detail = owner.getHouse(this.id).getDetail();
+        this.detail = owner.getHouse(this.id).detail;
     }
 
     public String getPhone() {
@@ -85,9 +85,6 @@ public class House{
         return address;
     }
 
-    public HouseDetail getDetail(){
-        return detail;
-    }
 
     public House(String id, int area, BuildingType buildingType, String imageUrl, DealType dealType, int basePrice, int rentPrice, int sellPrice, User owner) {
         this.id = id;
