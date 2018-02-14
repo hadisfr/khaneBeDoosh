@@ -14,14 +14,14 @@
             <% for (House house : (ArrayList<House>)(request.getAttribute("houses"))) { %>
                 <div class="outbox grid_element">
                     <% if(house.getDealType() == DealType.RENT) { %>
-                        قیمت پایه: <%= house.getBasePrice() %> تومان
-                        قیمیت اجاره: <%= house.getRentPrice() %> تومان
+                        <div>قیمت پایه: <%= house.getBasePrice() %> تومان</div>
+                        <div>قیمیت اجاره: <%= house.getRentPrice() %> تومان</div>
                     <% } else  { %>
-                        قیمت خرید: <%= house.getSellPrice() %>
+                        <div>قیمت خرید: <%= house.getSellPrice() %></div>
                     <% } %>
-                    متراژ: <%= house.getArea() %> متر
-                    نوع: <%= house.getBuildingType() %>
-                    لینک عکس: <%= house.getImageUrl() %>
+                    <div>متراژ: <%= house.getArea() %> متر</div>
+                    <div>نوع: <%= house.getBuildingType() %></div>
+                    <div>لینک عکس: <a href='<%= house.getImageUrl() %>' target="_blank"><%= house.getImageUrl() %></a></div>
                     <a href="javascript: void(0);">اطلاعات بیشتر</a>
                 </div>
             <% } %>
