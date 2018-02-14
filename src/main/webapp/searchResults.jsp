@@ -1,4 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page import="import java.util.ArrayList" %>
+<%@ page import="main.java.House" %>
+<%@ page import="main.java.DealType" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,18 +10,23 @@
     </head>
     <body>
         <jsp:include page="haeder.jsp" />
-        <% for (House house : request.getAttribute("houses")) { %>
-            <div class="outbox grid_element">
-                <%-- rent --%>
-                قیمت پایه: ** تومان
-                قیمیت اجاره: ** تومان
-                <%-- bye --%>
-                قیمت خرید: **
-                متراژ: ** متر
-                نوع: **
-                لینک عکس: **
-                <a href="javascript: void(0);">اطلاعات بیشتر</a>
-            </div>
+        <% if(request.getAttribute("houses") != null) { %>
+            <% for (House house : (ArrayList<House>)(request.getAttribute("houses"))) { %>
+                <div class="outbox grid_element">
+                    <% if(house.getDealType() == DealType.RENT) { %>
+                        قیمت پایه: <%= house.getBasePrice() %> تومان
+                        قیمیت اجاره: <%= house.getRentPrice() %> تومان
+                    <% } else  { %>
+                        قیمت خرید: <%= house.getSellPrice() %>
+                    <% } %>
+                    متراژ: <%= house.getRentArea() %> متر
+                    نوع: <%= house.getBuildingType() %>
+                    لینک عکس: <%= house.getImageUrl() %>
+                    <a href="javascript: void(0);">اطلاعات بیشتر</a>
+                </div>
+            <% } %>
+        <% } else { %>
+            <div class="outbox">No Result Found.</div>
         <% } %>
     </body>
 </html>
