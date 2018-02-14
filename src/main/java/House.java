@@ -4,6 +4,19 @@ public class House{
 
     private HouseDetail detail;
     private User owner;
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public int getRentPrice() {
+        return rentPrice;
+    }
+
+    public int getBasePrice() {
+        return basePrice;
+    }
+
     private String imageUrl;
     private String id;
     private int rentPrice;

@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="import java.util.ArrayList" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page import="main.java.House" %>
 <%@ page import="main.java.DealType" %>
 
@@ -19,7 +19,7 @@
                     <% } else  { %>
                         قیمت خرید: <%= house.getSellPrice() %>
                     <% } %>
-                    متراژ: <%= house.getRentArea() %> متر
+                    متراژ: <%= house.getArea() %> متر
                     نوع: <%= house.getBuildingType() %>
                     لینک عکس: <%= house.getImageUrl() %>
                     <a href="javascript: void(0);">اطلاعات بیشتر</a>
