@@ -30,7 +30,7 @@ public class KhaneBeDoosh {
                 continue;
             Individual individual = (Individual) user;
             if(userID == individual.getId()){
-                individual.
+                individual.setBalance(individual.getBalance() + amount);
             }
         }
     }
