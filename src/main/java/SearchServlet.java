@@ -14,12 +14,16 @@ public class SearchServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<House> houses = new ArrayList<House>();
-        houses.addAll(KhaneBeDoosh.getInstance().filterHouses(
+        try {
+            houses.addAll(KhaneBeDoosh.getInstance().filterHouses(
                 BuildingType.parseString(request.getParameter("buildingType")),
                 DealType.parseString(request.getParameter("dealType")),
-                Integer.parseInt(request.getParameter("minArea")),
-                Integer.parseInt(request.getParameter("maxPrice"))
-        ));
+                Integer.parseInt(request.getParameter("minArea") == null ? "0" : request.getParameter("minArea")),
+                Integer.parseInt(request.getParameter("maxPrice") == null ? "0" : request.getParameter("maxPrice"))
+            ));
+        } catch(Exception e) {
+            int a = 0;
+        }
         request.setAttribute("houses", houses);
         request.getRequestDispatcher("searchResults.jsp").forward(request, response);
     }
