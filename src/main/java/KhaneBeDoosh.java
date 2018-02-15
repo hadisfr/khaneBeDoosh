@@ -10,6 +10,7 @@ public class KhaneBeDoosh {
     private KhaneBeDoosh(){
         Individual individual = new Individual("بهنام همایون", 200, "09123456789", "behnam", "p@sw00rd");
         users.add(individual);
+        users.add(RealEstateAcm.getInstance());
         addHouse("398y2iuwjndwksfsd", 200, BuildingType.APARTMENT, "http://google.com",
                 individual, 100, 200, "address", "09123456789", "description", "2038-02-12");
         addHouse("roshanpazhooh", 800, BuildingType.VILLA, "http://yahoo.com",

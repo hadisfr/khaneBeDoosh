@@ -1,11 +1,21 @@
 package main.java;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class RealEstate extends User{
 
-    public RealEstate(String name){
+    protected String uri;
+
+    public RealEstate(String name, String uri){
         super(name);
+        this.uri = uri;
+    }
+
+    public abstract ArrayList<House> getHouses();
+
+    public ArrayList<House> searchHouses(BuildingType buildingType, DealType dealType, int minArea, int maxPrice) {
+        return filterHouses(getHouses(), buildingType, dealType, minArea, maxPrice);
     }
 
 }
