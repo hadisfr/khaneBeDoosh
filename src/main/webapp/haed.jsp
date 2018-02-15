@@ -6,6 +6,7 @@
         background: #eee;
         font-family: Yekan, Tahoma, Sans-Serif;
         direction: rtl;
+        text-align: center;
     }
     div.outbox {
         padding: 16px;
@@ -21,7 +22,7 @@
         color: white;
     }
     div.grid_element {
-        width: 32%;
+        width: 27%;
         display: inline-block;
     }
     form {

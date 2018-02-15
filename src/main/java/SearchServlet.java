@@ -18,11 +18,12 @@ public class SearchServlet extends HttpServlet {
             houses.addAll(KhaneBeDoosh.getInstance().filterHouses(
                 BuildingType.parseString(request.getParameter("buildingType")),
                 DealType.parseString(request.getParameter("dealType")),
-                Integer.parseInt(request.getParameter("minArea") == null ? "0" : request.getParameter("minArea")),
-                Integer.parseInt(request.getParameter("maxPrice") == null ? "0" : request.getParameter("maxPrice"))
+                Integer.parseInt(request.getParameter("minArea") == "" ? "0" : request.getParameter("minArea")),
+                Integer.parseInt(request.getParameter("maxPrice") == "" ? "0" : request.getParameter("maxPrice"))
             ));
         } catch(Exception e) {
-            int a = 0;
+            request.setAttribute("msg", "استثنا: ‪" + e);
+            request.getRequestDispatcher("/").forward(request, response);
         }
         request.setAttribute("houses", houses);
         request.getRequestDispatcher("searchResults.jsp").forward(request, response);

@@ -2,17 +2,18 @@ package main.java;
 
 public abstract class House{
 
-    private HouseDetail detail;
-    private User owner;
+    protected HouseDetail detail;
+    protected User owner;
+    protected String imageUrl;
+    protected String id;
+    protected int area;
+    protected BuildingType buildingType;
+
+    public abstract DealType getDealType();
 
     public String getImageUrl() {
         return imageUrl;
     }
-
-    private String imageUrl;
-    private String id;
-    private int area;
-    private BuildingType buildingType;
 
     public String getId() {
         return id;
@@ -26,9 +27,7 @@ public abstract class House{
         return buildingType;
     }
 
-    public abstract DealType getDealType();
-
-    private void getDetailFromOwner(){
+    protected void getDetailFromOwner(){
         this.detail = owner.getHouse(this.id).detail;
     }
 

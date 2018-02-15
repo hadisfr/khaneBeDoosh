@@ -7,13 +7,12 @@ public class Individual extends User{
 
     private static int counter = 1000;
 
-    String phone;
-    int balance;
-    int id;
-    String username;
-    String password;
-
-    protected HashMap<String, House> houses = new HashMap<String, House>();
+    private String phone;
+    private int balance;
+    private int id;
+    private String username;
+    private String password;
+    private HashMap<String, House> houses = new HashMap<String, House>();
 
     public int getId() {
         return id;
@@ -21,12 +20,15 @@ public class Individual extends User{
 
     ArrayList<String> paidHouses = new ArrayList<String>();
 
-    public Individual(int balance, String name) {
+    public Individual(String name, int balance, String phone, String username, String password) {
         super(name);
         if(balance < 0)
             balance = 0;
         this.balance = balance;
         this.id = counter++;
+        this.phone =  phone;
+        this.username = username;
+        this.password = password;
     }
 
     public boolean hasPaidforHouse(String id){

@@ -4,17 +4,18 @@ import java.util.ArrayList;
 
 public class KhaneBeDoosh {
 
-    ArrayList<User> users = new ArrayList<User>();
-
+    private ArrayList<User> users = new ArrayList<User>();
     private static KhaneBeDoosh khaneBedoosh = new KhaneBeDoosh();
 
     private KhaneBeDoosh(){
+        Individual individual = new Individual("Behnam :D", 100, "09123456789", "behnam", "p@sw00rd");
+        users.add(individual);
         addHouse("398y2iuwjndwksfsd", 200, BuildingType.APARTMENT, "http://google.com",
-                null, 100, 200);
-        addHouse("roshanpazhooh", 800, BuildingType.VILLA, "http://pornhub.com",
-                null, 90);
-        addHouse("amoopoorang", 800, BuildingType.APARTMENT, "http://xnxx.com",
-                null, 90000);
+                individual, 100, 200);
+        addHouse("roshanpazhooh", 800, BuildingType.VILLA, "http://yahoo.com",
+                individual, 90);
+        addHouse("amoopoorang", 800, BuildingType.APARTMENT, "http://bing.com",
+                individual, 90000);
     }
 
     public static KhaneBeDoosh getInstance(){
@@ -26,7 +27,6 @@ public class KhaneBeDoosh {
         for (User user : users){
             result.addAll(user.filterHouses(buildingType, dealType, minArea, maxPrice));
         }
-        System.out.println("Filter houses size " + result.size());
         return result;
     }
 
