@@ -19,7 +19,7 @@
             <input type="text" name="maxPrice" placeholder="حداکثر قیمت">
             <button type="submit">جست‌وجو</button>
         </form></div>
-        <div class="outbox"><form action="javascript: void(0);">
+        <div class="outbox"><form action="addHouse">
             <fieldset><legend>نوع ملک</legend>
                 <input type="radio" name="buildingType" value="آپارتمان" checked>آپارتمان</input>
                 <input type="radio" name="buildingType" value="ویلایی">ویلایی</input>

@@ -17,6 +17,14 @@
         <servlet-name>SearchServlet</servlet-name>
         <servlet-class>main.java.SearchServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>addHouseServlet</servlet-name>
+        <servlet-class>main.java.addHouseServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addHouseServlet</servlet-name>
+        <url-pattern>/addHouse</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/search</url-pattern>
