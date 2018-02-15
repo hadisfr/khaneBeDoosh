@@ -25,6 +25,14 @@
         <servlet-name>GetPhoneServlet</servlet-name>
         <servlet-class>main.java.GetPhoneServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PayServlet</servlet-name>
+        <servlet-class>main.java.PayServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PayServlet</servlet-name>
+        <url-pattern>/pay</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GetPhoneServlet</servlet-name>
         <url-pattern>/getPhone</url-pattern>
