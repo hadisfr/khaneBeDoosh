@@ -48,7 +48,7 @@ public class KhaneBeDoosh {
         HttpPost request = new HttpPost(bankUri);
         request.addHeader("Content-Type", "application/json");
         request.addHeader("apiKey", bankAPIKey);
-        String body = "{\"userId\": " + getDefaultUser().getId() + ", \"value\": " + amount + "}";
+        String body = "{\"userId\": " + getDefaultUser().getId() + ", \"value\": \"" + amount + "\"}";
         request.setEntity(new StringEntity(body));
         HttpResponse response = null;
         try {
