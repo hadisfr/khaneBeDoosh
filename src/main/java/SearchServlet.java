@@ -16,13 +16,10 @@ public class SearchServlet extends HttpServlet {
         ArrayList<House> houses = new ArrayList<House>();
         houses.addAll(KhaneBeDoosh.getInstance().filterHouses(
                 BuildingType.parseString(request.getParameter("buildingType")),
-                (DealType)(request.getParameter("dealType")),
-                (int)(request.getParameter("minArea")),
-                (int)(request.getParameter("maxPrice")));
-
-        House house = new House("398y2iuwjndwksfsd", 200, BuildingType.APARTMENT, "http://google.com",
-                null);
-        houses.add(house);
+                DealType.parseString(request.getParameter("dealType")),
+                Integer.parseInt(request.getParameter("minArea")),
+                Integer.parseInt(request.getParameter("maxPrice"))
+        ));
         request.setAttribute("houses", houses);
         request.getRequestDispatcher("searchResults.jsp").forward(request, response);
     }
