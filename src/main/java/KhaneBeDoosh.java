@@ -34,5 +34,15 @@ public class KhaneBeDoosh {
             }
         }
     }
-
+    public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner, int sellPrice){
+        HouseSell house = new HouseSell(id,area, buildingType, imageUrl, owner, sellPrice);
+        if(owner instanceof Individual)
+            ((Individual)owner).addHouse(house);
+    }
+    public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner,
+                         int rentPrice, int basePrice){
+        HouseRent house = new HouseRent(id,area, buildingType, imageUrl, owner, rentPrice, basePrice);
+        if(owner instanceof Individual)
+            ((Individual)owner).addHouse(house);
+    }
 }
