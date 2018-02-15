@@ -21,6 +21,14 @@
         <servlet-name>AddHouseServlet</servlet-name>
         <servlet-class>main.java.AddHouseServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetPhoneServlet</servlet-name>
+        <servlet-class>main.java.GetPhoneServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetPhoneServlet</servlet-name>
+        <url-pattern>/getPhone</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddHouseServlet</servlet-name>
         <url-pattern>/addHouse</url-pattern>
