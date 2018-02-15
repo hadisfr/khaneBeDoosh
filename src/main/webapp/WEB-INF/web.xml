@@ -18,11 +18,11 @@
         <servlet-class>main.java.SearchServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>addHouseServlet</servlet-name>
-        <servlet-class>main.java.addHouseServlet</servlet-class>
+        <servlet-name>AddHouseServlet</servlet-name>
+        <servlet-class>main.java.AddHouseServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>addHouseServlet</servlet-name>
+        <servlet-name>AddHouseServlet</servlet-name>
         <url-pattern>/addHouse</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
