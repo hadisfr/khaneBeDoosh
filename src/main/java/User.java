@@ -13,7 +13,7 @@ public abstract class User{
         this.id = next_index++;
     }
 
-    public abstract ArrayList<House> filterHouses(BuildingType buildingType, DealType dealType, int minArea, int maxPrice);
+    public abstract ArrayList<House> searchHouses(BuildingType buildingType, DealType dealType, int minArea, int maxPrice);
     public abstract House getHouse(String id);
     
     public String getName() {
@@ -23,4 +23,23 @@ public abstract class User{
     public int getId() {
         return id;
     }
+
+    protected ArrayList<House> filterHouses(ArrayList<House> houses, BuildingType buildingType, DealType dealType, int minArea, int maxPrice){
+        ArrayList<House> result = new ArrayList<House>();
+        for(House house : houses){
+            int price = 0;
+            if(house instanceof HouseRent)
+                price = ((HouseRent)house).getRentPrice();
+            else if(house instanceof HouseSell)
+                price = ((HouseSell)house).getSellPrice();
+            if(house.getBuildingType().equals(buildingType)
+                    && house.getDealType().equals(dealType)
+                    && house.getArea() >= minArea
+                    && price <= maxPrice
+                    )
+                result.add(house);
+        }
+        return result;
+    }
+
 }

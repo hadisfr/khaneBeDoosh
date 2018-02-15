@@ -8,7 +8,7 @@ public class KhaneBeDoosh {
     private static KhaneBeDoosh khaneBedoosh = new KhaneBeDoosh();
 
     private KhaneBeDoosh(){
-        Individual individual = new Individual("بهنام همایون", 20000, "09123456789", "behnam", "p@sw00rd");
+        Individual individual = new Individual("بهنام همایون", 200, "09123456789", "behnam", "p@sw00rd");
         users.add(individual);
         addHouse("398y2iuwjndwksfsd", 200, BuildingType.APARTMENT, "http://google.com",
                 individual, 100, 200, "address", "09123456789", "description", "2038-02-12");
@@ -29,7 +29,7 @@ public class KhaneBeDoosh {
     public ArrayList<House> filterHouses(BuildingType buildingType, DealType dealType, int minArea, int maxPrice){
         ArrayList<House> result = new ArrayList<House>();
         for (User user : users){
-            result.addAll(user.filterHouses(buildingType, dealType, minArea, maxPrice));
+            result.addAll(user.searchHouses(buildingType, dealType, minArea, maxPrice));
         }
         return result;
     }

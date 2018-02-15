@@ -8,7 +8,7 @@ public class RealEstateAcm extends RealEstate{
         super(name);
     }
 
-    public ArrayList<House> filterHouses(BuildingType buildingType, DealType dealType, int minArea, int maxPrice) {
+    public ArrayList<House> searchHouses(BuildingType buildingType, DealType dealType, int minArea, int maxPrice) {
         return null;
     }
 
