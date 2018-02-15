@@ -14,7 +14,11 @@ public enum DealType{
     }
 
     public static DealType parseString(String string){
-        if (string.equals("0"))
+        return parseInt(Integer.parseInt(string));
+    }
+
+    public static DealType parseInt(int i){
+        if (i == 0)
             return BUY;
         else
             return RENT;
