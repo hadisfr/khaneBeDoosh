@@ -29,4 +29,12 @@
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/search</url-pattern>
     </servlet-mapping>
+    <filter>
+        <filter-name>CharacterSetFilter</filter-name>
+        <filter-class>main.java.CharacterSetFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterSetFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 </web-app>
