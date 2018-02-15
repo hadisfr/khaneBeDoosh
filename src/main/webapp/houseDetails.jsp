@@ -38,7 +38,9 @@
                 <div>نوع: <%= house.getBuildingType() %></div>
                 <div>آدرس: <%= house.getAddress() %></div>
                 <div>توضیحات: <%= house.getDescription() %></div>
-                <div>لینک عکس: <a href='<%= house.getImageUrl() %>' target="_blank"><%= house.getImageUrl() %></a></div>
+                <% String imageUrl = house.getImageUrl().equals("") ? KhaneBeDoosh.nopicUri : house.getImageUrl(); %>
+                <div><img class="house_image" src='<%= imageUrl %>'></div>
+                <div class="linkbox">لینک عکس: <a href='<%= imageUrl %>' target="_blank"><%= imageUrl %></a></div>
                 <% if(request.getAttribute("wantsToSeePhone") != null && (boolean)(request.getAttribute("wantsToSeePhone"))) { %>
                     <% if(request.getAttribute("canSeePhone") != null && (boolean)(request.getAttribute("canSeePhone"))) { %>
                         <div>شمارهٔ‌مالک / مشاور: <%= house.getPhone() %></div>
@@ -52,5 +54,6 @@
                 خانه‌ای با این شناسه پیدا نشد.
             <% } %>
         </div>
+        <jsp:include page="footer.jsp" />
     </body>
 </html>

@@ -44,6 +44,22 @@
     fieldset {
         border: none;
     }
+    div.linkbox {
+        white-space: nowrap;
+        overflow-x: hidden;
+        font-size: smaller;
+    }
+    img.house_image {
+        max-width: 100%; 
+        height: 200px;
+        border-radius: 16px;
+    }
+    div.footer {
+        text-align: center;
+        font-size: small;
+        color: #999;
+        direction: ltr;
+    }
 </style>
 
 <%

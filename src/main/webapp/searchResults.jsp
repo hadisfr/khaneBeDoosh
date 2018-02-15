@@ -5,6 +5,7 @@
 <%@ page import="main.java.HouseSell" %>
 <%@ page import="main.java.DealType" %>
 <%@ page import="main.java.User" %>
+<%@ page import="main.java.KhaneBeDoosh" %>
 
 <!DOCTYPE html>
 <html>
@@ -25,12 +26,15 @@
                     <% } %>
                     <div>متراژ: <%= house.getArea() %> متر</div>
                     <div>نوع: <%= house.getBuildingType() %></div>
-                    <div>لینک عکس: <a href='<%= house.getImageUrl() %>' target="_blank"><%= house.getImageUrl() %></a></div>
-                    <a href='houseDetails.jsp?houseId=<%= house.getId() %>&ownerId=<%= house.getOwner().getId() %>'>اطلاعات بیشتر</a>
+                    <% String imageUrl = house.getImageUrl().equals("") ? KhaneBeDoosh.nopicUri : house.getImageUrl(); %>
+                    <div><img class="house_image" src='<%= imageUrl %>'></div>
+                    <div class="linkbox">لینک عکس: <a href='<%= imageUrl %>' target="_blank"><%= imageUrl %></a></div>
+                    <a href='houseDetails.jsp?houseId=<%= house.getId() %>&ownerId=<%= house.getOwner().getId() %>'><button>اطلاعات بیشتر</button></a>
                 </div>
             <% } %>
         <% } else { %>
             <div class="outbox">نتیجه‌ای پیدا نشد.</div>
         <% } %>
+        <jsp:include page="footer.jsp" />
     </body>
 </html>

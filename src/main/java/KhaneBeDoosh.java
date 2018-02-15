@@ -20,18 +20,18 @@ public class KhaneBeDoosh {
     private static KhaneBeDoosh khaneBedoosh = new KhaneBeDoosh();
 
     private static String bankAPIKey = "a1965d20-1280-11e8-87b4-496f79ef1988";
-
     private static String bankUri = "http://acm.ut.ac.ir/ieBank/pay";
+    public static String nopicUri = "no-pic.jpg";
 
     private KhaneBeDoosh(){
         Individual individual = new Individual("بهنام همایون", 200, "09123456789", "behnam", "p@sw00rd");
         users.add(individual);
         users.add(RealEstateAcm.getInstance());
-        addHouse("398y2iuwjndwksfsd", 200, BuildingType.APARTMENT, "http://google.com",
+        addHouse("398y2iuwjndwksfsd", 200, BuildingType.APARTMENT, "",
                 individual, 100, 200, "address", "09123456789", "description", "2038-02-12");
-        addHouse("roshanpazhooh", 800, BuildingType.VILLA, "http://yahoo.com",
+        addHouse("roshanpazhooh", 800, BuildingType.VILLA, "",
                 individual, 90, "address", "09123456789", "description", "2038-02-12");
-        addHouse("amoopoorang", 800, BuildingType.APARTMENT, "http://bing.com",
+        addHouse("amoopoorang", 800, BuildingType.APARTMENT, "",
                 individual, 90000, "address", "09123456789", "description", "2038-02-12");
     }
 
