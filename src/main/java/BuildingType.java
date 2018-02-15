@@ -17,4 +17,11 @@ public enum BuildingType{
         else
             return "ویلایی";
     }
+
+    public static BuildingType parseString(String string){
+        if(string.equals("آپارتمان"))
+            return APARTMENT;
+        else
+            return VILLA;
+    }
 }

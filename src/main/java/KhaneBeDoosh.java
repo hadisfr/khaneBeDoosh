@@ -8,7 +8,9 @@ public class KhaneBeDoosh {
 
     private static KhaneBeDoosh khaneBedoosh = new KhaneBeDoosh();
 
-    private KhaneBeDoosh(){}
+    private KhaneBeDoosh(){
+        addHouse();
+    }
 
     public static KhaneBeDoosh getInstance(){
         return khaneBedoosh;

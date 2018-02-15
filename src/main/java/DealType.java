@@ -12,4 +12,11 @@ public enum DealType{
     public int getValue() {
         return value;
     }
+
+    public static DealType parseString(String string){
+        if (string.equals("0"))
+            return BUY;
+        else
+            return RENT;
+    }
 }
