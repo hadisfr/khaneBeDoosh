@@ -65,7 +65,6 @@ public abstract class House{
         return address;
     }
 
-
     public House(String id, int area, BuildingType buildingType, String imageUrl, User owner) {
         this.id = id;
         this.area = area;
@@ -73,6 +72,12 @@ public abstract class House{
         this.imageUrl = imageUrl;
         this.owner = owner;
         detail = null;
+    }
+
+    public House(String id, int area, BuildingType buildingType, String imageUrl, User owner,
+            String address, String phone, String description, String expireTime) {
+        this(id, area, buildingType, imageUrl, owner);
+        this.detail = new HouseDetail(address, phone, description, expireTime);
     }
 
 }

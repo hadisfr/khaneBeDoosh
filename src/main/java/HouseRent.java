@@ -8,12 +8,15 @@ public class HouseRent extends House {
     public HouseRent(String id, int area, BuildingType buildingType, String imageUrl, User owner,
                      int rentPrice, int basePrice) {
         super(id, area, buildingType, imageUrl, owner);
-        if(basePrice < 0)
-            basePrice = 0;
-        if(rentPrice < 0)
-            rentPrice = 0;
-        this.basePrice = basePrice;
-        this.rentPrice = rentPrice;
+        setRentPrice(rentPrice);
+        setBasePrice(basePrice);
+    }
+
+    public HouseRent(String id, int area, BuildingType buildingType, String imageUrl, User owner,
+            int rentPrice, int basePrice, String address, String phone, String description, String expireTime) {
+        super(id, area, buildingType, imageUrl, owner, address, phone, description, expireTime);
+        setRentPrice(rentPrice);
+        setBasePrice(basePrice);
     }
 
     public int getRentPrice() {
@@ -22,6 +25,18 @@ public class HouseRent extends House {
 
     public int getBasePrice() {
         return basePrice;
+    }
+
+    private void setRentPrice(int rentPrice) {
+        if(rentPrice < 0)
+            rentPrice = 0;
+        this.rentPrice = rentPrice;
+    }
+
+    private void setBasePrice(int basePrice) {
+        if(basePrice < 0)
+            basePrice = 0;
+        this.basePrice = basePrice;
     }
 
     @Override
