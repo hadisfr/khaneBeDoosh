@@ -1,11 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="main.java.House" %>
-<%@ page import="main.java.KhaneBeDoosh" %>
 <%@ page import="main.java.HouseRent" %>
 <%@ page import="main.java.HouseSell" %>
 <%@ page import="main.java.DealType" %>
-<%@ page import="main.java.Individual" %>
 
 <!DOCTYPE html>
 <html>

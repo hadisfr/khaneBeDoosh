@@ -1,4 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page import="main.java.KhaneBeDoosh" %>
+<%@ page import="main.java.User" %>
+<%@ page import="main.java.Individual" %>
+
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <style type="text/css">
@@ -43,10 +47,9 @@
 </style>
 
 <%
-    request.setAttribute("username", request.getParameter("username"));
-    if(request.getAttribute("username") == null)
-        request.setAttribute("username", "بهنام همایون");
-    request.setAttribute("balance", request.getParameter("balance"));
-    if(request.getAttribute("balance") == null)
-        request.setAttribute("balance", 200);
+    if(request.getAttribute("user") == null)
+        request.setAttribute("user", KhaneBeDoosh.getInstance().getDefaultUser());
+    Individual currentUser = (Individual)(request.getAttribute("user"));
+    request.setAttribute("username", currentUser.getName());
+    request.setAttribute("balance", currentUser.getBalance());
 %>

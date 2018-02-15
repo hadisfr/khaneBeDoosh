@@ -8,7 +8,7 @@ public class KhaneBeDoosh {
     private static KhaneBeDoosh khaneBedoosh = new KhaneBeDoosh();
 
     private KhaneBeDoosh(){
-        Individual individual = new Individual("Behnam :D", 100, "09123456789", "behnam", "p@sw00rd");
+        Individual individual = new Individual("بهنام همایون", 200, "09123456789", "behnam", "p@sw00rd");
         users.add(individual);
         addHouse("398y2iuwjndwksfsd", 200, BuildingType.APARTMENT, "http://google.com",
                 individual, 100, 200);

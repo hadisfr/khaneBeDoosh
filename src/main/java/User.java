@@ -12,4 +12,7 @@ public abstract class User{
 
     public abstract ArrayList<House> filterHouses(BuildingType buildingType, DealType dealType, int minArea, int maxPrice);
     public abstract House getHouse(String id);
+    public String getName() {
+        return name;
+    }
 }

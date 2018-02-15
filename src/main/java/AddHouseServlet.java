@@ -11,17 +11,17 @@ public class AddHouseServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         DealType dealType = DealType.parseString(request.getParameter("dealType"));
         try {
-            String id = RandomStringUtils.randomAlphabetic(10);
+            String id = RandomStringUtils.randomAlphabetic(20);
             String imageUrl = "";
             String expireTime = "2032-12-01";
-            User user = KhaneBeDoosh.getInstance().getDefaultUser();
+            User currentUser = KhaneBeDoosh.getInstance().getDefaultUser();
             if(dealType == DealType.RENT) {
                 KhaneBeDoosh.getInstance().addHouse(
                     id,
                     Integer.parseInt(request.getParameter("area") == "" ? "0" : request.getParameter("area")),
                     BuildingType.parseString(request.getParameter("buildingType")),
                     imageUrl,
-                    user,
+                    currentUser,
                     Integer.parseInt(request.getParameter("price") == "" ? "0" : request.getParameter("price")),
                     0,
                     request.getParameter("address"),
@@ -36,7 +36,7 @@ public class AddHouseServlet extends HttpServlet {
                     Integer.parseInt(request.getParameter("area") == "" ? "0" : request.getParameter("area")),
                     BuildingType.parseString(request.getParameter("buildingType")),
                     imageUrl,
-                    user,
+                    currentUser,
                     Integer.parseInt(request.getParameter("price") == "" ? "0" : request.getParameter("price")),
                     request.getParameter("address"),
                     request.getParameter("phone"),
