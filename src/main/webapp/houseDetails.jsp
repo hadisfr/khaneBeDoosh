@@ -17,7 +17,7 @@
                 <% if(house.getDealType() == DealType.RENT) { %>
                     <div>قیمت پایه: <%= house.getBasePrice() %> تومان</div>
                     <div>قیمیت اجاره: <%= house.getRentPrice() %> تومان</div>
-                <% } else  { %>
+                <% } else if(house.getDealType() == DealType.BUY) { %>
                     <div>قیمت خرید: <%= house.getSellPrice() %></div>
                 <% } %>
                 <div>متراژ: <%= house.getArea() %> متر</div>
@@ -25,8 +25,8 @@
                 <div>آدرس: <%= house.getAddress() %></div>
                 <div>توضیحات: <%= house.getDescription() %></div>
                 <div>لینک عکس: <a href='<%= house.getImageUrl() %>' target="_blank"><%= house.getImageUrl() %></a></div>
-                <% if((boolean)(request.getAttribute("wants_to_see_phone"))) { %>
-                    <% if((boolean)(request.getAttribute("can_see_phone"))) { %>
+                <% if((boolean)(request.getAttribute("wantsToSeePhone"))) { %>
+                    <% if((boolean)(request.getAttribute("canSeePhone"))) { %>
                         <div>شمارهٔ‌مالک / کشاور: <%= house.getPhone() %></div>
                     <% } else { %>
                         <div>اعتبار شما کافی نیست.</div>

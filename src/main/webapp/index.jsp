@@ -6,7 +6,7 @@
     </head>
     <body>
         <jsp:include page="haeder.jsp" />
-        <div class="outbox"><form action="javascript: void(0);">
+        <div class="outbox"><form action="search">
             <fieldset><legend>نوع ملک</legend>
                 <input type="radio" name="buildingType" value="آپارتمان" checked>آپارتمان</input>
                 <input type="radio" name="buildingType" value="ویلایی">ویلایی</input>
@@ -15,8 +15,8 @@
                 <input type="radio" name="dealType" value="0" checked>فروش</input>
                 <input type="radio" name="dealType" value="1">رهن و اجاره</input>
             </fieldset>
-            <input type="text" name="area_min" placeholder="حداقل متراژ">
-            <input type="text" name="price_max" placeholder="حداکثر قیمت">
+            <input type="text" name="minArea" placeholder="حداقل متراژ">
+            <input type="text" name="maxPrice" placeholder="حداکثر قیمت">
             <button type="submit">جست‌وجو</button>
         </form></div>
         <div class="outbox"><form action="javascript: void(0);">

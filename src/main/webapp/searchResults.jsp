@@ -16,7 +16,7 @@
                     <% if(house.getDealType() == DealType.RENT) { %>
                         <div>قیمت پایه: <%= house.getBasePrice() %> تومان</div>
                         <div>قیمیت اجاره: <%= house.getRentPrice() %> تومان</div>
-                    <% } else  { %>
+                    <% } else if(house.getDealType() == DealType.BUY) { %>
                         <div>قیمت خرید: <%= house.getSellPrice() %></div>
                     <% } %>
                     <div>متراژ: <%= house.getArea() %> متر</div>
