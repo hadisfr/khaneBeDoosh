@@ -1,8 +1,5 @@
 package main.java;
 
-/**
- * Created by mohammadreza on 2/14/2018 AD.
- */
 public class HouseDetail {
     private String address;
     private String phone;
