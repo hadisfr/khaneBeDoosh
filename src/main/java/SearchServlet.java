@@ -14,10 +14,5 @@ public class SearchServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<House> houses = new ArrayList<House>();
-        House house = new House("398y2iuwjndwksfsd", 200, BuildingType.APARTMENT, "http://google.com",
-                DealType.BUY, 10, 20, 30, null);
-        houses.add(house);
-        request.setAttribute("houses", houses);
-        request.getRequestDispatcher("searchResults.jsp").forward(request, response);
     }
 }
