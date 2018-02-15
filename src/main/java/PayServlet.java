@@ -10,9 +10,10 @@ public class PayServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Individual currentUser = (Individual) KhaneBeDoosh.getInstance().getDefaultUser();
         try {
-            int balance = Integer.parseInt(request.getParameter("balance") == "" ? "0" : request.getParameter("balance"));
-            boolean isSuccessful;
-            if(isSuccessful)
+            if(KhaneBeDoosh.getInstance().increaseBalance(
+                    currentUser,
+                    Integer.parseInt(request.getParameter("balance") == "" ? "0" : request.getParameter("balance")))
+                    )
                 request.setAttribute("msg", "افزایش اعتبار موفقیت‌آمیز بود.");
             else
                 request.setAttribute("msg", "افزایش اعتبار ناموفق بود.");

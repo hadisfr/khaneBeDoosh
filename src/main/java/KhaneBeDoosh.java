@@ -1,11 +1,27 @@
 package main.java;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 public class KhaneBeDoosh {
 
     private ArrayList<User> users = new ArrayList<User>();
     private static KhaneBeDoosh khaneBedoosh = new KhaneBeDoosh();
+
+    private static String bankAPIKey = "a1965d20-1280-11e8-87b4-496f79ef1988";
+
+    private static String bankUri = "http://acm.ut.ac.ir/ieBank/pay";
 
     private KhaneBeDoosh(){
         Individual individual = new Individual("بهنام همایون", 200, "09123456789", "behnam", "p@sw00rd");
@@ -25,6 +41,40 @@ public class KhaneBeDoosh {
 
     public static KhaneBeDoosh getInstance(){
         return khaneBedoosh;
+    }
+
+    public boolean increaseBalance(Individual user, int amount) throws IOException {
+        user.setBalance(user.getBalance() + amount);
+        HttpClient client = HttpClientBuilder.create().build();
+//        URIBuilder builder = null;
+//        try {
+//            builder = new URIBuilder(bankAPIKey);
+//        } catch (URISyntaxException e) {
+//            e.printStackTrace();
+//        }
+//        builder.setParameter("userId", getDefaultUser().getId() + "").setParameter("value", amount + "");
+        HttpPost request = new HttpPost(bankUri);
+        request.addHeader("apiKey", bankAPIKey);
+        request.addHeader("Content-Type", "application/json");
+        String body = "{\"userId\": " + getDefaultUser().getId() + ", \"value\": " + amount ;
+        request.setEntity(new StringEntity(body));
+        HttpResponse response = null;
+        try {
+            response = client.execute(request);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String json = null;
+        try {
+            json = IOUtils.toString(response.getEntity().getContent());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(true)
+            throw new IOException(json);
+        JSONObject object = new JSONObject(json);
+        boolean payResult = false;
+        return payResult;
     }
 
     public ArrayList<House> filterHouses(BuildingType buildingType, DealType dealType, int minArea, int maxPrice){
