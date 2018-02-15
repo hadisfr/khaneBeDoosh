@@ -26,6 +26,7 @@ public class KhaneBeDoosh {
         for (User user : users){
             result.addAll(user.filterHouses(buildingType, dealType, minArea, maxPrice));
         }
+        System.out.println("Filter houses size " + result.size());
         return result;
     }
 
