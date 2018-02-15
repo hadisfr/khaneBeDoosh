@@ -12,7 +12,7 @@ public class PayServlet extends HttpServlet {
         try {
             if(KhaneBeDoosh.getInstance().increaseBalance(
                     currentUser,
-                    Integer.parseInt(request.getParameter("balance") == "" ? "0" : request.getParameter("balance")))
+                    Integer.parseInt(request.getParameter("balance").equals("") ? "0" : request.getParameter("balance")))
                     )
                 request.setAttribute("msg", "افزایش اعتبار موفقیت‌آمیز بود.");
             else

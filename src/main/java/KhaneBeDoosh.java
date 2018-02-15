@@ -44,19 +44,11 @@ public class KhaneBeDoosh {
     }
 
     public boolean increaseBalance(Individual user, int amount) throws IOException {
-        user.setBalance(user.getBalance() + amount);
         HttpClient client = HttpClientBuilder.create().build();
-//        URIBuilder builder = null;
-//        try {
-//            builder = new URIBuilder(bankAPIKey);
-//        } catch (URISyntaxException e) {
-//            e.printStackTrace();
-//        }
-//        builder.setParameter("userId", getDefaultUser().getId() + "").setParameter("value", amount + "");
         HttpPost request = new HttpPost(bankUri);
-        request.addHeader("apiKey", bankAPIKey);
         request.addHeader("Content-Type", "application/json");
-        String body = "{\"userId\": " + getDefaultUser().getId() + ", \"value\": " + amount ;
+        request.addHeader("apiKey", bankAPIKey);
+        String body = "{\"userId\": " + getDefaultUser().getId() + ", \"value\": " + amount + "}";
         request.setEntity(new StringEntity(body));
         HttpResponse response = null;
         try {
@@ -70,10 +62,10 @@ public class KhaneBeDoosh {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if(true)
-            throw new IOException(json);
         JSONObject object = new JSONObject(json);
-        boolean payResult = false;
+        boolean payResult = object.getBoolean("success");
+        if(payResult)
+            user.setBalance(user.getBalance() + amount);
         return payResult;
     }
 
