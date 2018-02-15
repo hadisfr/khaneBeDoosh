@@ -65,6 +65,10 @@ public abstract class House{
         return address;
     }
 
+    public User getOwner() {
+        return owner;
+    }
+
     public House(String id, int area, BuildingType buildingType, String imageUrl, User owner) {
         this.id = id;
         this.area = area;

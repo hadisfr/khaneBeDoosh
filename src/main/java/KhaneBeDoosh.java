@@ -11,11 +11,11 @@ public class KhaneBeDoosh {
         Individual individual = new Individual("بهنام همایون", 200, "09123456789", "behnam", "p@sw00rd");
         users.add(individual);
         addHouse("398y2iuwjndwksfsd", 200, BuildingType.APARTMENT, "http://google.com",
-                individual, 100, 200);
+                individual, 100, 200, "address", "09123456789", "description", "2038-02-12");
         addHouse("roshanpazhooh", 800, BuildingType.VILLA, "http://yahoo.com",
-                individual, 90);
+                individual, 90, "address", "09123456789", "description", "2038-02-12");
         addHouse("amoopoorang", 800, BuildingType.APARTMENT, "http://bing.com",
-                individual, 90000);
+                individual, 90000, "address", "09123456789", "description", "2038-02-12");
     }
 
     public User getDefaultUser() {
@@ -34,18 +34,28 @@ public class KhaneBeDoosh {
         return result;
     }
 
-    public void chargeBalance(int userID, int amount){
+    public void chargeBalance(int userId, int amount){
         if(amount < 0)
             amount = 0;
         for (User user : users){
             if(!(user instanceof Individual))
                 continue;
             Individual individual = (Individual) user;
-            if(userID == individual.getId()){
+            if(userId == individual.getId()){
                 individual.setBalance(individual.getBalance() + amount);
             }
         }
     }
+
+    public House getHouseById(String houseId, int userId) {
+        return getUserById(userId).getHouse(houseId);
+    }
+
+    private static int userIdBase = 1000;
+    private User getUserById(int userId) {
+        return users.get(userId - userIdBase);
+    }
+
     public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner, int sellPrice){
         HouseSell house = new HouseSell(id,area, buildingType, imageUrl, owner, sellPrice);
         if(owner instanceof Individual)

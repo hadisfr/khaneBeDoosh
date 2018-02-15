@@ -1,6 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="main.java.House" %>
+<%@ page import="main.java.HouseRent" %>
+<%@ page import="main.java.HouseSell" %>
 <%@ page import="main.java.DealType" %>
+<%@ page import="main.java.KhaneBeDoosh" %>
 
 <!DOCTYPE html>
 <html>
@@ -8,25 +11,36 @@
         <jsp:include page="haed.jsp" />
     </head>
     <body>
+        <%
+            House house = null;
+            try {
+                house = KhaneBeDoosh.getInstance().getHouseById(
+                    request.getParameter("houseId"),
+                    Integer.parseInt(request.getParameter("ownerId"))
+                );
+            } catch(Exception e) {
+                request.setAttribute("msg", "استثنا: ‪" + e);
+            }
+        %>
         <jsp:include page="haeder.jsp" />
         <div class="outbox">
             <%
-            House house = (House)(request.getAttribute("house"));
             if(house != null) {
             %>
                 <% if(house.getDealType() == DealType.RENT) { %>
-                    <div>قیمت پایه: <%= house.getBasePrice() %> تومان</div>
-                    <div>قیمیت اجاره: <%= house.getRentPrice() %> تومان</div>
-                <% } else if(house.getDealType() == DealType.BUY) { %>
-                    <div>قیمت خرید: <%= house.getSellPrice() %></div>
+                    <div>قیمت پایه: <%= ((HouseRent)house).getBasePrice() %> تومان</div>
+                    <div>قیمیت اجاره: <%= ((HouseRent)house).getRentPrice() %> تومان</div>
+                <% } else if(house.getDealType() == DealType.SELL) { %>
+                    <div>قیمت خرید: <%= ((HouseSell)house).getSellPrice() %></div>
+                    <div>&nbsp;</div>
                 <% } %>
                 <div>متراژ: <%= house.getArea() %> متر</div>
                 <div>نوع: <%= house.getBuildingType() %></div>
                 <div>آدرس: <%= house.getAddress() %></div>
                 <div>توضیحات: <%= house.getDescription() %></div>
                 <div>لینک عکس: <a href='<%= house.getImageUrl() %>' target="_blank"><%= house.getImageUrl() %></a></div>
-                <% if((boolean)(request.getAttribute("wantsToSeePhone"))) { %>
-                    <% if((boolean)(request.getAttribute("canSeePhone"))) { %>
+                <% if(request.getAttribute("wantsToSeePhone") != null && (boolean)(request.getAttribute("wantsToSeePhone"))) { %>
+                    <% if(request.getAttribute("canSeePhone") != null && (boolean)(request.getAttribute("canSeePhone"))) { %>
                         <div>شمارهٔ‌مالک / کشاور: <%= house.getPhone() %></div>
                     <% } else { %>
                         <div>اعتبار شما کافی نیست.</div>

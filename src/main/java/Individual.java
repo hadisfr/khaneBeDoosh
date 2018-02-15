@@ -5,18 +5,11 @@ import java.util.HashMap;
 
 public class Individual extends User{
 
-    private static int counter = 1000;
-
     private String phone;
     private int balance;
-    private int id;
     private String username;
     private String password;
     private HashMap<String, House> houses = new HashMap<String, House>();
-
-    public int getId() {
-        return id;
-    }
 
     ArrayList<String> paidHouses = new ArrayList<String>();
 
@@ -25,7 +18,6 @@ public class Individual extends User{
         if(balance < 0)
             balance = 0;
         this.balance = balance;
-        this.id = counter++;
         this.phone =  phone;
         this.username = username;
         this.password = password;

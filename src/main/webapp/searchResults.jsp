@@ -4,6 +4,7 @@
 <%@ page import="main.java.HouseRent" %>
 <%@ page import="main.java.HouseSell" %>
 <%@ page import="main.java.DealType" %>
+<%@ page import="main.java.User" %>
 
 <!DOCTYPE html>
 <html>
@@ -25,7 +26,7 @@
                     <div>متراژ: <%= house.getArea() %> متر</div>
                     <div>نوع: <%= house.getBuildingType() %></div>
                     <div>لینک عکس: <a href='<%= house.getImageUrl() %>' target="_blank"><%= house.getImageUrl() %></a></div>
-                    <a href="javascript: void(0);">اطلاعات بیشتر</a>
+                    <a href='houseDetails.jsp?houseId=<%= house.getId() %>&ownerId=<%= house.getOwner().getId() %>'>اطلاعات بیشتر</a>
                 </div>
             <% } %>
         <% } else { %>
