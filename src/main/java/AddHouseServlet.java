@@ -54,6 +54,6 @@ public class AddHouseServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.getRequestDispatcher("/").forward(request, response);
     }
 }

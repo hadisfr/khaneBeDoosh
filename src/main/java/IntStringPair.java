@@ -1,8 +1,5 @@
 package main.java;
 
-/**
- * Created by mohammadreza on 2/15/2018 AD.
- */
 public class IntStringPair {
     private int integer;
     private String string;
