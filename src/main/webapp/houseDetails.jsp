@@ -41,12 +41,12 @@
                 <div>لینک عکس: <a href='<%= house.getImageUrl() %>' target="_blank"><%= house.getImageUrl() %></a></div>
                 <% if(request.getAttribute("wantsToSeePhone") != null && (boolean)(request.getAttribute("wantsToSeePhone"))) { %>
                     <% if(request.getAttribute("canSeePhone") != null && (boolean)(request.getAttribute("canSeePhone"))) { %>
-                        <div>شمارهٔ‌مالک / کشاور: <%= house.getPhone() %></div>
+                        <div>شمارهٔ‌مالک / مشاور: <%= house.getPhone() %></div>
                     <% } else { %>
                         <div>اعتبار شما کافی نیست.</div>
                     <% } %>
                 <% } else { %>
-                    <a href="javascript: void(0);"><button>دریافت شمارهٔ مالک / مشاور</button></a>
+                    <a href='getPhone?houseId=<%= house.getId() %>&ownerId=<%= house.getOwner().getId() %>'><button>دریافت شمارهٔ مالک / مشاور</button></a>
                 <% } %>
             <% } else { %>
                 خانه‌ای با این شناسه پیدا نشد.
