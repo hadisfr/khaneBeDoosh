@@ -15,6 +15,6 @@ public class HouseSell extends House {
 
     @Override
     public DealType getDealType() {
-        return DealType.BUY;
+        return DealType.SELL;
     }
 }

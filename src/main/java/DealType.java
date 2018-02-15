@@ -1,7 +1,7 @@
 package main.java;
 
 public enum DealType{
-    BUY(0), RENT(1);
+    SELL(0), RENT(1);
 
     private final int value;
 
@@ -19,7 +19,7 @@ public enum DealType{
 
     public static DealType parseInt(int i){
         if (i == 0)
-            return BUY;
+            return SELL;
         else
             return RENT;
     }
