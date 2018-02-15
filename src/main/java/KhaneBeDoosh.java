@@ -22,6 +22,7 @@ public class KhaneBeDoosh {
     private static String bankAPIKey = "a1965d20-1280-11e8-87b4-496f79ef1988";
     private static String bankUri = "http://acm.ut.ac.ir/ieBank/pay";
     public static String nopicUri = "no-pic.jpg";
+    public static String logoUri = "logo.svg";
 
     private KhaneBeDoosh(){
         Individual individual = new Individual("بهنام همایون", 200, "09123456789", "behnam", "p@sw00rd");

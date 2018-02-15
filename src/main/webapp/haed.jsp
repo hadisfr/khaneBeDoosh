@@ -60,6 +60,9 @@
         color: #999;
         direction: ltr;
     }
+    img.logo {
+        width: 100%;
+    }
 </style>
 
 <%
