@@ -26,6 +26,11 @@
         <version>2.1</version>
         <scope>provided</scope>
     </dependency>
+    <dependency>
+        <groupId>commons-lang</groupId>
+        <artifactId>commons-lang</artifactId>
+        <version>20030203.000129</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>khaneBeDoosh</finalName>

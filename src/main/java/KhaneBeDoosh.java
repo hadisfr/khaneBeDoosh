@@ -18,6 +18,10 @@ public class KhaneBeDoosh {
                 individual, 90000);
     }
 
+    public User getDefaultUser() {
+        return users.get(0);
+    }
+
     public static KhaneBeDoosh getInstance(){
         return khaneBedoosh;
     }
@@ -47,9 +51,26 @@ public class KhaneBeDoosh {
         if(owner instanceof Individual)
             ((Individual)owner).addHouse(house);
     }
+
+    public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner, int sellPrice,
+            String address, String phone, String description, String expireTime){
+        HouseSell house = new HouseSell(id,area, buildingType, imageUrl, owner, sellPrice, address,
+            phone, description, expireTime);
+        if(owner instanceof Individual)
+            ((Individual)owner).addHouse(house);
+    }
+
     public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner,
                          int rentPrice, int basePrice){
         HouseRent house = new HouseRent(id,area, buildingType, imageUrl, owner, rentPrice, basePrice);
+        if(owner instanceof Individual)
+            ((Individual)owner).addHouse(house);
+    }
+
+    public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner,
+            int rentPrice, int basePrice, String address, String phone, String description, String expireTime){
+        HouseRent house = new HouseRent(id,area, buildingType, imageUrl, owner, rentPrice, basePrice, address,
+            phone, description, expireTime);
         if(owner instanceof Individual)
             ((Individual)owner).addHouse(house);
     }
