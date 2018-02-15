@@ -12,11 +12,12 @@ public class GetPhoneServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // request.getParameter("houseId"),
-        // Integer.parseInt(request.getParameter("ownerId"))
-        boolean canSeePhone = false;  // TODO: determine if user can see phone
+        Individual currentUser = ((Individual)KhaneBeDoosh.getInstance().getDefaultUser());
+        String houseId = request.getParameter("houseId");
+        int ownerId = Integer.parseInt(request.getParameter("ownerId"));
         request.setAttribute("wantsToSeePhone", true);
-        request.setAttribute("canSeePhone", canSeePhone);
+        request.setAttribute("canSeePhone",
+                currentUser.hasPaidforHouse(houseId, ownerId) || currentUser.payForHouse(houseId, ownerId));
         request.getRequestDispatcher("houseDetails.jsp").forward(request, response);
     }
 }

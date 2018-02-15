@@ -11,7 +11,7 @@ public class Individual extends User{
     private String password;
     private HashMap<String, House> houses = new HashMap<String, House>();
 
-    ArrayList<String> paidHouses = new ArrayList<String>();
+    ArrayList<IntStringPair> paidHouses = new ArrayList<IntStringPair>();
 
     public Individual(String name, int balance, String phone, String username, String password) {
         super(name);
@@ -23,17 +23,22 @@ public class Individual extends User{
         this.password = password;
     }
 
-    public boolean hasPaidforHouse(String id){
-        for (String member : paidHouses){
-            if(member.equals(id)){
+    public boolean hasPaidforHouse(String houseId, int ownerId){
+        for (IntStringPair member : paidHouses){
+            if(member.equals(new IntStringPair(ownerId, houseId))){
                 return true;
             }
         }
         return false;
     }
-
-    public void payForHouse(String id){
-        paidHouses.add(id);
+    private static int phonePrice = 1000;
+    public boolean payForHouse(String houseId, int ownerId){
+        if(balance > phonePrice) {
+            paidHouses.add(new IntStringPair(ownerId, houseId));
+            balance -= phonePrice;
+            return true;
+        }
+        return false;
     }
 
     public void addHouse(House house){
