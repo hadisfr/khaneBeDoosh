@@ -1,6 +1,6 @@
 package main.java;
 
-public class House{
+public abstract class House{
 
     private HouseDetail detail;
     private User owner;
@@ -9,21 +9,9 @@ public class House{
         return imageUrl;
     }
 
-    public int getRentPrice() {
-        return rentPrice;
-    }
-
-    public int getBasePrice() {
-        return basePrice;
-    }
-
     private String imageUrl;
     private String id;
-    private int rentPrice;
-    private int basePrice;
-    private int sellPrice;
     private int area;
-    private DealType dealType;
     private BuildingType buildingType;
 
     public String getId() {
@@ -38,14 +26,7 @@ public class House{
         return buildingType;
     }
 
-
-    public DealType getDealType() {
-        return dealType;
-    }
-
-    public int getSellPrice() {
-        return sellPrice;
-    }
+    public abstract DealType getDealType();
 
     private void getDetailFromOwner(){
         this.detail = owner.getHouse(this.id).detail;
@@ -86,15 +67,11 @@ public class House{
     }
 
 
-    public House(String id, int area, BuildingType buildingType, String imageUrl, DealType dealType, int basePrice, int rentPrice, int sellPrice, User owner) {
+    public House(String id, int area, BuildingType buildingType, String imageUrl, User owner) {
         this.id = id;
         this.area = area;
         this.buildingType = buildingType;
         this.imageUrl = imageUrl;
-        this.dealType = dealType;
-        this.basePrice = basePrice;
-        this.rentPrice = rentPrice;
-        this.sellPrice = sellPrice;
         this.owner = owner;
         detail = null;
     }

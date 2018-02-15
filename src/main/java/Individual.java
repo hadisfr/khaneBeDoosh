@@ -60,10 +60,15 @@ public class Individual extends User{
     public ArrayList<House> filterHouses(BuildingType buildingType, DealType dealType, int minArea, int maxPrice) {
         ArrayList<House> result = new ArrayList<House>();
         for(House house : houses.values()){
+            int price = 0;
+            if(house instanceof HouseRent)
+                price = ((HouseRent)house).getRentPrice();
+            else if(house instanceof HouseSell)
+                price = ((HouseSell)house).getSellPrice();
             if(house.getBuildingType().equals(buildingType) &&
                     house.getDealType().equals(dealType) &&
                     house.getArea() > minArea &&
-                    house.getSellPrice() < maxPrice)
+                    price < maxPrice)
                 result.add(house);
         }
         return result;
