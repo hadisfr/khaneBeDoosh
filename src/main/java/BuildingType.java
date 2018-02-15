@@ -21,7 +21,9 @@ public enum BuildingType{
     public static BuildingType parseString(String string){
         if(string.equals("آپارتمان"))
             return APARTMENT;
-        else
+        else if(string.equals("ویلایی"))
             return VILLA;
+        else
+            return null;
     }
 }

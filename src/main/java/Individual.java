@@ -67,10 +67,11 @@ public class Individual extends User{
                 price = ((HouseRent)house).getRentPrice();
             else if(house instanceof HouseSell)
                 price = ((HouseSell)house).getSellPrice();
-            if(house.getBuildingType().equals(buildingType) &&
-                    house.getDealType().equals(dealType) &&
-                    house.getArea() > minArea &&
-                    price < maxPrice)
+            if(house.getBuildingType().equals(buildingType)
+                    && house.getDealType().equals(dealType)
+                    && house.getArea() >= minArea
+                    && price <= maxPrice
+            )
                 result.add(house);
         }
         return result;
