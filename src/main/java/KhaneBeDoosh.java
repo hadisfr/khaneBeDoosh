@@ -9,7 +9,12 @@ public class KhaneBeDoosh {
     private static KhaneBeDoosh khaneBedoosh = new KhaneBeDoosh();
 
     private KhaneBeDoosh(){
-//        addHouse();
+        addHouse("398y2iuwjndwksfsd", 200, BuildingType.APARTMENT, "http://google.com",
+                null, 100, 200);
+        addHouse("roshanpazhooh", 800, BuildingType.VILLA, "http://pornhub.com",
+                null, 90);
+        addHouse("amoopoorang", 800, BuildingType.APARTMENT, "http://xnxx.com",
+                null, 90000);
     }
 
     public static KhaneBeDoosh getInstance(){
