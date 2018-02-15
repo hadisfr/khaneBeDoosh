@@ -35,7 +35,7 @@
             <input type="text" name="phone" placeholder="تلفن">
             <button type="submit">اضافه‌کردن خانهٔ جدید</button>
         </form></div>
-        <div class="outbox"><form action="javascript: void(0);">
+        <div class="outbox"><form action="pay" method="POST">
             <input type="text" name="balance" placeholder="اعتبار">
             <button type="submit">افزایش اعتبار</button>
         </form></div>
