@@ -20,7 +20,7 @@
                     <% if(house.getDealType() == DealType.RENT) { %>
                         <div>قیمت پایه: <%= ((HouseRent)house).getBasePrice() %> تومان</div>
                         <div>قیمیت اجاره: <%= ((HouseRent)house).getRentPrice() %> تومان</div>
-                    <% } else if(house.getDealType() == DealType.BUY) { %>
+                    <% } else if(house.getDealType() == DealType.SELL) { %>
                         <div>قیمت خرید: <%= ((HouseSell)house).getSellPrice() %></div>
                         <div>&nbsp;</div>
                     <% } %>
