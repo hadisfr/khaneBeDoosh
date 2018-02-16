@@ -19,10 +19,10 @@ public class KhaneBeDoosh {
     private ArrayList<User> users = new ArrayList<User>();
     private static KhaneBeDoosh khaneBedoosh = new KhaneBeDoosh();
 
-    private static String bankAPIKey = "a1965d20-1280-11e8-87b4-496f79ef1988";
-    private static String bankUri = "http://acm.ut.ac.ir/ieBank/pay";
-    public static String nopicUri = "no-pic.jpg";
-    public static String logoUri = "logo.svg";
+    private static final String bankAPIKey = "a1965d20-1280-11e8-87b4-496f79ef1988";
+    private static final String bankUri = "http://acm.ut.ac.ir/ieBank/pay";
+    private static final String nopicUri = "no-pic.jpg";
+    private static final String logoUri = "logo.svg";
 
     private KhaneBeDoosh(){
         Individual individual = new Individual("بهنام همایون", 200, "09123456789", "behnam", "p@sw00rd");
@@ -42,6 +42,14 @@ public class KhaneBeDoosh {
 
     public static KhaneBeDoosh getInstance(){
         return khaneBedoosh;
+    }
+
+    public static String getNopicUri() {
+        return nopicUri;
+    }
+
+    public static String getLogoUri() {
+        return logoUri;
     }
 
     public boolean increaseBalance(Individual user, int amount) throws IOException {
