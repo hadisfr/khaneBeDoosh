@@ -4,7 +4,6 @@
 <%@ page import="main.java.HouseRent" %>
 <%@ page import="main.java.HouseSell" %>
 <%@ page import="main.java.DealType" %>
-<%@ page import="main.java.User" %>
 <%@ page import="main.java.KhaneBeDoosh" %>
 
 <!DOCTYPE html>
@@ -14,8 +13,10 @@
     </head>
     <body>
         <jsp:include page="haeder.jsp" />
-        <% if(request.getAttribute("houses") != null) { %>
-            <% for (House house : (ArrayList<House>)(request.getAttribute("houses"))) { %>
+        <%
+            ArrayList<House> houses = (ArrayList<House>)(request.getAttribute("houses"));
+            if(houses.size() > 0) { %>
+            <% for (House house : houses) { %>
                 <div class="outbox grid_element">
                     <% if(house.getDealType() == DealType.RENT) { %>
                         <div>قیمت پایه: <%= ((HouseRent)house).getBasePrice() %> تومان</div>
