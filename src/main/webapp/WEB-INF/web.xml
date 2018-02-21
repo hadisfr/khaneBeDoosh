@@ -29,6 +29,14 @@
         <servlet-name>PayServlet</servlet-name>
         <servlet-class>main.java.PayServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HouseDetailsServlet</servlet-name>
+        <servlet-class>main.java.HouseDetailsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HouseDetailsServlet</servlet-name>
+        <url-pattern>/houseDetails</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PayServlet</servlet-name>
         <url-pattern>/pay</url-pattern>
