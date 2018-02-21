@@ -4,7 +4,7 @@ public abstract class House{
 
     protected HouseDetail detail;
     protected User owner;
-    protected String imageUrl;
+    protected String imageUrl = "";
     protected String id;
     protected int area;
     protected BuildingType buildingType;
@@ -12,7 +12,10 @@ public abstract class House{
     public abstract DealType getDealType();
 
     public String getImageUrl() {
-        return imageUrl;
+        if(imageUrl.equals(""))
+            return KhaneBeDoosh.getNopicUri();
+        else
+            return imageUrl;
     }
 
     public String getId() {

@@ -27,7 +27,7 @@
             <div>نوع: <%= house.getBuildingType() %></div>
             <div>آدرس: <%= house.getAddress() %></div>
             <div>توضیحات: <%= house.getDescription() %></div>
-            <% String imageUrl = house.getImageUrl().equals("") ? KhaneBeDoosh.getNopicUri() : house.getImageUrl(); %>
+            <% String imageUrl = house.getImageUrl(); %>
             <div><img class="house_image" src='<%= imageUrl %>'></div>
             <div class="linkbox">لینک عکس: <a href='<%= imageUrl %>' target="_blank"><%= imageUrl %></a></div>
             <% if(request.getAttribute("wantsToSeePhone") != null && (boolean)(request.getAttribute("wantsToSeePhone"))) { %>
