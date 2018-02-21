@@ -29,7 +29,7 @@
                     <% String imageUrl = house.getImageUrl().equals("") ? KhaneBeDoosh.getNopicUri() : house.getImageUrl(); %>
                     <div><img class="house_image" src='<%= imageUrl %>'></div>
                     <div class="linkbox">لینک عکس: <a href='<%= imageUrl %>' target="_blank"><%= imageUrl %></a></div>
-                    <a href='houseDetails.jsp?houseId=<%= house.getId() %>&ownerId=<%= house.getOwner().getId() %>'><button>اطلاعات بیشتر</button></a>
+                    <a href='houseDetails?houseId=<%= house.getId() %>&ownerId=<%= house.getOwner().getId() %>'><button>اطلاعات بیشتر</button></a>
                 </div>
             <% } %>
         <% } else { %>
