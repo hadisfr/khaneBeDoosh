@@ -1,3 +1,3 @@
-#!/usr/local/bin/bash
+#!/usr/bin/env bash
 
-mvn tomcat7:redeploy && echo "see http://localhost:8080/khaneBeDoosh"
+mvn tomcat7:redeploy && echo -e "see \033[4mhttp://localhost:8080/khaneBeDoosh\033[0m"
