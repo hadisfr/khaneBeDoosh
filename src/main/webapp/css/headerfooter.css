@@ -84,7 +84,7 @@ body {
     filter: brightness(90%);
 }
 
-.hover_menu_wrapper {
+.hover-menu-wrapper {
     display: none;
     position: absolute;
     top: 40px;
@@ -106,7 +106,7 @@ body {
     padding: 6px;
 }
 
-.toggle:hover + .hover_menu_wrapper, .hover_menu_wrapper:hover {
+.toggle:hover + .hover-menu-wrapper, .hover-menu-wrapper:hover {
     display: block;
     animation: fade_in 1s;
 }
