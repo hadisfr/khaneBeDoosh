@@ -25,6 +25,22 @@ p {
     text-align: justify;
 }
 
+.left-align {
+    text-align: left;
+}
+
+.right-align {
+    text-align: right;
+}
+
+.center-align {
+    text-align: center;
+}
+
+.justify-align {
+    text-align: justify;
+}
+
 .green {
     color: #3ad2cb;
 }
@@ -35,4 +51,14 @@ p {
 
 .violet {
     color: #5b539d;
+}
+
+.unimportant {
+    color: #999;
+    font-size: 0.75em;
+}
+
+.w50 {
+    width: 50%;
+    display: inline-block;
 }
