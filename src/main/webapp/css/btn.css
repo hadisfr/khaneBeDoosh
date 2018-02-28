@@ -1,3 +1,8 @@
+.btn-green, .btn-red, .btn-violet, .btn-outline-green, .btn-outline-red, .btn-outline-violet {
+  border-radius: 6px;
+}
+
+
 /*.btn-green-oldstyle */
 
 .btn-green-oldstyle {
