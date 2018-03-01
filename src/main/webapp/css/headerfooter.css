@@ -74,6 +74,7 @@ body {
     vertical-align: middle;
     text-align: center;
     padding: 10px;
+    white-space: nowrap;
 }
 
 .footer .social-logo img {
