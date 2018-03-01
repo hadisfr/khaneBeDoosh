@@ -299,3 +299,67 @@
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
 }
 
+/*.btn-white */
+
+.btn-white {
+    color: #666;
+    background-color: #fff;
+    border-color: #fff;
+    box-shadow: 0 2px 80px rgba(0, 0, 0, 0.1);
+}
+
+.btn-white:hover {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.btn-white:focus, .btn-white.focus {
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
+}
+
+.btn-white:not(:disabled):not(.disabled):active, .btn-white:not(:disabled):not(.disabled).active,
+.show > .btn-white.dropdown-toggle {
+    color: #000;
+    background-color: #eee;
+    border-color: #ddd;
+}
+
+.btn-white:not(:disabled):not(.disabled):active:focus, .btn-white:not(:disabled):not(.disabled).active:focus,
+.show > .btn-white.dropdown-toggle:focus {
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
+}
+
+.btn-outline-white {
+    color: #fff;
+    background-color: transparent;
+    background-image: none;
+    border-color: #fff;
+    box-shadow: 0 2px 80px rgba(0, 0, 0, 0.1);
+}
+
+.btn-outline-white:hover {
+    color: #666;
+    background-color: #fff;
+    border-color: #fff;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.btn-outline-white:focus, .btn-outline-white.focus {
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
+}
+
+.btn-outline-white.disabled, .btn-outline-white:disabled {
+    background-color: transparent;
+}
+
+.btn-outline-white:not(:disabled):not(.disabled):active, .btn-outline-white:not(:disabled):not(.disabled).active,
+.show > .btn-outline-white.dropdown-toggle {
+    color: #000;
+    background-color: #ddd;
+    border-color: #eee;
+}
+
+.btn-outline-white:not(:disabled):not(.disabled):active:focus, .btn-outline-white:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-white.dropdown-toggle:focus {
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
+}
+
