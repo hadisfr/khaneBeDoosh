@@ -68,6 +68,11 @@ p {
     display: inline-block;
 }
 
+.w100 {
+    width: 100%;
+    display: inline-block;
+}
+
 .title-wrapper {
     padding: 40px 60px;
     background: url("../pics/geometry2.png");

@@ -43,3 +43,51 @@
 .box-light-condensed .detail hr {
     border-color: #9a9a9a;
 }
+
+.search form {
+    width: 100%;
+    padding: 6px 26px;    
+}
+
+.search form div{
+    text-align: center;
+    padding: 6px;
+    position: relative;
+}
+
+.search input[type="text"], .search input[type="number"], .search input[type="submit"], .search select {
+    width: 100%;
+    display: inline-block;
+}
+
+.search input[type="text"], .search input[type="number"], .search select {
+    border-radius: 6px;
+    border: none;
+    height: 30px;
+    padding: 3px 16px;
+}
+
+.search input[type="radio"] {
+    margin: 6px;
+    margin-right: 26px;
+}
+
+.search input[type="radio"]:first-child {
+    margin-right: 6px;
+}
+
+.search select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.search select option:first-child {
+    display: none;
+}
+
+.search .badge {
+    position: absolute;
+    top: -16px;
+    left: 10px;
+    font-weight: lighter;
+}
