@@ -3,6 +3,7 @@
 @import url("shabnam.css");
 @import url("btn.css");
 @import url("headerfooter.css");
+@import url("boxes.css");
 
 @media only screen and (max-width: 992px) {
     .vanish-sm {
@@ -53,8 +54,12 @@ p {
     color: #5b539d;
 }
 
+.gray {
+    color: #9a9a9a;
+}
+
 .unimportant {
-    color: #999;
+    color: #9a9a9a;
     font-size: 0.75em;
 }
 
