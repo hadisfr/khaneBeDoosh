@@ -1,0 +1,57 @@
+.cnt {
+    padding: 26px;
+    font-size: 1.25em;
+}
+
+span {
+    padding: 3px 16px;
+}
+
+input[type="text"], input[type="number"], input[type="submit"] {
+    width: 100%;
+    display: inline-block;
+}
+
+input[type="text"], input[type="number"] {
+    border-radius: 6px;
+    color: #9a9a9a;
+    border: 1px solid;
+    height: 40px;
+    padding: 3px 16px;
+    margin: 16px auto;
+}
+
+input[type="radio"] {
+    margin: 6px;
+    margin-right: 26px;
+}
+
+input[type="radio"]:first-child {
+    margin-right: 6px;
+}
+
+form {
+    text-align: center;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-size: 0.8em;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  font-size: 0.8em;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  font-size: 0.8em;
+}
+:-moz-placeholder { /* Firefox 18- */
+  font-size: 0.8em;
+}
+
+.badge {
+    color: #9a9a9a;
+    position: absolute;
+    top: -10px;
+    left: 26px;
+    font-size: 0.6em;
+    font-weight: lighter;
+}
