@@ -1,0 +1,136 @@
+#why-use-us {
+    padding-top: 120px;
+    padding-bottom: 60px;
+}
+
+#why-use-us h1, #why-use-us h2, #why-use-us h3, #why-use-us h4 {
+    padding-bottom: 36px;
+}
+
+#why-use-us div { 
+    text-align: center;
+}
+
+#why-use-us ul {
+    list-style: none;
+}
+
+#why-use-us li {
+    padding: 6px 0;
+}
+
+#why-use-us li::before {
+    content: "\f058";
+    font-family: "Font Awesome 5 Free";
+    color: #5b539d;
+    font-weight: 900;
+    padding: 0 16px;
+}
+
+#why-use-us div img {
+    width: 80%;
+}
+
+
+.box-light {
+    position: relative;
+    height: 350px;
+    color: #4c4c4c;
+    text-align: center;
+    padding: 40px;
+    font-size: 1.3em;
+    font-weight: lighter;
+}
+
+.box-light img {
+    height: 100px;
+}
+
+.box-light * {
+    text-align: center;
+}
+
+.box-light h1, .box-light h2, .box-light h3, .box-light h4 {
+    padding: 20px 3px;
+}
+
+#search form {
+    width: 100%;
+    padding: 6px 26px;    
+}
+
+#search form div{
+    text-align: center;
+    padding: 6px;
+    position: relative;
+}
+
+#search input[type="text"], #search input[type="number"], #search input[type="submit"], #search select {
+    width: 100%;
+    display: inline-block;
+}
+
+#search input[type="text"], #search input[type="number"], #search select {
+    border-radius: 6px;
+    border: none;
+    height: 30px;
+    padding: 3px 16px;
+}
+
+#search input[type="radio"] {
+    margin: 6px;
+    margin-right: 26px;
+}
+
+#search input[type="radio"]:first-child {
+    margin-right: 6px;
+}
+
+#search select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+#search select option:first-child {
+    display: none;
+}
+
+#search .badge {
+    position: absolute;
+    top: -16px;
+    left: 10px;
+    font-weight: lighter;
+}
+
+#first {
+    width: 100vw;
+    min-height: 100vh;
+}
+
+#background {
+    background: url("../pics/banners/mahdiar-mahmoodi-452489-unsplash.jpg") center center/ cover no-repeat;
+    width: 100vw;
+    min-height: 110vh;
+    position: absolute;
+}
+
+.header {
+    background: none;
+    box-shadow: none;
+    position: absolute;
+}
+
+#logo-wrapper, #logo-wrapper * {
+    text-align: center;
+    text-shadow: 0 0 2px black;
+}
+
+#logo-wrapper img.logo {
+    max-width: 100%;
+    filter: drop-shadow(0 0 30px);
+}
+
+#logo-wrapper {
+    margin-top: 130px;
+    margin-bottom: 60px;
+}
