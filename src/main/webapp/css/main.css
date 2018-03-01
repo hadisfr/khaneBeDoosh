@@ -58,6 +58,10 @@ p {
     color: #9a9a9a;
 }
 
+.white {
+    color: #fff;
+}
+
 .unimportant {
     color: #9a9a9a;
     font-size: 0.75em;

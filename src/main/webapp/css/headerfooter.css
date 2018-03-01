@@ -96,7 +96,7 @@ body {
     padding-top: 40px;
 }
 
-.hover_menu {
+.hover-menu {
     background: #fff;
     padding: 16px;
     border-radius: 6px;
@@ -104,7 +104,7 @@ body {
     border: 1px solid #f9f9f9;
 }
 
-.hover_menu div {
+.hover-menu div {
     text-align: center;
     padding: 6px;
 }
@@ -125,5 +125,9 @@ body {
 
     .header-spacer {
         height: 140px;
+    }
+
+    .footer > div, .header > div {
+        white-space: initial;
     }
 }
