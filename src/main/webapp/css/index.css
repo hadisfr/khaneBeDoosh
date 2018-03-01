@@ -134,3 +134,19 @@
     margin-top: 130px;
     margin-bottom: 60px;
 }
+
+@media only screen and (max-width: 992px) {
+    #search  .badge {
+        position: initial;
+    }
+    #logo-wrapper h1, #logo-wrapper h2, #logo-wrapper h3, #logo-wrapper h4 {
+        font-size: 1.3em;
+    }
+    #logo-wrapper img.logo {
+        width: 40%;
+    }
+    #logo-wrapper {
+        margin-top: 90px;
+        margin-bottom: 30px;
+    }
+}
