@@ -44,6 +44,10 @@
     border-color: #9a9a9a;
 }
 
+.search {
+    padding-top: 60px;
+}
+
 .search form {
     width: 100%;
     padding: 6px 26px;    
