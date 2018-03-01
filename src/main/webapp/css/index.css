@@ -1,18 +1,13 @@
-@keyframes change-background {
-    0% {background-image: url("../pics/banners/mahdiar-mahmoodi-452489-unsplash.jpg");}
-    25% {background-image: url("../pics/banners/casey-horner-533586-unsplash.jpg");}
-    50% {background-image: url("../pics/banners/luke-van-zyl-504032-unsplash.jpg");}
-    75% {background-image: url("../pics/banners/michal-kubalczyk-260909-unsplash.jpg");}
-    100% {background-image: url("../pics/banners/mahdiar-mahmoodi-452489-unsplash.jpg");}
+:root {
+    --bg-duration: 5s;
 }
 
-/*@keyframes change-background {
-    0% {background-color: red;}
-    25% {background-color: green;}
-    50% {background-color: blue;}
-    75% {background-color: yellow;}
-    100% {background-color: red;}
-}*/
+@keyframes bg-fade {
+    0% {opacity: 1;}
+    23% {opacity: 1;}
+    25% {opacity: 0;}
+    98% {opacity: 0;}
+}
 
 #why-use-us {
     padding-top: 120px;
@@ -123,13 +118,37 @@
     min-height: 100vh;
 }
 
-#background {
+.background {
     background: center center/ cover no-repeat;
     width: 100vw;
     min-height: 110vh;
     position: absolute;
-    transition: background 5s ease-in-out;
-    animation: change-background 30s infinite forwards;
+    animation: bg-fade calc(4 * var(--bg-duration)) linear 0s infinite forwards;
+    transform: rotateZ(0);
+}
+
+.background#bg1 {
+    background-color: red;
+    background-image: url("../pics/banners/mahdiar-mahmoodi-452489-unsplash.jpg");
+    animation-delay: calc(0 * var(--bg-duration));
+}
+
+.background#bg2 {
+    background-color: blue;
+    background-image: url("../pics/banners/casey-horner-533586-unsplash.jpg");
+    animation-delay: calc(1 * var(--bg-duration));
+}
+
+.background#bg3 {
+    background-color: green;
+    background-image: url("../pics/banners/luke-van-zyl-504032-unsplash.jpg");
+    animation-delay: calc(2 * var(--bg-duration));
+}
+
+.background#bg4 {
+    background-color: yellow;
+    background-image: url("../pics/banners/michal-kubalczyk-260909-unsplash.jpg");
+    animation-delay: calc(3 * var(--bg-duration));
 }
 
 .header {
