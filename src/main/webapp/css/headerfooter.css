@@ -29,6 +29,7 @@ body {
 
 .header .logo {
     color: #3ad2cb;
+    transition: filter 0.15s;
 }
 
 .header .logo:hover {
@@ -76,6 +77,7 @@ body {
 }
 
 .footer .social-logo img {
+    transition: filter 0.15s;
     height: 30px;
 }
 
