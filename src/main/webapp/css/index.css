@@ -1,3 +1,19 @@
+@keyframes change-background {
+    0% {background-image: url("../pics/banners/mahdiar-mahmoodi-452489-unsplash.jpg");}
+    25% {background-image: url("../pics/banners/casey-horner-533586-unsplash.jpg");}
+    50% {background-image: url("../pics/banners/luke-van-zyl-504032-unsplash.jpg");}
+    75% {background-image: url("../pics/banners/michal-kubalczyk-260909-unsplash.jpg");}
+    100% {background-image: url("../pics/banners/mahdiar-mahmoodi-452489-unsplash.jpg");}
+}
+
+/*@keyframes change-background {
+    0% {background-color: red;}
+    25% {background-color: green;}
+    50% {background-color: blue;}
+    75% {background-color: yellow;}
+    100% {background-color: red;}
+}*/
+
 #why-use-us {
     padding-top: 120px;
     padding-bottom: 60px;
@@ -108,10 +124,12 @@
 }
 
 #background {
-    background: url("../pics/banners/mahdiar-mahmoodi-452489-unsplash.jpg") center center/ cover no-repeat;
+    background: center center/ cover no-repeat;
     width: 100vw;
     min-height: 110vh;
     position: absolute;
+    transition: background 5s ease-in-out;
+    animation: change-background 30s infinite forwards;
 }
 
 .header {
