@@ -33,7 +33,7 @@ public class Individual extends User{
     }
     private static int phonePrice = 1000;
     public boolean payForHouse(String houseId, int ownerId){
-        if(balance > phonePrice) {
+        if(balance >= phonePrice) {
             paidHouses.add(new IntStringPair(ownerId, houseId));
             balance -= phonePrice;
             return true;
