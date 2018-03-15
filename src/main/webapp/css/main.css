@@ -85,3 +85,7 @@ p {
     margin: -15px;
     margin-bottom: 15px;
 }
+
+.title-wrapper h1, .title-wrapper h2, .title-wrapper h3, .title-wrapper h4 {
+    font-weight: bold;
+}
