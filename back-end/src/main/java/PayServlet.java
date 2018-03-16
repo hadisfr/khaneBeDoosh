@@ -9,19 +9,25 @@ import java.io.IOException;
 public class PayServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Individual currentUser = (Individual) KhaneBeDoosh.getInstance().getDefaultUser();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        String jsonResponse;
         try {
             if(KhaneBeDoosh.getInstance().increaseBalance(
                     currentUser,
                     Integer.parseInt(request.getParameter("balance").equals("") ? "0" : request.getParameter("balance")))
                     )
-                request.setAttribute("msg", "افزایش اعتبار موفقیت‌آمیز بود.");
+                jsonResponse = "{ \"success\": true}";
+//                request.setAttribute("msg", "افزایش اعتبار موفقیت‌آمیز بود.");
             else
-                request.setAttribute("msg", "افزایش اعتبار ناموفق بود.");
+                jsonResponse = "{ \"success\": false}";
+//                request.setAttribute("msg", "افزایش اعتبار ناموفق بود.");
+            response.getWriter().write(jsonResponse);
         } catch(Exception e) {
             request.setAttribute("msg", "استثنا: ‪" + e);
             request.getRequestDispatcher("/").forward(request, response);
         }
-        request.getRequestDispatcher("/").forward(request, response);
+//        request.getRequestDispatcher("/").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
