@@ -27,11 +27,12 @@ class PayForm extends Component {
             },
         }).then(function (res) {
             if(res.status == HttpStatus.OK) {
-                alert("+");
+                this.props.msgPresenter.showMsg("اعتبار شما افزایش یافت!");
                 this.props.history.goBack();
             }
-            else
+            else {
                 this.props.history.push("/err/" + res.status);
+            }
         }.bind(this));
     }
 

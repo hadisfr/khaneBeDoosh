@@ -28,7 +28,23 @@ class App extends Component {
             backend_api: new api("http://localhost:8080/khaneBeDoosh", {
                 pay: "/pay",
             }),
+            msg: [],
         }
+        this.setMsg = this.setMsg.bind(this);
+        this.clearMsg = this.clearMsg.bind(this);
+        this.msgPresenter = {
+            timeout: 3000,
+            showMsg: this.setMsg,
+        }
+    }
+
+    setMsg(msg) {
+        this.setState((prev, props) => ({ msg: prev.msg.concat(msg) }));
+        setTimeout(this.clearMsg, this.msgPresenter.timeout);
+    }
+
+    clearMsg() {
+        this.setState((prev, props) => ({ msg: prev.msg.slice(1) }))
     }
 
     render() {
@@ -43,13 +59,20 @@ class App extends Component {
                     <Route path="/err/:id([0-9]{3})" render={(props) => <PageTitle title="خطا" />} />
                     <Redirect from="*" to="/err/404" />
                 </Switch>
+                {
+                    (this.state.msg && this.state.msg.length > 0)
+                    && <div className="msgbox">{this.state.msg.reduce((prev, curr) => [prev, <br />, curr])}</div>
+                }
                 <div className="cnt row"><div className="col-1"></div><div className="col-10 center-align">
                     <Switch>
                         <Route exact path="/" />
                         <Route
                             exact path="/pay"
-                            render={(props) => <Pay user={this.state.user}
-                            api={this.state.backend_api.pay} />}
+                            render={(props) => <Pay
+                                user={this.state.user}
+                                api={this.state.backend_api.pay}
+                                msgPresenter={this.msgPresenter}
+                            />}
                         />
                         <Route path="/search" />
                         <Route path="/house/:id" />

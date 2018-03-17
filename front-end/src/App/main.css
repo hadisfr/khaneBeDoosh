@@ -74,3 +74,14 @@ p {
     font-size: 1.25em;
     padding: 26px;
 }
+
+.msgbox {
+    background: SlateBlue;
+    border-radius: 6px;
+    color: #fff;
+    margin: 16px;
+    padding: 16px;
+    text-align: center;
+    transition: height 1s;
+}
+
