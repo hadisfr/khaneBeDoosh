@@ -18,9 +18,9 @@ class Footer extends Component {
         }
 
         const social_logos = [
-            new social_logo("Twitter", "https://twitter.com/", "pics/icons/Twitter_bird_logo_2012.svg.png"),
-            new social_logo("Telegram", "http://telegram.org/", "pics/icons/200px-Telegram_logo.svg.png"),
-            new social_logo("Instagram", "https://instagram.com/", "pics/icons/200px-Instagram_logo_2016.svg.png"),
+            new social_logo("Twitter", "https://twitter.com/", "/pics/icons/Twitter_bird_logo_2012.svg.png"),
+            new social_logo("Telegram", "http://telegram.org/", "/pics/icons/200px-Telegram_logo.svg.png"),
+            new social_logo("Instagram", "https://instagram.com/", "/pics/icons/200px-Instagram_logo_2016.svg.png"),
         ]
 
         const copyright_owners = [
