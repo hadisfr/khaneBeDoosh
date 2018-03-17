@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
+import HttpStatus from 'http-status-codes';
+import 'whatwg-fetch'
 import './Pay.css'
 
 class PayForm extends Component {
@@ -17,7 +19,20 @@ class PayForm extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        alert(this.state.balance);
+        fetch(this.props.api, {
+            method: "POST",
+            body: new URLSearchParams("balance=" + this.state.balance),
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+        }).then(function (res) {
+            if(res.status == HttpStatus.OK) {
+                alert("+");
+                this.props.history.goBack();
+            }
+            else
+                this.props.history.push("/err/" + res.status);
+        }.bind(this));
     }
 
     render() {

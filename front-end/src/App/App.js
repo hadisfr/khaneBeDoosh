@@ -15,11 +15,19 @@ function user(username, balance) {
     this.balance= balance;
 }
 
+function api(root, sub) {
+    this.root = root;
+    Object.keys(sub).forEach((key) => (this[key] = root + sub[key]), this);
+}
+
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
             user: new user("بهنام همایون", 200000),
+            backend_api: new api("http://localhost:8080/khaneBeDoosh", {
+                pay: "/pay",
+            }),
         }
     }
 
@@ -38,7 +46,11 @@ class App extends Component {
                 <div className="cnt row"><div className="col-1"></div><div className="col-10 center-align">
                     <Switch>
                         <Route exact path="/" />
-                        <Route exact path="/pay" render={(props) => <Pay user={this.state.user} />} />
+                        <Route
+                            exact path="/pay"
+                            render={(props) => <Pay user={this.state.user}
+                            api={this.state.backend_api.pay} />}
+                        />
                         <Route path="/search" />
                         <Route path="/house/:id" />
                         <Route path="/err/:id" component={ErrorMsg} />

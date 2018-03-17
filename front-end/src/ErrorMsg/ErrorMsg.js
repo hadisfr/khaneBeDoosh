@@ -6,6 +6,7 @@ const err_msg = {
     "403": "دسترسی مجاز نیست",
     "404": "صفحه پیدا نشد",
     "500": "سرور مشکل پیدا کرده است",
+    "502": "Bad Gateway",
 };
 
 class ErrorMsg extends Component {
