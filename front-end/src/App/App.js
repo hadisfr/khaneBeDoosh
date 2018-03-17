@@ -54,8 +54,8 @@ class App extends Component {
                 <Switch>
                     <Route exact path="/" />
                     <Route exact path="/pay" render={(props) => <PageTitle title="افزایش موجودی" />} />
-                    <Route path="/search" render={(props) => <PageTitle title="نتایج جست‌وجو" />} />
                     <Route path="/house/:id" render={(props) => <PageTitle title="مشخصات کامل ملک" />} />
+                    <Route path="/house" render={(props) => <PageTitle title="نتایج جست‌وجو" />} />
                     <Route path="/err/:id([0-9]{3})" render={(props) => <PageTitle title="خطا" />} />
                     <Redirect from="*" to="/err/404" />
                 </Switch>
@@ -74,8 +74,8 @@ class App extends Component {
                                 msgPresenter={this.msgPresenter}
                             />}
                         />
-                        <Route path="/search" />
                         <Route path="/house/:id" />
+                        <Route path="/house" />
                         <Route path="/err/:id" component={ErrorMsg} />
                     </Switch>
                 </div><div className="col-1"></div></div>
