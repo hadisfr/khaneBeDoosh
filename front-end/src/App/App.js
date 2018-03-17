@@ -10,6 +10,7 @@ import PageTitle from '../PageTitle/PageTitle'
 import ErrorMsg from '../ErrorMsg/ErrorMsg'
 import Pay from '../Pay/Pay'
 import HouseDetails from '../HouseDetails/HouseDetails'
+import SearchResults from '../SearchResults/SearchResults'
 
 function user(name, username, balance) {
     this.name = name;
@@ -31,6 +32,7 @@ class App extends Component {
             backend_api: new api("http://localhost:8080/khaneBeDoosh", {
                 pay: "pay",
                 house_details: "",  // TODO: use back-end's API for house details
+                search: "",  // TODO: use back-end's API for search
             }),
             msg: [],
         }
@@ -82,7 +84,10 @@ class App extends Component {
                             path="/house/:id"
                             render={(props) => <HouseDetails api={this.state.backend_api.house_details} />}
                         />
-                        <Route path="/house" />
+                        <Route
+                            path="/house"
+                            render={(props) => <SearchResults api={this.state.backend_api.search} />}
+                        />
                         <Route path="/err/:id" component={ErrorMsg} />
                     </Switch>
                 </div><div className="col-1"></div></div>

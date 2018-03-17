@@ -1,0 +1,57 @@
+.search {
+    padding-top: 60px;
+}
+
+.search form {
+    padding: 6px 26px;    
+    width: 100%;
+}
+
+.search form div{
+    padding: 6px;
+    position: relative;
+    text-align: center;
+}
+
+.search input[type="text"], .search input[type="number"], .search input[type="submit"], .search select {
+    display: inline-block;
+    width: 100%;
+}
+
+.search input[type="text"], .search input[type="number"], .search select {
+    border: none;
+    border-radius: 6px;
+    height: 30px;
+    padding: 3px 16px;
+}
+
+.search input[type="radio"] {
+    margin: 6px;
+    margin-right: 26px;
+}
+
+.search input[type="radio"]:first-child {
+    margin-right: 6px;
+}
+
+.search select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.search select option:first-child {
+    display: none;
+}
+
+.search .badge {
+    font-weight: lighter;
+    left: 10px;
+    position: absolute;
+    top: -16px;
+}
+
+@media only screen and (max-width: 992px) {
+    .search .badge {
+        position: initial;
+    }
+}
