@@ -47,7 +47,7 @@ class PayForm extends Component {
                     onChange={(event) => this.handleChange(event)}
                     value={this.state.balance}
                 />
-                <span className="badge">تومان</span>
+                <span className="pay-badge">تومان</span>
                 <input
                     type="submit"
                     value="افزایش اعتبار"
