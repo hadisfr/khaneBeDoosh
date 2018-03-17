@@ -11,7 +11,8 @@ import ErrorMsg from '../ErrorMsg/ErrorMsg'
 import Pay from '../Pay/Pay'
 import HouseDetails from '../HouseDetails/HouseDetails'
 
-function user(username, balance) {
+function user(name, username, balance) {
+    this.name = name;
     this.username= username;
     this.balance= balance;
     // TODO: request user's data from back-end in App::render before return
@@ -26,7 +27,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: new user("بهنام همایون", 200000),
+            user: new user("بهنام همایون", "behnam", 200000),
             backend_api: new api("http://localhost:8080/khaneBeDoosh", {
                 pay: "/pay",
             }),

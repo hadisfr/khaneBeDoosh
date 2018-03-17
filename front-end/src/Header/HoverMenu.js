@@ -12,7 +12,7 @@ class HoverMenu extends Component {
                 </button>
                 <div className="hover-menu-wrapper">
                     <div className="hover-menu">
-                        <div>{this.props.user.username}</div>
+                        <div>{this.props.user.name}</div>
                         <div className="unimportant">
                             <span className="center-right w50">اعتبار:</span>
                             <span className="center-left w50">{this.props.user.balance} تومان</span>
