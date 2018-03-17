@@ -42,6 +42,10 @@ body {
     white-space: nowrap;
 }
 
+.footer .social-logo {
+    padding: 0 6px;
+}
+
 .footer .social-logo img {
     height: 30px;
     transition: filter 0.15s;
