@@ -1,0 +1,86 @@
+@keyframes fade_in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.main {
+    padding-top: 70px;
+    position: absolute;
+}
+
+.header {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.header {
+    background: #fff;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.header .logo {
+    color: #3ad2cb;
+    font-weight: bold;
+    transition: filter 0.15s;
+}
+
+.header .logo:hover {
+    -webkit-filter: brightness(90%); /* Safari 6.0 - 9.0 */
+    filter: brightness(90%);
+    text-decoration: none;
+}
+
+.header img.logo {
+    height: 2.5em;
+    max-height: 70px;
+}
+
+.header > div {
+    display: inline-block;
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.hover-menu-wrapper {
+    display: none;
+    left: 10px;
+    padding-top: 40px;
+    position: absolute;
+    right: 10px;
+    top: 40px;
+}
+
+.hover-menu {
+    background: #fff;
+    border: 1px solid #f9f9f9;
+    border-radius: 6px;
+    padding: 16px;
+    text-align: center;
+}
+
+.hover-menu div {
+    padding: 6px;
+    text-align: center;
+}
+
+.toggle:hover + .hover-menu-wrapper, .hover-menu-wrapper:hover {
+    animation: fade_in 1s;
+    display: block;
+}
+
+@media only screen and (max-width: 992px) {
+    .main {
+        padding-top: 140px;
+    }
+
+    .header > div {
+        white-space: initial;
+    }
+}
