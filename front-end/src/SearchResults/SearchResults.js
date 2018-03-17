@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import './SearchResults.css'
 import SearchResult from './SearchResult'
+import SearchForm from '../SearchForm/SearchForm'
 
 class SearchResults extends Component {
     constructor(props) {
@@ -27,7 +28,7 @@ class SearchResults extends Component {
                 <div className="search col-12"><div className="row">
                     <div className="center-align col-12 gray">جست‌وجوی مجدد</div>
                     <div className="box-wrapper col-12"><div className="box-dark col-12">
-                        SearchForm
+                        <SearchForm api={this.props.api} />
                     </div></div>
                 </div></div>
             </div>
