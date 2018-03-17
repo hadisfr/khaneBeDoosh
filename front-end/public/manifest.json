@@ -1,12 +1,12 @@
 {
-  "short_name": "KhaneBeDoosh",
-  "name": "Khane Be Doosh",
-  "icons": [
-    {
-      "src": "./pics/logo.ico",
-      "type": "image/x-icon"
-    }
-  ],
-  "start_url": "./index.html",
-  "display": "standalone"
+    "short_name": "KhaneBeDoosh",
+    "name": "Khane Be Doosh",
+    "icons": [
+        {
+            "src": "./pics/logo.ico",
+            "type": "image/x-icon"
+        }
+    ],
+    "start_url": "./index.html",
+    "display": "standalone"
 }
