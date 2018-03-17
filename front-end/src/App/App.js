@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, withRouter } from 'react-router-dom'
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
 import './main.css';
 import './boxes.css';
 import './boxes.css';
@@ -25,7 +25,21 @@ class App extends Component {
         return (
             <div className="container-fluid main">
                 <Header user={this.state.user} />
-                <PageTitle title="خانه‌به‌دوش" />
+                <Switch>
+                    <Route exact path="/" />
+                    <Route exact path="/pay" render={(props) => <PageTitle title="افزایش موجودی" />} />
+                    <Route path="/search" render={(props) => <PageTitle title="نتایج جست‌وجو" />} />
+                    <Route path="/house/:id" render={(props) => <PageTitle title="مشخصات کامل ملک" />} />
+                    <Route path="/err/:id" render={(props) => <PageTitle title="خطا" />} />
+                    <Redirect from="*" to="/err/404" />
+                </Switch>
+                <Switch>
+                    <Route exact path="/" />
+                    <Route exact path="/pay" />
+                    <Route path="/search" />
+                    <Route path="/house/:id" />
+                    <Route path="/err/:id" />
+                </Switch>
                 <Footer />
             </div>
         );
