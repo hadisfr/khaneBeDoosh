@@ -15,7 +15,6 @@ class HouseDetails extends Component {
     }
 
     render() {
-        console.log(this.state.house_details);
         const det = this.state.house_details;
         return (
             <div className="row">
