@@ -8,6 +8,7 @@ import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import PageTitle from '../PageTitle/PageTitle'
 import ErrorMsg from '../ErrorMsg/ErrorMsg'
+import PayForm from '../PayForm/PayForm'
 
 function user(username, balance) {
     this.username= username;
@@ -34,13 +35,15 @@ class App extends Component {
                     <Route path="/err/:id([0-9]{3})" render={(props) => <PageTitle title="خطا" />} />
                     <Redirect from="*" to="/err/404" />
                 </Switch>
-                <Switch>
-                    <Route exact path="/" />
-                    <Route exact path="/pay" />
-                    <Route path="/search" />
-                    <Route path="/house/:id" />
-                    <Route path="/err/:id" component={ErrorMsg} />
-                </Switch>
+                <div className="cnt row"><div className="col-1"></div><div className="col-10 center-align">
+                    <Switch>
+                        <Route exact path="/" />
+                        <Route exact path="/pay" render={(props) => <PayForm user={this.state.user} />} />
+                        <Route path="/search" />
+                        <Route path="/house/:id" />
+                        <Route path="/err/:id" component={ErrorMsg} />
+                    </Switch>
+                </div><div className="col-1"></div></div>
                 <Footer />
             </div>
         );
