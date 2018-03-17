@@ -48,6 +48,10 @@
     white-space: nowrap;
 }
 
+.header .toggle {
+    text-align: center;
+}
+
 .hover-menu-wrapper {
     display: none;
     left: 10px;
@@ -59,7 +63,7 @@
 
 .hover-menu {
     background: #fff;
-    border: 1px solid #f9f9f9;
+    border: 1px solid #eee;
     border-radius: 6px;
     padding: 16px;
     text-align: center;
