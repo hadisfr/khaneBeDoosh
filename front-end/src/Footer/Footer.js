@@ -5,9 +5,6 @@ import SocialLogo from './SocialLogo'
 import CopyrightOwner from './CopyrightOwner'
 
 class Footer extends Component {
-    constructor(props) {
-        super(props);
-    }
     render() {
         function social_logo(title, url, img) {
             this.title = title;
