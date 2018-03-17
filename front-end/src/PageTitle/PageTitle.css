@@ -1,0 +1,12 @@
+.title-wrapper {
+    background: url("/pics/geometry2.png");
+    color: #3ad2cb;
+    font-weight: bold;
+    margin: -15px;
+    margin-bottom: 15px;
+    padding: 40px 60px;
+}
+
+.title-wrapper h1, .title-wrapper h2, .title-wrapper h3, .title-wrapper h4 {
+    font-weight: bold;
+}
