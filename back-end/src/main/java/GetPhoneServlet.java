@@ -18,15 +18,15 @@ public class GetPhoneServlet extends HttpServlet {
                     Integer.parseInt(request.getParameter("ownerId"))
             );
             request.setAttribute("house", house);
-            Individual currentUser = ((Individual)KhaneBeDoosh.getInstance().getDefaultUser());
+            Individual currentUser = ((Individual) KhaneBeDoosh.getInstance().getDefaultUser());
             String houseId = request.getParameter("houseId");
             int ownerId = Integer.parseInt(request.getParameter("ownerId"));
             request.setAttribute("wantsToSeePhone", true);
             request.setAttribute("canSeePhone",
                     currentUser.hasPaidforHouse(houseId, ownerId) || currentUser.payForHouse(houseId, ownerId));
             request.getRequestDispatcher("houseDetails.jsp").forward(request, response);
-        } catch(Exception e) {
-            request.setAttribute("msg", "خانه‌ای با این مشخصات پیدا نشد!" );
+        } catch (Exception e) {
+            request.setAttribute("msg", "خانه‌ای با این مشخصات پیدا نشد!");
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }

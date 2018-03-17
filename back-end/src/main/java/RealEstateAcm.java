@@ -11,11 +11,13 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class RealEstateAcm extends RealEstate{
+public class RealEstateAcm extends RealEstate {
 
     private static RealEstateAcm realEstateAcm = new RealEstateAcm();
 
-    public static RealEstateAcm getInstance(){return realEstateAcm;}
+    public static RealEstateAcm getInstance() {
+        return realEstateAcm;
+    }
 
     private RealEstateAcm() {
         super("acm", "http://acm.ut.ac.ir/khaneBeDoosh/house");
@@ -56,10 +58,10 @@ public class RealEstateAcm extends RealEstate{
             area = object.getInt("area");
             dealType = DealType.parseInt(object.getInt("dealType"));
             buildingType = BuildingType.parseString(object.getString("buildingType"));
-            if(dealType == DealType.SELL){
+            if (dealType == DealType.SELL) {
                 int sellPrice = priceObject.getInt("sellPrice");
                 result.add(new HouseSell(id, area, buildingType, imageUrl, owner, sellPrice));
-            } else if(dealType == DealType.RENT){
+            } else if (dealType == DealType.RENT) {
                 int rentPrice, basePrice;
                 rentPrice = priceObject.getInt("rentPrice");
                 basePrice = priceObject.getInt("basePrice");
@@ -104,10 +106,10 @@ public class RealEstateAcm extends RealEstate{
         dealType = DealType.parseInt(object.getInt("dealType"));
         buildingType = BuildingType.parseString(object.getString("buildingType"));
 
-        if(dealType == DealType.SELL){
+        if (dealType == DealType.SELL) {
             int sellPrice = priceObject.getInt("sellPrice");
             return new HouseSell(id, area, buildingType, imageUrl, owner, sellPrice, address, phone, description, expireTime);
-        } else if(dealType == DealType.RENT){
+        } else if (dealType == DealType.RENT) {
             int rentPrice, basePrice;
             rentPrice = priceObject.getInt("rentPrice");
             basePrice = priceObject.getInt("basePrice");
@@ -116,7 +118,6 @@ public class RealEstateAcm extends RealEstate{
 
         return null;
     }
-
 
 
 }

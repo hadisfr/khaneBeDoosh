@@ -3,11 +3,11 @@ package main.java;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public abstract class RealEstate extends User{
+public abstract class RealEstate extends User {
 
     protected String uri;
 
-    public RealEstate(String name, String uri){
+    public RealEstate(String name, String uri) {
         super(name);
         this.uri = uri;
     }

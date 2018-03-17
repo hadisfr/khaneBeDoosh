@@ -2,7 +2,7 @@ package main.java;
 
 import java.util.ArrayList;
 
-public abstract class User{
+public abstract class User {
 
     protected String name;
     private int id;
@@ -14,8 +14,9 @@ public abstract class User{
     }
 
     public abstract ArrayList<House> searchHouses(BuildingType buildingType, DealType dealType, int minArea, int maxPrice);
+
     public abstract House getHouse(String id);
-    
+
     public String getName() {
         return name;
     }
@@ -24,15 +25,15 @@ public abstract class User{
         return id;
     }
 
-    protected ArrayList<House> filterHouses(ArrayList<House> houses, BuildingType buildingType, DealType dealType, int minArea, int maxPrice){
+    protected ArrayList<House> filterHouses(ArrayList<House> houses, BuildingType buildingType, DealType dealType, int minArea, int maxPrice) {
         ArrayList<House> result = new ArrayList<House>();
-        for(House house : houses){
+        for (House house : houses) {
             int price = 0;
-            if(house instanceof HouseRent)
-                price = ((HouseRent)house).getRentPrice();
-            else if(house instanceof HouseSell)
-                price = ((HouseSell)house).getSellPrice();
-            if(house.getBuildingType().equals(buildingType)
+            if (house instanceof HouseRent)
+                price = ((HouseRent) house).getRentPrice();
+            else if (house instanceof HouseSell)
+                price = ((HouseSell) house).getSellPrice();
+            if (house.getBuildingType().equals(buildingType)
                     && house.getDealType().equals(dealType)
                     && house.getArea() >= minArea
                     && price <= maxPrice

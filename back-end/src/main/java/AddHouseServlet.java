@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
 import org.apache.commons.lang.RandomStringUtils;
 
 public class AddHouseServlet extends HttpServlet {
@@ -15,38 +16,38 @@ public class AddHouseServlet extends HttpServlet {
             String imageUrl = "";
             String expireTime = "2032-12-01";
             User currentUser = KhaneBeDoosh.getInstance().getDefaultUser();
-            if(dealType == DealType.RENT) {
+            if (dealType == DealType.RENT) {
                 KhaneBeDoosh.getInstance().addHouse(
-                    id,
-                    Integer.parseInt(request.getParameter("area") == "" ? "0" : request.getParameter("area")),
-                    BuildingType.parseString(request.getParameter("buildingType")),
-                    imageUrl,
-                    currentUser,
-                    Integer.parseInt(request.getParameter("price") == "" ? "0" : request.getParameter("price")),
-                    0,
-                    request.getParameter("address"),
-                    request.getParameter("phone"),
-                    request.getParameter("description"),
-                    expireTime
+                        id,
+                        Integer.parseInt(request.getParameter("area") == "" ? "0" : request.getParameter("area")),
+                        BuildingType.parseString(request.getParameter("buildingType")),
+                        imageUrl,
+                        currentUser,
+                        Integer.parseInt(request.getParameter("price") == "" ? "0" : request.getParameter("price")),
+                        0,
+                        request.getParameter("address"),
+                        request.getParameter("phone"),
+                        request.getParameter("description"),
+                        expireTime
                 );
                 request.setAttribute("msg", "خانه با موفقیت اضافه شد.");
-            } else if(dealType == DealType.SELL) {
+            } else if (dealType == DealType.SELL) {
                 KhaneBeDoosh.getInstance().addHouse(
-                    id,
-                    Integer.parseInt(request.getParameter("area") == "" ? "0" : request.getParameter("area")),
-                    BuildingType.parseString(request.getParameter("buildingType")),
-                    imageUrl,
-                    currentUser,
-                    Integer.parseInt(request.getParameter("price") == "" ? "0" : request.getParameter("price")),
-                    request.getParameter("address"),
-                    request.getParameter("phone"),
-                    request.getParameter("description"),
-                    expireTime
+                        id,
+                        Integer.parseInt(request.getParameter("area") == "" ? "0" : request.getParameter("area")),
+                        BuildingType.parseString(request.getParameter("buildingType")),
+                        imageUrl,
+                        currentUser,
+                        Integer.parseInt(request.getParameter("price") == "" ? "0" : request.getParameter("price")),
+                        request.getParameter("address"),
+                        request.getParameter("phone"),
+                        request.getParameter("description"),
+                        expireTime
                 );
                 request.setAttribute("msg", "خانه با موفقیت اضافه شد.");
             } else
                 throw new IOException("Bad BuildingType");
-        } catch(Exception e) {
+        } catch (Exception e) {
             request.setAttribute("msg", "استثنا: ‪" + e);
             request.getRequestDispatcher("/").forward(request, response);
         }

@@ -24,7 +24,7 @@ public class KhaneBeDoosh {
     private static final String nopicUri = "pics/no-pic.jpg";
     private static final String logoUri = "pics/logo.svg";
 
-    private KhaneBeDoosh(){
+    private KhaneBeDoosh() {
         Individual individual = new Individual("بهنام همایون", 200, "09123456789", "behnam", "p@sw00rd");
         users.add(individual);
         users.add(RealEstateAcm.getInstance());
@@ -40,7 +40,7 @@ public class KhaneBeDoosh {
         return users.get(0);
     }
 
-    public static KhaneBeDoosh getInstance(){
+    public static KhaneBeDoosh getInstance() {
         return khaneBedoosh;
     }
 
@@ -73,27 +73,27 @@ public class KhaneBeDoosh {
         }
         JSONObject object = new JSONObject(json);
         boolean payResult = object.getBoolean("success");
-        if(payResult)
+        if (payResult)
             user.setBalance(user.getBalance() + amount);
         return payResult;
     }
 
-    public ArrayList<House> filterHouses(BuildingType buildingType, DealType dealType, int minArea, int maxPrice){
+    public ArrayList<House> filterHouses(BuildingType buildingType, DealType dealType, int minArea, int maxPrice) {
         ArrayList<House> result = new ArrayList<House>();
-        for (User user : users){
+        for (User user : users) {
             result.addAll(user.searchHouses(buildingType, dealType, minArea, maxPrice));
         }
         return result;
     }
 
-    public void chargeBalance(int userId, int amount){
-        if(amount < 0)
+    public void chargeBalance(int userId, int amount) {
+        if (amount < 0)
             amount = 0;
-        for (User user : users){
-            if(!(user instanceof Individual))
+        for (User user : users) {
+            if (!(user instanceof Individual))
                 continue;
             Individual individual = (Individual) user;
-            if(userId == individual.getId()){
+            if (userId == individual.getId()) {
                 individual.setBalance(individual.getBalance() + amount);
             }
         }
@@ -104,36 +104,37 @@ public class KhaneBeDoosh {
     }
 
     private static int userIdBase = 1000;
+
     public User getUserById(int userId) {
         return users.get(userId - userIdBase);
     }
 
-    public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner, int sellPrice){
-        HouseSell house = new HouseSell(id,area, buildingType, imageUrl, owner, sellPrice);
-        if(owner instanceof Individual)
-            ((Individual)owner).addHouse(house);
+    public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner, int sellPrice) {
+        HouseSell house = new HouseSell(id, area, buildingType, imageUrl, owner, sellPrice);
+        if (owner instanceof Individual)
+            ((Individual) owner).addHouse(house);
     }
 
     public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner, int sellPrice,
-            String address, String phone, String description, String expireTime){
-        HouseSell house = new HouseSell(id,area, buildingType, imageUrl, owner, sellPrice, address,
-            phone, description, expireTime);
-        if(owner instanceof Individual)
-            ((Individual)owner).addHouse(house);
+                         String address, String phone, String description, String expireTime) {
+        HouseSell house = new HouseSell(id, area, buildingType, imageUrl, owner, sellPrice, address,
+                phone, description, expireTime);
+        if (owner instanceof Individual)
+            ((Individual) owner).addHouse(house);
     }
 
     public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner,
-                         int rentPrice, int basePrice){
-        HouseRent house = new HouseRent(id,area, buildingType, imageUrl, owner, rentPrice, basePrice);
-        if(owner instanceof Individual)
-            ((Individual)owner).addHouse(house);
+                         int rentPrice, int basePrice) {
+        HouseRent house = new HouseRent(id, area, buildingType, imageUrl, owner, rentPrice, basePrice);
+        if (owner instanceof Individual)
+            ((Individual) owner).addHouse(house);
     }
 
     public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner,
-            int rentPrice, int basePrice, String address, String phone, String description, String expireTime){
-        HouseRent house = new HouseRent(id,area, buildingType, imageUrl, owner, rentPrice, basePrice, address,
-            phone, description, expireTime);
-        if(owner instanceof Individual)
-            ((Individual)owner).addHouse(house);
+                         int rentPrice, int basePrice, String address, String phone, String description, String expireTime) {
+        HouseRent house = new HouseRent(id, area, buildingType, imageUrl, owner, rentPrice, basePrice, address,
+                phone, description, expireTime);
+        if (owner instanceof Individual)
+            ((Individual) owner).addHouse(house);
     }
 }

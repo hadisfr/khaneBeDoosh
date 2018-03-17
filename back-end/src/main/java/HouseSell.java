@@ -10,7 +10,7 @@ public class HouseSell extends House {
     }
 
     public HouseSell(String id, int area, BuildingType buildingType, String imageUrl, User owner, int sellPrice,
-            String address, String phone, String description, String expireTime) {
+                     String address, String phone, String description, String expireTime) {
         super(id, area, buildingType, imageUrl, owner, address, phone, description, expireTime);
         this.setSellPrice(sellPrice);
     }
@@ -20,7 +20,7 @@ public class HouseSell extends House {
     }
 
     private void setSellPrice(int sellPrice) {
-        if(sellPrice < 0)
+        if (sellPrice < 0)
             sellPrice = 0;
         this.sellPrice = sellPrice;
     }

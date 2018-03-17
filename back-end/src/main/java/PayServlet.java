@@ -13,7 +13,7 @@ public class PayServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         String jsonResponse;
         try {
-            if(KhaneBeDoosh.getInstance().increaseBalance(
+            if (KhaneBeDoosh.getInstance().increaseBalance(
                     currentUser,
                     Integer.parseInt(request.getParameter("balance").equals("") ? "0" : request.getParameter("balance")))
                     )
@@ -23,7 +23,7 @@ public class PayServlet extends HttpServlet {
                 jsonResponse = "{ \"success\": false}";
 //                request.setAttribute("msg", "افزایش اعتبار ناموفق بود.");
             response.getWriter().write(jsonResponse);
-        } catch(Exception e) {
+        } catch (Exception e) {
             request.setAttribute("msg", "استثنا: ‪" + e);
             request.getRequestDispatcher("/").forward(request, response);
         }

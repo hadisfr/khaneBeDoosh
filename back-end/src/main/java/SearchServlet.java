@@ -20,15 +20,15 @@ public class SearchServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         try {
             houses.addAll(KhaneBeDoosh.getInstance().filterHouses(
-                BuildingType.parseString(request.getParameter("buildingType")),
-                DealType.parseString(request.getParameter("dealType")),
-                Integer.parseInt(request.getParameter("minArea") == "" ? "0" : request.getParameter("minArea")),
-                Integer.parseInt(request.getParameter("maxPrice") == "" ? "0" : request.getParameter("maxPrice"))
+                    BuildingType.parseString(request.getParameter("buildingType")),
+                    DealType.parseString(request.getParameter("dealType")),
+                    Integer.parseInt(request.getParameter("minArea") == "" ? "0" : request.getParameter("minArea")),
+                    Integer.parseInt(request.getParameter("maxPrice") == "" ? "0" : request.getParameter("maxPrice"))
             ));
             Gson gson = new Gson();
             String jsonResponse = gson.toJson(houses);
             response.getWriter().write(jsonResponse);
-        } catch(Exception e) {
+        } catch (Exception e) {
             request.setAttribute("msg", "استثنا: ‪" + e);
             request.getRequestDispatcher("/").forward(request, response);
         }

@@ -1,6 +1,6 @@
 package main.java;
 
-public abstract class House{
+public abstract class House {
 
     protected HouseDetail detail;
     protected User owner;
@@ -12,7 +12,7 @@ public abstract class House{
     public abstract DealType getDealType();
 
     public String getImageUrl() {
-        if(imageUrl.equals(""))
+        if (imageUrl.equals(""))
             return KhaneBeDoosh.getNopicUri();
         else
             return imageUrl;
@@ -30,12 +30,12 @@ public abstract class House{
         return buildingType;
     }
 
-    protected void getDetailFromOwner(){
+    protected void getDetailFromOwner() {
         this.detail = owner.getHouse(this.id).detail;
     }
 
     public String getPhone() {
-        if(detail == null){
+        if (detail == null) {
             getDetailFromOwner();
         }
         String phone = detail.getPhone();
@@ -43,8 +43,8 @@ public abstract class House{
         return phone;
     }
 
-    public String getDescription(){
-        if(detail == null){
+    public String getDescription() {
+        if (detail == null) {
             getDetailFromOwner();
         }
         String description = detail.getDescription();
@@ -53,7 +53,7 @@ public abstract class House{
     }
 
     public String getExpireTime() {
-        if(detail == null){
+        if (detail == null) {
             getDetailFromOwner();
         }
         String expireTime = detail.getExpireTime();
@@ -61,7 +61,7 @@ public abstract class House{
     }
 
     public String getAddress() {
-        if(detail == null){
+        if (detail == null) {
             getDetailFromOwner();
         }
         String address = detail.getAddress();
@@ -82,7 +82,7 @@ public abstract class House{
     }
 
     public House(String id, int area, BuildingType buildingType, String imageUrl, User owner,
-            String address, String phone, String description, String expireTime) {
+                 String address, String phone, String description, String expireTime) {
         this(id, area, buildingType, imageUrl, owner);
         this.detail = new HouseDetail(address, phone, description, expireTime);
     }

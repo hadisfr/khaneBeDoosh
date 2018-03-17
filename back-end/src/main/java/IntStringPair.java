@@ -27,9 +27,9 @@ public class IntStringPair {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof IntStringPair){
-            IntStringPair casted = (IntStringPair)obj;
-            if(casted.getInteger() == this.integer && casted.getString().equals(this.string))
+        if (obj instanceof IntStringPair) {
+            IntStringPair casted = (IntStringPair) obj;
+            if (casted.getInteger() == this.integer && casted.getString().equals(this.string))
                 return true;
         }
         return false;

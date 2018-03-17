@@ -26,8 +26,8 @@ public class HouseDetailsServlet extends HttpServlet {
             response.getWriter().write(jsonResponse);
 //            request.setAttribute("house", house);
 //            request.getRequestDispatcher("houseDetails.jsp").forward(request, response);
-        } catch(Exception e) {
-            request.setAttribute("msg", "خانه‌ای با این مشخصات پیدا نشد!" );
+        } catch (Exception e) {
+            request.setAttribute("msg", "خانه‌ای با این مشخصات پیدا نشد!");
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
