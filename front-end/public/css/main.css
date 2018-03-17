@@ -1,9 +1,3 @@
-@import url("bootstrap.css");
-@import url("fontawesome-all.css");
-@import url("shabnam.css");
-@import url("btn.css");
-@import url("boxes.css");
-
 @media only screen and (max-width: 992px) {
     .vanish-sm {
         display: none !important;
@@ -15,10 +9,10 @@
 }
 
 body {
-    direction: rtl;
-    font-family: "Shabnam";
     background-color: #fefefe;
     color: #4c4c4c;
+    direction: rtl;
+    font-family: "Shabnam";
 }
 
 p {
@@ -67,11 +61,11 @@ p {
 }
 
 .w50 {
-    width: 50%;
     display: inline-block;
+    width: 50%;
 }
 
 .w100 {
-    width: 100%;
     display: inline-block;
+    width: 100%;
 }
