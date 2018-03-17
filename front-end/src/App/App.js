@@ -11,6 +11,7 @@ import ErrorMsg from '../ErrorMsg/ErrorMsg'
 import Pay from '../Pay/Pay'
 import HouseDetails from '../HouseDetails/HouseDetails'
 import SearchResults from '../SearchResults/SearchResults'
+import Landing from '../Landing/Landing'
 
 function user(name, username, balance) {
     this.name = name;
@@ -71,7 +72,10 @@ class App extends Component {
                 }
                 <div className="cnt row"><div className="col-1"></div><div className="col-10 center-align">
                     <Switch>
-                        <Route exact path="/" />
+                        <Route
+                            exact path="/"
+                            render={(props) => <Landing search_api={this.state.backend_api.search} />}
+                        />
                         <Route
                             exact path="/pay"
                             render={(props) => <Pay

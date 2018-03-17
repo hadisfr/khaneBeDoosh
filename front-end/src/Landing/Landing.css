@@ -1,0 +1,97 @@
+@keyframes bg-fade {
+    0% {opacity: 1;}
+    23% {opacity: 1;}
+    25% {opacity: 0;}
+    98% {opacity: 0;}
+}
+
+#why-use-us {
+    padding-bottom: 60px;
+    padding-top: 120px;
+}
+
+#why-use-us h1, #why-use-us h2, #why-use-us h3, #why-use-us h4 {
+    padding-bottom: 36px;
+}
+
+#why-use-us div { 
+    text-align: center;
+}
+
+#why-use-us ul {
+    list-style: none;
+}
+
+#why-use-us li {
+    padding: 6px 0;
+}
+
+#why-use-us li::before {
+    color: #5b539d;
+    content: "\f058";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    padding: 0 16px;
+}
+
+#why-use-us div img {
+    width: 80%;
+}
+
+
+.box-light {
+    color: #4c4c4c;
+    font-weight: lighter;
+    height: 350px;
+    padding: 40px;
+    position: relative;
+    text-align: center;
+}
+
+.box-light img {
+    height: 100px;
+}
+
+.box-light * {
+    text-align: center;
+}
+
+.box-light h1, .box-light h2, .box-light h3, .box-light h4 {
+    padding: 20px 3px;
+}
+
+#first {
+    min-height: 100vh;
+    width: 100vw;
+}
+
+.header {
+    background: none;
+    box-shadow: none;
+    position: absolute;
+}
+
+#logo-wrapper, #logo-wrapper * {
+    text-align: center;
+    text-shadow: 0 0 2px black;
+}
+
+#logo-wrapper img.logo {
+    filter: drop-shadow(0 0 30px);
+    max-width: 100%;
+}
+
+#logo-wrapper {
+    margin-bottom: 60px;
+    margin-top: 130px;
+}
+
+@media only screen and (max-width: 992px) {
+    #logo-wrapper img.logo {
+        width: 40%;
+    }
+    #logo-wrapper {
+        margin-bottom: 30px;
+        margin-top: 90px;
+    }
+}
