@@ -1,0 +1,26 @@
+.box-wrapper {
+    padding: 16px;
+}
+
+.box-light, .box-light-condensed, .box-dark {
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 80px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    text-align: center;
+    transition: box-shadow 0.25s ease-in-out;
+    overflow: hidden;
+}
+
+.box-light-condensed {
+    box-shadow: 0 2px 40px rgba(0, 0, 0, 0.1);
+}
+
+.box-light-condensed:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.box-dark {
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+}

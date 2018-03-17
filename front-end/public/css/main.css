@@ -1,0 +1,77 @@
+@import url("bootstrap.css");
+@import url("fontawesome-all.css");
+@import url("shabnam.css");
+@import url("btn.css");
+@import url("boxes.css");
+
+@media only screen and (max-width: 992px) {
+    .vanish-sm {
+        display: none !important;
+    }
+}
+
+* {
+    text-align: right;
+}
+
+body {
+    direction: rtl;
+    font-family: "Shabnam";
+    background-color: #fefefe;
+    color: #4c4c4c;
+}
+
+p {
+    text-align: justify;
+}
+
+.left-align {
+    text-align: left;
+}
+
+.right-align {
+    text-align: right;
+}
+
+.center-align {
+    text-align: center;
+}
+
+.justify-align {
+    text-align: justify;
+}
+
+.green {
+    color: #3ad2cb;
+}
+
+.red {
+    color: #f45b69;
+}
+
+.violet {
+    color: #5b539d;
+}
+
+.gray {
+    color: #9a9a9a;
+}
+
+.white {
+    color: #fff;
+}
+
+.unimportant {
+    color: #9a9a9a;
+    font-size: 0.75em;
+}
+
+.w50 {
+    width: 50%;
+    display: inline-block;
+}
+
+.w100 {
+    width: 100%;
+    display: inline-block;
+}
