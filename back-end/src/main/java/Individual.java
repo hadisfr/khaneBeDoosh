@@ -9,9 +9,9 @@ public class Individual extends User{
     private int balance;
     private String username;
     private String password;
-    private HashMap<String, House> houses = new HashMap<String, House>();
+    private transient HashMap<String, House> houses = new HashMap<String, House>();
 
-    ArrayList<IntStringPair> paidHouses = new ArrayList<IntStringPair>();
+    private transient ArrayList<IntStringPair> paidHouses = new ArrayList<IntStringPair>();
 
     public Individual(String name, int balance, String phone, String username, String password) {
         super(name);
