@@ -69,3 +69,8 @@ p {
     display: inline-block;
     width: 100%;
 }
+
+.cnt {
+    font-size: 1.25em;
+    padding: 26px;
+}
