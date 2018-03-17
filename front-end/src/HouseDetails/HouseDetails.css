@@ -1,0 +1,32 @@
+#house-pic {
+    border-radius: 10px;
+    width: 100%;
+}
+
+.btn {
+    font-weight: lighter;
+}
+
+#house-detail dt, #house-detail dd {
+    border-bottom: 1px solid #ddd;
+    display: inline-block;
+    font-size: 0.7em;
+    padding: 6px;
+    padding-top: 20px;
+}
+
+#house-detail dt {
+    color: #9a9a9a;
+    font-weight: lighter;
+    width: 39%;
+}
+
+#house-detail dd {
+    margin: 0;
+    width: 59%;
+}
+
+#change-number-status {
+    margin: 16px 0;
+    width: 100%;
+}

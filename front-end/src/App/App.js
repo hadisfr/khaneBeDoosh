@@ -9,6 +9,7 @@ import Footer from '../Footer/Footer'
 import PageTitle from '../PageTitle/PageTitle'
 import ErrorMsg from '../ErrorMsg/ErrorMsg'
 import Pay from '../Pay/Pay'
+import HouseDetails from '../HouseDetails/HouseDetails'
 
 function user(username, balance) {
     this.username= username;
@@ -75,7 +76,7 @@ class App extends Component {
                                 msgPresenter={this.msgPresenter}
                             />}
                         />
-                        <Route path="/house/:id" />
+                        <Route path="/house/:id" component={HouseDetails} />
                         <Route path="/house" />
                         <Route path="/err/:id" component={ErrorMsg} />
                     </Switch>
