@@ -9,7 +9,7 @@ class HouseDetails extends Component {
     }
 
     componentDidMount() {
-        fetch("/housedetails.json").then((res) => res.json()).then(function(res) {  // TODO: use back-end's API
+        fetch(this.props.api + "?id=" + this.props.match.params.id).then((res) => res.json()).then(function(res) {
             this.setState({ house_details: res });
         }.bind(this));
     }

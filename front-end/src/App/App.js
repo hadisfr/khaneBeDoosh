@@ -20,7 +20,7 @@ function user(name, username, balance) {
 
 function api(root, sub) {
     this.root = root;
-    Object.keys(sub).forEach((key) => (this[key] = root + sub[key]), this);
+    Object.keys(sub).forEach((key) => (this[key] = root + "/" + sub[key]), this);
 }
 
 class App extends Component {
@@ -29,7 +29,8 @@ class App extends Component {
         this.state = {
             user: new user("بهنام همایون", "behnam", 200000),
             backend_api: new api("http://localhost:8080/khaneBeDoosh", {
-                pay: "/pay",
+                pay: "pay",
+                house_details: "",  // TODO: use back-end's API for house details
             }),
             msg: [],
         }
@@ -77,7 +78,10 @@ class App extends Component {
                                 msgPresenter={this.msgPresenter}
                             />}
                         />
-                        <Route path="/house/:id" component={HouseDetails} />
+                        <Route
+                            path="/house/:id"
+                            render={(props) => <HouseDetails api={this.state.backend_api.house_details} />}
+                        />
                         <Route path="/house" />
                         <Route path="/err/:id" component={ErrorMsg} />
                     </Switch>
