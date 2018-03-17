@@ -13,6 +13,7 @@ import Pay from '../Pay/Pay'
 function user(username, balance) {
     this.username= username;
     this.balance= balance;
+    // TODO: request user's data from back-end in App::render before return
 }
 
 function api(root, sub) {
