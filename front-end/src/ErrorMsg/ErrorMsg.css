@@ -1,0 +1,21 @@
+.error-msg {
+    padding: 60px 26px;
+}
+
+.error-msg *:first-child {
+    color: Maroon;
+}
+
+.error-msg h1, .error-msg h2, .error-msg h3 {
+    font-weight: bold;
+}
+
+.error-msg, .error-msg * {
+    text-align: center;
+}
+
+@media only screen and (max-width: 992px) {
+    .error-msg {
+        padding: 0;
+    }
+}
