@@ -8,7 +8,7 @@ import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import PageTitle from '../PageTitle/PageTitle'
 import ErrorMsg from '../ErrorMsg/ErrorMsg'
-import PayForm from '../PayForm/PayForm'
+import Pay from '../Pay/Pay'
 
 function user(username, balance) {
     this.username= username;
@@ -38,7 +38,7 @@ class App extends Component {
                 <div className="cnt row"><div className="col-1"></div><div className="col-10 center-align">
                     <Switch>
                         <Route exact path="/" />
-                        <Route exact path="/pay" render={(props) => <PayForm user={this.state.user} />} />
+                        <Route exact path="/pay" render={(props) => <Pay user={this.state.user} />} />
                         <Route path="/search" />
                         <Route path="/house/:id" />
                         <Route path="/err/:id" component={ErrorMsg} />
