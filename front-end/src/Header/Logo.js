@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, withRouter, Link } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import './Header.css'
 
 class Logo extends Component {

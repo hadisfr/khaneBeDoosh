@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import './Footer.css';
 import SocialLogo from './SocialLogo'
 import CopyrightOwner from './CopyrightOwner'
