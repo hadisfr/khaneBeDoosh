@@ -1,0 +1,7 @@
+{
+    "pay": "/pay",
+    "house_details": "/house/",
+    "search": "/house",
+    "error": "/err/",
+    "root": "/"
+}

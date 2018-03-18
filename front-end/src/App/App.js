@@ -14,6 +14,7 @@ import SearchResults from '../SearchResults/SearchResults'
 import Landing from '../Landing/Landing'
 import LandingBackground from '../Landing/LandingBackground'
 import backend_api from '../back-end-api.json'
+import frontend_api from '../front-end-api.json'
 
 function user(name, username, balance) {
     this.name = name;
@@ -50,14 +51,14 @@ class App extends Component {
         return (
             <div className="container-fluid main">
                 <Header user={this.state.user} />
-                <Route exact path="/" component={LandingBackground} />
+                <Route exact path={frontend_api.root} component={LandingBackground} />
                 <Switch>
-                    <Route exact path="/" />
-                    <Route exact path="/pay" render={(props) => <PageTitle title="افزایش موجودی" />} />
-                    <Route path="/house/:id" render={(props) => <PageTitle title="مشخصات کامل ملک" />} />
-                    <Route path="/house" render={(props) => <PageTitle title="نتایج جست‌وجو" />} />
-                    <Route path="/err/:id([0-9]{3})" render={(props) => <PageTitle title="خطا" />} />
-                    <Redirect from="*" to="/err/404" />
+                    <Route exact path={frontend_api.root} />
+                    <Route exact path={frontend_api.pay} render={(props) => <PageTitle title="افزایش موجودی" />} />
+                    <Route path={frontend_api.house_details + ":id"} render={(props) => <PageTitle title="مشخصات کامل ملک" />} />
+                    <Route path={frontend_api.search} render={(props) => <PageTitle title="نتایج جست‌وجو" />} />
+                    <Route path={frontend_api.error + ":id([0-9]{3})"} render={(props) => <PageTitle title="خطا" />} />
+                    <Redirect from="*" to={frontend_api.error + "404"} />
                 </Switch>
                 {
                     (this.state.msg && this.state.msg.length > 0)
@@ -65,14 +66,14 @@ class App extends Component {
                 }
                 <div className="cnt row"><div className="col-1"></div><div className="col-10 center-align">
                     <Switch>
-                        <Route exact path="/" render={(props) => <Landing />} />
+                        <Route exact path={frontend_api.root} render={(props) => <Landing />} />
                         <Route
-                            exact path="/pay"
+                            exact path={frontend_api.pay}
                             render={(props) => <Pay user={this.state.user} msgPresenter={this.msgPresenter} />}
                         />
-                        <Route path="/house/:id" render={(props) => <HouseDetails />} />
-                        <Route path="/house" render={(props) => <SearchResults />} />
-                        <Route path="/err/:id" component={ErrorMsg} />
+                        <Route path={frontend_api.house_details + ":id"} render={(props) => <HouseDetails />} />
+                        <Route path={frontend_api.search} render={(props) => <SearchResults />} />
+                        <Route path={frontend_api.error + ":id"} component={ErrorMsg} />
                     </Switch>
                 </div><div className="col-1"></div></div>
                 <Footer />

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import './SearchForm.css'
+import frontend_api from '../front-end-api.json'
 
 class SearchForm extends Component {
     constructor(props) {
@@ -22,7 +23,7 @@ class SearchForm extends Component {
     handle_action(event) {
         event.preventDefault();
         const query = "?" + Object.keys(this.state).map((key) => (key + '=' + this.state[key])).join("&");
-        this.props.history.push("/house" + query);
+        this.props.history.push(frontend_api.search + query);
         if(this.props.call_back)
             this.props.call_back(query);
     }
