@@ -1,6 +1,9 @@
 package main.java;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
+import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +17,9 @@ public class GetPhoneServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+//            response.setContentType("application/json");
+//            response.setCharacterEncoding("UTF-8");
+//            HashMap<String, Boolean> res = new HashMap<String, Boolean>();
             House house = KhaneBeDoosh.getInstance().getHouseById(
                     request.getParameter("houseId"),
                     Integer.parseInt(request.getParameter("ownerId"))
@@ -26,9 +32,12 @@ public class GetPhoneServlet extends HttpServlet {
             request.setAttribute("canSeePhone",
                     currentUser.hasPaidforHouse(houseId, ownerId) || currentUser.payForHouse(houseId, ownerId));
             request.getRequestDispatcher("houseDetails.jsp").forward(request, response);
+//            response.getWriter().write((new Gson()).toJson(res));
         } catch (Exception e) {
-            request.setAttribute("msg", "خانه‌ای با این مشخصات پیدا نشد!");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            HashMap<String, String> err_res = new HashMap<String, String>();
+            err_res.put("msg", e.toString());
+            response.getWriter().write((new Gson()).toJson(err_res));
         }
     }
 }
