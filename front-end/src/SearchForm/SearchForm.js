@@ -78,7 +78,7 @@ class SearchForm extends Component {
                     />
                     <span className="badge">تومان</span>
                 </div>
-                <div className="col-12 col-sm-6 col-lg-4" style={{ display: this.state.dealType === "" || "none" }} >
+                <div className="col-12 col-sm-6 col-lg-4 vanish-sm" style={{ display: this.state.dealType === "" || "none" }} >
                     &nbsp;
                 </div>
                 <div className="col-12 col-sm-6 col-lg-4">
@@ -123,7 +123,7 @@ class SearchForm extends Component {
                     />
                     <span className="badge">تومان</span>
                 </div>
-                <div className="col-12 col-sm-6 col-lg-4" style={{ display: this.state.dealType !== "RENT" || "none" }} >
+                <div className="col-12 col-sm-6 col-lg-4 vanish-sm" style={{ display: this.state.dealType !== "RENT" || "none" }} >
                     &nbsp;
                 </div>
                 <div className="col-12 col-sm-6 col-lg-4">
