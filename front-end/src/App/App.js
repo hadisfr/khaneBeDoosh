@@ -33,8 +33,8 @@ class App extends Component {
             user: new user("بهنام همایون", "behnam", 200000),
             backend_api: new api("http://localhost:8080/khaneBeDoosh", {
                 pay: "pay",
-                house_details: "",  // TODO: use back-end's API for house details
-                search: "",  // TODO: use back-end's API for search
+                house_details: "houseDetails",  // TODO: use back-end's API for house details
+                search: "search",  // TODO: use back-end's API for search
             }),
             msg: [],
         }
