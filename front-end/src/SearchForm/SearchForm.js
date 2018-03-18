@@ -21,9 +21,10 @@ class SearchForm extends Component {
 
     handle_action(event) {
         event.preventDefault();
-        this.props.history.push(
-            "/house?" + Object.keys(this.state).map((key) => (key + '=' + this.state[key])).join("&")
-        );
+        const query = "?" + Object.keys(this.state).map((key) => (key + '=' + this.state[key])).join("&");
+        this.props.history.push("/house" + query);
+        if(this.props.call_back)
+            this.props.call_back(query);
     }
 
     render() {

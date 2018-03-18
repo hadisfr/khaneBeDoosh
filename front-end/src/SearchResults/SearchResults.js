@@ -13,7 +13,12 @@ class SearchResults extends Component {
     }
 
     componentDidMount() {
-        fetch(this.props.api + this.props.location.search).then((res) => res.json()).then(function(res) {
+        this.fetch_results(this.props.location.search);
+    }
+
+    fetch_results(query) {
+        console.log(query);
+        fetch(this.props.api + query).then((res) => res.json()).then(function(res) {
             this.setState({ houses: res });
         }.bind(this));
     }
@@ -28,7 +33,7 @@ class SearchResults extends Component {
                 <div className="search col-12"><div className="row">
                     <div className="center-align col-12 gray">جست‌وجوی مجدد</div>
                     <div className="box-wrapper col-12"><div className="box-dark col-12">
-                        <SearchForm api={this.props.api} />
+                        <SearchForm api={this.props.api} call_back={ this.fetch_results.bind(this) } />
                     </div></div>
                 </div></div>
             </div>
