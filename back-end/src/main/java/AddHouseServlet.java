@@ -24,33 +24,34 @@ public class AddHouseServlet extends HttpServlet {
             String imageUrl = "";
             String expireTime = "2032-12-01";
             User currentUser = KhaneBeDoosh.getInstance().getDefaultUser();
-            if(!request.getParameterMap().containsKey("dealType"))
+            if (!request.getParameterMap().containsKey("dealType"))
                 throw new IllegalArgumentException("missing dealType");
             DealType dealType = DealType.parseString(request.getParameter("dealType"));
             if (dealType == null)
                 throw new IllegalArgumentException("bad dealType");
-            if(!request.getParameterMap().containsKey("buildingType"))
+            if (!request.getParameterMap().containsKey("buildingType"))
                 throw new IllegalArgumentException("missing buildingType");
             BuildingType buildingType = BuildingType.parseString(request.getParameter("buildingType"));
             if (buildingType == null)
                 throw new IllegalArgumentException("bad buildingType");
-            if(!request.getParameterMap().containsKey("area"))
+            if (!request.getParameterMap().containsKey("area"))
                 throw new IllegalArgumentException("missing area");
             int area = Integer.parseInt(request.getParameter("area"));
-            if(!request.getParameterMap().containsKey("address"))
+            if (!request.getParameterMap().containsKey("address"))
                 throw new IllegalArgumentException("missing address");
             String address = request.getParameter("address");
-            if(!request.getParameterMap().containsKey("phone"))
+            if (!request.getParameterMap().containsKey("phone"))
                 throw new IllegalArgumentException("missing phone");
             String phone = request.getParameter("phone");
-            if(!request.getParameterMap().containsKey("description"))
+            if (!request.getParameterMap().containsKey("description"))
                 throw new IllegalArgumentException("missing description");
             String description = request.getParameter("description");
+
             if (dealType == DealType.RENT) {
-                if(!request.getParameterMap().containsKey("rentPrice"))
+                if (!request.getParameterMap().containsKey("rentPrice"))
                     throw new IllegalArgumentException("missing rentPrice");
                 int rentPrice = Integer.parseInt(request.getParameter("rentPrice"));
-                if(!request.getParameterMap().containsKey("basePrice"))
+                if (!request.getParameterMap().containsKey("basePrice"))
                     throw new IllegalArgumentException("missing basePrice");
                 int basePrice = Integer.parseInt(request.getParameter("basePrice"));
                 KhaneBeDoosh.getInstance().addHouse(
@@ -67,7 +68,7 @@ public class AddHouseServlet extends HttpServlet {
                         expireTime
                 );
             } else if (dealType == DealType.SELL) {
-                if(!request.getParameterMap().containsKey("sellPrice"))
+                if (!request.getParameterMap().containsKey("sellPrice"))
                     throw new IllegalArgumentException("missing sellPrice");
                 int sellPrice = Integer.parseInt(request.getParameter("sellPrice"));
                 KhaneBeDoosh.getInstance().addHouse(
