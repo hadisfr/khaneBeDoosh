@@ -5,7 +5,7 @@ public enum DealType {
 
     private final int value;
 
-    private DealType(int value) {
+    DealType(int value) {
         this.value = value;
     }
 
@@ -31,5 +31,13 @@ public enum DealType {
             return RENT;
         else
             return null;
+    }
+
+    @Override
+    public String toString() {
+        if(value == 0)
+            return "SELL";
+        else
+            return "RENT";
     }
 }

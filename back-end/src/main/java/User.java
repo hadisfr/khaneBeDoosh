@@ -36,10 +36,10 @@ public abstract class User {
             else if (house instanceof HouseSell)
                 price = ((HouseSell) house).getSellPrice();
 
-            if (!((buildingType != null && !house.getBuildingType().equals(buildingType)) ||
-                    (dealType != null && !house.getDealType().equals(dealType)) ||
-                    (minArea != illegalSearchValue && house.getArea() < minArea) ||
-                    (maxPrice != illegalSearchValue && price >= maxPrice)))
+            if (((buildingType != null && house.getBuildingType().equals(buildingType)) &&
+                    (dealType != null && house.getDealType().equals(dealType)) &&
+                    (minArea != illegalSearchValue && house.getArea() > minArea) &&
+                    (maxPrice != illegalSearchValue && price <= maxPrice)))
                 result.add(house);
         }
         return result;
