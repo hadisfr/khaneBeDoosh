@@ -14,8 +14,10 @@ public enum BuildingType {
     public String toString() {
         if (value == 0)
             return "آپارتمان";
-        else
+        else if (value == 1)
             return "ویلایی";
+        else
+            return "";
     }
 
     public static BuildingType parseString(String string) {

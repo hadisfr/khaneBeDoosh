@@ -37,7 +37,9 @@ public enum DealType {
     public String toString() {
         if (value == 0)
             return "SELL";
-        else
+        else if (value == 1)
             return "RENT";
+        else
+            return "";
     }
 }
