@@ -23,7 +23,7 @@ class HouseDetails extends Component {
                     <dl id="house-detail">
                         <dt>شماره</dt><dd>۰۹۱۲۳۴۵۶۷۸۹</dd>  {/* TODO: handle phone number */}
                         <dt>نوع ساختمان</dt><dd>{det && (
-                            det.buildingType == "APARTMENT" ? "آپارتمان" : det.buildingType == "VILLA" ? "ویلایی" : det.buildingType
+                            det.buildingType === "APARTMENT" ? "آپارتمان" : det.buildingType === "VILLA" ? "ویلایی" : det.buildingType
                         )}</dd>
                         <dt>قیمت</dt><dd>۲٬۰۰۰٬۰۰۰٬۰۰۰ تومان</dd>  {/* TODO: add price based on dealType */}
                         <dt>آدرس</dt><dd>{det && det.detail.address}</dd>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import './Landing.css'
-import SearchForm from '../SearchForm/SearchForm'
 
 class Card extends Component {
     render() {

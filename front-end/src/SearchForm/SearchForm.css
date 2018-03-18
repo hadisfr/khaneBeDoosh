@@ -21,7 +21,7 @@
 .search input[type="text"], .search input[type="number"], .search select {
     border: none;
     border-radius: 6px;
-    height: 30px;
+    height: 40px;
     padding: 3px 16px;
 }
 

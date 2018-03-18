@@ -9,7 +9,7 @@ class SearchResult extends Component {
             <div className="col-lg-6 col-sm-12 box-wrapper">
                 <Link to={det.id}>
                     <div className="box-light-condensed">
-                        <img src={det && det.imageUrl} alt="picture of house" />
+                        <img src={det && det.imageUrl} alt={det && det.imageUrl} />
                         <span className="badge box-badge btn-red">رهن و اجاره</span>  {/* TODO: handle dealType and change color */}
                         <div className="detail row">
                             <div className="col-6">{det && det.area} متر مربع</div>
