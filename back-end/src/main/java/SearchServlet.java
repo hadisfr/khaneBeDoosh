@@ -3,6 +3,7 @@ package main.java;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,19 +21,27 @@ public class SearchServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         try {
             houses.addAll(KhaneBeDoosh.getInstance().filterHouses(
-                    BuildingType.parseString(request.getParameter("buildingType")),
-                    DealType.parseString(request.getParameter("dealType")),
-                    Integer.parseInt(request.getParameter("minArea") == "" ? "0" : request.getParameter("minArea")),
-                    Integer.parseInt(request.getParameter("maxPrice") == "" ? "0" : request.getParameter("maxPrice"))
+                    request.getParameterMap().containsKey("buildingType")
+                            ? BuildingType.parseString(request.getParameter("buildingType"))
+                            : BuildingType.APARTMENT,
+                    request.getParameterMap().containsKey("buildingType")
+                            ? DealType.parseString(request.getParameter("dealType"))
+                            : DealType.RENT,
+                    request.getParameterMap().containsKey("minArea")
+                            ? Integer.parseInt(request.getParameter("minArea"))
+                            : 0,
+                    request.getParameterMap().containsKey("maxPrice")
+                            ? Integer.parseInt(request.getParameter("minArea"))
+                            : 0
             ));
-            Gson gson = new Gson();
-            String jsonResponse = gson.toJson(houses);
-            response.getWriter().write(jsonResponse);
+            // TODO: handle default parameters
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.getWriter().write((new Gson()).toJson(houses));
         } catch (Exception e) {
-            request.setAttribute("msg", "استثنا: ‪" + e);
-            request.getRequestDispatcher("/").forward(request, response);
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            HashMap<String, String> err_res = new HashMap<String, String>();
+            err_res.put("msg", e.toString());
+            response.getWriter().write((new Gson()).toJson(err_res));
         }
-//        request.setAttribute("houses", houses);
-//        request.getRequestDispatcher("searchResults.jsp").forward(request, response);
     }
 }
