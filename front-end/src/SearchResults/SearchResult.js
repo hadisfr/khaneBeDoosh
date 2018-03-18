@@ -14,13 +14,18 @@ class SearchResult extends Component {
                         <div className="detail row">
                             <div className="col-6">{det && det.area} متر مربع</div>
                             <div className="col-6">
-                                <span className="fas fa-map-marker-alt red"></span>  {/* TODO: handle dealType and change color */}
-                                &nbsp;
-                                {det && det.detail && det.detail.address}
+                                {det && (
+                                    det.buildingType === "APARTMENT" 
+                                    ? "آپارتمان"
+                                    :
+                                        det.buildingType === "VILLA"
+                                        ? "ویلایی"
+                                        : det.buildingType
+                                )}
                             </div>
                             <div className="col-12"><hr /></div>
-                            <div className="col-6">رهن ۲۰۰٬۰۰۰٬۰۰۰ <span className="unimportant"> تومان </span></div>  {/* TODO: add price based on dealType */}
-                            <div className="col-6">اجاره ۱۵۰٬۰۰۰٬۰۰۰  <span className="unimportant"> تومان </span></div>  {/* TODO: add price based on dealType */}
+                            <div className="col-6"><span className="fas fa-dollar-sign fa-lg"></span>&nbsp;رهن ۲۰۰٬۰۰۰٬۰۰۰ <span className="unimportant"> تومان </span></div>  {/* TODO: add price based on dealType */}
+                            <div className="col-6"><span className="fas fa-dollar-sign fa-lg"></span>&nbsp;اجاره ۱۵۰٬۰۰۰٬۰۰۰  <span className="unimportant"> تومان </span></div>  {/* TODO: add price based on dealType */}
                         </div>
                     </div>
                 </Link>
