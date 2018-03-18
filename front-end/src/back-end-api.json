@@ -1,0 +1,6 @@
+{
+    "pay": "http://localhost:8080/khaneBeDoosh/pay",
+    "house_details": "http://localhost:8080/khaneBeDoosh/houseDetails",
+    "search": "http://localhost:8080/khaneBeDoosh/search",
+    "root": "http://localhost:8080/khaneBeDoosh"
+}

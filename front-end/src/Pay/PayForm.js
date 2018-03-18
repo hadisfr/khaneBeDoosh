@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import HttpStatus from 'http-status-codes';
-import 'whatwg-fetch'
 import './Pay.css'
+import backend_api from '../back-end-api.json'
 
 class PayForm extends Component {
     constructor(props) {
@@ -19,7 +19,7 @@ class PayForm extends Component {
 
     handle_submit(event) {
         event.preventDefault();
-        fetch(this.props.api, {
+        fetch(backend_api.pay, {
             method: "POST",
             body: new URLSearchParams("balance=" + this.state.balance),
             headers: {

@@ -39,7 +39,7 @@ class Landing extends Component {
                     <div className="col-sm-0 col-lg-4 vanish-sm"></div>
                     <div className="search">
                         <div className="box-wrapper col-12"><div className="box-dark col-12">
-                            <SearchForm api={this.props.search_api} />
+                            <SearchForm />
                         </div></div>
                     </div>
                 </div></div>

@@ -13,6 +13,7 @@ import HouseDetails from '../HouseDetails/HouseDetails'
 import SearchResults from '../SearchResults/SearchResults'
 import Landing from '../Landing/Landing'
 import LandingBackground from '../Landing/LandingBackground'
+import backend_api from '../back-end-api.json'
 
 function user(name, username, balance) {
     this.name = name;
@@ -21,21 +22,11 @@ function user(name, username, balance) {
     // TODO: request user's data from back-end in App::render before return
 }
 
-function api(root, sub) {
-    this.root = root;
-    Object.keys(sub).forEach((key) => (this[key] = root + "/" + sub[key]), this);
-}
-
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
             user: new user("بهنام همایون", "behnam", 200000),
-            backend_api: new api("http://localhost:8080/khaneBeDoosh", {
-                pay: "pay",
-                house_details: "houseDetails",  // TODO: use back-end's API for house details
-                search: "search",  // TODO: use back-end's API for search
-            }),
             msg: [],
         }
         this.setMsg = this.setMsg.bind(this);
@@ -74,26 +65,13 @@ class App extends Component {
                 }
                 <div className="cnt row"><div className="col-1"></div><div className="col-10 center-align">
                     <Switch>
-                        <Route
-                            exact path="/"
-                            render={(props) => <Landing search_api={this.state.backend_api.search} />}
-                        />
+                        <Route exact path="/" render={(props) => <Landing />} />
                         <Route
                             exact path="/pay"
-                            render={(props) => <Pay
-                                user={this.state.user}
-                                api={this.state.backend_api.pay}
-                                msgPresenter={this.msgPresenter}
-                            />}
+                            render={(props) => <Pay user={this.state.user} msgPresenter={this.msgPresenter} />}
                         />
-                        <Route
-                            path="/house/:id"
-                            render={(props) => <HouseDetails api={this.state.backend_api.house_details} />}
-                        />
-                        <Route
-                            path="/house"
-                            render={(props) => <SearchResults api={this.state.backend_api.search} />}
-                        />
+                        <Route path="/house/:id" render={(props) => <HouseDetails />} />
+                        <Route path="/house" render={(props) => <SearchResults />} />
                         <Route path="/err/:id" component={ErrorMsg} />
                     </Switch>
                 </div><div className="col-1"></div></div>

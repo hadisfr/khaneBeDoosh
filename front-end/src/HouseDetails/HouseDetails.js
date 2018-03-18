@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import './HouseDetails.css'
+import backend_api from '../back-end-api.json'
 
 class HouseDetails extends Component {
     constructor(props) {
@@ -9,7 +10,7 @@ class HouseDetails extends Component {
     }
 
     componentDidMount() {
-        fetch(this.props.api + "?id=" + this.props.match.params.id).then((res) => res.json()).then(function(res) {
+        fetch(backend_api.house_details + "?id=" + this.props.match.params.id).then((res) => res.json()).then(function(res) {
             this.setState({ house_details: res });
         }.bind(this));
     }
@@ -23,7 +24,11 @@ class HouseDetails extends Component {
                     <dl id="house-detail">
                         <dt>شماره</dt><dd>۰۹۱۲۳۴۵۶۷۸۹</dd>  {/* TODO: handle phone number */}
                         <dt>نوع ساختمان</dt><dd>{det && (
-                            det.buildingType === "APARTMENT" ? "آپارتمان" : det.buildingType === "VILLA" ? "ویلایی" : det.buildingType
+                            det.buildingType === "APARTMENT"
+                            ? "آپارتمان"
+                            : det.buildingType === "VILLA"
+                                ? "ویلایی"
+                                : det.buildingType
                         )}</dd>
                         <dt>قیمت</dt><dd>۲٬۰۰۰٬۰۰۰٬۰۰۰ تومان</dd>  {/* TODO: add price based on dealType */}
                         <dt>آدرس</dt><dd>{det && det.detail && det.detail.address}</dd>
