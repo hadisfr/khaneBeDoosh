@@ -26,9 +26,9 @@ class HouseDetails extends Component {
                             det.buildingType === "APARTMENT" ? "آپارتمان" : det.buildingType === "VILLA" ? "ویلایی" : det.buildingType
                         )}</dd>
                         <dt>قیمت</dt><dd>۲٬۰۰۰٬۰۰۰٬۰۰۰ تومان</dd>  {/* TODO: add price based on dealType */}
-                        <dt>آدرس</dt><dd>{det && det.detail.address}</dd>
+                        <dt>آدرس</dt><dd>{det && det.detail && det.detail.address}</dd>
                         <dt>متراژ</dt><dd>{det && det.area} متر مربع</dd>
-                        <dt>توضیحات</dt><dd>{det && det.detail.description}</dd>
+                        <dt>توضیحات</dt><dd>{det && det.detail && det.detail.description}</dd>
                     </dl>
                 </div>
                 <div className="col-12 col-lg-8">
