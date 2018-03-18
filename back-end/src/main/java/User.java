@@ -8,6 +8,8 @@ public abstract class User {
     private int id;
     protected static int next_index = 1000;
 
+    private static final int illegalSearchValue = -1;
+
     public User(String name) {
         this.name = name;
         this.id = next_index++;
@@ -33,11 +35,11 @@ public abstract class User {
                 price = ((HouseRent) house).getRentPrice();
             else if (house instanceof HouseSell)
                 price = ((HouseSell) house).getSellPrice();
-            if (house.getBuildingType().equals(buildingType)
-                    && house.getDealType().equals(dealType)
-                    && house.getArea() >= minArea
-                    && price <= maxPrice
-                    )
+
+            if(!((buildingType != null && !house.getBuildingType().equals(buildingType)) ||
+                    (dealType != null && !house.getDealType().equals(dealType)) ||
+                    (minArea != illegalSearchValue && house.getArea() < minArea) ||
+                    (maxPrice != illegalSearchValue && price >= maxPrice)))
                 result.add(house);
         }
         return result;

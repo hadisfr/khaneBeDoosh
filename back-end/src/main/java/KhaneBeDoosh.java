@@ -13,11 +13,13 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class KhaneBeDoosh {
 
     private ArrayList<User> users = new ArrayList<User>();
     private static KhaneBeDoosh khaneBedoosh = new KhaneBeDoosh();
+    private transient HashMap<String, House> houses = new HashMap<String, House>();
 
     private static final String bankAPIKey = "a1965d20-1280-11e8-87b4-496f79ef1988";
     private static final String bankUri = "http://acm.ut.ac.ir/ieBank/pay";
@@ -86,19 +88,6 @@ public class KhaneBeDoosh {
         return result;
     }
 
-    public void chargeBalance(int userId, int amount) {
-        if (amount < 0)
-            amount = 0;
-        for (User user : users) {
-            if (!(user instanceof Individual))
-                continue;
-            Individual individual = (Individual) user;
-            if (userId == individual.getId()) {
-                individual.setBalance(individual.getBalance() + amount);
-            }
-        }
-    }
-
     public House getHouseById(String houseId, int userId) {
         return getUserById(userId).getHouse(houseId);
     }
@@ -112,7 +101,8 @@ public class KhaneBeDoosh {
     public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner, int sellPrice) {
         HouseSell house = new HouseSell(id, area, buildingType, imageUrl, owner, sellPrice);
         if (owner instanceof Individual)
-            ((Individual) owner).addHouse(house);
+            houses.put(house.getId(), house);
+//            ((Individual) owner).addHouse(house);
     }
 
     public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner, int sellPrice,
@@ -120,14 +110,16 @@ public class KhaneBeDoosh {
         HouseSell house = new HouseSell(id, area, buildingType, imageUrl, owner, sellPrice, address,
                 phone, description, expireTime);
         if (owner instanceof Individual)
-            ((Individual) owner).addHouse(house);
+            houses.put(house.getId(), house);
+//            ((Individual) owner).addHouse(house);
     }
 
     public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner,
                          int rentPrice, int basePrice) {
         HouseRent house = new HouseRent(id, area, buildingType, imageUrl, owner, rentPrice, basePrice);
         if (owner instanceof Individual)
-            ((Individual) owner).addHouse(house);
+            houses.put(house.getId(), house);
+//            ((Individual) owner).addHouse(house);
     }
 
     public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner,
@@ -135,6 +127,7 @@ public class KhaneBeDoosh {
         HouseRent house = new HouseRent(id, area, buildingType, imageUrl, owner, rentPrice, basePrice, address,
                 phone, description, expireTime);
         if (owner instanceof Individual)
-            ((Individual) owner).addHouse(house);
+            houses.put(house.getId(), house);
+//            ((Individual) owner).addHouse(house);
     }
 }
