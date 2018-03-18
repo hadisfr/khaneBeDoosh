@@ -53,7 +53,9 @@ public class KhaneBeDoosh {
         return logoUri;
     }
 
-    public boolean increaseBalance(Individual user, int amount) throws IOException {
+    public boolean increaseBalance(Individual user, int amount) throws IOException, IllegalArgumentException {
+        if (amount < 0)
+            throw new IllegalArgumentException("Negative Amount");
         HttpClient client = HttpClientBuilder.create().build();
         HttpPost request = new HttpPost(bankUri);
         request.addHeader("Content-Type", "application/json");

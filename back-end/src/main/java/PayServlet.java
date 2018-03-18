@@ -1,6 +1,8 @@
 package main.java;
 
+import com.google.gson.Gson;
 import java.io.IOException;
+import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,34 +13,22 @@ import javax.servlet.http.HttpServletResponse;
 public class PayServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException  {
         Individual currentUser = (Individual) KhaneBeDoosh.getInstance().getDefaultUser();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        String jsonResponse;
+        HashMap<String, Boolean> res = new HashMap<String, Boolean>();
         try {
             int balance = Integer.parseInt(request.getParameter("balance"));
-            if (balance < 0)
-                balance = 0;
-            if (KhaneBeDoosh.getInstance().increaseBalance(currentUser, balance)) {
-                jsonResponse = "{ \"success\": true}";
-                response.setStatus(HttpServletResponse.SC_OK);
-//                request.setAttribute("msg", "افزایش اعتبار موفقیت‌آمیز بود.");
-            } else {
-                jsonResponse = "{ \"success\": false}";
-                response.setStatus(HttpServletResponse.SC_BAD_GATEWAY);
-//                request.setAttribute("msg", "افزایش اعتبار ناموفق بود.");
-            }
-            response.getWriter().write(jsonResponse);
+            res.put("success", KhaneBeDoosh.getInstance().increaseBalance(currentUser, balance));
+            response.setStatus(res.get("success") ? HttpServletResponse.SC_OK : HttpServletResponse.SC_BAD_GATEWAY);
+            response.getWriter().write((new Gson()).toJson(res));
         } catch (Exception e) {
-            request.setAttribute("msg", "استثنا: ‪" + e);
-            request.getRequestDispatcher("/").forward(request, response);
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            HashMap<String, String> err_res = new HashMap<String, String>();
+            err_res.put("msg", e.toString());
+            response.getWriter().write((new Gson()).toJson(err_res));
         }
-//        request.getRequestDispatcher("/").forward(request, response);
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/").forward(request, response);
     }
 }
