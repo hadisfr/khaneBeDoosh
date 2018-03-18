@@ -34,9 +34,9 @@ public class AddHouseServlet extends HttpServlet {
             BuildingType buildingType = request.getParameterMap().containsKey("buildingType")
                     ? BuildingType.parseString(request.getParameter("buildingType"))
                     : BuildingType.APARTMENT;
-            if(buildingType == null)
+            if (buildingType == null)
                 throw new IOException("Bad BuildingType");
-            int price =  request.getParameterMap().containsKey("price")
+            int price = request.getParameterMap().containsKey("price")
                     ? Integer.parseInt(request.getParameter("price"))
                     : 0;
             String address = request.getParameterMap().containsKey("address")

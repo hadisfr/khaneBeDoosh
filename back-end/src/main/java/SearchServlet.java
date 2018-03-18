@@ -1,6 +1,7 @@
 package main.java;
 
 import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,7 +21,6 @@ public class SearchServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         try {
-            if(request.getParameterMap().containsKey("buildingType"))
             houses.addAll(KhaneBeDoosh.getInstance().filterHouses(
                     request.getParameterMap().containsKey("buildingType")
                             ? BuildingType.parseString(request.getParameter("buildingType"))
