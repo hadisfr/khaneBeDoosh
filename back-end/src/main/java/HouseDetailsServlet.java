@@ -2,6 +2,7 @@ package main.java;
 
 import com.google.gson.Gson;
 import java.io.IOException;
+import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,14 +22,12 @@ public class HouseDetailsServlet extends HttpServlet {
                     request.getParameter("houseId"),
                     Integer.parseInt(request.getParameter("ownerId"))
             );
-            Gson gson = new Gson();
-            String jsonResponse = gson.toJson(house);
-            response.getWriter().write(jsonResponse);
-//            request.setAttribute("house", house);
-//            request.getRequestDispatcher("houseDetails.jsp").forward(request, response);
+            response.getWriter().write((new Gson()).toJson(house));
         } catch (Exception e) {
-            request.setAttribute("msg", "خانه‌ای با این مشخصات پیدا نشد!");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            HashMap<String, String> err_res = new HashMap<String, String>();
+            err_res.put("msg", e.toString());
+            response.getWriter().write((new Gson()).toJson(err_res));
         }
     }
 }
