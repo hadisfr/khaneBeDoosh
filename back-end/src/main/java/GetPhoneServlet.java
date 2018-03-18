@@ -21,17 +21,30 @@ public class GetPhoneServlet extends HttpServlet {
         HashMap<String, String> res = new HashMap<String, String>();
         try {
             Individual currentUser = ((Individual) KhaneBeDoosh.getInstance().getDefaultUser());
-            String houseId = request.getParameter("houseId");
-            int ownerId = Integer.parseInt(request.getParameter("ownerId"));
-            House house = KhaneBeDoosh.getInstance().getHouseById(houseId, ownerId);
-            response.setStatus(
-                    currentUser.hasPaidforHouse(houseId, ownerId) || currentUser.payForHouse(houseId, ownerId)
-                            ? HttpServletResponse.SC_OK
-                            : HttpServletResponse.SC_PAYMENT_REQUIRED
-            );
-            if (response.getStatus() == HttpServletResponse.SC_OK)
-                res.put("phone", house.getPhone());
+            if (currentUser != null) {
+                if (!request.getParameterMap().containsKey("houseId"))
+                    throw new IllegalArgumentException("missing houseId");
+                String houseId = request.getParameter("houseId");
+                if (!request.getParameterMap().containsKey("ownerId"))
+                    throw new IllegalArgumentException("missing ownerId");
+                int ownerId = Integer.parseInt(request.getParameter("ownerId"));
+                House house = KhaneBeDoosh.getInstance().getHouseById(houseId, ownerId);
+                response.setStatus(
+                        currentUser.hasPaidforHouse(houseId, ownerId) || currentUser.payForHouse(houseId, ownerId)
+                                ? HttpServletResponse.SC_OK
+                                : HttpServletResponse.SC_PAYMENT_REQUIRED
+                );
+                if (response.getStatus() == HttpServletResponse.SC_OK)
+                    res.put("phone", house.getPhone());
+                response.getWriter().write((new Gson()).toJson(res));
+            } else {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            }
+        } catch (IllegalArgumentException e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            res.put("msg", "Invalid Parameters: " + e.toString());
             response.getWriter().write((new Gson()).toJson(res));
+
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             res.put("msg", e.toString());

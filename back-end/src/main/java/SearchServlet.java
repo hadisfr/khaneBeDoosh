@@ -43,6 +43,11 @@ public class SearchServlet extends HttpServlet {
             // TODO: handle default parameters
             response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().write((new Gson()).toJson(houses));
+        } catch (IllegalArgumentException e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            HashMap<String, String> err_res = new HashMap<String, String>();
+            err_res.put("msg", "Invalid Parameters: " + e.toString());
+            response.getWriter().write((new Gson()).toJson(err_res));
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             HashMap<String, String> err_res = new HashMap<String, String>();

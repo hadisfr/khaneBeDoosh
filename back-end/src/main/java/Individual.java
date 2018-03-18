@@ -58,7 +58,9 @@ public class Individual extends User {
         this.balance = balance;
     }
 
-    public String getUsername() { return username; }
+    public String getUsername() {
+        return username;
+    }
 
     public ArrayList<House> searchHouses(BuildingType buildingType, DealType dealType, int minArea, int maxPrice) {
         ArrayList<House> hashmapArrayListed = new ArrayList<House>();
