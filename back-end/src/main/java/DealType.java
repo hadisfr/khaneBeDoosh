@@ -35,7 +35,7 @@ public enum DealType {
 
     @Override
     public String toString() {
-        if(value == 0)
+        if (value == 0)
             return "SELL";
         else
             return "RENT";

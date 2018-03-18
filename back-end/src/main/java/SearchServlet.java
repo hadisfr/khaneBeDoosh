@@ -30,10 +30,16 @@ public class SearchServlet extends HttpServlet {
             int minArea = request.getParameterMap().containsKey("minArea")
                     ? Integer.parseInt(request.getParameter("minArea"))
                     : 0;
-            int maxPrice = request.getParameterMap().containsKey("maxPrice")
-                    ? Integer.parseInt(request.getParameter("maxPrice"))
+            int maxSellPrice = request.getParameterMap().containsKey("maxSellPrice")
+                    ? Integer.parseInt(request.getParameter("maxSellPrice"))
                     : 0;
-            houses.addAll(KhaneBeDoosh.getInstance().filterHouses(buildingType, dealType, minArea, maxPrice));
+            int maxBasePrice = request.getParameterMap().containsKey("maxBasePrice")
+                    ? Integer.parseInt(request.getParameter("maxBasePrice"))
+                    : 0;
+            int maxRentPrice = request.getParameterMap().containsKey("maxRentPrice")
+                    ? Integer.parseInt(request.getParameter("maxRentPrice"))
+                    : 0;
+            houses.addAll(KhaneBeDoosh.getInstance().filterHouses(buildingType, dealType, minArea, maxSellPrice));
             // TODO: handle default parameters
             response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().write((new Gson()).toJson(houses));
