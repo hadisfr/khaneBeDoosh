@@ -26,7 +26,7 @@ class PayForm extends Component {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
         }).then(function (res) {
-            if(res.status == HttpStatus.OK) {
+            if(res.status === HttpStatus.OK) {
                 this.props.msgPresenter.showMsg("اعتبار شما افزایش یافت!");
                 this.props.history.goBack();
             }
