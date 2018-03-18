@@ -51,6 +51,10 @@ class App extends Component {
         return (
             <div className="container-fluid main">
                 <Header user={this.state.user} />
+                {
+                    (this.state.msg && this.state.msg.length > 0)
+                    && <div className="msgbox">{this.state.msg.reduce((prev, curr) => [prev, <br />, curr])}</div>
+                }
                 <Route exact path={frontend_api.root} component={LandingBackground} />
                 <Switch>
                     <Route exact path={frontend_api.root} />
@@ -60,10 +64,6 @@ class App extends Component {
                     <Route path={frontend_api.error + ":id([0-9]{3})"} render={(props) => <PageTitle title="خطا" />} />
                     <Redirect from="*" to={frontend_api.error + "404"} />
                 </Switch>
-                {
-                    (this.state.msg && this.state.msg.length > 0)
-                    && <div className="msgbox">{this.state.msg.reduce((prev, curr) => [prev, <br />, curr])}</div>
-                }
                 <div className="cnt row"><div className="col-1"></div><div className="col-10 center-align">
                     <Switch>
                         <Route exact path={frontend_api.root} render={(props) => <Landing />} />

@@ -79,9 +79,18 @@ p {
     background: SlateBlue;
     border-radius: 6px;
     color: #fff;
-    margin: 16px;
+    left: 0;
+    margin: 16px auto;
+    opacity: 0.8;
     padding: 16px;
+    position: absolute;
+    right: 0;
     text-align: center;
-    transition: height 1s;
+    transition: height 1s, opacity 0.3s;
+    width: 80%;
+    z-index: 900;
 }
 
+.msgbox:hover {
+    opacity: 0.95;
+}
