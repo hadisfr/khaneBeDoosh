@@ -8,9 +8,11 @@ class SearchForm extends Component {
         super(props);
         this.state = {
             buildingType: "",
-            maxPrice: "",
+            maxSellPrice: "",
+            maxRentPrice: "",
+            maxBasePrice: "",
             minArea: "",
-            dealType: "SELL",
+            dealType: "",
         };
     }
 
@@ -22,14 +24,21 @@ class SearchForm extends Component {
 
     handle_action(event) {
         event.preventDefault();
-        const query = "?" + Object.keys(this.state).map((key) => (key + '=' + this.state[key])).join("&");
+        var req = Object.assign({}, this.state);
+        if(req.dealType != "SELL"){
+            req.maxSellPrice = "";
+        }
+        if(req.dealType != "RENT") {
+            req.maxRentPrice = "";
+            req.maxBasePrice = "";
+        }
+        const query = "?" + Object.keys(req).filter((key) => (req[key])).map((key) => (key + '=' + req[key])).join("&");
         this.props.history.push(frontend_api.search + query);
         if(this.props.call_back)
             this.props.call_back(query);
     }
 
     render() {
-        // TODO: handle price for two dealTypes
         return (
             <form onSubmit={ (event) => this.handle_action(event) } ><div className="row search">
                 <div className="col-12 col-sm-6 col-lg-4">
@@ -43,18 +52,34 @@ class SearchForm extends Component {
                         <option value="APARTMENT">آپارتمان</option>
                     </select>
                 </div>
-                <div className="col-12 col-sm-6 col-lg-4">
+                <div className="col-12 col-sm-6 col-lg-4" style={{ display: this.state.dealType === "SELL" || "none" }} >
                     <input
                         type="number"
                         min="0"
                         step="1"
-                        name="maxPrice"
+                        name="maxSellPrice"
                         pattern="^[0123456789]*$"
-                        placeholder="حداکثر قیمت"
-                        value={this.state.maxPrice}
+                        placeholder="حداکثر قیمت خرید"
+                        value={this.state.maxSellPrice}
                         onChange={ (event) => this.handle_change(event) }
                     />
                     <span className="badge">تومان</span>
+                </div>
+                <div className="col-12 col-sm-6 col-lg-4" style={{ display: this.state.dealType === "RENT" || "none" }} >
+                    <input
+                        type="number"
+                        min="0"
+                        step="1"
+                        name="maxRentPrice"
+                        pattern="^[0123456789]*$"
+                        placeholder="حداکثر قیمت اجاره"
+                        value={this.state.maxRentPrice}
+                        onChange={ (event) => this.handle_change(event) }
+                    />
+                    <span className="badge">تومان</span>
+                </div>
+                <div className="col-12 col-sm-6 col-lg-4" style={{ display: this.state.dealType === "" || "none" }} >
+                    &nbsp;
                 </div>
                 <div className="col-12 col-sm-6 col-lg-4">
                     <input
@@ -69,7 +94,7 @@ class SearchForm extends Component {
                     />
                     <span className="badge">متر</span>
                 </div>
-                <div className="col-12 col-sm-6 col-lg-4"><fieldset>
+                <div className="col-12 col-sm-6 col-lg-4"><fieldset className="center-align">
                     <input
                         type="radio"
                         name="dealType"
@@ -80,21 +105,37 @@ class SearchForm extends Component {
                     <input
                         type="radio"
                         name="dealType"
-                        value="1"
+                        value="RENT"
                         onChange={ (event) => this.handle_change(event) }
                         checked={ this.state.dealType === "RENT" }
                     />رهن و اجاره
                 </fieldset></div>
-                <div className="col-12 col-sm-6 col-lg-4">&nbsp;</div>
+                <div className="col-12 col-sm-6 col-lg-4" style={{ display: this.state.dealType === "RENT" || "none" }} >
+                    <input
+                        type="number"
+                        min="0"
+                        step="1"
+                        name="maxBasePrice"
+                        pattern="^[0123456789]*$"
+                        placeholder="حداکثر قیمت رهن"
+                        value={this.state.maxBasePrice}
+                        onChange={ (event) => this.handle_change(event) }
+                    />
+                    <span className="badge">تومان</span>
+                </div>
+                <div className="col-12 col-sm-6 col-lg-4" style={{ display: this.state.dealType !== "RENT" || "none" }} >
+                    &nbsp;
+                </div>
                 <div className="col-12 col-sm-6 col-lg-4">
                     <input
                         type="submit"
                         className="btn btn-green"
                         value="جست‌وجو"
                         disabled={!(
-                            RegExp("^[0123456789]*$").test(this.state.maxPrice)
+                            RegExp("^[0123456789]*$").test(this.state.maxSellPrice)
+                            && RegExp("^[0123456789]*$").test(this.state.maxRentPrice)
+                            && RegExp("^[0123456789]*$").test(this.state.maxBasePrice)
                             && RegExp("^[0123456789]*$").test(this.state.minArea)
-                            && (this.state.dealType === "SELL" || this.state.dealType === "RENT")
                         )}
                     />
                 </div>

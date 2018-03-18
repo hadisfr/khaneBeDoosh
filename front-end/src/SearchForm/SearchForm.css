@@ -15,6 +15,7 @@
 
 .search input[type="text"], .search input[type="number"], .search input[type="submit"], .search select {
     display: inline-block;
+    margin-bottom: 16px;
     width: 100%;
 }
 
