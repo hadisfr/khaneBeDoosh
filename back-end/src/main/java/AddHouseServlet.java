@@ -17,7 +17,6 @@ public class AddHouseServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO: should handle default params? if so, handle them properly.
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         try {
@@ -25,61 +24,74 @@ public class AddHouseServlet extends HttpServlet {
             String imageUrl = "";
             String expireTime = "2032-12-01";
             User currentUser = KhaneBeDoosh.getInstance().getDefaultUser();
-            DealType dealType = request.getParameterMap().containsKey("dealType")
-                    ? DealType.parseString(request.getParameter("dealType"))
-                    : DealType.SELL;
-            int area = request.getParameterMap().containsKey("area")
-                    ? Integer.parseInt(request.getParameter("area"))
-                    : 0;
-            BuildingType buildingType = request.getParameterMap().containsKey("buildingType")
-                    ? BuildingType.parseString(request.getParameter("buildingType"))
-                    : BuildingType.APARTMENT;
-            if(buildingType == null)
-                throw new IOException("Bad BuildingType");
-            int price =  request.getParameterMap().containsKey("price")
-                    ? Integer.parseInt(request.getParameter("price"))
-                    : 0;
-            String address = request.getParameterMap().containsKey("address")
-                    ? request.getParameter("address")
-                    : "";
-            String phone = request.getParameterMap().containsKey("phone")
-                    ? request.getParameter("phone")
-                    : "";
-            String description = request.getParameterMap().containsKey("description")
-                    ? request.getParameter("description")
-                    : "";
+            if(!request.getParameterMap().containsKey("dealType"))
+                throw new IllegalArgumentException("missing dealType");
+            DealType dealType = DealType.parseString(request.getParameter("dealType"));
+            if (dealType == null)
+                throw new IllegalArgumentException("bad dealType");
+            if(!request.getParameterMap().containsKey("buildingType"))
+                throw new IllegalArgumentException("missing buildingType");
+            BuildingType buildingType = BuildingType.parseString(request.getParameter("buildingType"));
+            if (buildingType == null)
+                throw new IllegalArgumentException("bad buildingType");
+            if(!request.getParameterMap().containsKey("area"))
+                throw new IllegalArgumentException("missing area");
+            int area = Integer.parseInt(request.getParameter("area"));
+            if(!request.getParameterMap().containsKey("address"))
+                throw new IllegalArgumentException("missing address");
+            String address = request.getParameter("address");
+            if(!request.getParameterMap().containsKey("phone"))
+                throw new IllegalArgumentException("missing phone");
+            String phone = request.getParameter("phone");
+            if(!request.getParameterMap().containsKey("description"))
+                throw new IllegalArgumentException("missing description");
+            String description = request.getParameter("description");
             if (dealType == DealType.RENT) {
+                if(!request.getParameterMap().containsKey("rentPrice"))
+                    throw new IllegalArgumentException("missing rentPrice");
+                int rentPrice = Integer.parseInt(request.getParameter("rentPrice"));
+                if(!request.getParameterMap().containsKey("basePrice"))
+                    throw new IllegalArgumentException("missing basePrice");
+                int basePrice = Integer.parseInt(request.getParameter("basePrice"));
                 KhaneBeDoosh.getInstance().addHouse(
                         id,
                         area,
                         buildingType,
                         imageUrl,
                         currentUser,
-                        price,
-                        0,
+                        rentPrice,
+                        basePrice,
                         address,
                         phone,
                         description,
                         expireTime
                 );
             } else if (dealType == DealType.SELL) {
+                if(!request.getParameterMap().containsKey("sellPrice"))
+                    throw new IllegalArgumentException("missing sellPrice");
+                int sellPrice = Integer.parseInt(request.getParameter("sellPrice"));
                 KhaneBeDoosh.getInstance().addHouse(
                         id,
                         area,
                         buildingType,
                         imageUrl,
                         currentUser,
-                        price,
+                        sellPrice,
                         address,
                         phone,
                         description,
                         expireTime
                 );
             } else
-                throw new IOException("Bad DealType");
+                throw new IllegalArgumentException("bad dealType");
             HashMap<String, Boolean> res = new HashMap<String, Boolean>();
             res.put("success", true);
             response.getWriter().write((new Gson()).toJson(res));
+        } catch (IllegalArgumentException e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            HashMap<String, String> err_res = new HashMap<String, String>();
+            err_res.put("msg", "Invalid Parameters: " + e.toString());
+            response.getWriter().write((new Gson()).toJson(err_res));
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             HashMap<String, String> err_res = new HashMap<String, String>();

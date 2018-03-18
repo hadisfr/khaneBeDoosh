@@ -1,6 +1,7 @@
 package main.java;
 
 import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,20 +21,19 @@ public class SearchServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         try {
-            houses.addAll(KhaneBeDoosh.getInstance().filterHouses(
-                    request.getParameterMap().containsKey("buildingType")
-                            ? BuildingType.parseString(request.getParameter("buildingType"))
-                            : BuildingType.APARTMENT,
-                    request.getParameterMap().containsKey("buildingType")
-                            ? DealType.parseString(request.getParameter("dealType"))
-                            : DealType.RENT,
-                    request.getParameterMap().containsKey("minArea")
-                            ? Integer.parseInt(request.getParameter("minArea"))
-                            : 0,
-                    request.getParameterMap().containsKey("maxPrice")
-                            ? Integer.parseInt(request.getParameter("maxPrice"))
-                            : 0
-            ));
+            BuildingType buildingType = request.getParameterMap().containsKey("buildingType")
+                    ? BuildingType.parseString(request.getParameter("buildingType"))
+                    : BuildingType.APARTMENT;
+            DealType dealType = request.getParameterMap().containsKey("dealType")
+                    ? DealType.parseString(request.getParameter("dealType"))
+                    : DealType.SELL;
+            int minArea = request.getParameterMap().containsKey("minArea")
+                    ? Integer.parseInt(request.getParameter("minArea"))
+                    : 0;
+            int maxPrice = request.getParameterMap().containsKey("maxPrice")
+                    ? Integer.parseInt(request.getParameter("maxPrice"))
+                    : 0;
+            houses.addAll(KhaneBeDoosh.getInstance().filterHouses(buildingType, dealType, minArea, maxPrice));
             // TODO: handle default parameters
             response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().write((new Gson()).toJson(houses));

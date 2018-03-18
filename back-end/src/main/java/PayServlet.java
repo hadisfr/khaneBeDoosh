@@ -1,6 +1,7 @@
 package main.java;
 
 import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.util.HashMap;
 import javax.servlet.ServletException;
@@ -14,7 +15,7 @@ public class PayServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException  {
+            throws ServletException, IOException {
         Individual currentUser = (Individual) KhaneBeDoosh.getInstance().getDefaultUser();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
