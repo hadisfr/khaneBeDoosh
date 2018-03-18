@@ -43,6 +43,10 @@
     display: none;
 }
 
+.search input:invalid {
+    color: FireBrick;
+}
+
 .search .badge {
     font-weight: lighter;
     left: 10px;

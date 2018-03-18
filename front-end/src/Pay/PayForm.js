@@ -43,7 +43,8 @@ class PayForm extends Component {
                 <input
                     type="number"
                     name="balance"
-                    pattern="[0-9]+"
+                    min="0"
+                    step="1"
                     placeholder="مبلغ مورد نظر"
                     onChange={(event) => this.handle_change(event)}
                     value={this.state.balance}
@@ -53,7 +54,8 @@ class PayForm extends Component {
                     type="submit"
                     value="افزایش اعتبار"
                     className="btn btn-green"
-                    disabled={!(this.state.balance && this.state.balance > 0)}
+                    required
+                    disabled={!(RegExp("^[0123456789]+$").test(this.state.balance))}
                 />
             </form>
         );

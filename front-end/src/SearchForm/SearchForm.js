@@ -46,7 +46,10 @@ class SearchForm extends Component {
                 <div className="col-12 col-sm-6 col-lg-4">
                     <input
                         type="number"
+                        min="0"
+                        step="1"
                         name="maxPrice"
+                        pattern="^[0123456789]*$"
                         placeholder="حداکثر قیمت"
                         value={this.state.maxPrice}
                         onChange={ (event) => this.handle_change(event) }
@@ -57,6 +60,9 @@ class SearchForm extends Component {
                     <input
                         type="number"
                         name="minArea"
+                        min="0"
+                        step="1"
+                        pattern="^[0123456789]*$"
                         placeholder="حداقل مساحت"
                         value={this.state.minArea}
                         onChange={ (event) => this.handle_change(event) }
@@ -80,7 +86,18 @@ class SearchForm extends Component {
                     />خرید
                 </fieldset></div>
                 <div className="col-12 col-sm-6 col-lg-4">&nbsp;</div>
-                <div className="col-12 col-sm-6 col-lg-4"><input type="submit" className="btn btn-green" value="جست‌وجو" /></div>
+                <div className="col-12 col-sm-6 col-lg-4">
+                    <input
+                        type="submit"
+                        className="btn btn-green"
+                        value="جست‌وجو"
+                        disabled={!(
+                            RegExp("^[0123456789]*$").test(this.state.maxPrice)
+                            && RegExp("^[0123456789]*$").test(this.state.minArea)
+                            && (this.state.dealType === "0" || this.state.dealType === "1")
+                        )}
+                    />
+                </div>
             </div></form>
         );
     }
