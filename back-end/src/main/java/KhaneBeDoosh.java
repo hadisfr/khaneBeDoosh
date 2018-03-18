@@ -13,11 +13,13 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class KhaneBeDoosh {
 
     private ArrayList<User> users = new ArrayList<User>();
     private static KhaneBeDoosh khaneBedoosh = new KhaneBeDoosh();
+    private transient HashMap<String, House> houses = new HashMap<String, House>();
 
     private static final String bankAPIKey = "a1965d20-1280-11e8-87b4-496f79ef1988";
     private static final String bankUri = "http://acm.ut.ac.ir/ieBank/pay";
@@ -85,20 +87,7 @@ public class KhaneBeDoosh {
         }
         return result;
     }
-
-    public void chargeBalance(int userId, int amount) {
-        if (amount < 0)
-            amount = 0;
-        for (User user : users) {
-            if (!(user instanceof Individual))
-                continue;
-            Individual individual = (Individual) user;
-            if (userId == individual.getId()) {
-                individual.setBalance(individual.getBalance() + amount);
-            }
-        }
-    }
-
+    
     public House getHouseById(String houseId, int userId) {
         return getUserById(userId).getHouse(houseId);
     }
