@@ -37,8 +37,8 @@ class Landing extends Component {
                         <h1 className="logo white">خانه‌به‌دوش</h1>
                     </div>
                     <div className="col-sm-0 col-lg-4 vanish-sm"></div>
-                    <div className="search">
-                        <div className="box-wrapper col-12"><div className="box-dark col-12">
+                    <div className="search col-12">
+                        <div className="box-wrapper"><div className="box-dark">
                             <SearchForm />
                         </div></div>
                     </div>

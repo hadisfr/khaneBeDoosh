@@ -33,7 +33,7 @@ class SearchResults extends Component {
                 </div></div>
                 <div className="search col-12"><div className="row">
                     <div className="center-align col-12 gray">جست‌وجوی مجدد</div>
-                    <div className="box-wrapper col-12"><div className="box-dark col-12">
+                    <div className="box-wrapper"><div className="box-dark">
                         <SearchForm call_back={ this.fetch_results.bind(this) } />
                     </div></div>
                 </div></div>
