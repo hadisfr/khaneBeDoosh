@@ -13,12 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 public class SearchServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/").forward(request, response);
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         ArrayList<House> houses = new ArrayList<House>();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

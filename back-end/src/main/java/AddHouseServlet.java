@@ -12,7 +12,8 @@ import org.apache.commons.lang.RandomStringUtils;
 public class AddHouseServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         DealType dealType = DealType.parseString(request.getParameter("dealType"));
         try {
             String id = RandomStringUtils.randomAlphabetic(20);
@@ -54,11 +55,6 @@ public class AddHouseServlet extends HttpServlet {
             request.setAttribute("msg", "استثنا: ‪" + e);
             request.getRequestDispatcher("/").forward(request, response);
         }
-        request.getRequestDispatcher("/").forward(request, response);
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/").forward(request, response);
     }
 }

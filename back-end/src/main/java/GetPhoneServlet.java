@@ -11,12 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 public class GetPhoneServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/").forward(request, response);
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         try {
             House house = KhaneBeDoosh.getInstance().getHouseById(
                     request.getParameter("houseId"),
