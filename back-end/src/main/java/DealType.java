@@ -13,14 +13,23 @@ public enum DealType {
         return value;
     }
 
-    public static DealType parseString(String string) {
-        return parseInt(Integer.parseInt(string));
+    public static DealType parseInt(int i) {
+        switch (i) {
+            case 0:
+                return SELL;
+            case 1:
+                return RENT;
+            default:
+                return null;
+        }
     }
 
-    public static DealType parseInt(int i) {
-        if (i == 0)
+    public static DealType parseString(String string) {
+        if (string.equals("0") || string.equals("SELL"))
             return SELL;
-        else
+        else if (string.equals("1") || string.equals("RENT"))
             return RENT;
+        else
+            return null;
     }
 }
