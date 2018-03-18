@@ -1,11 +1,14 @@
 package main.java;
 
 import java.io.IOException;
+import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
 import org.apache.commons.lang.RandomStringUtils;
 
 @WebServlet("/addHouse")
@@ -14,6 +17,8 @@ public class AddHouseServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         DealType dealType = DealType.parseString(request.getParameter("dealType"));
         try {
             String id = RandomStringUtils.randomAlphabetic(20);
@@ -52,9 +57,10 @@ public class AddHouseServlet extends HttpServlet {
             } else
                 throw new IOException("Bad BuildingType");
         } catch (Exception e) {
-            request.setAttribute("msg", "استثنا: ‪" + e);
-            request.getRequestDispatcher("/").forward(request, response);
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            HashMap<String, String> err_res = new HashMap<String, String>();
+            err_res.put("msg", e.toString());
+            response.getWriter().write((new Gson()).toJson(err_res));
         }
-        request.getRequestDispatcher("/").forward(request, response);
     }
 }

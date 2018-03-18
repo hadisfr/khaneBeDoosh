@@ -20,6 +20,7 @@ public class SearchServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         try {
+            if(request.getParameterMap().containsKey("buildingType"))
             houses.addAll(KhaneBeDoosh.getInstance().filterHouses(
                     request.getParameterMap().containsKey("buildingType")
                             ? BuildingType.parseString(request.getParameter("buildingType"))
@@ -31,7 +32,7 @@ public class SearchServlet extends HttpServlet {
                             ? Integer.parseInt(request.getParameter("minArea"))
                             : 0,
                     request.getParameterMap().containsKey("maxPrice")
-                            ? Integer.parseInt(request.getParameter("minArea"))
+                            ? Integer.parseInt(request.getParameter("maxPrice"))
                             : 0
             ));
             // TODO: handle default parameters
