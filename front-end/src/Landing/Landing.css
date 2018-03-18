@@ -1,10 +1,3 @@
-@keyframes bg-fade {
-    0% {opacity: 1;}
-    23% {opacity: 1;}
-    25% {opacity: 0;}
-    98% {opacity: 0;}
-}
-
 #why-use-us {
     padding-bottom: 60px;
     padding-top: 120px;
@@ -65,10 +58,16 @@
     width: 100vw;
 }
 
-.header {
-    background: none;
-    box-shadow: none;
+.landing-background {
+    animation: bg-fade 20s linear 0s infinite forwards;
+    background: center center/ cover no-repeat;
+    min-height: 130vh;
     position: absolute;
+    transform: rotateZ(0);
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
 }
 
 #logo-wrapper, #logo-wrapper * {
@@ -82,8 +81,7 @@
 }
 
 #logo-wrapper {
-    margin-bottom: 60px;
-    margin-top: 130px;
+    margin: 30px 0;
 }
 
 @media only screen and (max-width: 992px) {

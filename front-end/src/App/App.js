@@ -12,6 +12,7 @@ import Pay from '../Pay/Pay'
 import HouseDetails from '../HouseDetails/HouseDetails'
 import SearchResults from '../SearchResults/SearchResults'
 import Landing from '../Landing/Landing'
+import LandingBackground from '../Landing/LandingBackground'
 
 function user(name, username, balance) {
     this.name = name;
@@ -58,6 +59,7 @@ class App extends Component {
         return (
             <div className="container-fluid main">
                 <Header user={this.state.user} />
+                <Route exact path="/" component={LandingBackground} />
                 <Switch>
                     <Route exact path="/" />
                     <Route exact path="/pay" render={(props) => <PageTitle title="افزایش موجودی" />} />
