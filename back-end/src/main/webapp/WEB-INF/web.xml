@@ -13,47 +13,6 @@
         </jsp-property-group>
     </jsp-config>
 
-    <servlet>
-        <servlet-name>SearchServlet</servlet-name>
-        <servlet-class>main.java.SearchServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AddHouseServlet</servlet-name>
-        <servlet-class>main.java.AddHouseServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>GetPhoneServlet</servlet-name>
-        <servlet-class>main.java.GetPhoneServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>PayServlet</servlet-name>
-        <servlet-class>main.java.PayServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>HouseDetailsServlet</servlet-name>
-        <servlet-class>main.java.HouseDetailsServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>HouseDetailsServlet</servlet-name>
-        <url-pattern>/houseDetails</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>PayServlet</servlet-name>
-        <url-pattern>/pay</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>GetPhoneServlet</servlet-name>
-        <url-pattern>/getPhone</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddHouseServlet</servlet-name>
-        <url-pattern>/addHouse</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SearchServlet</servlet-name>
-        <url-pattern>/search</url-pattern>
-    </servlet-mapping>
-
     <filter>
         <filter-name>CharacterSetFilter</filter-name>
         <filter-class>main.java.CharacterSetFilter</filter-class>

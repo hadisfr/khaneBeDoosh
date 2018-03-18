@@ -1,5 +1,7 @@
 package main.java;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -7,9 +9,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class RealEstateAcm extends RealEstate {
 

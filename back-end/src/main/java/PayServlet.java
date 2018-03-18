@@ -1,12 +1,16 @@
 package main.java;
 
+import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
+@WebServlet("/pay")
 public class PayServlet extends HttpServlet {
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Individual currentUser = (Individual) KhaneBeDoosh.getInstance().getDefaultUser();
         response.setContentType("application/json");
@@ -33,6 +37,7 @@ public class PayServlet extends HttpServlet {
 //        request.getRequestDispatcher("/").forward(request, response);
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/").forward(request, response);
     }
