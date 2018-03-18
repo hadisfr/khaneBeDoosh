@@ -7,7 +7,8 @@ import javax.crypto.spec.SecretKeySpec;
 public class Utility {
     private static final String privateKey = "Allah is alive!";
     private static final String delimiter = "!@#deli";
-    public static String encrypt(String houseId, int userId){
+
+    public static String encrypt(String houseId, int userId) {
         String text = houseId + delimiter + userId;
         Key aesKey = new SecretKeySpec(privateKey.getBytes(), "AES");
         try {
@@ -21,10 +22,10 @@ public class Utility {
         return null;
     }
 
-    public static IntStringPair decrypt(String text){
+    public static IntStringPair decrypt(String text) {
         Key aesKey = new SecretKeySpec(privateKey.getBytes(), "AES");
         try {
-            Cipher cipher= Cipher.getInstance("AES");
+            Cipher cipher = Cipher.getInstance("AES");
             cipher.init(Cipher.DECRYPT_MODE, aesKey);
             String decrypted = new String(cipher.doFinal(text.getBytes()));
             String[] decrypted_parts = decrypted.split(delimiter);

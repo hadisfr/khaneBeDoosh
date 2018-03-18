@@ -14,7 +14,7 @@ public class PayServlet extends HttpServlet {
         String jsonResponse;
         try {
             int balance = Integer.parseInt(request.getParameter("balance"));
-            if(balance < 0)
+            if (balance < 0)
                 balance = 0;
             if (KhaneBeDoosh.getInstance().increaseBalance(currentUser, balance)) {
                 jsonResponse = "{ \"success\": true}";
