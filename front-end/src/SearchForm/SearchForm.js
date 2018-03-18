@@ -10,7 +10,7 @@ class SearchForm extends Component {
             buildingType: "",
             maxPrice: "",
             minArea: "",
-            dealType: "0",
+            dealType: "SELL",
         };
     }
 
@@ -73,17 +73,17 @@ class SearchForm extends Component {
                     <input
                         type="radio"
                         name="dealType"
-                        value="0"
+                        value="SELL"
                         onChange={ (event) => this.handle_change(event) }
-                        checked={ this.state.dealType === "0" }
-                    />رهن و اجاره
+                        checked={ this.state.dealType === "SELL" }
+                    />خرید
                     <input
                         type="radio"
                         name="dealType"
                         value="1"
                         onChange={ (event) => this.handle_change(event) }
-                        checked={ this.state.dealType === "1" }
-                    />خرید
+                        checked={ this.state.dealType === "RENT" }
+                    />رهن و اجاره
                 </fieldset></div>
                 <div className="col-12 col-sm-6 col-lg-4">&nbsp;</div>
                 <div className="col-12 col-sm-6 col-lg-4">
@@ -94,7 +94,7 @@ class SearchForm extends Component {
                         disabled={!(
                             RegExp("^[0123456789]*$").test(this.state.maxPrice)
                             && RegExp("^[0123456789]*$").test(this.state.minArea)
-                            && (this.state.dealType === "0" || this.state.dealType === "1")
+                            && (this.state.dealType === "SELL" || this.state.dealType === "RENT")
                         )}
                     />
                 </div>
