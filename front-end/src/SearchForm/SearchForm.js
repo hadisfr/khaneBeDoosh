@@ -25,10 +25,10 @@ class SearchForm extends Component {
     handle_action(event) {
         event.preventDefault();
         var req = Object.assign({}, this.state);
-        if(req.dealType != "SELL"){
+        if(req.dealType !== "SELL"){
             req.maxSellPrice = "";
         }
-        if(req.dealType != "RENT") {
+        if(req.dealType !== "RENT") {
             req.maxRentPrice = "";
             req.maxBasePrice = "";
         }
