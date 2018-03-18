@@ -13,10 +13,10 @@ public class PayServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         String jsonResponse;
         try {
-            if (KhaneBeDoosh.getInstance().increaseBalance(
-                    currentUser,
-                    Integer.parseInt(request.getParameter("balance").equals("") ? "0" : request.getParameter("balance")))
-                    ) {
+            int balance = Integer.parseInt(request.getParameter("balance"));
+            if(balance < 0)
+                balance = 0;
+            if (KhaneBeDoosh.getInstance().increaseBalance(currentUser, balance)) {
                 jsonResponse = "{ \"success\": true}";
                 response.setStatus(HttpServletResponse.SC_OK);
 //                request.setAttribute("msg", "افزایش اعتبار موفقیت‌آمیز بود.");
