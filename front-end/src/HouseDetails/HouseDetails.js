@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import './HouseDetails.css'
+import HttpStatus from 'http-status-codes';
 import backend_api from '../back-end-api.json'
+import frontend_api from '../front-end-api.json'
 
 class HouseDetails extends Component {
     constructor(props) {
@@ -10,9 +12,13 @@ class HouseDetails extends Component {
     }
 
     componentDidMount() {
-        fetch(backend_api.house_details + "?id=" + this.props.match.params.id).then((res) => res.json()).then(function(res) {
+        fetch(backend_api.house_details + "?id=" + this.props.match.params.id)
+        .then(
+            (res) => (res.status === HttpStatus.OK ? res.json() : this.props.history.push(frontend_api.error + res.status)),
+            (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR))
+        ).then(function(res) {
             this.setState({ house_details: res });
-        }.bind(this));
+        }.bind(this), (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR)));
     }
 
     render() {

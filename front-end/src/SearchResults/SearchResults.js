@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import './SearchResults.css'
+import HttpStatus from 'http-status-codes';
 import SearchResult from './SearchResult'
 import SearchForm from '../SearchForm/SearchForm'
 import backend_api from '../back-end-api.json'
+import frontend_api from '../front-end-api.json'
 
 class SearchResults extends Component {
     constructor(props) {
@@ -19,9 +21,13 @@ class SearchResults extends Component {
 
     fetchResults(query) {
         console.log(query);
-        fetch(backend_api.search + query).then((res) => res.json()).then(function(res) {
+        fetch(backend_api.search + query)
+        .then(
+            (res) => (res.status === HttpStatus.OK ? res.json() : this.props.history.push(frontend_api.error + res.status)),
+            (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR))
+        ).then(function(res) {
             this.setState({ houses: res });
-        }.bind(this));
+        }.bind(this), (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR)));
     }
 
     render() {

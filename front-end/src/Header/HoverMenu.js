@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom'
 import './Header.css'
+import HttpStatus from 'http-status-codes';
 import frontend_api from '../front-end-api.json'
 
 class HoverMenu extends Component {
@@ -21,7 +22,9 @@ class HoverMenu extends Component {
                             </div>
                         }
                         {!(this.props.user) &&
-                            <div><Link to={frontend_api.error + "501"}><button className="btn btn-red">ورود به سایت</button></Link></div>
+                            <div><Link to={frontend_api.error + HttpStatus.NOT_IMPLEMENTED}>
+                                <button className="btn btn-red">ورود به سایت</button>
+                            </Link></div>
                         }
                         {this.props.user &&
                             <div><Link to={frontend_api.pay}><button className="btn btn-green">افزایش اعتبار</button></Link></div>

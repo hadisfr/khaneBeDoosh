@@ -4,6 +4,7 @@ import './main.css';
 import './boxes.css';
 import './boxes.css';
 import './btn.css';
+import HttpStatus from 'http-status-codes';
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import PageTitle from '../PageTitle/PageTitle'
@@ -51,9 +52,13 @@ class App extends Component {
     }
 
     updateUserInfo() {
-        fetch(backend_api.user).then((res) => (res.status === 200 ? res.json() : null)).then(function(res) {
+        fetch(backend_api.user)
+        .then(
+            (res) => (res.status === HttpStatus.OK ? res.json() : null),
+            (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR))
+        ).then(function(res) {
             this.setState(res ? { user: new user(res.name, res.username, res.balance) } : null);
-        }.bind(this));
+        }.bind(this), (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR)));
     }
 
     render() {
@@ -71,7 +76,7 @@ class App extends Component {
                     <Route path={frontend_api.house_details + ":id"} render={(props) => <PageTitle title="مشخصات کامل ملک" />} />
                     <Route path={frontend_api.search} render={(props) => <PageTitle title="نتایج جست‌وجو" />} />
                     <Route path={frontend_api.error + ":id([0-9]{3})"} render={(props) => <PageTitle title="خطا" />} />
-                    <Redirect from="*" to={frontend_api.error + "404"} />
+                    <Redirect from="*" to={frontend_api.error + HttpStatus.NOT_FOUND} />
                 </Switch>
                 <div className="cnt row"><div className="col-1"></div><div className="col-10 center-align">
                     <Switch>
@@ -85,7 +90,7 @@ class App extends Component {
                                     callBack={this.updateUserInfo.bind(this)}
                                     msgPresenter={this.msgPresenter}
                                 />
-                                : <Redirect to={frontend_api.error + "401"} />
+                                : <Redirect to={frontend_api.error + HttpStatus.UNAUTHORIZED} />
                             )}
                         />
                         <Route path={frontend_api.house_details + ":id"} render={(props) => <HouseDetails />} />

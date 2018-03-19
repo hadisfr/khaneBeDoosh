@@ -26,16 +26,22 @@ class PayForm extends Component {
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
-        }).then(function (res) {
-            if(res.status === HttpStatus.OK) {
-                this.props.msgPresenter.showMsg("اعتبار شما افزایش یافت!");
-                this.props.history.goBack();
-            }
-            else {
-                this.props.history.push(frontend_api.error + res.status);
-            }
-            this.props.callBack();
-        }.bind(this));
+        }).then(
+            function (res) {
+                if(res.status === HttpStatus.OK) {
+                    this.props.msgPresenter.showMsg("اعتبار شما افزایش یافت!");
+                    this.props.history.goBack();
+                }
+                else {
+                    this.props.history.push(frontend_api.error + res.status);
+                }
+                this.props.callBack();
+            }.bind(this),
+                (err) => (
+                    this.props.msgPresenter.showMsg(String(err))
+                    || this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR)
+                )
+            );
     }
 
     render() {
