@@ -3,6 +3,15 @@ package main.java;
 import java.util.ArrayList;
 
 public class Utility {
+    private static Utility utility = new Utility();
+
+    public static Utility getInstance() {
+        return utility;
+    }
+
+    private Utility() {
+    }
+
     private static final String privateKey = "Allahisalivemofo";
     private static final String delimiter = "_";
     public static final int illegalSearchValue = -1;
