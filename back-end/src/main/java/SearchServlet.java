@@ -30,18 +30,27 @@ public class SearchServlet extends HttpServlet {
             int minArea = request.getParameterMap().containsKey("minArea")
                     ? Integer.parseInt(request.getParameter("minArea"))
                     : Utility.illegalSearchValue;
-            int maxSellPrice = request.getParameterMap().containsKey("maxSellPrice")
-                    ? Integer.parseInt(request.getParameter("maxSellPrice"))
-                    : Utility.illegalSearchValue;
-            int maxBasePrice = request.getParameterMap().containsKey("maxBasePrice")
-                    ? Integer.parseInt(request.getParameter("maxBasePrice"))
-                    : Utility.illegalSearchValue;
-            int maxRentPrice = request.getParameterMap().containsKey("maxRentPrice")
-                    ? Integer.parseInt(request.getParameter("maxRentPrice"))
-                    : Utility.illegalSearchValue;
-            houses.addAll(KhaneBeDoosh.getInstance().filterHouses(buildingType, dealType, minArea, maxSellPrice));
+            Price price = null;
+            if(request.getParameterMap().containsKey("maxSellPrice")){
+                price = new PriceSell(Integer.parseInt(request.getParameter("maxSellPrice")));
+            } else if (request.getParameterMap().containsKey("maxBasePrice") ||
+                    request.getParameterMap().containsKey("maxRentPrice")) {
+                price = new PriceRent(
+                        request.getParameterMap().containsKey("maxBasePrice")
+                        ? Integer.parseInt(request.getParameter("maxBasePrice"))
+                        : Utility.illegalSearchValue,
+                        request.getParameterMap().containsKey("maxRentPrice")
+                        ? Integer.parseInt(request.getParameter("maxRentPrice"))
+                        : Utility.illegalSearchValue
+                );
+            }
+            houses.addAll(KhaneBeDoosh.getInstance().filterHouses(buildingType, dealType, minArea, price));
+            ArrayList<SearchHouseWrapper> wrappedHouses = new ArrayList<SearchHouseWrapper>();
+            for(House house : houses){
+                wrappedHouses.add(new SearchHouseWrapper(house));
+            }
             response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().write((new Gson()).toJson(houses));
+            response.getWriter().write((new Gson()).toJson(wrappedHouses));
         } catch (IllegalArgumentException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             HashMap<String, String> err_res = new HashMap<String, String>();

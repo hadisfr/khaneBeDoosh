@@ -15,7 +15,7 @@ public abstract class RealEstate extends User {
 
     public abstract House getHouse(String id);
 
-    public ArrayList<House> searchHouses(BuildingType buildingType, DealType dealType, int minArea, int maxPrice) {
+    public ArrayList<House> searchHouses(BuildingType buildingType, DealType dealType, int minArea, Price maxPrice) {
         return Utility.filterHouses(getHouses(), buildingType, dealType, minArea, maxPrice);
     }
 

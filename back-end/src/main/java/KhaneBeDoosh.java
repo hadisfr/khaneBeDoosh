@@ -83,13 +83,13 @@ public class KhaneBeDoosh {
         return payResult;
     }
 
-    private ArrayList<House> searchHouses(BuildingType buildingType, DealType dealType, int minArea, int maxPrice){
+    private ArrayList<House> searchHouses(BuildingType buildingType, DealType dealType, int minArea, Price maxPrice){
         ArrayList<House> hashmapArrayListed = new ArrayList<House>();
         hashmapArrayListed.addAll(houses.values());
         return Utility.filterHouses(hashmapArrayListed,  buildingType, dealType, minArea, maxPrice);
     }
 
-    public ArrayList<House> filterHouses(BuildingType buildingType, DealType dealType, int minArea, int maxPrice) {
+    public ArrayList<House> filterHouses(BuildingType buildingType, DealType dealType, int minArea, Price maxPrice) {
         ArrayList<House> result = new ArrayList<House>();
         for (User user : users) {
             if(!(user instanceof Individual))

@@ -6,7 +6,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
 public class Utility {
-    private static final String privateKey = "Allah is alive!";
+    private static final String privateKey = "Allahisalivemofo";
     private static final String delimiter = "!@#deli";
     public static final int illegalSearchValue = -1;
 
@@ -38,17 +38,26 @@ public class Utility {
         return null;
     }
 
-    public static ArrayList<House> filterHouses(ArrayList<House> houses, BuildingType buildingType, DealType dealType, int minArea, int maxPrice) {
+    public static ArrayList<House> filterHouses(ArrayList<House> houses, BuildingType buildingType, DealType dealType, int minArea, Price maxPrice) {
         ArrayList<House> result = new ArrayList<House>();
         for (House house : houses) {
-            Price pricee = house.getPrice();
-            int price = 0;
-            //TODO: change filter for both house types
+            Price price = house.getPrice();
+            boolean priceCheck = false;
+            if(maxPrice != null) {
+                if (price instanceof PriceSell && maxPrice instanceof PriceSell) {
+                    priceCheck = ((PriceSell) price).getPrice() >= ((PriceSell) maxPrice).getPrice();
+                } else if (price instanceof PriceRent && maxPrice instanceof PriceRent) {
+                    int basePrice = ((PriceRent) maxPrice).getBasePrice();
+                    int rentPrice = ((PriceRent) maxPrice).getRentPrice();
+                    priceCheck = (basePrice != illegalSearchValue &&  ((PriceRent) price).getBasePrice() >= basePrice)
+                            || (rentPrice != illegalSearchValue && ((PriceRent) price).getRentPrice() >= rentPrice);
+                }
+            }
 
             if (!((buildingType != null && !house.getBuildingType().equals(buildingType)) ||
                     (dealType != null && !house.getDealType().equals(dealType)) ||
                     (minArea != illegalSearchValue && house.getArea() < minArea) ||
-                    (maxPrice != illegalSearchValue && price >= maxPrice)))
+                    (priceCheck)))
                 result.add(house);
         }
         return result;
