@@ -47,34 +47,28 @@ public class House {
         if (detail == null) {
             getDetailFromOwner();
         }
-        String phone = detail.getPhone();
-
-        return phone;
+        return detail.getPhone();
     }
 
     public String getDescription() {
         if (detail == null) {
             getDetailFromOwner();
         }
-        String description = detail.getDescription();
-
-        return description;
+        return detail.getDescription();
     }
 
     public String getExpireTime() {
         if (detail == null) {
             getDetailFromOwner();
         }
-        String expireTime = detail.getExpireTime();
-        return expireTime;
+        return detail.getExpireTime();
     }
 
     public String getAddress() {
         if (detail == null) {
             getDetailFromOwner();
         }
-        String address = detail.getAddress();
-        return address;
+        return detail.getAddress();
     }
 
     public User getOwner() {

@@ -1,7 +1,5 @@
 package main.java;
 
-import java.util.ArrayList;
-
 public abstract class User {
 
     protected String name;
