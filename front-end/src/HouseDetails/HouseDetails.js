@@ -21,6 +21,16 @@ class HouseDetails extends Component {
         }.bind(this), (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR)));
     }
 
+    getPhone(event) {
+        fetch(backend_api.get_phone + "?id=" + this.props.match.params.id)
+        .then(
+            (res) => (res.status === HttpStatus.OK ? res.json() : this.props.history.push(frontend_api.error + res.status)),
+            (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR))
+        ).then(function(res) {
+            this.setState({ phone: res.phone });
+        }.bind(this), (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR)));
+    }
+
     render() {
         const det = this.state.house_details;
         return (
@@ -32,7 +42,6 @@ class HouseDetails extends Component {
                         det.dealType === "SELL" ? "خرید" : det.dealType === "RENT" ? "رهن و اجاره" : null
                     )}</button>
                     <dl id="house-detail">
-                        <dt>شماره</dt><dd>۰۹۱۲۳۴۵۶۷۸۹</dd>  {/* TODO: handle phone number */}
                         <dt>نوع ساختمان</dt><dd>{det && (
                             det.buildingType === "APARTMENT"
                             ? "آپارتمان"
@@ -66,12 +75,18 @@ class HouseDetails extends Component {
                         ))}
                         <dt>آدرس</dt><dd>{(det && det.address) || <span>&nbsp;</span>}</dd>
                         <dt>متراژ</dt><dd>{det && det.area} متر مربع</dd>
+                        {!this.state.phone && <button
+                            id="change-number-status"
+                            className="btn btn-green"
+                            onClick={(event) => (this.getPhone(event))}
+                        >نمایش شماره</button>}
+                        {this.state.phone !== undefined && <dt>شماره</dt>}
+                        {this.state.phone !== undefined && <dd>{this.state.phone}</dd>}
                         <dt>توضیحات</dt><dd>{(det && det.description) || <span>&nbsp;</span>}</dd>
                     </dl>
                 </div>
                 <div className="col-12 col-lg-8">
                     <img id="house-pic" src={det && det.imageUrl} alt="house-pic" />
-                    <button id="change-number-status" className="btn btn-red">نمایش شماره</button>  {/* TODO: handle phone number */}
                 </div>
             </div>
         );

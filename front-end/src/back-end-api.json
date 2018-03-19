@@ -1,7 +1,7 @@
 {
     "pay": "http://localhost:8080/khaneBeDoosh/pay",
     "house_details": "http://localhost:8080/khaneBeDoosh/house",
-    "house_phone": "http://localhost:8080/khaneBeDoosh/phone",
+    "get_phone": "http://localhost:8080/khaneBeDoosh/phone",
     "new_house": "http://localhost:8080/khaneBeDoosh/house",
     "search": "http://localhost:8080/khaneBeDoosh/search",
     "user": "http://localhost:8080/khaneBeDoosh/user",
