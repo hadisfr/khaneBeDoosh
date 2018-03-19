@@ -28,6 +28,7 @@ class HouseDetails extends Component {
             (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR))
         ).then(function(res) {
             this.setState({ phone: res.phone });
+            this.props.callBack();
         }.bind(this), (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR)));
     }
 

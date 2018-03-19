@@ -103,7 +103,10 @@ class App extends Component {
                                 : <Redirect to={frontend_api.error + HttpStatus.UNAUTHORIZED} />
                             )}
                         />
-                        <Route path={frontend_api.house_details + ":id"} render={(props) => <HouseDetails />} />
+                        <Route
+                            path={frontend_api.house_details + ":id"}
+                            render={(props) => <HouseDetails callBack={this.updateUserInfo.bind(this)} />}
+                        />
                         <Route path={frontend_api.search} render={(props) => <SearchResults />} />
                         <Route path={frontend_api.error + ":id"} component={ErrorMsg} />
                     </Switch>
