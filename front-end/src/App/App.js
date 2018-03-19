@@ -20,14 +20,13 @@ function user(name, username, balance) {
     this.name = name;
     this.username= username;
     this.balance= balance;
-    // TODO: request user's data from back-end in App::render before return
 }
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: new user("بهنام همایون", "behnam", 200000),
+            user: null,
             msg: [],
         }
         this.setMsg = this.setMsg.bind(this);
@@ -38,6 +37,10 @@ class App extends Component {
         }
     }
 
+    componentDidMount() {
+        this.updateUserInfo();
+    }
+
     setMsg(msg) {
         this.setState((prev, props) => ({ msg: prev.msg.concat(msg) }));
         setTimeout(this.clearMsg, this.msgPresenter.timeout);
@@ -45,6 +48,12 @@ class App extends Component {
 
     clearMsg() {
         this.setState((prev, props) => ({ msg: prev.msg.slice(1) }))
+    }
+
+    updateUserInfo() {
+        fetch(backend_api.user).then((res) => (res.status === 200 ? res.json() : null)).then(function(res) {
+            this.setState(res ? { user: new user(res.name, res.username, res.balance) } : null);
+        }.bind(this));
     }
 
     render() {
@@ -69,7 +78,15 @@ class App extends Component {
                         <Route exact path={frontend_api.root} render={(props) => <Landing />} />
                         <Route
                             exact path={frontend_api.pay}
-                            render={(props) => <Pay user={this.state.user} msgPresenter={this.msgPresenter} />}
+                            render={(props) => (
+                                this.state.user 
+                                ? <Pay
+                                    user={this.state.user}
+                                    callBack={this.updateUserInfo.bind(this)}
+                                    msgPresenter={this.msgPresenter}
+                                />
+                                : <Redirect to={frontend_api.root} />
+                            )}
                         />
                         <Route path={frontend_api.house_details + ":id"} render={(props) => <HouseDetails />} />
                         <Route path={frontend_api.search} render={(props) => <SearchResults />} />

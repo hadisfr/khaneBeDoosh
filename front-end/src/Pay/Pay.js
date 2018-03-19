@@ -10,7 +10,9 @@ class Pay extends Component {
                 <div className="col-12 col-lg-6 current-credit">
                     <span className="gray">اعتبار کنونی </span> {this.props.user.balance} <span className="gray"> تومان</span>
                 </div>
-                <div className="col-12 col-lg-6"><PayForm msgPresenter={this.props.msgPresenter} /></div>
+                <div className="col-12 col-lg-6">
+                    <PayForm callBack={this.props.callBack} msgPresenter={this.props.msgPresenter} />
+                </div>
             </div>
         );
     }

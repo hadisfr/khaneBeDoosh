@@ -34,6 +34,7 @@ class PayForm extends Component {
             else {
                 this.props.history.push(frontend_api.error + res.status);
             }
+            this.props.callBack();
         }.bind(this));
     }
 

@@ -13,12 +13,19 @@ class HoverMenu extends Component {
                 </button>
                 <div className="hover-menu-wrapper">
                     <div className="hover-menu">
-                        <div>{this.props.user.name}</div>
-                        <div className="unimportant">
-                            <span className="center-right w50">اعتبار:</span>
-                            <span className="center-left w50">{this.props.user.balance} تومان</span>
-                        </div>
-                        <div><Link to={frontend_api.pay}><button className="btn btn-green">افزایش اعتبار</button></Link></div>
+                        <div>{this.props.user ? this.props.user.name : "کاربر مهمان"}</div>
+                        {this.props.user &&
+                            <div className="unimportant">
+                                <span className="center-right w50">اعتبار:</span>
+                                <span className="center-left w50">{this.props.user.balance} تومان</span>
+                            </div>
+                        }
+                        {!(this.props.user) &&
+                            <div><Link to={frontend_api.root}><button className="btn btn-red">ورود به سایت</button></Link></div>
+                        }
+                        {this.props.user &&
+                            <div><Link to={frontend_api.pay}><button className="btn btn-green">افزایش اعتبار</button></Link></div>
+                        }
                     </div>
                 </div>
             </div>
