@@ -11,14 +11,14 @@ public class HouseDetailWrapper {
     private String description;
     private String expireTime;
 
-    public HouseDetailWrapper(House house){
+    public HouseDetailWrapper(House house) {
         this.dealType = house.getDealType();
         this.imageUrl = house.getImageUrl();
         this.id = Utility.encrypt(house.getId(), house.getOwner().getId());
         this.area = house.getArea();
         this.buildingType = house.getBuildingType();
         this.price = house.getPrice();
-        if(this.imageUrl.equals(""))
+        if (this.imageUrl.equals(""))
             this.imageUrl = KhaneBeDoosh.getNopicUri();
         this.address = house.getAddress();
         this.description = house.getDescription();

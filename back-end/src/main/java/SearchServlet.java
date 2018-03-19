@@ -31,22 +31,22 @@ public class SearchServlet extends HttpServlet {
                     ? Integer.parseInt(request.getParameter("minArea"))
                     : Utility.illegalSearchValue;
             Price price = null;
-            if(request.getParameterMap().containsKey("maxSellPrice")){
+            if (request.getParameterMap().containsKey("maxSellPrice")) {
                 price = new PriceSell(Integer.parseInt(request.getParameter("maxSellPrice")));
             } else if (request.getParameterMap().containsKey("maxBasePrice") ||
                     request.getParameterMap().containsKey("maxRentPrice")) {
                 price = new PriceRent(
                         request.getParameterMap().containsKey("maxBasePrice")
-                        ? Integer.parseInt(request.getParameter("maxBasePrice"))
-                        : Utility.illegalSearchValue,
+                                ? Integer.parseInt(request.getParameter("maxBasePrice"))
+                                : Utility.illegalSearchValue,
                         request.getParameterMap().containsKey("maxRentPrice")
-                        ? Integer.parseInt(request.getParameter("maxRentPrice"))
-                        : Utility.illegalSearchValue
+                                ? Integer.parseInt(request.getParameter("maxRentPrice"))
+                                : Utility.illegalSearchValue
                 );
             }
             houses.addAll(KhaneBeDoosh.getInstance().filterHouses(buildingType, dealType, minArea, price));
             ArrayList<SearchHouseWrapper> wrappedHouses = new ArrayList<SearchHouseWrapper>();
-            for(House house : houses){
+            for (House house : houses) {
                 wrappedHouses.add(new SearchHouseWrapper(house));
             }
             response.setStatus(HttpServletResponse.SC_OK);

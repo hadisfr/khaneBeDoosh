@@ -46,13 +46,13 @@ public class Utility {
         for (House house : houses) {
             Price price = house.getPrice();
             boolean priceCheck = false;
-            if(maxPrice != null) {
+            if (maxPrice != null) {
                 if (price instanceof PriceSell && maxPrice instanceof PriceSell) {
                     priceCheck = ((PriceSell) price).getPrice() >= ((PriceSell) maxPrice).getPrice();
                 } else if (price instanceof PriceRent && maxPrice instanceof PriceRent) {
                     int basePrice = ((PriceRent) maxPrice).getBasePrice();
                     int rentPrice = ((PriceRent) maxPrice).getRentPrice();
-                    priceCheck = (basePrice != illegalSearchValue &&  ((PriceRent) price).getBasePrice() >= basePrice)
+                    priceCheck = (basePrice != illegalSearchValue && ((PriceRent) price).getBasePrice() >= basePrice)
                             || (rentPrice != illegalSearchValue && ((PriceRent) price).getRentPrice() >= rentPrice);
                 }
             }

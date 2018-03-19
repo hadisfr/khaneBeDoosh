@@ -11,10 +11,10 @@ public class House {
 
     private Price price;
 
-    public DealType getDealType(){
-        if(price instanceof PriceRent)
+    public DealType getDealType() {
+        if (price instanceof PriceRent)
             return DealType.RENT;
-        else if(price instanceof PriceSell)
+        else if (price instanceof PriceSell)
             return DealType.SELL;
         else
             return null;
@@ -40,7 +40,7 @@ public class House {
     }
 
     protected void getDetailFromOwner() {
-        this.detail = ((RealEstate)owner).getHouse(this.id).detail;
+        this.detail = ((RealEstate) owner).getHouse(this.id).detail;
     }
 
     public String getPhone() {
