@@ -8,7 +8,7 @@ import javax.crypto.spec.SecretKeySpec;
 public class Utility {
     private static final String privateKey = "Allah is alive!";
     private static final String delimiter = "!@#deli";
-    private static final int illegalSearchValue = -1;
+    public static final int illegalSearchValue = -1;
 
     public static String encrypt(String houseId, int userId) {
         String text = houseId + delimiter + userId;
@@ -46,11 +46,11 @@ public class Utility {
                 price = ((HouseRent) house).getRentPrice();
             else if (house instanceof HouseSell)
                 price = ((HouseSell) house).getSellPrice();
-
-            if (((buildingType != null && house.getBuildingType().equals(buildingType)) &&
-                    (dealType != null && house.getDealType().equals(dealType)) &&
-                    (minArea != illegalSearchValue && house.getArea() > minArea) &&
-                    (maxPrice != illegalSearchValue && price <= maxPrice)))
+            
+            if (!((buildingType != null && !house.getBuildingType().equals(buildingType)) ||
+                    (dealType != null && !house.getDealType().equals(dealType)) ||
+                    (minArea != illegalSearchValue && house.getArea() < minArea) ||
+                    (maxPrice != illegalSearchValue && price >= maxPrice)))
                 result.add(house);
         }
         return result;
