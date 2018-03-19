@@ -17,6 +17,6 @@ public class SearchHouseWrapper {
         this.buildingType = house.getBuildingType();
         this.price = house.getPrice();
         if (this.imageUrl.equals(""))
-            this.imageUrl = KhaneBeDoosh.getNopicUri();
+            this.imageUrl = KhaneBeDoosh.getNoPicUri();
     }
 }

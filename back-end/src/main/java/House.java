@@ -22,7 +22,7 @@ public class House {
 
     public String getImageUrl() {
         if (imageUrl.equals(""))
-            return KhaneBeDoosh.getNopicUri();
+            return KhaneBeDoosh.getNoPicUri();
         else
             return imageUrl;
     }

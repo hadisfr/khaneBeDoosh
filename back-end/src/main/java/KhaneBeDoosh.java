@@ -1,17 +1,13 @@
 package main.java;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONObject;
@@ -28,10 +24,16 @@ public class KhaneBeDoosh {
 
     private static final String bankAPIKey = "a1965d20-1280-11e8-87b4-496f79ef1988";
     private static final String bankUri = "http://acm.ut.ac.ir/ieBank/pay";
-    private static final String nopicUri = "http://localhost:8080/khaneBeDoosh/pics/no-pic.jpg";
+    private static final String noPicUri = "http://localhost:8080/khaneBeDoosh/pics/no-pic.jpg";
 
     private KhaneBeDoosh() {
-        Individual individual = new Individual("بهنام همایون", 200, "09123456789", "behnam", "p@sw00rd");
+        Individual individual = new Individual(
+                "بهنام همایون",
+                200,
+                "09123456789",
+                "behnam",
+                "p@sw00rd"
+        );
         users.add(individual);
         users.add(RealEstateAcm.getInstance());
     }
@@ -40,8 +42,8 @@ public class KhaneBeDoosh {
         return users.get(0);
     }
 
-    public static String getNopicUri() {
-        return nopicUri;
+    public static String getNoPicUri() {
+        return noPicUri;
     }
 
     public boolean increaseBalance(Individual user, int amount) throws IOException, IllegalArgumentException {
@@ -61,7 +63,10 @@ public class KhaneBeDoosh {
         }
         String json = null;
         try {
-            json = IOUtils.toString(response.getEntity().getContent());
+            if(response != null)
+                json = IOUtils.toString(response.getEntity().getContent());
+            else
+                throw new IOException();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -73,9 +78,8 @@ public class KhaneBeDoosh {
     }
 
     private ArrayList<House> searchHouses(BuildingType buildingType, DealType dealType, int minArea, Price maxPrice) {
-        ArrayList<House> hashmapArrayListed = new ArrayList<House>();
-        hashmapArrayListed.addAll(houses.values());
-        return Utility.filterHouses(hashmapArrayListed, buildingType, dealType, minArea, maxPrice);
+        return Utility.filterHouses((new ArrayList<House>(houses.values())),
+                buildingType, dealType, minArea, maxPrice);
     }
 
     public ArrayList<House> filterHouses(BuildingType buildingType, DealType dealType, int minArea, Price maxPrice) {
@@ -97,13 +101,14 @@ public class KhaneBeDoosh {
             return ((RealEstate) user).getHouse(houseId);
     }
 
-    private static int userIdBase = 1000;
+    private static final int userIdBase = 1000;
 
     public User getUserById(int userId) {
         return users.get(userId - userIdBase);
     }
 
-    public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner, int sellPrice,
+    public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner,
+                         int sellPrice,
                          String address, String phone, String description, String expireTime) {
         House house = new House(id, area, buildingType, imageUrl, owner, address,
                 phone, description, expireTime, new PriceSell(sellPrice));
@@ -112,7 +117,8 @@ public class KhaneBeDoosh {
     }
 
     public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner,
-                         int rentPrice, int basePrice, String address, String phone, String description, String expireTime) {
+                         int rentPrice, int basePrice,
+                         String address, String phone, String description, String expireTime) {
         House house = new House(id, area, buildingType, imageUrl, owner, address,
                 phone, description, expireTime, new PriceRent(rentPrice, basePrice));
         if (owner instanceof Individual)
