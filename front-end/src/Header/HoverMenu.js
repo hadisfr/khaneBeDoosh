@@ -29,6 +29,9 @@ class HoverMenu extends Component {
                         {this.props.user &&
                             <div><Link to={frontend_api.pay}><button className="btn btn-green">افزایش اعتبار</button></Link></div>
                         }
+                        {this.props.user &&
+                            <div><Link to={frontend_api.new_house}><button className="btn btn-red">&nbsp;افزودن خانه&nbsp;</button></Link></div>
+                        }
                     </div>
                 </div>
             </div>

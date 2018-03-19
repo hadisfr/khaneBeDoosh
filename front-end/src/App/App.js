@@ -14,6 +14,7 @@ import HouseDetails from '../HouseDetails/HouseDetails'
 import SearchResults from '../SearchResults/SearchResults'
 import Landing from '../Landing/Landing'
 import LandingBackground from '../Landing/LandingBackground'
+import NewHouseForm from '../NewHouseForm/NewHouseForm'
 import backend_api from '../back-end-api.json'
 import frontend_api from '../front-end-api.json'
 
@@ -73,6 +74,7 @@ class App extends Component {
                 <Switch>
                     <Route exact path={frontend_api.root} />
                     <Route exact path={frontend_api.pay} render={(props) => <PageTitle title="افزایش موجودی" />} />
+                    <Route path={frontend_api.new_house} render={(props) => <PageTitle title="ثبت ملک جدید" />} />
                     <Route path={frontend_api.house_details + ":id"} render={(props) => <PageTitle title="مشخصات کامل ملک" />} />
                     <Route path={frontend_api.search} render={(props) => <PageTitle title="نتایج جست‌وجو" />} />
                     <Route path={frontend_api.error + ":id([0-9]{3})"} render={(props) => <PageTitle title="خطا" />} />
@@ -90,6 +92,14 @@ class App extends Component {
                                     callBack={this.updateUserInfo.bind(this)}
                                     msgPresenter={this.msgPresenter}
                                 />
+                                : <Redirect to={frontend_api.error + HttpStatus.UNAUTHORIZED} />
+                            )}
+                        />
+                        <Route
+                            path={frontend_api.new_house}
+                            render={(props) => (
+                                this.state.user 
+                                ? (<NewHouseForm msgPresenter={this.msgPresenter} />)
                                 : <Redirect to={frontend_api.error + HttpStatus.UNAUTHORIZED} />
                             )}
                         />
