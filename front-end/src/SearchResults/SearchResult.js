@@ -11,22 +11,50 @@ class SearchResult extends Component {
                 <Link to={frontend_api.house_details + det.id}>
                     <div className="box-light-condensed">
                         <img src={det && det.imageUrl} alt={det && det.imageUrl} />
-                        <span className="badge box-badge btn-red">رهن و اجاره</span>  {/* TODO: handle dealType and change color */}
+                        <span className={"badge box-badge btn " + (det && (
+                            det.dealType === "SELL" ? "btn-red" : det.dealType === "RENT" ? "btn-violet" : ""
+                        ))}>{det && (
+                            det.dealType === "SELL" ? "خرید" : det.dealType === "RENT" ? "رهن و اجاره" : ""
+                        )}</span>
                         <div className="detail row">
                             <div className="col-6">{det && det.area} متر مربع</div>
-                            <div className="col-6">
-                                {det && (
+                            <div className="col-6">{det && (
                                     det.buildingType === "APARTMENT" 
                                     ? "آپارتمان"
                                     :
                                         det.buildingType === "VILLA"
                                         ? "ویلایی"
                                         : det.buildingType
-                                )}
-                            </div>
+                            )}</div>
                             <div className="col-12"><hr /></div>
-                            <div className="col-6"><span className="fas fa-dollar-sign fa-lg"></span>&nbsp;رهن ۲۰۰٬۰۰۰٬۰۰۰ <span className="unimportant"> تومان </span></div>  {/* TODO: add price based on dealType */}
-                            <div className="col-6"><span className="fas fa-dollar-sign fa-lg"></span>&nbsp;اجاره ۱۵۰٬۰۰۰٬۰۰۰  <span className="unimportant"> تومان </span></div>  {/* TODO: add price based on dealType */}
+                            {
+                                (det && (
+                                    det.dealType === "SELL"
+                                    ? <div className="col-6">
+                                        <span className="fas fa-dollar-sign fa-lg"></span>&nbsp;
+                                        قیمت {det.price.sellPrice}
+                                        <span className="unimportant"> تومان </span>
+                                    </div>
+                                    : det.dealType === "RENT"
+                                        ? <div className="col-6">
+                                            <span className="fas fa-dollar-sign fa-lg"></span>&nbsp;
+                                            رهن {det.price.basePrice}
+                                            <span className="unimportant"> تومان </span>
+                                        </div>
+                                        : null
+                                ))
+                            }
+                            {
+                                (det && (
+                                    det.dealType === "RENT"
+                                    ? <div className="col-6">
+                                        <span className="fas fa-dollar-sign fa-lg"></span>&nbsp;
+                                        اجاره {det.price.rentPrice}
+                                        <span className="unimportant"> تومان </span>
+                                    </div>
+                                    : null
+                                ))
+                            }
                         </div>
                     </div>
                 </Link>
