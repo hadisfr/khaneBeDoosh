@@ -20,7 +20,6 @@ class SearchResults extends Component {
     }
 
     fetchResults(query) {
-        console.log(query);
         fetch(backend_api.search + query)
         .then(
             (res) => (res.status === HttpStatus.OK ? res.json() : this.props.history.push(frontend_api.error + res.status)),
