@@ -1,18 +1,18 @@
 package main.java;
 
 public class PriceSell extends Price {
-    private int price;
+    private int sellPrice;
 
-    public int getPrice() {
-        return price;
+    public int getSellPrice() {
+        return sellPrice;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setSellPrice(int sellPrice) {
+        this.sellPrice = sellPrice;
     }
 
-    public PriceSell(int price) {
+    public PriceSell(int sellPrice) {
 
-        this.price = price;
+        this.sellPrice = sellPrice;
     }
 }

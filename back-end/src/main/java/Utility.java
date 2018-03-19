@@ -1,9 +1,6 @@
 package main.java;
 
-import java.security.Key;
 import java.util.ArrayList;
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
 
 public class Utility {
     private static final String privateKey = "Allahisalivemofo";
@@ -48,7 +45,7 @@ public class Utility {
             boolean priceCheck = false;
             if (maxPrice != null) {
                 if (price instanceof PriceSell && maxPrice instanceof PriceSell) {
-                    priceCheck = ((PriceSell) price).getPrice() >= ((PriceSell) maxPrice).getPrice();
+                    priceCheck = ((PriceSell) price).getSellPrice() >= ((PriceSell) maxPrice).getSellPrice();
                 } else if (price instanceof PriceRent && maxPrice instanceof PriceRent) {
                     int basePrice = ((PriceRent) maxPrice).getBasePrice();
                     int rentPrice = ((PriceRent) maxPrice).getRentPrice();
