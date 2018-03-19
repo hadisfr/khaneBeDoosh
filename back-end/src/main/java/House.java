@@ -31,7 +31,7 @@ public abstract class House {
     }
 
     protected void getDetailFromOwner() {
-        this.detail = owner.getHouse(this.id).detail;
+        this.detail = ((RealEstate)owner).getHouse(this.id).detail;
     }
 
     public String getPhone() {

@@ -9,7 +9,7 @@ public class Individual extends User {
     private int balance;
     private String username;
     private String password;
-    private transient HashMap<String, House> houses = new HashMap<String, House>();
+//    private transient HashMap<String, House> houses = new HashMap<String, House>();
 
     private transient ArrayList<IntStringPair> paidHouses = new ArrayList<IntStringPair>();
 
@@ -43,10 +43,10 @@ public class Individual extends User {
         return false;
     }
 
-    public void addHouse(House house) {
-        String id = house.getId();
-        houses.put(id, house);
-    }
+//    public void addHouse(House house) {
+//        String id = house.getId();
+//        houses.put(id, house);
+//    }
 
     public int getBalance() {
         return balance;
@@ -62,13 +62,15 @@ public class Individual extends User {
         return username;
     }
 
-    public ArrayList<House> searchHouses(BuildingType buildingType, DealType dealType, int minArea, int maxPrice) {
-        ArrayList<House> hashmapArrayListed = new ArrayList<House>();
-        hashmapArrayListed.addAll(houses.values());
-        return filterHouses(hashmapArrayListed, buildingType, dealType, minArea, maxPrice);
-    }
+//    public ArrayList<House> searchHouses(BuildingType buildingType, DealType dealType, int minArea, int maxPrice) {
+//        ArrayList<House> hashmapArrayListed = new ArrayList<House>();
+//        hashmapArrayListed.addAll(houses.values());
+//        return Utility.filterHouses(hashmapArrayListed, buildingType, dealType, minArea, maxPrice);
+//        return null;
+//    }
 
-    public House getHouse(String id) {
-        return houses.get(id);
-    }
+//    public House getHouse(String id) {
+//        return houses.get(id);
+//        return null;
+//    }
 }

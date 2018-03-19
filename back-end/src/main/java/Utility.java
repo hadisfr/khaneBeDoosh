@@ -1,12 +1,14 @@
 package main.java;
 
 import java.security.Key;
+import java.util.ArrayList;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
 public class Utility {
     private static final String privateKey = "Allah is alive!";
     private static final String delimiter = "!@#deli";
+    private static final int illegalSearchValue = -1;
 
     public static String encrypt(String houseId, int userId) {
         String text = houseId + delimiter + userId;
@@ -34,5 +36,23 @@ public class Utility {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static ArrayList<House> filterHouses(ArrayList<House> houses, BuildingType buildingType, DealType dealType, int minArea, int maxPrice) {
+        ArrayList<House> result = new ArrayList<House>();
+        for (House house : houses) {
+            int price = 0;
+            if (house instanceof HouseRent)
+                price = ((HouseRent) house).getRentPrice();
+            else if (house instanceof HouseSell)
+                price = ((HouseSell) house).getSellPrice();
+
+            if (((buildingType != null && house.getBuildingType().equals(buildingType)) &&
+                    (dealType != null && house.getDealType().equals(dealType)) &&
+                    (minArea != illegalSearchValue && house.getArea() > minArea) &&
+                    (maxPrice != illegalSearchValue && price <= maxPrice)))
+                result.add(house);
+        }
+        return result;
     }
 }

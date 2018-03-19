@@ -1,6 +1,7 @@
 package main.java;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +20,7 @@ public class KhaneBeDoosh {
 
     private ArrayList<User> users = new ArrayList<User>();
     private static KhaneBeDoosh khaneBedoosh = new KhaneBeDoosh();
-    private transient HashMap<String, House> houses = new HashMap<String, House>();
+    private HashMap<String, House> houses = new HashMap<String, House>();
 
     private static final String bankAPIKey = "a1965d20-1280-11e8-87b4-496f79ef1988";
     private static final String bankUri = "http://acm.ut.ac.ir/ieBank/pay";
@@ -82,16 +83,28 @@ public class KhaneBeDoosh {
         return payResult;
     }
 
+    private ArrayList<House> searchHouses(BuildingType buildingType, DealType dealType, int minArea, int maxPrice){
+        ArrayList<House> hashmapArrayListed = new ArrayList<House>();
+        hashmapArrayListed.addAll(houses.values());
+        return Utility.filterHouses(hashmapArrayListed,  buildingType, dealType, minArea, maxPrice);
+    }
+
     public ArrayList<House> filterHouses(BuildingType buildingType, DealType dealType, int minArea, int maxPrice) {
         ArrayList<House> result = new ArrayList<House>();
         for (User user : users) {
-            result.addAll(user.searchHouses(buildingType, dealType, minArea, maxPrice));
+            if(!(user instanceof Individual))
+                result.addAll(((RealEstate)user).searchHouses(buildingType, dealType, minArea, maxPrice));
+            else
+                result.addAll(this.searchHouses(buildingType, dealType, minArea, maxPrice));
         }
         return result;
     }
 
     public House getHouseById(String houseId, int userId) {
-        return getUserById(userId).getHouse(houseId);
+        if(userId == 0)
+            return houses.get(houseId);
+        else
+            return ((RealEstate)getUserById(userId)).getHouse(houseId);
     }
 
     private static int userIdBase = 1000;
@@ -104,7 +117,6 @@ public class KhaneBeDoosh {
         HouseSell house = new HouseSell(id, area, buildingType, imageUrl, owner, sellPrice);
         if (owner instanceof Individual)
             houses.put(house.getId(), house);
-//            ((Individual) owner).addHouse(house);
     }
 
     public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner, int sellPrice,
@@ -113,7 +125,6 @@ public class KhaneBeDoosh {
                 phone, description, expireTime);
         if (owner instanceof Individual)
             houses.put(house.getId(), house);
-//            ((Individual) owner).addHouse(house);
     }
 
     public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner,
@@ -121,7 +132,6 @@ public class KhaneBeDoosh {
         HouseRent house = new HouseRent(id, area, buildingType, imageUrl, owner, rentPrice, basePrice);
         if (owner instanceof Individual)
             houses.put(house.getId(), house);
-//            ((Individual) owner).addHouse(house);
     }
 
     public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner,
@@ -130,6 +140,5 @@ public class KhaneBeDoosh {
                 phone, description, expireTime);
         if (owner instanceof Individual)
             houses.put(house.getId(), house);
-//            ((Individual) owner).addHouse(house);
     }
 }
