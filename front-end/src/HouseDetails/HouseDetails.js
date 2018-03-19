@@ -26,7 +26,11 @@ class HouseDetails extends Component {
         return (
             <div className="row">
                 <div className="col-12 col-lg-4">
-                    <button className="btn btn-violet">فروش</button>  {/* TODO: handle dealType */}
+                    <button className={"btn " + (det && (
+                        det.dealType === "SELL" ? "btn-red" : det.dealType === "RENT" ? "btn-violet" : ""
+                    ))}>{det && (
+                        det.dealType === "SELL" ? "خرید" : det.dealType === "RENT" ? "رهن و اجاره" : null
+                    )}</button>
                     <dl id="house-detail">
                         <dt>شماره</dt><dd>۰۹۱۲۳۴۵۶۷۸۹</dd>  {/* TODO: handle phone number */}
                         <dt>نوع ساختمان</dt><dd>{det && (
@@ -36,10 +40,33 @@ class HouseDetails extends Component {
                                 ? "ویلایی"
                                 : det.buildingType
                         )}</dd>
-                        <dt>قیمت</dt><dd>۲٬۰۰۰٬۰۰۰٬۰۰۰ تومان</dd>  {/* TODO: add price based on dealType */}
-                        <dt>آدرس</dt><dd>{det && det.detail && det.detail.address}</dd>
+                        {(det && (
+                            det.dealType === "SELL"
+                            ? <dt>قیمت فروش</dt>
+                            : det.dealType === "RENT"
+                                ? <dt>قیمت رهن</dt>
+                                : null
+                        ))}
+                        {(det && (
+                            det.dealType === "SELL"
+                            ? <dd>{det.price.sellPrice} تومان</dd>
+                            : det.dealType === "RENT"
+                                ? <dd>{det.price.basePrice} تومان</dd>
+                                : null
+                        ))}
+                        {(det && (
+                            det.dealType === "RENT"
+                            ? <dt>قیمت اجاره</dt>
+                            : null
+                        ))}
+                        {(det && (
+                            det.dealType === "RENT"
+                            ? <dd>{det.price.rentPrice} تومان</dd>
+                            : null
+                        ))}
+                        <dt>آدرس</dt><dd>{(det && det.address) || <span>&nbsp;</span>}</dd>
                         <dt>متراژ</dt><dd>{det && det.area} متر مربع</dd>
-                        <dt>توضیحات</dt><dd>{det && det.detail && det.detail.description}</dd>
+                        <dt>توضیحات</dt><dd>{(det && det.description) || <span>&nbsp;</span>}</dd>
                     </dl>
                 </div>
                 <div className="col-12 col-lg-8">
