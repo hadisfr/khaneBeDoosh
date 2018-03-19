@@ -16,13 +16,13 @@ class SearchForm extends Component {
         };
     }
 
-    handle_change(event) {
+    handleChange(event) {
         if(event.target.type !== "radio")
             event.preventDefault();
         this.setState({ [event.target.name]: event.target.value });
     }
 
-    handle_action(event) {
+    handleSubmit(event) {
         event.preventDefault();
         var req = Object.assign({}, this.state);
         if(req.dealType !== "SELL"){
@@ -40,11 +40,11 @@ class SearchForm extends Component {
 
     render() {
         return (
-            <form onSubmit={ (event) => this.handle_action(event) } ><div className="row search">
+            <form onSubmit={ (event) => this.handleSubmit(event) } ><div className="row search">
                 <div className="col-12 col-sm-6 col-lg-4">
                     <select
                         name="buildingType"
-                        onChange={ (event) => this.handle_change(event) }
+                        onChange={ (event) => this.handleChange(event) }
                         value={this.state.buildingType}
                     >
                         <option value="" disabled>▼ نوع ملک</option>
@@ -61,7 +61,7 @@ class SearchForm extends Component {
                         pattern="^[0123456789]*$"
                         placeholder="حداکثر قیمت خرید"
                         value={this.state.maxSellPrice}
-                        onChange={ (event) => this.handle_change(event) }
+                        onChange={ (event) => this.handleChange(event) }
                     />
                     <span className="badge">تومان</span>
                 </div>
@@ -74,7 +74,7 @@ class SearchForm extends Component {
                         pattern="^[0123456789]*$"
                         placeholder="حداکثر قیمت اجاره"
                         value={this.state.maxRentPrice}
-                        onChange={ (event) => this.handle_change(event) }
+                        onChange={ (event) => this.handleChange(event) }
                     />
                     <span className="badge">تومان</span>
                 </div>
@@ -90,7 +90,7 @@ class SearchForm extends Component {
                         pattern="^[0123456789]*$"
                         placeholder="حداقل مساحت"
                         value={this.state.minArea}
-                        onChange={ (event) => this.handle_change(event) }
+                        onChange={ (event) => this.handleChange(event) }
                     />
                     <span className="badge">متر</span>
                 </div>
@@ -99,14 +99,14 @@ class SearchForm extends Component {
                         type="radio"
                         name="dealType"
                         value="SELL"
-                        onChange={ (event) => this.handle_change(event) }
+                        onChange={ (event) => this.handleChange(event) }
                         checked={ this.state.dealType === "SELL" }
                     />خرید
                     <input
                         type="radio"
                         name="dealType"
                         value="RENT"
-                        onChange={ (event) => this.handle_change(event) }
+                        onChange={ (event) => this.handleChange(event) }
                         checked={ this.state.dealType === "RENT" }
                     />رهن و اجاره
                 </fieldset></div>
@@ -119,7 +119,7 @@ class SearchForm extends Component {
                         pattern="^[0123456789]*$"
                         placeholder="حداکثر قیمت رهن"
                         value={this.state.maxBasePrice}
-                        onChange={ (event) => this.handle_change(event) }
+                        onChange={ (event) => this.handleChange(event) }
                     />
                     <span className="badge">تومان</span>
                 </div>

@@ -13,12 +13,12 @@ class PayForm extends Component {
         };
     }
 
-    handle_change(event) {
+    handleChange(event) {
         event.preventDefault();
         this.setState({balance: event.target.value});
     }
 
-    handle_submit(event) {
+    handleSubmit(event) {
         event.preventDefault();
         fetch(backend_api.pay, {
             method: "POST",
@@ -40,14 +40,14 @@ class PayForm extends Component {
 
     render() {
         return (
-            <form onSubmit={(event) => this.handle_submit(event)}>
+            <form onSubmit={(event) => this.handleSubmit(event)}>
                 <input
                     type="number"
                     name="balance"
                     min="0"
                     step="1"
                     placeholder="مبلغ مورد نظر"
-                    onChange={(event) => this.handle_change(event)}
+                    onChange={(event) => this.handleChange(event)}
                     value={this.state.balance}
                 />
                 <span className="pay-badge">تومان</span>
