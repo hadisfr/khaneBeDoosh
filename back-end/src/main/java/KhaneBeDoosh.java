@@ -103,23 +103,10 @@ public class KhaneBeDoosh {
         return users.get(userId - userIdBase);
     }
 
-    public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner, int sellPrice) {
-        House house = new House(id, area, buildingType, imageUrl, owner, new PriceSell(sellPrice));
-        if (owner instanceof Individual)
-            houses.put(house.getId(), house);
-    }
-
     public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner, int sellPrice,
                          String address, String phone, String description, String expireTime) {
         House house = new House(id, area, buildingType, imageUrl, owner, address,
                 phone, description, expireTime, new PriceSell(sellPrice));
-        if (owner instanceof Individual)
-            houses.put(house.getId(), house);
-    }
-
-    public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner,
-                         int rentPrice, int basePrice) {
-        House house = new House(id, area, buildingType, imageUrl, owner, new PriceRent(rentPrice, basePrice));
         if (owner instanceof Individual)
             houses.put(house.getId(), house);
     }

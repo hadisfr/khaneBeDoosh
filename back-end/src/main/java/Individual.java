@@ -43,11 +43,6 @@ public class Individual extends User {
         return false;
     }
 
-//    public void addHouse(House house) {
-//        String id = house.getId();
-//        houses.put(id, house);
-//    }
-
     public int getBalance() {
         return balance;
     }
@@ -61,16 +56,4 @@ public class Individual extends User {
     public String getUsername() {
         return username;
     }
-
-//    public ArrayList<House> searchHouses(BuildingType buildingType, DealType dealType, int minArea, int maxPrice) {
-//        ArrayList<House> hashmapArrayListed = new ArrayList<House>();
-//        hashmapArrayListed.addAll(houses.values());
-//        return Utility.filterHouses(hashmapArrayListed, buildingType, dealType, minArea, maxPrice);
-//        return null;
-//    }
-
-//    public House getHouse(String id) {
-//        return houses.get(id);
-//        return null;
-//    }
 }
