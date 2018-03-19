@@ -85,7 +85,7 @@ class App extends Component {
                                     callBack={this.updateUserInfo.bind(this)}
                                     msgPresenter={this.msgPresenter}
                                 />
-                                : <Redirect to={frontend_api.root} />
+                                : <Redirect to={frontend_api.error + "401"} />
                             )}
                         />
                         <Route path={frontend_api.house_details + ":id"} render={(props) => <HouseDetails />} />

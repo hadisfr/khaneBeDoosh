@@ -3,10 +3,12 @@ import { withRouter } from 'react-router-dom'
 import './ErrorMsg.css'
 
 const err_msg = {
+    "401": "ابتدا باید احراز هویت شوید",
     "403": "دسترسی مجاز نیست",
     "404": "صفحه پیدا نشد",
     "500": "سرور مشکل پیدا کرده است",
-    "502": "Bad Gateway",
+    "501": "پیاده‌سازی نشده است",
+    "502": "دروازه مشکل دارد",
 };
 
 class ErrorMsg extends Component {
