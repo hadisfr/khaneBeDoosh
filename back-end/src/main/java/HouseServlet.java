@@ -73,9 +73,9 @@ public class HouseServlet extends HttpServlet {
                 if (!request.getParameterMap().containsKey("phone"))
                     throw new IllegalArgumentException("missing phone");
                 String phone = request.getParameter("phone");
-                if (!request.getParameterMap().containsKey("description"))
-                    throw new IllegalArgumentException("missing description");
-                String description = request.getParameter("description");
+                String description = request.getParameterMap().containsKey("description")
+                        ? request.getParameter("description")
+                        : "";
 
                 if (dealType == DealType.RENT) {
                     if (!request.getParameterMap().containsKey("rentPrice"))
