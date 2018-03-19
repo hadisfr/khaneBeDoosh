@@ -17,9 +17,13 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONObject;
 
 public class KhaneBeDoosh {
+    private static KhaneBeDoosh khaneBedoosh = new KhaneBeDoosh();
+
+    public static KhaneBeDoosh getInstance() {
+        return khaneBedoosh;
+    }
 
     private ArrayList<User> users = new ArrayList<User>();
-    private static KhaneBeDoosh khaneBedoosh = new KhaneBeDoosh();
     private HashMap<String, House> houses = new HashMap<String, House>();
 
     private static final String bankAPIKey = "a1965d20-1280-11e8-87b4-496f79ef1988";
@@ -34,10 +38,6 @@ public class KhaneBeDoosh {
 
     public User getDefaultUser() {
         return users.get(0);
-    }
-
-    public static KhaneBeDoosh getInstance() {
-        return khaneBedoosh;
     }
 
     public static String getNopicUri() {
