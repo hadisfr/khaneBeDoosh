@@ -58,15 +58,17 @@ public class RealEstateAcm extends RealEstate {
             area = object.getInt("area");
             dealType = DealType.parseInt(object.getInt("dealType"));
             buildingType = BuildingType.parseString(object.getString("buildingType"));
+            Price price = null;
             if (dealType == DealType.SELL) {
                 int sellPrice = priceObject.getInt("sellPrice");
-                result.add(new HouseSell(id, area, buildingType, imageUrl, owner, sellPrice));
+                price = new PriceSell(sellPrice);
             } else if (dealType == DealType.RENT) {
                 int rentPrice, basePrice;
                 rentPrice = priceObject.getInt("rentPrice");
                 basePrice = priceObject.getInt("basePrice");
-                result.add(new HouseRent(id, area, buildingType, imageUrl, owner, rentPrice, basePrice));
+                price = new PriceRent(basePrice, rentPrice);
             }
+            result.add(new House(id, area, buildingType, imageUrl, owner, price));
         }
         return result;
     }
@@ -106,17 +108,18 @@ public class RealEstateAcm extends RealEstate {
         dealType = DealType.parseInt(object.getInt("dealType"));
         buildingType = BuildingType.parseString(object.getString("buildingType"));
 
+        Price price = null;
         if (dealType == DealType.SELL) {
             int sellPrice = priceObject.getInt("sellPrice");
-            return new HouseSell(id, area, buildingType, imageUrl, owner, sellPrice, address, phone, description, expireTime);
+            price = new PriceSell(sellPrice);
         } else if (dealType == DealType.RENT) {
             int rentPrice, basePrice;
             rentPrice = priceObject.getInt("rentPrice");
             basePrice = priceObject.getInt("basePrice");
-            return new HouseRent(id, area, buildingType, imageUrl, owner, rentPrice, basePrice, address, phone, description, expireTime);
+            price = new PriceRent(basePrice, rentPrice);
         }
 
-        return null;
+        return new House(id, area, buildingType, imageUrl, owner, address, phone, description, expireTime, price);
     }
 
 

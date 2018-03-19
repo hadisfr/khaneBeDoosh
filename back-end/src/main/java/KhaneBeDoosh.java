@@ -114,30 +114,30 @@ public class KhaneBeDoosh {
     }
 
     public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner, int sellPrice) {
-        HouseSell house = new HouseSell(id, area, buildingType, imageUrl, owner, sellPrice);
+        House house = new House(id, area, buildingType, imageUrl, owner, new PriceSell(sellPrice));
         if (owner instanceof Individual)
             houses.put(house.getId(), house);
     }
 
     public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner, int sellPrice,
                          String address, String phone, String description, String expireTime) {
-        HouseSell house = new HouseSell(id, area, buildingType, imageUrl, owner, sellPrice, address,
-                phone, description, expireTime);
+        House house = new House(id, area, buildingType, imageUrl, owner, address,
+                phone, description, expireTime, new PriceSell(sellPrice));
         if (owner instanceof Individual)
             houses.put(house.getId(), house);
     }
 
     public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner,
                          int rentPrice, int basePrice) {
-        HouseRent house = new HouseRent(id, area, buildingType, imageUrl, owner, rentPrice, basePrice);
+        House house = new House(id, area, buildingType, imageUrl, owner, new PriceRent(rentPrice, basePrice));
         if (owner instanceof Individual)
             houses.put(house.getId(), house);
     }
 
     public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner,
                          int rentPrice, int basePrice, String address, String phone, String description, String expireTime) {
-        HouseRent house = new HouseRent(id, area, buildingType, imageUrl, owner, rentPrice, basePrice, address,
-                phone, description, expireTime);
+        House house = new House(id, area, buildingType, imageUrl, owner, address,
+                phone, description, expireTime, new PriceRent(rentPrice, basePrice));
         if (owner instanceof Individual)
             houses.put(house.getId(), house);
     }

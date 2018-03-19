@@ -1,6 +1,6 @@
 package main.java;
 
-public abstract class House {
+public class House {
 
     protected HouseDetail detail;
     protected User owner;
@@ -9,7 +9,16 @@ public abstract class House {
     protected int area;
     protected BuildingType buildingType;
 
-    public abstract DealType getDealType();
+    private Price price;
+
+    public DealType getDealType(){
+        if(price instanceof PriceRent)
+            return DealType.RENT;
+        else if(price instanceof PriceSell)
+            return DealType.SELL;
+        else
+            return null;
+    }
 
     public String getImageUrl() {
         if (imageUrl.equals(""))
@@ -72,19 +81,23 @@ public abstract class House {
         return owner;
     }
 
-    public House(String id, int area, BuildingType buildingType, String imageUrl, User owner) {
+    public House(String id, int area, BuildingType buildingType, String imageUrl, User owner, Price price) {
         this.id = id;
         this.area = area;
         this.buildingType = buildingType;
         this.imageUrl = imageUrl;
         this.owner = owner;
+        this.price = price;
         detail = null;
     }
 
     public House(String id, int area, BuildingType buildingType, String imageUrl, User owner,
-                 String address, String phone, String description, String expireTime) {
-        this(id, area, buildingType, imageUrl, owner);
+                 String address, String phone, String description, String expireTime, Price price) {
+        this(id, area, buildingType, imageUrl, owner, price);
         this.detail = new HouseDetail(address, phone, description, expireTime);
     }
 
+    public Price getPrice() {
+        return price;
+    }
 }

@@ -41,12 +41,10 @@ public class Utility {
     public static ArrayList<House> filterHouses(ArrayList<House> houses, BuildingType buildingType, DealType dealType, int minArea, int maxPrice) {
         ArrayList<House> result = new ArrayList<House>();
         for (House house : houses) {
+            Price pricee = house.getPrice();
             int price = 0;
-            if (house instanceof HouseRent)
-                price = ((HouseRent) house).getRentPrice();
-            else if (house instanceof HouseSell)
-                price = ((HouseSell) house).getSellPrice();
-            
+            //TODO: change filter for both house types
+
             if (!((buildingType != null && !house.getBuildingType().equals(buildingType)) ||
                     (dealType != null && !house.getDealType().equals(dealType)) ||
                     (minArea != illegalSearchValue && house.getArea() < minArea) ||
