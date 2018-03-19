@@ -12,6 +12,24 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/user")
 public class UserServlet extends HttpServlet {
+
+    /**
+     * @api {get} /user get current user's info
+     * @apiGroup User
+     * @apiVersion 1.0.0
+     * @apiName getUser
+     * @apiSuccess {int} balance
+     * @apiSuccess {string} name
+     * @apiSuccess {string} username
+     * @apiSuccessExample {json} Success 200
+     * {"balance":"200","name":"بهنام همایون","username":"behnam"}
+     * @apiErrorExample Unauthorized 401
+     * HTTP/1.1 401 Unauthorized
+     * @apiError (Internal Server Error 500) {string} msg
+     * @apiErrorExample {json} Internal Server Error 500
+     * HTTP/1.1 500 Internal Server Error
+     * {"msg":"Server Error details"}
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -31,6 +49,7 @@ public class UserServlet extends HttpServlet {
             }
         } catch (Exception e) {
             res.put("msg", e.toString());
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().write((new Gson()).toJson(res));
         }
     }

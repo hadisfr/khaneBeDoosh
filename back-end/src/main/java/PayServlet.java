@@ -13,6 +13,30 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/pay")
 public class PayServlet extends HttpServlet {
 
+    /**
+     * @api {post} /pay increment user's balance
+     * @apiGroup User
+     * @apiVersion 1.0.0
+     * @apiName postPay
+     * @apiParam {int} balance amount to increment
+     * @apiSuccess {bool} success
+     * @apiSuccessExample {json} Success 200
+     * {"success":true}
+     * @apiError (Bad Request 400) {string} msg
+     * @apiErrorExample {json} Bad Request 400
+     * HTTP/1.1 400 Bad Request
+     * {"msg":"Invalid Parameters: java.lang.IllegalArgumentException: missing id"}
+     * @apiErrorExample Unauthorized 401
+     * HTTP/1.1 401 Unauthorized
+     * @apiError (Internal Server Error 500) {string} msg
+     * @apiErrorExample {json} Internal Server Error 500
+     * HTTP/1.1 500 Internal Server Error
+     * {"msg":"Server Error details"}
+     * @apiError (Bad Gateway 502) {bool} success
+     * @apiErrorExample {json} Bad Gateway 502
+     * HTTP/1.1 502 Bad Gateway
+     * {"success":false}
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

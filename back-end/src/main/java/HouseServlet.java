@@ -14,6 +14,46 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/house")
 public class HouseServlet extends HttpServlet {
 
+    /**
+     * @api {get} /house get house details
+     * @apiGroup House
+     * @apiVersion 1.0.0
+     * @apiName getHouse
+     * @apiParam {string} id house id
+     * @apiSuccess {string} id
+     * @apiSuccess {string} address
+     * @apiSuccess {int} area
+     * @apiSuccess {string/enum} buildingType possible values: ["APARTMENT", "VILLA"]
+     * @apiSuccess {string/enum} dealType possible values: ["SELL", "RENT"]
+     * @apiSuccess {string} description
+     * @apiSuccess {date} expireTime
+     * @apiSuccess {string/uri} imageUrl
+     * @apiSuccess {json} price
+     * @apiSuccess {int} price.basePrice iff `dealType == RENT`
+     * @apiSuccess {int} price.sellPrice iff `dealType == SELL`
+     * @apiSuccess {int} price.rentPrice iff `dealType == RENT`
+     * @apiSuccessExample {json} Success 200
+     * {
+     * "imageUrl":
+     * "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Soweto_township.jpg/320px-Soweto_township.jpg",
+     * "id":"ca27a86c-bf52-4d79-9834-90a48ff4be9b_1001",
+     * "area":161,
+     * "buildingType":"APARTMENT",
+     * "dealType":"SELL",
+     * "price":{"sellPrice":109813},
+     * "address":"دروازه غار",
+     * "description":"از خانه برون آمد و بازار بیاراست، در وهم نگنجد که چه دلبند و چه شیرین",
+     * "expireTime":"2018-02-11"
+     * }
+     * @apiError (Bad Request 400) {string} msg
+     * @apiErrorExample {json} Bad Request 400
+     * HTTP/1.1 400 Bad Request
+     * {"msg":"Invalid Parameters: java.lang.IllegalArgumentException: missing id"}
+     * @apiError (Internal Server Error 500) {string} msg
+     * @apiErrorExample {json} Internal Server Error 500
+     * HTTP/1.1 500 Internal Server Error
+     * {"msg":"Server Error details"}
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -42,6 +82,35 @@ public class HouseServlet extends HttpServlet {
         }
     }
 
+    /**
+     * @api {post} /house add new house
+     * @apiGroup House
+     * @apiVersion 1.0.0
+     * @apiName postHouse
+     * @apiParam {string} address
+     * @apiParam {int} area
+     * @apiParam {string/enum} buildingType possible values: ["APARTMENT", "VILLA"]
+     * @apiParam {string/enum} dealType possible values: ["SELL", "RENT"]
+     * @apiParam {string} description
+     * @apiParam {string/phoneNumber)} phone
+     * @apiParam {object} price
+     * @apiParam {int} price.basePrice iff `dealType == RENT`
+     * @apiParam {int} price.sellPrice iff `dealType == SELL`
+     * @apiParam {int} price.rentPrice iff `dealType == RENT`
+     * @apiSuccess {bool} success
+     * @apiSuccessExample {json} Success 200
+     * {"success":true}
+     * @apiError (Bad Request 400) {string} msg
+     * @apiErrorExample {json} Bad Request 400
+     * HTTP/1.1 400 Bad Request
+     * {"msg":"Invalid Parameters: java.lang.IllegalArgumentException: missing id"}
+     * @apiErrorExample Unauthorized 401
+     * HTTP/1.1 401 Unauthorized
+     * @apiError (Internal Server Error 500) {string} msg
+     * @apiErrorExample {json} Internal Server Error 500
+     * HTTP/1.1 500 Internal Server Error
+     * {"msg":"Server Error details"}
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

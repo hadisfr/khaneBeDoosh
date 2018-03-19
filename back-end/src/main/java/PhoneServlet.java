@@ -13,6 +13,29 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/phone")
 public class PhoneServlet extends HttpServlet {
 
+    /**
+     * @api {get} /phone get phone number
+     * @apiGroup House
+     * @apiVersion 1.0.0
+     * @apiDescription do required financial things get house's owner's phone number
+     * @apiName getPhone
+     * @apiParam {string} id house id
+     * @apiSuccess {string/phoneNumber} phone
+     * @apiSuccessExample {json} Success 200
+     * {"phone":"686-04-0693"}
+     * @apiError (Bad Request 400) {string} msg
+     * @apiErrorExample {json} Bad Request 400
+     * HTTP/1.1 400 Bad Request
+     * {"msg":"Invalid Parameters: java.lang.IllegalArgumentException: missing id"}
+     * @apiErrorExample Unauthorized 401
+     * HTTP/1.1 401 Unauthorized
+     * @apiErrorExample Payment Required 402
+     * HTTP/1.1 402 Payment Required
+     * @apiError (Internal Server Error 500) {string} msg
+     * @apiErrorExample {json} Internal Server Error 500
+     * HTTP/1.1 500 Internal Server Error
+     * {"msg":"Server Error details"}
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -14,6 +14,38 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/search")
 public class SearchServlet extends HttpServlet {
 
+    /**
+     * @api {get} /search search houses
+     * @apiGroup House
+     * @apiVersion 1.0.0
+     * @apiName getSearch
+     * @apiParam {int} [minArea]
+     * @apiParam {string/enum} [buildingType] possible values: ["APARTMENT", "VILLA"]
+     * @apiParam {string/enum} [dealType] possible values: ["SELL", "RENT"]
+     * @apiParam {int} [minBasePrice] only if `dealType == RENT`
+     * @apiParam {int} [minSellPrice] only if `dealType == SELL`
+     * @apiParam {int} [minRentPrice] only if `dealType == RENT`
+     * @apiSuccess {object[]} _ array of objects with:
+     * @apiSuccess {string} _.id
+     * @apiSuccess {int} _.area
+     * @apiSuccess {string/enum} _.buildingType possible values: ["APARTMENT", "VILLA"]
+     * @apiSuccess {string/enum} _.dealType possible values: ["SELL", "RENT"]
+     * @apiSuccess {string/uri} _.imageUrl
+     * @apiSuccess {json} _.price
+     * @apiSuccess {int} _.price.basePrice iff `dealType == RENT`
+     * @apiSuccess {int} _.price.sellPrice iff `dealType == SELL`
+     * @apiSuccess {int} _.price.rentPrice iff `dealType == RENT`
+     * @apiSuccessExample {json} Success 200
+     * {"success":true}
+     * @apiError (Bad Request 400) {string} msg
+     * @apiErrorExample {json} Bad Request 400
+     * HTTP/1.1 400 Bad Request
+     * {"msg":"Invalid Parameters: java.lang.IllegalArgumentException: missing id"}
+     * @apiError (Internal Server Error 500) {string} msg
+     * @apiErrorExample {json} Internal Server Error 500
+     * HTTP/1.1 500 Internal Server Error
+     * {"msg":"Server Error details"}
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
