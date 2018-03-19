@@ -5,6 +5,15 @@
 <web-app>
     <display-name>KhaneBeDoosh</display-name>
 
+    ﻿
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+            <trim-directive-whitespaces>true</trim-directive-whitespaces>
+        </jsp-property-group>
+    </jsp-config>
+
     <filter>
         <filter-name>CharacterSetFilter</filter-name>
         <filter-class>main.java.CharacterSetFilter</filter-class>
@@ -26,7 +35,9 @@
         </init-param>
         <init-param>
             <param-name>cors.allowed.headers</param-name>
-            <param-value>Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers</param-value>
+            <param-value>
+                Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+            </param-value>
         </init-param>
         <init-param>
             <param-name>cors.exposed.headers</param-name>
