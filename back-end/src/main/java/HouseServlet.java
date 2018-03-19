@@ -29,7 +29,6 @@ public class HouseServlet extends HttpServlet {
             );
             response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().write((new Gson()).toJson(house));
-//            response.getWriter().write(house_UserId.getString() + " " + house_UserId.getInteger());
         } catch (IllegalArgumentException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             HashMap<String, String> err_res = new HashMap<String, String>();
