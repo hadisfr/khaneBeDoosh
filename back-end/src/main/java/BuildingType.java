@@ -13,9 +13,9 @@ public enum BuildingType {
     @Override
     public String toString() {
         if (value == 0)
-            return "آپارتمان";
+            return "APARTMENT";
         else if (value == 1)
-            return "ویلایی";
+            return "VILLA";
         else
             return "";
     }
