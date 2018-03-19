@@ -101,10 +101,11 @@ public class KhaneBeDoosh {
     }
 
     public House getHouseById(String houseId, int userId) {
-        if(userId == 0)
+        User user = getUserById(userId);
+        if(user instanceof Individual)
             return houses.get(houseId);
         else
-            return ((RealEstate)getUserById(userId)).getHouse(houseId);
+            return ((RealEstate)user).getHouse(houseId);
     }
 
     private static int userIdBase = 1000;

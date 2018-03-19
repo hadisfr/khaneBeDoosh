@@ -7,7 +7,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class Utility {
     private static final String privateKey = "Allahisalivemofo";
-    private static final String delimiter = "!@#deli";
+    private static final String delimiter = "_";
     public static final int illegalSearchValue = -1;
 
     public static String encrypt(String houseId, int userId) {

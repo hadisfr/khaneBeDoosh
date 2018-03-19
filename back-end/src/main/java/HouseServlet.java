@@ -20,16 +20,16 @@ public class HouseServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         try {
-            if (!request.getParameterMap().containsKey("houseId"))
-                throw new IllegalArgumentException("missing houseId");
-            if (!request.getParameterMap().containsKey("ownerId"))
-                throw new IllegalArgumentException("missing ownerId");
+            if (!request.getParameterMap().containsKey("id"))
+                throw new IllegalArgumentException("missing id");
+            IntStringPair house_UserId = Utility.decrypt(request.getParameter("id"));
             House house = KhaneBeDoosh.getInstance().getHouseById(
-                    request.getParameter("houseId"),
-                    Integer.parseInt(request.getParameter("ownerId"))
+                    house_UserId.getString(),
+                    house_UserId.getInteger()
             );
             response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().write((new Gson()).toJson(house));
+//            response.getWriter().write(house_UserId.getString() + " " + house_UserId.getInteger());
         } catch (IllegalArgumentException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             HashMap<String, String> err_res = new HashMap<String, String>();
