@@ -22,13 +22,15 @@ public class PhoneServlet extends HttpServlet {
         try {
             Individual currentUser = ((Individual) KhaneBeDoosh.getInstance().getDefaultUser());
             if (currentUser != null) {
-                if (!request.getParameterMap().containsKey("houseId"))
-                    throw new IllegalArgumentException("missing houseId");
-                String houseId = request.getParameter("houseId");
-                if (!request.getParameterMap().containsKey("ownerId"))
-                    throw new IllegalArgumentException("missing ownerId");
-                int ownerId = Integer.parseInt(request.getParameter("ownerId"));
-                House house = KhaneBeDoosh.getInstance().getHouseById(houseId, ownerId);
+                if (!request.getParameterMap().containsKey("id"))
+                    throw new IllegalArgumentException("missing id");
+                IntStringPair house_UserId = Utility.decrypt(request.getParameter("id"));
+                String houseId = house_UserId.getString();
+                int ownerId = house_UserId.getInteger();
+                House house = KhaneBeDoosh.getInstance().getHouseById(
+                        house_UserId.getString(),
+                        house_UserId.getInteger()
+                );
                 response.setStatus(
                         currentUser.hasPaidforHouse(houseId, ownerId) || currentUser.payForHouse(houseId, ownerId)
                                 ? HttpServletResponse.SC_OK
