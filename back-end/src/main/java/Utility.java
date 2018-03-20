@@ -6,12 +6,6 @@ import java.util.ArrayList;
 
 
 public class Utility {
-    private static Utility utility = new Utility();
-
-    public static Utility getInstance() {
-        return utility;
-    }
-
     private Utility() {
     }
 
