@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import './ErrorMsg.css'
 
 const err_msg = {
+    "400": "درخواست اشتباه است",
     "401": "ابتدا باید احراز هویت شوید",
     "402": "پرداخت لازم است",
     "403": "دسترسی مجاز نیست",
