@@ -20,11 +20,15 @@ public class Utility {
                 .compact();
     }
 
-    public static IntStringPair decryptHouseId(String text) {
-        Claims claim = Jwts.parser()
-                .setSigningKey(secret.getBytes())
-                .parseClaimsJws(text).getBody();
-        return new IntStringPair(Integer.parseInt(claim.get("ownerId").toString()), claim.get("houseId").toString());
+    public static IntStringPair decryptHouseId(String token) throws IllegalArgumentException {
+        try {
+            Claims claim = Jwts.parser()
+                    .setSigningKey(secret.getBytes())
+                    .parseClaimsJws(token).getBody();
+            return new IntStringPair(Integer.parseInt(claim.get("ownerId").toString()), claim.get("houseId").toString());
+        } catch (JwtException e) {
+            throw new IllegalArgumentException("invalid id");
+        }
     }
 
     public static ArrayList<House> filterHouses(
