@@ -63,7 +63,7 @@ public class KhaneBeDoosh {
         }
         String json = null;
         try {
-            if(response != null)
+            if (response != null)
                 json = IOUtils.toString(response.getEntity().getContent());
             else
                 throw new IOException();
