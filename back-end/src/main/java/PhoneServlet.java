@@ -47,7 +47,7 @@ public class PhoneServlet extends HttpServlet {
             if (currentUser != null) {
                 if (!request.getParameterMap().containsKey("id"))
                     throw new IllegalArgumentException("missing id");
-                IntStringPair house_UserId = Utility.decrypt(request.getParameter("id"));
+                IntStringPair house_UserId = Utility.decryptHouseId(request.getParameter("id"));
                 String houseId = house_UserId.getString();
                 int ownerId = house_UserId.getInteger();
                 House house = KhaneBeDoosh.getInstance().getHouseById(

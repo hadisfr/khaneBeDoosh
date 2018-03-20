@@ -18,7 +18,7 @@ public class Utility {
     private static final String secret = "Shahrbaraaz";
     public static final int illegalSearchValue = -1;
 
-    public static String encrypt(String houseId, int ownerId) {
+    public static String encryptHouseId(String houseId, int ownerId) {
         return Jwts.builder()
                 .claim("houseId", houseId)
                 .claim("ownerId", ownerId)
@@ -26,7 +26,7 @@ public class Utility {
                 .compact();
     }
 
-    public static IntStringPair decrypt(String text) {
+    public static IntStringPair decryptHouseId(String text) {
         Claims claim = Jwts.parser()
                 .setSigningKey(secret.getBytes())
                 .parseClaimsJws(text).getBody();

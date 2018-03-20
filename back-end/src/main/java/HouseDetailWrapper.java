@@ -14,7 +14,7 @@ public class HouseDetailWrapper {
     public HouseDetailWrapper(House house) {
         this.dealType = house.getDealType();
         this.imageUrl = house.getImageUrl();
-        this.id = Utility.encrypt(house.getId(), house.getOwner().getId());
+        this.id = Utility.encryptHouseId(house.getId(), house.getOwner().getId());
         this.area = house.getArea();
         this.buildingType = house.getBuildingType();
         this.price = house.getPrice();
