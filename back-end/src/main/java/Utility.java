@@ -1,6 +1,9 @@
 package main.java;
 
+import io.jsonwebtoken.*;
+
 import java.util.ArrayList;
+
 
 public class Utility {
     private static Utility utility = new Utility();
@@ -12,42 +15,27 @@ public class Utility {
     private Utility() {
     }
 
-    private static final String privateKey = "Allahisalivemofo";
-    private static final String delimiter = "_";
+    private static final String secret = "Shahrbaraaz";
     public static final int illegalSearchValue = -1;
 
-    public static String encrypt(String houseId, int userId) {
-//        String text = houseId + delimiter + userId;
-//        Key aesKey = new SecretKeySpec(privateKey.getBytes(), "AES");
-//        try {
-//            Cipher cipher = Cipher.getInstance("AES");
-//            cipher.init(Cipher.ENCRYPT_MODE, aesKey);
-//            byte[] encrypted = cipher.doFinal(text.getBytes());
-//            return new String(encrypted);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-        return houseId + delimiter + userId;
+    public static String encrypt(String houseId, int ownerId) {
+        return Jwts.builder()
+                .claim("houseId", houseId)
+                .claim("ownerId", ownerId)
+                .signWith(SignatureAlgorithm.HS256, secret.getBytes())
+                .compact();
     }
 
     public static IntStringPair decrypt(String text) {
-//        Key aesKey = new SecretKeySpec(privateKey.getBytes(), "AES");
-//        try {
-//            Cipher cipher = Cipher.getInstance("AES");
-//            cipher.init(Cipher.DECRYPT_MODE, aesKey);
-//            String decrypted = new String(cipher.doFinal(text.getBytes()));
-//            String[] decrypted_parts = decrypted.split(delimiter);
-//            return new IntStringPair(Integer.parseInt(decrypted_parts[1]), decrypted_parts[0]);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-        String[] decrypted_parts = text.split(delimiter);
-        return new IntStringPair(Integer.parseInt(decrypted_parts[1]), decrypted_parts[0]);
+        Claims claim = Jwts.parser()
+                .setSigningKey(secret.getBytes())
+                .parseClaimsJws(text).getBody();
+        return new IntStringPair(Integer.parseInt(claim.get("ownerId").toString()), claim.get("houseId").toString());
     }
 
-    public static ArrayList<House> filterHouses(ArrayList<House> houses, BuildingType buildingType, DealType dealType, int minArea, Price maxPrice) {
+    public static ArrayList<House> filterHouses(
+            ArrayList<House> houses, BuildingType buildingType, DealType dealType, int minArea, Price maxPrice
+    ) {
         ArrayList<House> result = new ArrayList<House>();
         for (House house : houses) {
             Price price = house.getPrice();
