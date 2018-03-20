@@ -24,7 +24,6 @@ public class KhaneBeDoosh {
 
     private static final String bankAPIKey = "a1965d20-1280-11e8-87b4-496f79ef1988";
     private static final String bankUri = "http://acm.ut.ac.ir/ieBank/pay";
-    private static final String noPicUri = "http://localhost:8080/khaneBeDoosh/pics/no-pic.jpg";
 
     private KhaneBeDoosh() {
         Individual individual = new Individual(
@@ -40,10 +39,6 @@ public class KhaneBeDoosh {
 
     public User getDefaultUser() {
         return users.get(0);
-    }
-
-    public static String getNoPicUri() {
-        return noPicUri;
     }
 
     public boolean increaseBalance(Individual user, int amount) throws IOException, IllegalArgumentException {

@@ -18,8 +18,6 @@ public class HouseDetailWrapper {
         this.area = house.getArea();
         this.buildingType = house.getBuildingType();
         this.price = house.getPrice();
-        if (this.imageUrl.equals(""))
-            this.imageUrl = KhaneBeDoosh.getNoPicUri();
         this.address = house.getAddress();
         this.description = house.getDescription();
         this.expireTime = house.getExpireTime();

@@ -21,10 +21,7 @@ public class House {
     }
 
     public String getImageUrl() {
-        if (imageUrl.equals(""))
-            return KhaneBeDoosh.getNoPicUri();
-        else
-            return imageUrl;
+        return imageUrl;
     }
 
     public String getId() {
