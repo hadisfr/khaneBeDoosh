@@ -87,7 +87,7 @@ class HouseDetails extends Component {
                     </dl>
                 </div>
                 <div className="col-12 col-lg-8">
-                    <img id="house-pic" src={det && det.imageUrl} alt="house-pic" />
+                    <img id="house-pic" src={det && det.imageUrl} alt={det && det.imageUrl} />
                 </div>
             </div>
         );
