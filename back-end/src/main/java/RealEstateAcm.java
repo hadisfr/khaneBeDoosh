@@ -91,7 +91,7 @@ public class RealEstateAcm extends RealEstate {
             e.printStackTrace();
         }
         JSONObject object = (new JSONObject(json)).getJSONObject("data");
-        String imageUrl, address, phone, description, expireTime;
+        String imageUrl, address, phone, description;
         int area;
         DealType dealType;
         BuildingType buildingType;
@@ -103,7 +103,6 @@ public class RealEstateAcm extends RealEstate {
         address = object.getString("address");
         phone = object.getString("phone");
         description = object.getString("description");
-        expireTime = object.getString("expireTime");
         area = object.getInt("area");
         dealType = DealType.parseInt(object.getInt("dealType"));
         buildingType = BuildingType.parseString(object.getString("buildingType"));
@@ -119,7 +118,7 @@ public class RealEstateAcm extends RealEstate {
             price = new PriceRent(basePrice, rentPrice);
         }
 
-        return new House(id, area, buildingType, imageUrl, owner, address, phone, description, expireTime, price);
+        return new House(id, area, buildingType, imageUrl, owner, address, phone, description, price);
     }
 
 

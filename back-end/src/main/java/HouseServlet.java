@@ -117,7 +117,6 @@ public class HouseServlet extends HttpServlet {
         try {
             String id = RandomStringUtils.randomAlphabetic(20);
             String imageUrl = "";
-            String expireTime = "2032-12-01";
             User currentUser = KhaneBeDoosh.getInstance().getDefaultUser();
             if (currentUser != null) {
                 if (!request.getParameterMap().containsKey("dealType"))
@@ -160,8 +159,7 @@ public class HouseServlet extends HttpServlet {
                             basePrice,
                             address,
                             phone,
-                            description,
-                            expireTime
+                            description
                     );
                 } else if (dealType == DealType.SELL) {
                     if (!request.getParameterMap().containsKey("sellPrice"))
@@ -176,8 +174,7 @@ public class HouseServlet extends HttpServlet {
                             sellPrice,
                             address,
                             phone,
-                            description,
-                            expireTime
+                            description
                     );
                 } else
                     throw new IllegalArgumentException("bad dealType");

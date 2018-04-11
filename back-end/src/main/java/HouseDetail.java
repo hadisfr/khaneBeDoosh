@@ -29,7 +29,7 @@ public class HouseDetail {
         this.description = description;
     }
 
-    public HouseDetail(String address, String phone, String description, String expireTime) {
+    public HouseDetail(String address, String phone, String description) {
 
         this.address = address;
         this.phone = phone;

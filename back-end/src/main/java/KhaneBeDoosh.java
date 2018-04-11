@@ -104,18 +104,18 @@ public class KhaneBeDoosh {
 
     public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner,
                          int sellPrice,
-                         String address, String phone, String description, String expireTime) {
+                         String address, String phone, String description) {
         House house = new House(id, area, buildingType, imageUrl, owner, address,
-                phone, description, expireTime, new PriceSell(sellPrice));
+                phone, description, new PriceSell(sellPrice));
         if (owner instanceof Individual)
             houses.put(house.getId(), house);
     }
 
     public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner,
                          int rentPrice, int basePrice,
-                         String address, String phone, String description, String expireTime) {
+                         String address, String phone, String description) {
         House house = new House(id, area, buildingType, imageUrl, owner, address,
-                phone, description, expireTime, new PriceRent(rentPrice, basePrice));
+                phone, description, new PriceRent(rentPrice, basePrice));
         if (owner instanceof Individual)
             houses.put(house.getId(), house);
     }

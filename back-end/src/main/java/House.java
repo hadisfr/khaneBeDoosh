@@ -76,9 +76,9 @@ public class House {
     }
 
     public House(String id, int area, BuildingType buildingType, String imageUrl, User owner,
-                 String address, String phone, String description, String expireTime, Price price) {
+                 String address, String phone, String description, Price price) {
         this(id, area, buildingType, imageUrl, owner, price);
-        this.detail = new HouseDetail(address, phone, description, expireTime);
+        this.detail = new HouseDetail(address, phone, description);
     }
 
     public Price getPrice() {
