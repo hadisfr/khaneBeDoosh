@@ -9,7 +9,6 @@ public class HouseDetailWrapper {
     private Price price;
     private String address;
     private String description;
-    private String expireTime;
 
     public HouseDetailWrapper(House house) {
         this.dealType = house.getDealType();
@@ -20,6 +19,5 @@ public class HouseDetailWrapper {
         this.price = house.getPrice();
         this.address = house.getAddress();
         this.description = house.getDescription();
-        this.expireTime = house.getExpireTime();
     }
 }

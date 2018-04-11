@@ -26,7 +26,6 @@ public class HouseServlet extends HttpServlet {
      * @apiSuccess {string/enum} buildingType possible values: ["APARTMENT", "VILLA"]
      * @apiSuccess {string/enum} dealType possible values: ["SELL", "RENT"]
      * @apiSuccess {string} description
-     * @apiSuccess {date} expireTime
      * @apiSuccess {string/uri} imageUrl
      * @apiSuccess {json} price
      * @apiSuccess {int} price.basePrice iff `dealType == RENT`
@@ -42,8 +41,7 @@ public class HouseServlet extends HttpServlet {
      * "dealType":"SELL",
      * "price":{"sellPrice":109813},
      * "address":"دروازه غار",
-     * "description":"از خانه برون آمد و بازار بیاراست، در وهم نگنجد که چه دلبند و چه شیرین",
-     * "expireTime":"2018-02-11"
+     * "description":"از خانه برون آمد و بازار بیاراست، در وهم نگنجد که چه دلبند و چه شیرین"
      * }
      * @apiError (Bad Request 400) {string} msg
      * @apiErrorExample {json} Bad Request 400

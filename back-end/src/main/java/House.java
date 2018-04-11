@@ -54,13 +54,6 @@ public class House {
         return detail.getDescription();
     }
 
-    public String getExpireTime() {
-        if (detail == null) {
-            getDetailFromOwner();
-        }
-        return detail.getExpireTime();
-    }
-
     public String getAddress() {
         if (detail == null) {
             getDetailFromOwner();
