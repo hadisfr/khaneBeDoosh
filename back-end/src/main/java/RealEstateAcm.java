@@ -20,7 +20,7 @@ public class RealEstateAcm extends RealEstate {
     }
 
     private RealEstateAcm() {
-        super("acm", "http://acm.ut.ac.ir/khaneBeDoosh/house");
+        super("acm", "http://acm.ut.ac.ir/khaneBeDoosh/v2/house");
     }
 
     @Override
