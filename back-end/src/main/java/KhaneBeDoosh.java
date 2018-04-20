@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.*;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
@@ -38,16 +39,15 @@ public class KhaneBeDoosh {
     private String log = "";
 
     private KhaneBeDoosh() {
-        Individual individual = new Individual(
-                "behnam",
-                200,
-                "بهنام همایون"
-        );
-//        individuals.put(individual.getUsername(), individual);
+        Logger logger = Logger.getLogger(KhaneBeDoosh.class.getName());
+        logger.info("Start KhaneBeDoosh");
+
         try {
+//            IndividualMapper.insert(new Individual("behnam", 200, "بهنام همایون"));
             individuals.put(defaultUserUsername, IndividualMapper.getByUsername(defaultUserUsername));
         } catch (Exception e) {
             this.addLog(e.getMessage());
+            logger.severe("EXC: " + e.getMessage());
             e.printStackTrace();
         }
         realEstates.put(RealEstateAcm.getInstance().getUsername(), RealEstateAcm.getInstance());

@@ -2,6 +2,7 @@ package main.java;
 
 import java.io.File;
 import java.sql.*;
+import java.util.logging.Logger;
 
 public class IndividualMapper {
 
@@ -13,19 +14,25 @@ public class IndividualMapper {
             "catalina.base")).getAbsoluteFile(), "webapps/khaneBeDoosh/WEB-INF/khaneBeDoosh.db"));
 
     public static Individual getByUsername(String username) throws SQLException, ClassNotFoundException {
+        Logger logger = Logger.getLogger(IndividualMapper.class.getName());
+        logger.info(String.format("get Individual(username=%s) from %s", username, dbUri));
+
         Connection connection = null;
         Individual ret = null;
-//        insert(new Individual("behnam", 200, "بهنام همایون"));
         Class.forName("org.sqlite.JDBC");
         try {
             connection = DriverManager.getConnection(dbUri);
+
+            DatabaseMetaData md = connection.getMetaData();
+            ResultSet trs = md.getTables(null, null, "%", null);
+            while (trs.next())
+                logger.info("table: " + trs.getString(3));
+
             PreparedStatement stmt = connection.prepareStatement(String.format("select * from %s where %s=?;",
                     IndividualTableName, UsernameKey));
             stmt.setString(1, username);
-//            Statement stmt = connection.createStatement();
             stmt.setQueryTimeout(30);
             ResultSet res = stmt.executeQuery();
-//            ResultSet res = stmt.executeQuery(String.format("select * from %s;", IndividualTableName));
             if (res.next()) {
                 ret = new Individual(res.getString(UsernameKey), res.getInt(BalanceKey),
                         res.getString(DisplayNameKey));
@@ -39,15 +46,24 @@ public class IndividualMapper {
     }
 
     public static void insert(Individual individual) throws SQLException, ClassNotFoundException {
+        Logger logger = Logger.getLogger(IndividualMapper.class.getName());
+        logger.info(String.format("insert Individual(username=%s) from %s", individual.getUsername(), dbUri));
+
         Class.forName("org.sqlite.JDBC");
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(dbUri);
+
+            DatabaseMetaData md = connection.getMetaData();
+            ResultSet trs = md.getTables(null, null, "%", null);
+            while (trs.next())
+                logger.info("table: " + trs.getString(3));
+
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
-//            statement.executeUpdate("drop table if exists Individuals");
-//            statement.executeUpdate("CREATE TABLE Individual"
-//                    + "('username' TEXT PRIMARY KEY NOT NULL, 'balance' INTEGER, 'displayName' INTEGER)");
+            statement.executeUpdate("drop table if exists Individuals");
+            statement.executeUpdate("CREATE TABLE Individual"
+                    + "('username' TEXT PRIMARY KEY NOT NULL, 'balance' INTEGER, 'displayName' INTEGER)");
             connection.setAutoCommit(false);
             try {
                 PreparedStatement insertStatement = connection.prepareStatement(String.format(
@@ -71,11 +87,20 @@ public class IndividualMapper {
     }
 
     public static int update(Individual individual) throws SQLException, ClassNotFoundException {
+        Logger logger = Logger.getLogger(IndividualMapper.class.getName());
+        logger.info(String.format("update Individual(username=%s) from %s", individual.getUsername(), dbUri));
+
         Class.forName("org.sqlite.JDBC");
         Connection connection = null;
         int ret = 0;
         try {
             connection = DriverManager.getConnection(dbUri);
+
+            DatabaseMetaData md = connection.getMetaData();
+            ResultSet trs = md.getTables(null, null, "%", null);
+            while (trs.next())
+                logger.info("table: " + trs.getString(3));
+
             PreparedStatement stmt = connection.prepareStatement(String.format(
                     "update %s set %s=?, %s=?, %s=? where %s=?;",
                     IndividualTableName, UsernameKey, BalanceKey, DisplayNameKey, UsernameKey
