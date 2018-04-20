@@ -37,6 +37,7 @@ public class House {
     }
 
     protected void getDetailFromOwner() {
+
         this.detail = ((RealEstate) owner).getHouse(this.id).detail;
     }
 

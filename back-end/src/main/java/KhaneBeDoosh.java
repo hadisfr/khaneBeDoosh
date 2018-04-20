@@ -19,7 +19,8 @@ public class KhaneBeDoosh {
         return khaneBedoosh;
     }
 
-    private ArrayList<User> users = new ArrayList<User>();
+    private ArrayList<Individual> individuals = new ArrayList<Individual>();
+    private ArrayList<RealEstate> realEstates = new ArrayList<RealEstate>();
     private HashMap<String, House> houses = new HashMap<String, House>();
 
     private static final String bankAPIKey = "a1965d20-1280-11e8-87b4-496f79ef1988";
@@ -33,12 +34,12 @@ public class KhaneBeDoosh {
                 "behnam",
                 "p@sw00rd"
         );
-        users.add(individual);
-        users.add(RealEstateAcm.getInstance());
+        individuals.add(individual);
+        realEstates.add(RealEstateAcm.getInstance());
     }
 
     public User getDefaultUser() {
-        return users.get(0);
+        return individuals.get(0);
     }
 
     public boolean increaseBalance(Individual user, int amount) throws IOException, IllegalArgumentException {
@@ -79,11 +80,11 @@ public class KhaneBeDoosh {
 
     public ArrayList<House> filterHouses(BuildingType buildingType, DealType dealType, int minArea, Price maxPrice) {
         ArrayList<House> result = new ArrayList<House>();
-        for (User user : users) {
-            if (!(user instanceof Individual))
-                result.addAll(((RealEstate) user).searchHouses(buildingType, dealType, minArea, maxPrice));
-            else
-                result.addAll(this.searchHouses(buildingType, dealType, minArea, maxPrice));
+        for (User user : individuals) {
+            result.addAll(((RealEstate) user).searchHouses(buildingType, dealType, minArea, maxPrice));
+        }
+        for (User user : realEstates) {
+            result.addAll(this.searchHouses(buildingType, dealType, minArea, maxPrice));
         }
         return result;
     }
@@ -96,10 +97,15 @@ public class KhaneBeDoosh {
             return ((RealEstate) user).getHouse(houseId);
     }
 
-    private static final int userIdBase = 1000;
+    private static final int realEstateIdBase = 1000;
+    private static final int individualIdBase = 2000;
 
     public User getUserById(int userId) {
-        return users.get(userId - userIdBase);
+        if(userId > realEstateIdBase && userId < individualIdBase)
+            return realEstates.get(userId - realEstateIdBase);
+        if(userId > individualIdBase)
+            return individuals.get(userId - individualIdBase);
+        return null;
     }
 
     public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner,
