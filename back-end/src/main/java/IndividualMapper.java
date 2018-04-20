@@ -4,32 +4,56 @@ import java.sql.*;
 
 public class IndividualMapper {
 
-    public Individual getIndividualById(int id){
+    private static final String IndividualTableName = "Individual";
+    private static final String UsernameKey = "username";
+    private static final String BalanceKey = "balance";
+    private static final String DisplayNameKey = "displayName";
+
+    public static Individual getByUsername(String username) throws SQLException {
         Connection connection = null;
+        Individual ret = null;
         try {
             connection = DriverManager.getConnection(KhaneBeDoosh.dbUri);
-            PreparedStatement stmt = connection.prepareStatement("select * from Individual where id=?;");
-            stmt.setInt(1, id);
+            PreparedStatement stmt = connection.prepareStatement("select * from ? where ?=?;");
+            stmt.setString(1, IndividualTableName);
+            stmt.setString(2, UsernameKey);
+            stmt.setString(3, username);
             stmt.setQueryTimeout(30);
             ResultSet res = stmt.executeQuery();
-            while (res.next()) {
-                return new Individual(res.getString("username"), res.getInt("balance"), res.getString("displayname"));
+            if (res.next()) {
+                ret = new Individual(res.getString(UsernameKey), res.getInt(BalanceKey),
+                        res.getString(DisplayNameKey));
             }
             res.close();
-        } catch (SQLException e) {
-//            resp.getWriter().write(e.getMessage());
         } finally {
-            try {
-                if (connection != null)
-                    connection.close();
-            } catch (SQLException e) {
-//                resp.getWriter().write(e.getMessage());
-            }
+            if (connection != null)
+                connection.close();
         }
-        return null;
+        return ret;
     }
 
-    public Individual getIndividualByUsername(String username){
-        return null;
+    public static int update(Individual individual) throws SQLException {
+        Connection connection = null;
+        int ret = 0;
+        try {
+            connection = DriverManager.getConnection(KhaneBeDoosh.dbUri);
+            PreparedStatement stmt = connection.prepareStatement("update ? set ?=?, ?=?, ?=? where ?=?;");
+            stmt.setString(1, IndividualTableName);
+            stmt.setString(2, UsernameKey);
+            stmt.setString(3, individual.getUsername());
+            stmt.setString(4, BalanceKey);
+            stmt.setInt(5, individual.getBalance());
+            stmt.setString(6, DisplayNameKey);
+            stmt.setString(7, individual.getDisplayName());
+            stmt.setString(8, UsernameKey);
+            stmt.setString(9, individual.getUsername());
+            stmt.setQueryTimeout(30);
+            ret = stmt.executeUpdate();
+        } finally {
+            if (connection != null)
+                connection.close();
+        }
+        return ret;
     }
+
 }

@@ -7,7 +7,7 @@ public class Individual extends User {
     private int balance;
     private String displayName;
 
-    private transient ArrayList<StringStringPair> paidHouses = new ArrayList<StringStringPair>();
+    private ArrayList<StringStringPair> paidHouses = new ArrayList<StringStringPair>();
 
     public Individual(String username, int balance, String displayName) {
         super(username);
