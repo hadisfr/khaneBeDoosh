@@ -36,30 +36,25 @@ public class House {
         return buildingType;
     }
 
-    protected void getDetailFromOwner() {
-
-        this.detail = ((RealEstate) owner).getHouse(this.id).detail;
+    protected HouseDetail getDetail() {
+        if (this.owner instanceof Individual)
+            return this.detail;
+        else if (this.owner instanceof RealEstate)
+            return ((RealEstate) owner).getHouse(this.id).detail;
+        else
+            return null;
     }
 
     public String getPhone() {
-        if (detail == null) {
-            getDetailFromOwner();
-        }
-        return detail.getPhone();
+        return this.getDetail().getPhone();
     }
 
     public String getDescription() {
-        if (detail == null) {
-            getDetailFromOwner();
-        }
-        return detail.getDescription();
+        return this.getDetail().getDescription();
     }
 
     public String getAddress() {
-        if (detail == null) {
-            getDetailFromOwner();
-        }
-        return detail.getAddress();
+        return this.getDetail().getAddress();
     }
 
     public User getOwner() {
