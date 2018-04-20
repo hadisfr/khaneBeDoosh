@@ -2,6 +2,7 @@ package main.java;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -28,8 +29,13 @@ public class KhaneBeDoosh {
 
     private static final String bankAPIKey = "a1965d20-1280-11e8-87b4-496f79ef1988";
     private static final String bankUri = "http://acm.ut.ac.ir/ieBank/pay";
-    static final String dbUri = String.format("jdbc:sqlite:%s", new File(new File(System.getProperty(
-            "catalina.base")).getAbsoluteFile(), "webapps/khaneBeDoosh/WEB-INF/sample.db"));
+    public static final String dbUri;
+    static {
+        dbUri = String.format("jdbc:sqlite:%s", new File(new File(System.getProperty(
+                "catalina.base")).getAbsoluteFile(), "webapps/khaneBeDoosh/WEB-INF/khaneBeDoosh.db"));
+    }
+    private static final String defaultUserUsername = "behnam";
+    private String log = "";
 
     private KhaneBeDoosh() {
         Individual individual = new Individual(
@@ -37,12 +43,27 @@ public class KhaneBeDoosh {
                 200,
                 "بهنام همایون"
         );
-        individuals.put(individual.getUsername(), individual);
+//        individuals.put(individual.getUsername(), individual);
+        try {
+            individuals.put(defaultUserUsername, IndividualMapper.getByUsername(defaultUserUsername));
+        } catch (Exception e) {
+            this.addLog(e.getMessage());
+            e.printStackTrace();
+        }
         realEstates.put(RealEstateAcm.getInstance().getUsername(), RealEstateAcm.getInstance());
     }
 
-    public User getDefaultUser() {
-        return individuals.get(0);
+    public void addLog(String str) {
+        this.log += str;
+        this.log += "\n";
+    }
+
+    public String getLog() {
+        return log;
+    }
+
+    public Individual getDefaultUser() {
+        return individuals.get(defaultUserUsername);
     }
 
     public boolean increaseBalance(Individual user, int amount) throws IOException, IllegalArgumentException {

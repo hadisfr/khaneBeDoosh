@@ -37,7 +37,7 @@ public class UserServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         HashMap<String, String> res = new HashMap<String, String>();
         try {
-            Individual currentUser = ((Individual) KhaneBeDoosh.getInstance().getDefaultUser());
+            Individual currentUser = KhaneBeDoosh.getInstance().getDefaultUser();
             if (currentUser != null) {
                 response.setStatus(HttpServletResponse.SC_OK);
                 res.put("name", currentUser.getDisplayName());
