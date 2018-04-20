@@ -1,31 +1,25 @@
 package main.java;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Individual extends User {
 
-    private String phone;
     private int balance;
-    private String username;
-    private String password;
-//    private transient HashMap<String, House> houses = new HashMap<String, House>();
+    private String displayName;
 
-    private transient ArrayList<IntStringPair> paidHouses = new ArrayList<IntStringPair>();
+    private transient ArrayList<StringStringPair> paidHouses = new ArrayList<StringStringPair>();
 
-    public Individual(String name, int balance, String phone, String username, String password) {
-        super(name);
+    public Individual(String username, int balance, String displayName) {
+        super(username);
         if (balance < 0)
             balance = 0;
         this.balance = balance;
-        this.phone = phone;
-        this.username = username;
-        this.password = password;
+        this.displayName = displayName;
     }
 
-    public boolean hasPaidforHouse(String houseId, int ownerId) {
-        for (IntStringPair member : paidHouses) {
-            if (member.equals(new IntStringPair(ownerId, houseId))) {
+    public boolean hasPaidforHouse(String houseId, String ownerId) {
+        for (StringStringPair member : paidHouses) {
+            if (member.equals(new StringStringPair(ownerId, houseId))) {
                 return true;
             }
         }
@@ -34,9 +28,9 @@ public class Individual extends User {
 
     private static int phonePrice = 1000;
 
-    public boolean payForHouse(String houseId, int ownerId) {
+    public boolean payForHouse(String houseId, String ownerId) {
         if (balance >= phonePrice) {
-            paidHouses.add(new IntStringPair(ownerId, houseId));
+            paidHouses.add(new StringStringPair(ownerId, houseId));
             balance -= phonePrice;
             return true;
         }
@@ -53,7 +47,7 @@ public class Individual extends User {
         this.balance = balance;
     }
 
-    public String getUsername() {
-        return username;
+    public String getDisplayName() {
+        return displayName;
     }
 }

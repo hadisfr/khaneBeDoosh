@@ -60,10 +60,10 @@ public class HouseServlet extends HttpServlet {
         try {
             if (!request.getParameterMap().containsKey("id"))
                 throw new IllegalArgumentException("missing id");
-            IntStringPair house_UserId = Utility.decryptHouseId(request.getParameter("id"));
+            StringStringPair house_UserId = Utility.decryptHouseId(request.getParameter("id"));
             House house = KhaneBeDoosh.getInstance().getHouseById(
-                    house_UserId.getString(),
-                    house_UserId.getInteger()
+                    house_UserId.getSecond(),
+                    house_UserId.getFirst()
             );
             response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().write((new Gson()).toJson(new HouseDetailWrapper(house)));

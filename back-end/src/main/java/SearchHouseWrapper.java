@@ -12,7 +12,7 @@ public class SearchHouseWrapper {
     public SearchHouseWrapper(House house) {
         this.dealType = house.getDealType();
         this.imageUrl = house.getImageUrl();
-        this.id = Utility.encryptHouseId(house.getId(), house.getOwner().getId());
+        this.id = Utility.encryptHouseId(house.getId(), house.getOwner().getUsername());
         this.area = house.getArea();
         this.buildingType = house.getBuildingType();
         this.price = house.getPrice();

@@ -6,8 +6,8 @@ public abstract class RealEstate extends User {
 
     protected String uri;
 
-    public RealEstate(String name, String uri) {
-        super(name);
+    public RealEstate(String username, String uri) {
+        super(username);
         this.uri = uri;
     }
 

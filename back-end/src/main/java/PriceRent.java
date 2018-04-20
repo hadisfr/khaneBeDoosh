@@ -21,7 +21,6 @@ public class PriceRent extends Price {
     }
 
     public PriceRent(int basePrice, int rentPrice) {
-
         this.basePrice = basePrice;
         this.rentPrice = rentPrice;
     }

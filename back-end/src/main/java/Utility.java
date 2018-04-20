@@ -12,7 +12,7 @@ public class Utility {
     private static final String secret = "Shahrbaraaz";
     public static final int illegalSearchValue = -1;
 
-    public static String encryptHouseId(String houseId, int ownerId) {
+    public static String encryptHouseId(String houseId, String ownerId) {
         return Jwts.builder()
                 .claim("houseId", houseId)
                 .claim("ownerId", ownerId)
@@ -20,12 +20,12 @@ public class Utility {
                 .compact();
     }
 
-    public static IntStringPair decryptHouseId(String token) throws IllegalArgumentException {
+    public static StringStringPair decryptHouseId(String token) throws IllegalArgumentException {
         try {
             Claims claim = Jwts.parser()
                     .setSigningKey(secret.getBytes())
                     .parseClaimsJws(token).getBody();
-            return new IntStringPair(Integer.parseInt(claim.get("ownerId").toString()), claim.get("houseId").toString());
+            return new StringStringPair(claim.get("ownerId").toString(), claim.get("houseId").toString());
         } catch (JwtException e) {
             throw new IllegalArgumentException("invalid id");
         }

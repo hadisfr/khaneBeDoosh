@@ -40,7 +40,7 @@ public class UserServlet extends HttpServlet {
             Individual currentUser = ((Individual) KhaneBeDoosh.getInstance().getDefaultUser());
             if (currentUser != null) {
                 response.setStatus(HttpServletResponse.SC_OK);
-                res.put("name", currentUser.getName());
+                res.put("name", currentUser.getDisplayName());
                 res.put("username", currentUser.getUsername());
                 res.put("balance", "" + currentUser.getBalance());
                 response.getWriter().write((new Gson()).toJson(res));

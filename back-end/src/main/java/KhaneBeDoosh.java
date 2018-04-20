@@ -1,5 +1,6 @@
 package main.java;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,6 +13,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONObject;
 
+import javax.naming.Context;
+
 public class KhaneBeDoosh {
     private static KhaneBeDoosh khaneBedoosh = new KhaneBeDoosh();
 
@@ -19,23 +22,23 @@ public class KhaneBeDoosh {
         return khaneBedoosh;
     }
 
-    private ArrayList<Individual> individuals = new ArrayList<Individual>();
-    private ArrayList<RealEstate> realEstates = new ArrayList<RealEstate>();
+    private HashMap<String, Individual> individuals = new HashMap<String, Individual>();
+    private HashMap<String, RealEstate> realEstates = new HashMap<String, RealEstate>();
     private HashMap<String, House> houses = new HashMap<String, House>();
 
     private static final String bankAPIKey = "a1965d20-1280-11e8-87b4-496f79ef1988";
     private static final String bankUri = "http://acm.ut.ac.ir/ieBank/pay";
+    static final String dbUri = String.format("jdbc:sqlite:%s", new File(new File(System.getProperty(
+            "catalina.base")).getAbsoluteFile(), "webapps/khaneBeDoosh/WEB-INF/sample.db"));
 
     private KhaneBeDoosh() {
         Individual individual = new Individual(
-                "بهنام همایون",
-                200,
-                "09123456789",
                 "behnam",
-                "p@sw00rd"
+                200,
+                "بهنام همایون"
         );
-        individuals.add(individual);
-        realEstates.add(RealEstateAcm.getInstance());
+        individuals.put(individual.getUsername(), individual);
+        realEstates.put(RealEstateAcm.getInstance().getUsername(), RealEstateAcm.getInstance());
     }
 
     public User getDefaultUser() {
@@ -49,7 +52,7 @@ public class KhaneBeDoosh {
         HttpPost request = new HttpPost(bankUri);
         request.addHeader("Content-Type", "application/json");
         request.addHeader("apiKey", bankAPIKey);
-        String body = "{\"userId\": " + getDefaultUser().getId() + ", \"value\": \"" + amount + "\"}";
+        String body = "{\"userId\": " + getDefaultUser().getUsername() + ", \"value\": \"" + amount + "\"}";
         request.setEntity(new StringEntity(body));
         HttpResponse response = null;
         try {
@@ -80,16 +83,16 @@ public class KhaneBeDoosh {
 
     public ArrayList<House> filterHouses(BuildingType buildingType, DealType dealType, int minArea, Price maxPrice) {
         ArrayList<House> result = new ArrayList<House>();
-        for (User user : individuals) {
+        for (User user : individuals.values()) {
             result.addAll(((RealEstate) user).searchHouses(buildingType, dealType, minArea, maxPrice));
         }
-        for (User user : realEstates) {
+        for (User user : realEstates.values()) {
             result.addAll(this.searchHouses(buildingType, dealType, minArea, maxPrice));
         }
         return result;
     }
 
-    public House getHouseById(String houseId, int userId) {
+    public House getHouseById(String houseId, String userId) {
         User user = getUserById(userId);
         if (user instanceof Individual)
             return houses.get(houseId);
@@ -97,15 +100,11 @@ public class KhaneBeDoosh {
             return ((RealEstate) user).getHouse(houseId);
     }
 
-    private static final int realEstateIdBase = 1000;
-    private static final int individualIdBase = 2000;
-
-    public User getUserById(int userId) {
-        if(userId > realEstateIdBase && userId < individualIdBase)
-            return realEstates.get(userId - realEstateIdBase);
-        if(userId > individualIdBase)
-            return individuals.get(userId - individualIdBase);
-        return null;
+    public User getUserById(String username) {
+        if (realEstates.containsKey(username))
+            return realEstates.get(username);
+        else
+            return individuals.get(username);
     }
 
     public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner,

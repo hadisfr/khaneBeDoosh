@@ -47,12 +47,12 @@ public class PhoneServlet extends HttpServlet {
             if (currentUser != null) {
                 if (!request.getParameterMap().containsKey("id"))
                     throw new IllegalArgumentException("missing id");
-                IntStringPair house_UserId = Utility.decryptHouseId(request.getParameter("id"));
-                String houseId = house_UserId.getString();
-                int ownerId = house_UserId.getInteger();
+                StringStringPair house_UserId = Utility.decryptHouseId(request.getParameter("id"));
+                String houseId = house_UserId.getSecond();
+                String ownerId = house_UserId.getFirst();
                 House house = KhaneBeDoosh.getInstance().getHouseById(
-                        house_UserId.getString(),
-                        house_UserId.getInteger()
+                        house_UserId.getSecond(),
+                        house_UserId.getFirst()
                 );
                 response.setStatus(
                         currentUser.hasPaidforHouse(houseId, ownerId) || currentUser.payForHouse(houseId, ownerId)
