@@ -2,7 +2,6 @@ package main.java;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.*;
@@ -14,8 +13,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONObject;
-
-import javax.naming.Context;
 
 public class KhaneBeDoosh {
     private static KhaneBeDoosh khaneBedoosh = new KhaneBeDoosh();
