@@ -28,10 +28,12 @@ public class KhaneBeDoosh {
     private static final String bankAPIKey = "a1965d20-1280-11e8-87b4-496f79ef1988";
     private static final String bankUri = "http://acm.ut.ac.ir/ieBank/pay";
     public static final String dbUri;
+
     static {
         dbUri = String.format("jdbc:sqlite:%s", new File(new File(System.getProperty(
                 "catalina.base")).getAbsoluteFile(), "webapps/khaneBeDoosh/WEB-INF/khaneBeDoosh.db"));
     }
+
     private static final String defaultUserUsername = "behnam";
     private String log = "";
 
