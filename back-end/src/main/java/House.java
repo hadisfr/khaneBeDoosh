@@ -6,7 +6,7 @@ import java.sql.SQLException;
 public class House {
 
     protected HouseDetail detail;
-    protected User owner;
+
     protected String ownerName;
     protected String imageUrl;
     protected String id;
@@ -45,7 +45,7 @@ public class House {
             return this.detail;
         else {
             User owner = KhaneBeDoosh.getInstance().getUserById(this.ownerName);
-            if (this.owner instanceof RealEstate)
+            if (owner instanceof RealEstate)
                 return ((RealEstate) (owner)).getHouse(this.id).detail;
             else
                 return null;
@@ -68,21 +68,29 @@ public class House {
         return ownerName;
     }
 
-    public House(String id, int area, BuildingType buildingType, String imageUrl, User owner, Price price) {
+    public House(String id, int area, BuildingType buildingType, String imageUrl, String ownerName, Price price) {
         this.id = id;
         this.area = area;
         this.buildingType = buildingType;
         this.imageUrl = imageUrl;
-        this.owner = owner;
-        this.ownerName = owner.getUsername();
+        this.ownerName = ownerName;
         this.price = price;
         detail = null;
     }
 
+    public House(String id, int area, BuildingType buildingType, String imageUrl, String ownerName,
+                 String address, String phone, String description, Price price) {
+        this(id, area, buildingType, imageUrl, ownerName, price);
+        this.detail = new HouseDetail(address, phone, description);
+    }
+
+    public House(String id, int area, BuildingType buildingType, String imageUrl, User owner, Price price) {
+        this(id, area, buildingType, imageUrl, owner.getUsername(), price);
+    }
+
     public House(String id, int area, BuildingType buildingType, String imageUrl, User owner,
                  String address, String phone, String description, Price price) {
-        this(id, area, buildingType, imageUrl, owner, price);
-        this.detail = new HouseDetail(address, phone, description);
+        this(id, area, buildingType, imageUrl, owner.getUsername(), address, phone, description, price);
     }
 
     public Price getPrice() {
