@@ -27,7 +27,7 @@ public class KhaneBeDoosh {
     private HashMap<String, House> houses = new HashMap<String, House>();
 
     private static final String bankAPIKey = "a1965d20-1280-11e8-87b4-496f79ef1988";
-    private static final String bankUri = "http://139.59.151.5:6664/bank/pay";
+    private static final String bankUri = "http://acm.ut.ac.ir/ieBank/pay";
     public static final String dbUri;
     private static final Logger logger = Logger.getLogger(KhaneBeDoosh.class.getName());
 
@@ -67,8 +67,7 @@ public class KhaneBeDoosh {
         HttpResponse response = client.execute(request);
         String json = IOUtils.toString(response.getEntity().getContent());
         JSONObject object = new JSONObject(json);
-//        boolean payResult = object.getBoolean("success");
-        boolean payResult = object.getString("result").equals("OK");
+        boolean payResult = object.getBoolean("success");
         if (payResult)
             user.setBalance(user.getBalance() + amount);
         return payResult;
