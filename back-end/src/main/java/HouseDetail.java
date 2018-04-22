@@ -1,17 +1,8 @@
 package main.java;
 
 public class HouseDetail {
-    private String address;
     private String phone;
     private String description;
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     public String getPhone() {
         return phone;
@@ -29,9 +20,7 @@ public class HouseDetail {
         this.description = description;
     }
 
-    public HouseDetail(String address, String phone, String description) {
-
-        this.address = address;
+    public HouseDetail(String phone, String description) {
         this.phone = phone;
         this.description = description;
     }

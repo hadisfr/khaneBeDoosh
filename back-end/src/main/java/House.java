@@ -9,6 +9,7 @@ public class House {
 
     protected String ownerName;
     protected String imageUrl;
+    protected String address;
     protected String id;
     protected int area;
     protected BuildingType buildingType;
@@ -60,32 +61,33 @@ public class House {
         return this.getDetail().getDescription();
     }
 
-    public String getAddress() throws IOException, SQLException, ClassNotFoundException {
-        return this.getDetail().getAddress();
+    public String getAddress() {
+        return this.address;
     }
 
     public String getOwnerName() {
         return ownerName;
     }
 
-    public House(String id, int area, BuildingType buildingType, String imageUrl, String ownerName, Price price) {
+    public House(String id, int area, BuildingType buildingType, String imageUrl, String ownerName, Price price, String address) {
         this.id = id;
         this.area = area;
         this.buildingType = buildingType;
         this.imageUrl = imageUrl;
         this.ownerName = ownerName;
         this.price = price;
+        this.address = address;
         detail = null;
     }
 
     public House(String id, int area, BuildingType buildingType, String imageUrl, String ownerName,
                  String address, String phone, String description, Price price) {
-        this(id, area, buildingType, imageUrl, ownerName, price);
-        this.detail = new HouseDetail(address, phone, description);
+        this(id, area, buildingType, imageUrl, ownerName, price, address);
+        this.detail = new HouseDetail(phone, description);
     }
 
-    public House(String id, int area, BuildingType buildingType, String imageUrl, User owner, Price price) {
-        this(id, area, buildingType, imageUrl, owner.getUsername(), price);
+    public House(String id, int area, BuildingType buildingType, String imageUrl, User owner, Price price, String address) {
+        this(id, area, buildingType, imageUrl, owner.getUsername(), price, address);
     }
 
     public House(String id, int area, BuildingType buildingType, String imageUrl, User owner,
