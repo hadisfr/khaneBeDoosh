@@ -21,7 +21,7 @@ public class RealEstateAcm extends RealEstate {
     }
 
     private RealEstateAcm() {
-        super("acm", "http://acm.ut.ac.ir/khaneBeDoosh/v2/house");
+        super("acm", "http://139.59.151.5:6664/khaneBeDoosh/v2/house");
     }
 
     @Override
