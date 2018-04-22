@@ -69,7 +69,7 @@ public class House {
         return ownerName;
     }
 
-    public House(String id, int area, BuildingType buildingType, String imageUrl, String ownerName, Price price, String address) {
+    public House(String id, int area, BuildingType buildingType, String imageUrl, String ownerName, String address, Price price) {
         this.id = id;
         this.area = area;
         this.buildingType = buildingType;
@@ -82,12 +82,12 @@ public class House {
 
     public House(String id, int area, BuildingType buildingType, String imageUrl, String ownerName,
                  String address, String phone, String description, Price price) {
-        this(id, area, buildingType, imageUrl, ownerName, price, address);
+        this(id, area, buildingType, imageUrl, ownerName, address, price);
         this.detail = new HouseDetail(phone, description);
     }
 
-    public House(String id, int area, BuildingType buildingType, String imageUrl, User owner, Price price, String address) {
-        this(id, area, buildingType, imageUrl, owner.getUsername(), price, address);
+    public House(String id, int area, BuildingType buildingType, String imageUrl, User owner, String address, Price price) {
+        this(id, area, buildingType, imageUrl, owner.getUsername(), address, price);
     }
 
     public House(String id, int area, BuildingType buildingType, String imageUrl, User owner,

@@ -85,16 +85,20 @@ public class KhaneBeDoosh {
         return result;
     }
 
+    boolean isUserRealEstate(String name) {
+        return realEstates.containsKey(name);
+    }
+
+    boolean isUserRealEstate(User user) {
+        return user instanceof RealEstate;
+    }
+
     public House getHouseById(String houseId, String userId) throws IOException, SQLException, ClassNotFoundException {
-        User user = getUserById(userId);
-        if (user instanceof Individual)
-            return houses.get(houseId);
-        else
-            return ((RealEstate) user).getHouse(houseId);
+        return HouseMapper.getHouseById(houseId, userId);
     }
 
     public User getUserById(String username) throws SQLException, ClassNotFoundException {
-        if (realEstates.containsKey(username))
+        if (isUserRealEstate(username))
             return realEstates.get(username);
         else
             return IndividualMapper.getByUsername(username);
@@ -102,19 +106,17 @@ public class KhaneBeDoosh {
 
     public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner,
                          int sellPrice,
-                         String address, String phone, String description) {
-        House house = new House(id, area, buildingType, imageUrl, owner, address,
-                phone, description, new PriceSell(sellPrice));
-        if (owner instanceof Individual)
-            houses.put(house.getId(), house);
+                         String address, String phone, String description)
+            throws SQLException, IOException, ClassNotFoundException {
+        HouseMapper.insertHouse(new House(id, area, buildingType, imageUrl, owner, address,
+                phone, description, new PriceSell(sellPrice)));
     }
 
     public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner,
                          int rentPrice, int basePrice,
-                         String address, String phone, String description) {
-        House house = new House(id, area, buildingType, imageUrl, owner, address,
-                phone, description, new PriceRent(rentPrice, basePrice));
-        if (owner instanceof Individual)
-            houses.put(house.getId(), house);
+                         String address, String phone, String description)
+            throws SQLException, IOException, ClassNotFoundException {
+        HouseMapper.insertHouse(new House(id, area, buildingType, imageUrl, owner, address,
+                phone, description, new PriceRent(rentPrice, basePrice)));
     }
 }

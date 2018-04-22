@@ -23,7 +23,7 @@ public class IndividualMapper {
         logger.info(String.format("get Individual(username=%s) from %s", username, dbUri));
 
         Class.forName("org.sqlite.JDBC");
-        
+
         Connection connection = null;
         Individual ret;
         try {

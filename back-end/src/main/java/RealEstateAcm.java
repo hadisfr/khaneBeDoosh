@@ -60,7 +60,7 @@ public class RealEstateAcm extends RealEstate {
                 basePrice = priceObject.getInt("basePrice");
                 price = new PriceRent(basePrice, rentPrice);
             }
-            result.add(new House(id, area, buildingType, imageUrl, owner, price, address));
+            result.add(new House(id, area, buildingType, imageUrl, owner, address, price));
         }
         return result;
     }
