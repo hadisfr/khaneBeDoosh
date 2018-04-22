@@ -104,10 +104,10 @@ public class KhaneBeDoosh {
     public ArrayList<House> filterHouses(BuildingType buildingType, DealType dealType, int minArea, Price maxPrice) {
         ArrayList<House> result = new ArrayList<House>();
         for (User user : individuals.values()) {
-            result.addAll(((RealEstate) user).searchHouses(buildingType, dealType, minArea, maxPrice));
+            result.addAll(this.searchHouses(buildingType, dealType, minArea, maxPrice));
         }
         for (User user : realEstates.values()) {
-            result.addAll(this.searchHouses(buildingType, dealType, minArea, maxPrice));
+            result.addAll(((RealEstate) user).searchHouses(buildingType, dealType, minArea, maxPrice));
         }
         return result;
     }
