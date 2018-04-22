@@ -15,6 +15,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONObject;
 
 public class KhaneBeDoosh {
+
     private static KhaneBeDoosh khaneBedoosh = new KhaneBeDoosh();
 
     public static KhaneBeDoosh getInstance() {
@@ -28,6 +29,7 @@ public class KhaneBeDoosh {
     private static final String bankAPIKey = "a1965d20-1280-11e8-87b4-496f79ef1988";
     private static final String bankUri = "http://acm.ut.ac.ir/ieBank/pay";
     public static final String dbUri;
+    private static final Logger logger = Logger.getLogger(KhaneBeDoosh.class.getName());
 
     static {
         dbUri = String.format("jdbc:sqlite:%s", new File(new File(System.getProperty(
@@ -35,7 +37,6 @@ public class KhaneBeDoosh {
     }
 
     private static final String defaultUserUsername = "behnam";
-    private String log = "";
 
     private KhaneBeDoosh() {
         Logger logger = Logger.getLogger(KhaneBeDoosh.class.getName());
@@ -45,20 +46,9 @@ public class KhaneBeDoosh {
 //            IndividualMapper.insert(new Individual("behnam", 200, "بهنام همایون"));
             individuals.put(defaultUserUsername, IndividualMapper.getByUsername(defaultUserUsername));
         } catch (Exception e) {
-            this.addLog(e.getMessage());
-            logger.severe("EXC: " + e.getMessage());
-            e.printStackTrace();
+            logger.warning(org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(e));
         }
         realEstates.put(RealEstateAcm.getInstance().getUsername(), RealEstateAcm.getInstance());
-    }
-
-    public void addLog(String str) {
-        this.log += str;
-        this.log += "\n";
-    }
-
-    public String getLog() {
-        return log;
     }
 
     public Individual getDefaultUser() {
@@ -74,21 +64,8 @@ public class KhaneBeDoosh {
         request.addHeader("apiKey", bankAPIKey);
         String body = "{\"userId\": " + getDefaultUser().getUsername() + ", \"value\": \"" + amount + "\"}";
         request.setEntity(new StringEntity(body));
-        HttpResponse response = null;
-        try {
-            response = client.execute(request);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String json = null;
-        try {
-            if (response != null)
-                json = IOUtils.toString(response.getEntity().getContent());
-            else
-                throw new IOException();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        HttpResponse response = client.execute(request);
+        String json = IOUtils.toString(response.getEntity().getContent());
         JSONObject object = new JSONObject(json);
         boolean payResult = object.getBoolean("success");
         if (payResult)
