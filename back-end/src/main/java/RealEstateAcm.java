@@ -2,6 +2,7 @@ package main.java;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
@@ -24,24 +25,14 @@ public class RealEstateAcm extends RealEstate {
     }
 
     @Override
-    public ArrayList<House> getHouses() {
+    public ArrayList<House> getHouses() throws IOException {
         ArrayList<House> result = new ArrayList<House>();
 
         HttpClient client = HttpClientBuilder.create().build();
         HttpGet request = new HttpGet(uri);
         request.addHeader("accept", "application/json");
-        HttpResponse response = null;
-        try {
-            response = client.execute(request);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String json = null;
-        try {
-            json = IOUtils.toString(response.getEntity().getContent());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        HttpResponse response = client.execute(request);
+        String json = IOUtils.toString(response.getEntity().getContent());
         JSONArray array = (new JSONObject(json)).getJSONArray("data");
         for (int i = 0; i < array.length(); i++) {
             JSONObject object = array.getJSONObject(i);
@@ -73,23 +64,13 @@ public class RealEstateAcm extends RealEstate {
         return result;
     }
 
-    public House getHouse(String id) {
+    public House getHouse(String id) throws IOException {
         String houseUri = uri + "/" + id;
         HttpClient client = HttpClientBuilder.create().build();
         HttpGet request = new HttpGet(houseUri);
         request.addHeader("accept", "application/json");
-        HttpResponse response = null;
-        try {
-            response = client.execute(request);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String json = null;
-        try {
-            json = IOUtils.toString(response.getEntity().getContent());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        HttpResponse response = client.execute(request);
+        String json = IOUtils.toString(response.getEntity().getContent());
         JSONObject object = (new JSONObject(json)).getJSONObject("data");
         String imageUrl, address, phone, description;
         int area;

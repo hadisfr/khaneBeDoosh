@@ -1,5 +1,7 @@
 package main.java;
 
+import java.io.IOException;
+
 public class HouseDetailWrapper {
     private String imageUrl;
     private String id;
@@ -10,7 +12,7 @@ public class HouseDetailWrapper {
     private String address;
     private String description;
 
-    public HouseDetailWrapper(House house) {
+    public HouseDetailWrapper(House house) throws IOException {
         this.dealType = house.getDealType();
         this.imageUrl = house.getImageUrl();
         this.id = Utility.encryptHouseId(house.getId(), house.getOwner().getUsername());

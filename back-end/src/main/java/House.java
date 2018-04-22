@@ -1,5 +1,7 @@
 package main.java;
 
+import java.io.IOException;
+
 public class House {
 
     protected HouseDetail detail;
@@ -36,7 +38,7 @@ public class House {
         return buildingType;
     }
 
-    protected HouseDetail getDetail() {
+    protected HouseDetail getDetail() throws IOException {
         if (this.owner instanceof Individual)
             return this.detail;
         else if (this.owner instanceof RealEstate)
@@ -45,15 +47,15 @@ public class House {
             return null;
     }
 
-    public String getPhone() {
+    public String getPhone() throws IOException {
         return this.getDetail().getPhone();
     }
 
-    public String getDescription() {
+    public String getDescription() throws IOException {
         return this.getDetail().getDescription();
     }
 
-    public String getAddress() {
+    public String getAddress() throws IOException {
         return this.getDetail().getAddress();
     }
 

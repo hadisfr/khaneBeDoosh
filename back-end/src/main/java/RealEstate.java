@@ -1,5 +1,6 @@
 package main.java;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public abstract class RealEstate extends User {
@@ -11,11 +12,11 @@ public abstract class RealEstate extends User {
         this.uri = uri;
     }
 
-    public abstract ArrayList<House> getHouses();
+    public abstract ArrayList<House> getHouses() throws IOException;
 
-    public abstract House getHouse(String id);
+    public abstract House getHouse(String id) throws IOException;
 
-    public ArrayList<House> searchHouses(BuildingType buildingType, DealType dealType, int minArea, Price maxPrice) {
+    public ArrayList<House> searchHouses(BuildingType buildingType, DealType dealType, int minArea, Price maxPrice) throws IOException {
         return Utility.filterHouses(getHouses(), buildingType, dealType, minArea, maxPrice);
     }
 

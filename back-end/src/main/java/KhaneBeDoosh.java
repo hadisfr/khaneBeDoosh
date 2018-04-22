@@ -101,7 +101,7 @@ public class KhaneBeDoosh {
                 buildingType, dealType, minArea, maxPrice);
     }
 
-    public ArrayList<House> filterHouses(BuildingType buildingType, DealType dealType, int minArea, Price maxPrice) {
+    public ArrayList<House> filterHouses(BuildingType buildingType, DealType dealType, int minArea, Price maxPrice) throws IOException {
         ArrayList<House> result = new ArrayList<House>();
         for (User user : individuals.values()) {
             result.addAll(this.searchHouses(buildingType, dealType, minArea, maxPrice));
@@ -112,7 +112,7 @@ public class KhaneBeDoosh {
         return result;
     }
 
-    public House getHouseById(String houseId, String userId) {
+    public House getHouseById(String houseId, String userId) throws IOException {
         User user = getUserById(userId);
         if (user instanceof Individual)
             return houses.get(houseId);
