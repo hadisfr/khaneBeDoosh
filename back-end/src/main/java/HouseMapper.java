@@ -93,8 +93,8 @@ public class HouseMapper {
             try {
                 PreparedStatement stmt = connection.prepareStatement(String.format(
                         "insert into %s (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                        + "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", HouseTableName,
-                        HouseIdKey, OwnerIdKey,
+                                + "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
+                        HouseTableName, HouseIdKey, OwnerIdKey,
                         AreaKey, ImageUrlKey, AddressKey, PhoneKey, DescriptionKey, BuildingTypeKey, DealTypeKey,
                         PriceBaseKey, PriceRentKey, PriceSellKey
                 ));
@@ -108,11 +108,11 @@ public class HouseMapper {
                 stmt.setString(8, house.getBuildingType().toString());
                 stmt.setString(9, house.getDealType().toString());
                 stmt.setInt(10, house.getDealType() == DealType.RENT ?
-                        ((PriceRent)(house.getPrice())).getBasePrice() : 0);
+                        ((PriceRent) (house.getPrice())).getBasePrice() : 0);
                 stmt.setInt(11, house.getDealType() == DealType.RENT ?
-                        ((PriceRent)(house.getPrice())).getRentPrice() : 0);
+                        ((PriceRent) (house.getPrice())).getRentPrice() : 0);
                 stmt.setInt(10, house.getDealType() == DealType.SELL ?
-                        ((PriceSell)(house.getPrice())).getSellPrice() : 0);
+                        ((PriceSell) (house.getPrice())).getSellPrice() : 0);
                 stmt.executeUpdate();
 
                 connection.commit();
