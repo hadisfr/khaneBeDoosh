@@ -22,9 +22,10 @@ public class IndividualMapper {
     public static Individual getByUsername(String username) throws SQLException, ClassNotFoundException {
         logger.info(String.format("get Individual(username=%s) from %s", username, dbUri));
 
+        Class.forName("org.sqlite.JDBC");
+        
         Connection connection = null;
         Individual ret;
-        Class.forName("org.sqlite.JDBC");
         try {
             connection = DriverManager.getConnection(dbUri);
 
@@ -73,6 +74,7 @@ public class IndividualMapper {
         logger.info(String.format("insert Individual(username=%s) from %s", individual.getUsername(), dbUri));
 
         Class.forName("org.sqlite.JDBC");
+
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(dbUri);
@@ -130,6 +132,7 @@ public class IndividualMapper {
         logger.info(String.format("update Individual(username=%s) from %s", individual.getUsername(), dbUri));
 
         Class.forName("org.sqlite.JDBC");
+
         Connection connection = null;
         int ret;
         try {
