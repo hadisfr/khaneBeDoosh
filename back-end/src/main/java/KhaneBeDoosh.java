@@ -2,6 +2,7 @@ package main.java;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.*;
@@ -22,7 +23,6 @@ public class KhaneBeDoosh {
         return khaneBedoosh;
     }
 
-    private HashMap<String, Individual> individuals = new HashMap<String, Individual>();
     private HashMap<String, RealEstate> realEstates = new HashMap<String, RealEstate>();
     private HashMap<String, House> houses = new HashMap<String, House>();
 
@@ -42,20 +42,15 @@ public class KhaneBeDoosh {
         Logger logger = Logger.getLogger(KhaneBeDoosh.class.getName());
         logger.info("Start KhaneBeDoosh");
 
-        try {
-//            IndividualMapper.insert(new Individual("behnam", 200, "بهنام همایون"));
-            individuals.put(defaultUserUsername, IndividualMapper.getByUsername(defaultUserUsername));
-        } catch (Exception e) {
-            logger.warning(org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(e));
-        }
         realEstates.put(RealEstateAcm.getInstance().getUsername(), RealEstateAcm.getInstance());
     }
 
-    public Individual getDefaultUser() {
-        return individuals.get(defaultUserUsername);
+    public Individual getDefaultUser() throws SQLException, ClassNotFoundException {
+        return (Individual)(getUserById(defaultUserUsername));
     }
 
-    public boolean increaseBalance(Individual user, int amount) throws IOException, IllegalArgumentException {
+    public boolean increaseBalance(Individual user, int amount)
+            throws IOException, IllegalArgumentException, SQLException, ClassNotFoundException {
         if (amount < 0)
             throw new IllegalArgumentException("Negative Amount");
         HttpClient client = HttpClientBuilder.create().build();
@@ -69,8 +64,10 @@ public class KhaneBeDoosh {
         JSONObject object = new JSONObject(json);
 //        boolean payResult = object.getBoolean("success");
         boolean payResult = object.getString("result").equals("OK");
-        if (payResult)
+        if (payResult) {
             user.setBalance(user.getBalance() + amount);
+            IndividualMapper.update(user);
+        }
         return payResult;
     }
 
@@ -79,18 +76,16 @@ public class KhaneBeDoosh {
                 buildingType, dealType, minArea, maxPrice);
     }
 
-    public ArrayList<House> filterHouses(BuildingType buildingType, DealType dealType, int minArea, Price maxPrice) throws IOException {
-        ArrayList<House> result = new ArrayList<House>();
-        for (User user : individuals.values()) {
-            result.addAll(this.searchHouses(buildingType, dealType, minArea, maxPrice));
-        }
-        for (User user : realEstates.values()) {
-            result.addAll(((RealEstate) user).searchHouses(buildingType, dealType, minArea, maxPrice));
+    public ArrayList<House> filterHouses(BuildingType buildingType, DealType dealType, int minArea, Price maxPrice)
+            throws IOException {
+        ArrayList<House> result = new ArrayList<House>(this.searchHouses(buildingType, dealType, minArea, maxPrice));
+        for (RealEstate realEstate: realEstates.values()) {
+            result.addAll(realEstate.searchHouses(buildingType, dealType, minArea, maxPrice));
         }
         return result;
     }
 
-    public House getHouseById(String houseId, String userId) throws IOException {
+    public House getHouseById(String houseId, String userId) throws IOException, SQLException, ClassNotFoundException {
         User user = getUserById(userId);
         if (user instanceof Individual)
             return houses.get(houseId);
@@ -98,11 +93,11 @@ public class KhaneBeDoosh {
             return ((RealEstate) user).getHouse(houseId);
     }
 
-    public User getUserById(String username) {
+    public User getUserById(String username) throws SQLException, ClassNotFoundException {
         if (realEstates.containsKey(username))
             return realEstates.get(username);
         else
-            return individuals.get(username);
+            return IndividualMapper.getByUsername(username);
     }
 
     public void addHouse(String id, int area, BuildingType buildingType, String imageUrl, User owner,

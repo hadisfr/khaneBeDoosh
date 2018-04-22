@@ -58,7 +58,9 @@ public class PhoneServlet extends HttpServlet {
                         house_UserId.getFirst()
                 );
                 response.setStatus(
-                        currentUser.hasPaidforHouse(houseId, ownerId) || currentUser.payForHouse(houseId, ownerId)
+                        currentUser.hasPaidforHouse(houseId, ownerId) || (
+                                currentUser.payForHouse(houseId, ownerId) && (IndividualMapper.update(currentUser) > 0)
+                        )
                                 ? HttpServletResponse.SC_OK
                                 : HttpServletResponse.SC_PAYMENT_REQUIRED
                 );

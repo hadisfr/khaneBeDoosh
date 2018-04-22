@@ -2,14 +2,19 @@ package main.java;
 
 import java.io.File;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 public class IndividualMapper {
 
     private static final String IndividualTableName = "Individual";
+    private static final String PaidHousesTableName = "PaidHouses";
     private static final String UsernameKey = "username";
     private static final String BalanceKey = "balance";
     private static final String DisplayNameKey = "displayName";
+    private static final String OwnerIdKey = "OwnerId";
+    private static final String HouseIdKey = "HouseId";
+    private static final String PayerKey = "IndividualId";
     private static final Logger logger = Logger.getLogger(IndividualMapper.class.getName());
     private static final String dbUri = String.format("jdbc:sqlite:%s", new File(new File(System.getProperty(
             "catalina.base")).getAbsoluteFile(), "webapps/khaneBeDoosh/WEB-INF/khaneBeDoosh.db"));
@@ -18,7 +23,7 @@ public class IndividualMapper {
         logger.info(String.format("get Individual(username=%s) from %s", username, dbUri));
 
         Connection connection = null;
-        Individual ret = null;
+        Individual ret;
         Class.forName("org.sqlite.JDBC");
         try {
             connection = DriverManager.getConnection(dbUri);
@@ -33,11 +38,30 @@ public class IndividualMapper {
             stmt.setString(1, username);
             stmt.setQueryTimeout(30);
             ResultSet res = stmt.executeQuery();
+            String userName = "";
+            int balance = 0;
+            String displayName = "";
             if (res.next()) {
-                ret = new Individual(res.getString(UsernameKey), res.getInt(BalanceKey),
-                        res.getString(DisplayNameKey));
+                userName = res.getString(UsernameKey);
+                balance = res.getInt(BalanceKey);
+                displayName = res.getString(DisplayNameKey);
             }
             res.close();
+            stmt.close();
+
+            stmt = connection.prepareStatement(String.format("select %s, %s from %s where %s=?;",
+                    OwnerIdKey, HouseIdKey, PaidHousesTableName, PayerKey));
+            stmt.setString(1, userName);
+            stmt.setQueryTimeout(30);
+            ArrayList<StringStringPair> paidHouses = new ArrayList<StringStringPair>();
+            res = stmt.executeQuery();
+            while (res.next()) {
+                paidHouses.add(new StringStringPair(res.getString(OwnerIdKey), res.getString(HouseIdKey)));
+            }
+            res.close();
+            stmt.close();
+
+            ret = new Individual(username, balance, displayName, paidHouses);
         } finally {
             if (connection != null)
                 connection.close();
@@ -60,19 +84,36 @@ public class IndividualMapper {
 
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
-            statement.executeUpdate("drop table if exists Individuals");
-            statement.executeUpdate("CREATE TABLE Individual"
-                    + "('username' TEXT PRIMARY KEY NOT NULL, 'balance' INTEGER, 'displayName' INTEGER)");
+            statement.executeUpdate(String.format("drop table if exists %s;", IndividualTableName));
+            statement.executeUpdate(String.format(
+                    "create table %s ('%s' TEXT PRIMARY KEY NOT NULL, '%s' INTEGER, '%s' TEXT);",
+                    IndividualTableName, UsernameKey, BalanceKey, DisplayNameKey
+            ));
             connection.setAutoCommit(false);
             try {
                 PreparedStatement insertStatement = connection.prepareStatement(String.format(
-                        "insert into %s (%s, %s, %s) values(?, ?, ?)",
+                        "insert into %s (%s, %s, %s) values(?, ?, ?);",
                         IndividualTableName, UsernameKey, BalanceKey, DisplayNameKey)
                 );
                 insertStatement.setString(1, individual.getUsername());
                 insertStatement.setInt(2, individual.getBalance());
                 insertStatement.setString(3, individual.getDisplayName());
+                insertStatement.setQueryTimeout(30);
                 insertStatement.executeUpdate();
+                insertStatement.close();
+
+                insertStatement = connection.prepareStatement(String.format(
+                        "insert into %s (%s, %s, %s) values(?, ?, ?);", PaidHousesTableName,
+                        PayerKey, OwnerIdKey, HouseIdKey));
+                insertStatement.setQueryTimeout(30);
+                for (StringStringPair pair : individual.getPaidHouses()) {
+                    insertStatement.setString(1, individual.getUsername());
+                    insertStatement.setString(2, pair.getFirst());
+                    insertStatement.setString(3, pair.getSecond());
+                    insertStatement.executeUpdate();
+                }
+                insertStatement.close();
+
                 connection.commit();
             } catch (SQLException e) {
                 connection.rollback();
@@ -90,7 +131,7 @@ public class IndividualMapper {
 
         Class.forName("org.sqlite.JDBC");
         Connection connection = null;
-        int ret = 0;
+        int ret;
         try {
             connection = DriverManager.getConnection(dbUri);
 
@@ -98,6 +139,8 @@ public class IndividualMapper {
             ResultSet trs = md.getTables(null, null, "%", null);
             while (trs.next())
                 logger.info("table: " + trs.getString(3));
+
+            connection.setAutoCommit(false);
 
             PreparedStatement stmt = connection.prepareStatement(String.format(
                     "update %s set %s=?, %s=?, %s=? where %s=?;",
@@ -109,6 +152,28 @@ public class IndividualMapper {
             stmt.setString(4, individual.getUsername());
             stmt.setQueryTimeout(30);
             ret = stmt.executeUpdate();
+            stmt.close();
+
+            stmt = connection.prepareStatement(String.format("delete from %s where %s=?;",
+                    PaidHousesTableName, PayerKey));
+            stmt.setString(1, individual.getUsername());
+            stmt.setQueryTimeout(30);
+            stmt.executeUpdate();
+            stmt.close();
+
+            stmt = connection.prepareStatement(String.format(
+                    "insert into %s (%s, %s, %s) values(?, ?, ?);", PaidHousesTableName,
+                    PayerKey, OwnerIdKey, HouseIdKey));
+            stmt.setQueryTimeout(30);
+            for (StringStringPair pair : individual.getPaidHouses()) {
+                stmt.setString(1, individual.getUsername());
+                stmt.setString(2, pair.getFirst());
+                stmt.setString(3, pair.getSecond());
+                stmt.executeUpdate();
+            }
+            stmt.close();
+
+            connection.commit();
         } finally {
             if (connection != null)
                 connection.close();

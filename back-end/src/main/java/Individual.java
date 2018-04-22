@@ -17,6 +17,12 @@ public class Individual extends User {
         this.displayName = displayName;
     }
 
+    public Individual(String username, int balance, String displayName,
+                      ArrayList<StringStringPair> paidHouses) {
+        this(username, balance, displayName);
+        this.paidHouses = new ArrayList<StringStringPair>(paidHouses);
+    }
+
     public boolean hasPaidforHouse(String houseId, String ownerId) {
         for (StringStringPair member : paidHouses) {
             if (member.equals(new StringStringPair(ownerId, houseId))) {
@@ -49,5 +55,9 @@ public class Individual extends User {
 
     public String getDisplayName() {
         return displayName;
+    }
+
+    ArrayList<StringStringPair> getPaidHouses() {
+        return paidHouses;
     }
 }

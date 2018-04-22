@@ -1,6 +1,7 @@
 package main.java;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class HouseDetailWrapper {
     private String imageUrl;
@@ -12,10 +13,10 @@ public class HouseDetailWrapper {
     private String address;
     private String description;
 
-    public HouseDetailWrapper(House house) throws IOException {
+    public HouseDetailWrapper(House house) throws IOException, SQLException, ClassNotFoundException {
         this.dealType = house.getDealType();
         this.imageUrl = house.getImageUrl();
-        this.id = Utility.encryptHouseId(house.getId(), house.getOwner().getUsername());
+        this.id = Utility.encryptHouseId(house.getId(), house.getOwnerName());
         this.area = house.getArea();
         this.buildingType = house.getBuildingType();
         this.price = house.getPrice();
