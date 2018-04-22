@@ -86,7 +86,6 @@ public class IndividualMapper {
     }
 
     public static int update(Individual individual) throws SQLException, ClassNotFoundException {
-        Logger logger = Logger.getLogger(IndividualMapper.class.getName());
         logger.info(String.format("update Individual(username=%s) from %s", individual.getUsername(), dbUri));
 
         Class.forName("org.sqlite.JDBC");
