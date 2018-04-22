@@ -3,3 +3,5 @@ INSERT INTO "Individual" ("username","balance","displayName") VALUES ("behnam","
 CREATE TABLE PaidHouses ("individualId" TEXT NOT NULL, "ownerId" TEXT NOT NULL, "houseId" TEXT NOT NULL, PRIMARY KEY ("individualId", "ownerId", "houseId"));
 INSERT INTO "PaidHouses" ("individualId","ownerId","houseId") VALUES ("behnam","acm","78278842-78eb-475f-a38a-a7001f86f644");
 CREATE TABLE Realestate ("name" TEXT, "expireTime" DATETIME);
+CREATE TABLE House ("houseId" TEXT NOT NULL, "ownerId" TEXT NOT NULL, "area" INTEGER, "imageUrl" TEXT, "address" TEXT, "phone" TEXT, "description" TEXT, "buildingType" TEXT, "dealType" TEXT, "priceBase" INTEGER, "priceRent" INTEGER, "priceSell" INTEGER, PRIMARY KEY ("houseId", "ownerId"));
+INSERT INTO "House" ("houseId","ownerId","area","imageUrl","address","phone","description","buildingType","dealType","priceBase","priceRent","priceSell") VALUES ('sdfghjkcxjhjkojhlkmknzvnsdjlkfalkdnamxjamoddmodm','behnam','100','','UT','09123456789','?!!','VILLA','SELL',NULL,NULL,'100');
