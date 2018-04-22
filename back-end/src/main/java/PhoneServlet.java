@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/phone")
 public class PhoneServlet extends HttpServlet {
+
+    private static final Logger logger = Logger.getLogger(PhoneServlet.class.getName());
 
     /**
      * @api {get} /phone get phone number
@@ -66,11 +69,13 @@ public class PhoneServlet extends HttpServlet {
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             }
         } catch (IllegalArgumentException e) {
+            logger.warning(org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(e));
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             res.put("msg", "Invalid Parameters: " + e.toString());
             response.getWriter().write((new Gson()).toJson(res));
 
         } catch (Exception e) {
+            logger.warning(org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(e));
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             res.put("msg", e.toString());
             response.getWriter().write((new Gson()).toJson(res));

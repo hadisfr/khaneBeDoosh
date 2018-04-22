@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/search")
 public class SearchServlet extends HttpServlet {
+
+    private static final Logger logger = Logger.getLogger(SearchServlet.class.getName());
 
     /**
      * @api {get} /search search houses
@@ -84,11 +87,13 @@ public class SearchServlet extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().write((new Gson()).toJson(wrappedHouses));
         } catch (IllegalArgumentException e) {
+            logger.warning(org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(e));
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             HashMap<String, String> err_res = new HashMap<String, String>();
             err_res.put("msg", "Invalid Parameters: " + e.toString());
             response.getWriter().write((new Gson()).toJson(err_res));
         } catch (Exception e) {
+            logger.warning(org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(e));
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             HashMap<String, String> err_res = new HashMap<String, String>();
             err_res.put("msg", e.toString());

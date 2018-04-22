@@ -10,11 +10,11 @@ public class IndividualMapper {
     private static final String UsernameKey = "username";
     private static final String BalanceKey = "balance";
     private static final String DisplayNameKey = "displayName";
+    private static final Logger logger = Logger.getLogger(IndividualMapper.class.getName());
     private static final String dbUri = String.format("jdbc:sqlite:%s", new File(new File(System.getProperty(
             "catalina.base")).getAbsoluteFile(), "webapps/khaneBeDoosh/WEB-INF/khaneBeDoosh.db"));
 
     public static Individual getByUsername(String username) throws SQLException, ClassNotFoundException {
-        Logger logger = Logger.getLogger(IndividualMapper.class.getName());
         logger.info(String.format("get Individual(username=%s) from %s", username, dbUri));
 
         Connection connection = null;
@@ -46,7 +46,6 @@ public class IndividualMapper {
     }
 
     public static void insert(Individual individual) throws SQLException, ClassNotFoundException {
-        Logger logger = Logger.getLogger(IndividualMapper.class.getName());
         logger.info(String.format("insert Individual(username=%s) from %s", individual.getUsername(), dbUri));
 
         Class.forName("org.sqlite.JDBC");

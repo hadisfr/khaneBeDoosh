@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/user")
 public class UserServlet extends HttpServlet {
+
+    private static final Logger logger = Logger.getLogger(UserServlet.class.getName());
 
     /**
      * @api {get} /user get current user's info
@@ -48,6 +51,7 @@ public class UserServlet extends HttpServlet {
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             }
         } catch (Exception e) {
+            logger.warning(org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(e));
             res.put("msg", e.toString());
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().write((new Gson()).toJson(res));
