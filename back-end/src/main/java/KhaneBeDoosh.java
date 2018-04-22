@@ -46,7 +46,7 @@ public class KhaneBeDoosh {
     }
 
     public Individual getDefaultUser() throws SQLException, ClassNotFoundException {
-        return (Individual)(getUserById(defaultUserUsername));
+        return (Individual) (getUserById(defaultUserUsername));
     }
 
     public boolean increaseBalance(Individual user, int amount)
@@ -79,7 +79,7 @@ public class KhaneBeDoosh {
     public ArrayList<House> filterHouses(BuildingType buildingType, DealType dealType, int minArea, Price maxPrice)
             throws IOException {
         ArrayList<House> result = new ArrayList<House>(this.searchHouses(buildingType, dealType, minArea, maxPrice));
-        for (RealEstate realEstate: realEstates.values()) {
+        for (RealEstate realEstate : realEstates.values()) {
             result.addAll(realEstate.searchHouses(buildingType, dealType, minArea, maxPrice));
         }
         return result;

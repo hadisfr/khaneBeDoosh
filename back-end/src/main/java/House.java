@@ -46,7 +46,7 @@ public class House {
         else {
             User owner = KhaneBeDoosh.getInstance().getUserById(this.ownerName);
             if (this.owner instanceof RealEstate)
-                return ((RealEstate)(owner)).getHouse(this.id).detail;
+                return ((RealEstate) (owner)).getHouse(this.id).detail;
             else
                 return null;
         }

@@ -12,9 +12,9 @@ public class IndividualMapper {
     private static final String UsernameKey = "username";
     private static final String BalanceKey = "balance";
     private static final String DisplayNameKey = "displayName";
-    private static final String OwnerIdKey = "OwnerId";
-    private static final String HouseIdKey = "HouseId";
-    private static final String PayerKey = "IndividualId";
+    private static final String OwnerIdKey = "ownerId";
+    private static final String HouseIdKey = "houseId";
+    private static final String PayerKey = "individualId";
     private static final Logger logger = Logger.getLogger(IndividualMapper.class.getName());
     private static final String dbUri = String.format("jdbc:sqlite:%s", new File(new File(System.getProperty(
             "catalina.base")).getAbsoluteFile(), "webapps/khaneBeDoosh/WEB-INF/khaneBeDoosh.db"));
