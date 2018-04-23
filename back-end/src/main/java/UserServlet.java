@@ -52,7 +52,7 @@ public class UserServlet extends HttpServlet {
             }
         } catch (Exception e) {
             logger.warning(org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(e));
-            res.put("msg", e.toString());
+            res.put("msg", e.getMessage());
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().write((new Gson()).toJson(res));
         }

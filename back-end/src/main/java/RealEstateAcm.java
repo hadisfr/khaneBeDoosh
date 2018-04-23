@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -30,10 +29,9 @@ public class RealEstateAcm extends RealEstate {
         HttpClient client = HttpClientBuilder.create().build();
         HttpGet request = new HttpGet(uri);
         request.addHeader("accept", "application/json");
-        HttpResponse response = client.execute(request);
-        JSONObject res = new JSONObject(IOUtils.toString(response.getEntity().getContent()));
-        this.lastTimestamp = res.getLong("expireTime");
-        JSONArray array = res.getJSONArray("data");
+        JSONObject response = new JSONObject(IOUtils.toString(client.execute(request).getEntity().getContent()));
+        this.lastTimestamp = response.getLong("expireTime");
+        JSONArray array = response.getJSONArray("data");
         for (int i = 0; i < array.length(); i++) {
             JSONObject object = array.getJSONObject(i);
             String id, imageUrl, address;
@@ -70,24 +68,23 @@ public class RealEstateAcm extends RealEstate {
         HttpClient client = HttpClientBuilder.create().build();
         HttpGet request = new HttpGet(houseUri);
         request.addHeader("accept", "application/json");
-        HttpResponse response = client.execute(request);
-        String json = IOUtils.toString(response.getEntity().getContent());
-        JSONObject object = (new JSONObject(json)).getJSONObject("data");
+        JSONObject response = (new JSONObject(IOUtils.toString(client.execute(request).getEntity().getContent())))
+                .getJSONObject("data");
         String imageUrl, address, phone, description;
         int area;
         DealType dealType;
         BuildingType buildingType;
         User owner = getInstance();
 
-        JSONObject priceObject = object.getJSONObject("price");
+        JSONObject priceObject = response.getJSONObject("price");
 
-        imageUrl = object.getString("imageURL");
-        address = object.getString("address");
-        phone = object.getString("phone");
-        description = object.getString("description");
-        area = object.getInt("area");
-        dealType = DealType.parseInt(object.getInt("dealType"));
-        buildingType = BuildingType.parseString(object.getString("buildingType"));
+        imageUrl = response.getString("imageURL");
+        address = response.getString("address");
+        phone = response.getString("phone");
+        description = response.getString("description");
+        area = response.getInt("area");
+        dealType = DealType.parseInt(response.getInt("dealType"));
+        buildingType = BuildingType.parseString(response.getString("buildingType"));
 
         Price price = null;
         if (dealType == DealType.SELL) {

@@ -1,6 +1,7 @@
 package main.java;
 
 import com.google.gson.Gson;
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -70,16 +71,16 @@ public class PhoneServlet extends HttpServlet {
             } else {
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             }
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | JSONException e) {
             logger.warning(org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(e));
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            res.put("msg", "Invalid Parameters: " + e.toString());
+            res.put("msg", "Invalid Parameters: " + e.getMessage());
             response.getWriter().write((new Gson()).toJson(res));
 
         } catch (Exception e) {
             logger.warning(org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(e));
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            res.put("msg", e.toString());
+            res.put("msg", e.getMessage());
             response.getWriter().write((new Gson()).toJson(res));
         }
     }

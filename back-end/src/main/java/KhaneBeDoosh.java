@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.logging.*;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -24,7 +23,6 @@ public class KhaneBeDoosh {
     }
 
     private HashMap<String, RealEstate> realEstates = new HashMap<String, RealEstate>();
-    private HashMap<String, House> houses = new HashMap<String, House>();
 
     private static final String bankAPIKey = "a1965d20-1280-11e8-87b4-496f79ef1988";
     private static final String bankUri = "http://139.59.151.5:6664/bank/pay";
@@ -50,20 +48,18 @@ public class KhaneBeDoosh {
     }
 
     public boolean increaseBalance(Individual user, int amount)
-            throws IOException, IllegalArgumentException, SQLException, ClassNotFoundException {
+            throws IllegalArgumentException, SQLException, ClassNotFoundException, IOException {
         if (amount < 0)
             throw new IllegalArgumentException("Negative Amount");
         HttpClient client = HttpClientBuilder.create().build();
         HttpPost request = new HttpPost(bankUri);
         request.addHeader("Content-Type", "application/json");
         request.addHeader("apiKey", bankAPIKey);
-        String body = "{\"userId\": " + getDefaultUser().getUsername() + ", \"value\": \"" + amount + "\"}";
-        request.setEntity(new StringEntity(body));
-        HttpResponse response = client.execute(request);
-        String json = IOUtils.toString(response.getEntity().getContent());
-        JSONObject object = new JSONObject(json);
-//        boolean payResult = object.getBoolean("success");
-        boolean payResult = object.getString("result").equals("OK");
+        request.setEntity(new StringEntity(String.format("{\"userId\": %s, \"value\": \"%d\"}",
+                getDefaultUser().getUsername(), amount)));
+        JSONObject response = new JSONObject(IOUtils.toString(client.execute(request).getEntity().getContent()));
+//        boolean payResult = response.getBoolean("success");
+        boolean payResult = response.getString("result").equals("OK");
         if (payResult) {
             user.setBalance(user.getBalance() + amount);
             IndividualMapper.update(user);

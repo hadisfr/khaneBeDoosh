@@ -2,6 +2,7 @@ package main.java;
 
 import com.google.gson.Gson;
 import org.apache.commons.lang.RandomStringUtils;
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -70,17 +71,17 @@ public class HouseServlet extends HttpServlet {
             );
             response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().write((new Gson()).toJson(new HouseDetailWrapper(house)));
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | JSONException e) {
             logger.warning(org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(e));
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             HashMap<String, String> err_res = new HashMap<String, String>();
-            err_res.put("msg", "Invalid Parameters: " + e.toString());
+            err_res.put("msg", "Invalid Parameters: " + e.getMessage());
             response.getWriter().write((new Gson()).toJson(err_res));
         } catch (Exception e) {
             logger.warning(org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(e));
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             HashMap<String, String> err_res = new HashMap<String, String>();
-            err_res.put("msg", e.toString());
+            err_res.put("msg", e.getMessage());
             response.getWriter().write((new Gson()).toJson(err_res));
         }
     }
@@ -189,17 +190,17 @@ public class HouseServlet extends HttpServlet {
             } else {
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             }
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | JSONException e) {
             logger.warning(org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(e));
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             HashMap<String, String> err_res = new HashMap<String, String>();
-            err_res.put("msg", "Invalid Parameters: " + e.toString());
+            err_res.put("msg", "Invalid Parameters: " + e.getMessage());
             response.getWriter().write((new Gson()).toJson(err_res));
         } catch (Exception e) {
             logger.warning(org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(e));
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             HashMap<String, String> err_res = new HashMap<String, String>();
-            err_res.put("msg", e.toString());
+            err_res.put("msg", e.getMessage());
             response.getWriter().write((new Gson()).toJson(err_res));
         }
     }
