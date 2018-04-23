@@ -178,7 +178,7 @@ public class HouseMapper {
 
         RealEstate realEstate = (RealEstate) KhaneBeDoosh.getInstance().getUserById(realEstateName);
         ArrayList<House> newHouses = realEstate.getHouses();
-        long timestamp = realEstate.getLastTimesatmp();
+        long timestamp = realEstate.getLastTimestamp();
 
         Connection connection = null;
         int ret = 0;

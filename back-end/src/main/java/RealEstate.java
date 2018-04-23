@@ -22,7 +22,7 @@ public abstract class RealEstate extends User {
         return Utility.filterHouses(getHouses(), buildingType, dealType, minArea, maxPrice);
     }
 
-    public long getLastTimesatmp() {
+    public long getLastTimestamp() {
         return lastTimesatmp;
     }
 }
