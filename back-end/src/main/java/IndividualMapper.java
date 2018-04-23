@@ -70,12 +70,13 @@ public class IndividualMapper {
         return ret;
     }
 
-    public static void insert(Individual individual) throws SQLException, ClassNotFoundException {
+    public static int insert(Individual individual) throws SQLException, ClassNotFoundException {
         logger.info(String.format("insert Individual(username=%s) from %s", individual.getUsername(), dbUri));
 
         Class.forName("org.sqlite.JDBC");
 
         Connection connection = null;
+        int ret = 0;
         try {
             connection = DriverManager.getConnection(dbUri);
 
@@ -101,7 +102,7 @@ public class IndividualMapper {
                 insertStatement.setInt(2, individual.getBalance());
                 insertStatement.setString(3, individual.getDisplayName());
                 insertStatement.setQueryTimeout(30);
-                insertStatement.executeUpdate();
+                ret = insertStatement.executeUpdate();
                 insertStatement.close();
 
                 insertStatement = connection.prepareStatement(String.format(
@@ -126,6 +127,7 @@ public class IndividualMapper {
             if (connection != null)
                 connection.close();
         }
+        return ret;
     }
 
     public static int update(Individual individual) throws SQLException, ClassNotFoundException {

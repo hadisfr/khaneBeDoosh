@@ -79,7 +79,7 @@ public class HouseMapper {
         return ret;
     }
 
-    public static void insertHouse(House house) throws SQLException, ClassNotFoundException, IOException {
+    public static int insertHouse(House house) throws SQLException, ClassNotFoundException, IOException {
         logger.info(String.format("insert House(ownerId=%s, houseId=%s) from %s",
                 house.getOwnerName(), house.getId(), dbUri));
 
@@ -87,6 +87,7 @@ public class HouseMapper {
 
         boolean isOwnerIndividual = !KhaneBeDoosh.getInstance().isUserRealEstate(house.getOwnerName());
         Connection connection = null;
+        int ret = 0;
         try {
             connection = DriverManager.getConnection(dbUri);
             connection.setAutoCommit(false);
@@ -113,7 +114,7 @@ public class HouseMapper {
                         ((PriceRent) (house.getPrice())).getRentPrice() : 0);
                 stmt.setInt(10, house.getDealType() == DealType.SELL ?
                         ((PriceSell) (house.getPrice())).getSellPrice() : 0);
-                stmt.executeUpdate();
+                ret = stmt.executeUpdate();
 
                 connection.commit();
             } catch (SQLException e) {
@@ -125,5 +126,6 @@ public class HouseMapper {
             if (connection != null)
                 connection.close();
         }
+        return ret;
     }
 }
