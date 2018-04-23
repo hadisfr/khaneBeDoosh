@@ -10,7 +10,7 @@ public class Utility {
     }
 
     private static final String secret = "Shahrbaraaz";
-    public static final int illegalSearchValue = -1;
+    public static final int IllegalSearchValue = -1;
 
     public static String encryptHouseId(String houseId, String ownerId) {
         return Jwts.builder()
@@ -44,14 +44,14 @@ public class Utility {
                 } else if (price instanceof PriceRent && maxPrice instanceof PriceRent) {
                     int basePrice = ((PriceRent) maxPrice).getBasePrice();
                     int rentPrice = ((PriceRent) maxPrice).getRentPrice();
-                    priceCheck = (basePrice != illegalSearchValue && ((PriceRent) price).getBasePrice() >= basePrice)
-                            || (rentPrice != illegalSearchValue && ((PriceRent) price).getRentPrice() >= rentPrice);
+                    priceCheck = (basePrice != IllegalSearchValue && ((PriceRent) price).getBasePrice() >= basePrice)
+                            || (rentPrice != IllegalSearchValue && ((PriceRent) price).getRentPrice() >= rentPrice);
                 }
             }
 
             if (!((buildingType != null && !house.getBuildingType().equals(buildingType)) ||
                     (dealType != null && !house.getDealType().equals(dealType)) ||
-                    (minArea != illegalSearchValue && house.getArea() < minArea) ||
+                    (minArea != IllegalSearchValue && house.getArea() < minArea) ||
                     (priceCheck)))
                 result.add(house);
         }

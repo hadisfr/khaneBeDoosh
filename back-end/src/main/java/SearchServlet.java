@@ -64,7 +64,7 @@ public class SearchServlet extends HttpServlet {
                     : null;
             int minArea = request.getParameterMap().containsKey("minArea")
                     ? Integer.parseInt(request.getParameter("minArea"))
-                    : Utility.illegalSearchValue;
+                    : Utility.IllegalSearchValue;
             Price price = null;
             if (request.getParameterMap().containsKey("maxSellPrice")) {
                 price = new PriceSell(Integer.parseInt(request.getParameter("maxSellPrice")));
@@ -73,10 +73,10 @@ public class SearchServlet extends HttpServlet {
                 price = new PriceRent(
                         request.getParameterMap().containsKey("maxBasePrice")
                                 ? Integer.parseInt(request.getParameter("maxBasePrice"))
-                                : Utility.illegalSearchValue,
+                                : Utility.IllegalSearchValue,
                         request.getParameterMap().containsKey("maxRentPrice")
                                 ? Integer.parseInt(request.getParameter("maxRentPrice"))
-                                : Utility.illegalSearchValue
+                                : Utility.IllegalSearchValue
                 );
             }
             houses.addAll(KhaneBeDoosh.getInstance().searchHouses(buildingType, dealType, minArea, price));
