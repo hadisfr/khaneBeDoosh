@@ -251,7 +251,7 @@ public class HouseMapper {
             throws SQLException {
         int dealTypePos = 0, areaPos = 0, buildingTypePos = 0, priceSellPos = 0, priceRentPos = 0, priceBasePos = 0;
         ArrayList<String> where = new ArrayList<String>();
-        if(givenBuildingType != null) {
+        if (givenBuildingType != null) {
             where.add(String.format("%s=?", BuildingTypeKey));
             buildingTypePos++;
             areaPos++;
@@ -260,7 +260,7 @@ public class HouseMapper {
             priceRentPos++;
             priceBasePos++;
         }
-        if(minArea != Utility.IllegalSearchValue) {
+        if (minArea != Utility.IllegalSearchValue) {
             where.add(String.format("%s>=?", AreaKey));
             areaPos++;
             dealTypePos++;
@@ -268,7 +268,7 @@ public class HouseMapper {
             priceRentPos++;
             priceBasePos++;
         }
-        if(givenDealType != null) {
+        if (givenDealType != null) {
             where.add(String.format("%s=?", DealTypeKey));
             dealTypePos++;
             priceSellPos++;
@@ -279,12 +279,12 @@ public class HouseMapper {
                     where.add(String.format("%s<=?", PriceSellKey));
                     priceSellPos++;
                 } else if (maxPrice instanceof PriceRent) {
-                    if (((PriceRent)maxPrice).getRentPrice() != Utility.IllegalSearchValue) {
+                    if (((PriceRent) maxPrice).getRentPrice() != Utility.IllegalSearchValue) {
                         where.add(String.format("%s<=?", PriceRentKey));
                         priceRentPos++;
                         priceBasePos++;
                     }
-                    if (((PriceRent)maxPrice).getBasePrice() != Utility.IllegalSearchValue) {
+                    if (((PriceRent) maxPrice).getBasePrice() != Utility.IllegalSearchValue) {
                         where.add(String.format("%s<=?", PriceBaseKey));
                         priceBasePos++;
                     }
@@ -292,22 +292,23 @@ public class HouseMapper {
             }
         }
         PreparedStatement stmt = connection.prepareStatement(String.format(
-                "select * from %s where %s;", HouseTableName, String.join(" and ", where)));
+                "select * from %s %s %s;", HouseTableName, where.size() > 0 ? "where" : "",
+                String.join(" and ", where)));
         stmt.setQueryTimeout(30);
-        if(givenBuildingType != null)
+        if (givenBuildingType != null)
             stmt.setString(buildingTypePos, givenBuildingType.toString());
-        if(minArea != Utility.IllegalSearchValue)
+        if (minArea != Utility.IllegalSearchValue)
             stmt.setInt(areaPos, minArea);
-        if(givenDealType != null) {
+        if (givenDealType != null) {
             stmt.setString(dealTypePos, givenDealType.toString());
             if (maxPrice != null) {
                 if (maxPrice instanceof PriceSell) {
-                    stmt.setInt(priceSellPos, ((PriceSell)maxPrice).getSellPrice());
+                    stmt.setInt(priceSellPos, ((PriceSell) maxPrice).getSellPrice());
                 } else if (maxPrice instanceof PriceRent) {
-                    if (((PriceRent)maxPrice).getRentPrice() != Utility.IllegalSearchValue)
-                        stmt.setInt(priceRentPos, ((PriceRent)maxPrice).getRentPrice());
-                    if (((PriceRent)maxPrice).getBasePrice() != Utility.IllegalSearchValue)
-                        stmt.setInt(priceBasePos, ((PriceRent)maxPrice).getBasePrice());
+                    if (((PriceRent) maxPrice).getRentPrice() != Utility.IllegalSearchValue)
+                        stmt.setInt(priceRentPos, ((PriceRent) maxPrice).getRentPrice());
+                    if (((PriceRent) maxPrice).getBasePrice() != Utility.IllegalSearchValue)
+                        stmt.setInt(priceBasePos, ((PriceRent) maxPrice).getBasePrice());
                 }
             }
         }
