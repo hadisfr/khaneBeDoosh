@@ -77,7 +77,8 @@ public class KhaneBeDoosh {
     }
 
     public ArrayList<House> filterHouses(BuildingType buildingType, DealType dealType, int minArea, Price maxPrice)
-            throws IOException {
+            throws IOException, SQLException, ClassNotFoundException {
+//        HouseMapper.updateRealEstates();
         ArrayList<House> result = new ArrayList<House>(this.searchHouses(buildingType, dealType, minArea, maxPrice));
         for (RealEstate realEstate : realEstates.values()) {
             result.addAll(realEstate.searchHouses(buildingType, dealType, minArea, maxPrice));

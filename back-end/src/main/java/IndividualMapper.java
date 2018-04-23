@@ -76,7 +76,7 @@ public class IndividualMapper {
         Class.forName("org.sqlite.JDBC");
 
         Connection connection = null;
-        int ret = 0;
+        int ret;
         try {
             connection = DriverManager.getConnection(dbUri);
 

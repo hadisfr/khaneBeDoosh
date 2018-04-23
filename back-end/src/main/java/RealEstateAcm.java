@@ -32,8 +32,9 @@ public class RealEstateAcm extends RealEstate {
         HttpGet request = new HttpGet(uri);
         request.addHeader("accept", "application/json");
         HttpResponse response = client.execute(request);
-        String json = IOUtils.toString(response.getEntity().getContent());
-        JSONArray array = (new JSONObject(json)).getJSONArray("data");
+        JSONObject res = new JSONObject(IOUtils.toString(response.getEntity().getContent()));
+        this.lastTimesatmp = res.getLong("expireTime");
+        JSONArray array = res.getJSONArray("data");
         for (int i = 0; i < array.length(); i++) {
             JSONObject object = array.getJSONObject(i);
             String id, imageUrl, address;
@@ -102,6 +103,4 @@ public class RealEstateAcm extends RealEstate {
 
         return new House(id, area, buildingType, imageUrl, owner, address, phone, description, price);
     }
-
-
 }
