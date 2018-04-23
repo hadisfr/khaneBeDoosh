@@ -6,12 +6,12 @@ import java.util.ArrayList;
 public abstract class RealEstate extends User {
 
     protected String uri;
-    protected long lastTimesatmp;
+    protected long lastTimestamp;
 
     public RealEstate(String username, String uri) {
         super(username);
         this.uri = uri;
-        this.lastTimesatmp = 0;
+        this.lastTimestamp = 0;
     }
 
     public abstract ArrayList<House> getHouses() throws IOException;
@@ -23,6 +23,6 @@ public abstract class RealEstate extends User {
     }
 
     public long getLastTimestamp() {
-        return lastTimesatmp;
+        return lastTimestamp;
     }
 }
