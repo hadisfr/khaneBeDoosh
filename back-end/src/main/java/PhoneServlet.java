@@ -46,7 +46,7 @@ public class PhoneServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         HashMap<String, String> res = new HashMap<String, String>();
         try {
-            Individual currentUser = ((Individual) KhaneBeDoosh.getInstance().getDefaultUser());
+            Individual currentUser = KhaneBeDoosh.getInstance().getDefaultUser();
             if (currentUser != null) {
                 if (!request.getParameterMap().containsKey("id"))
                     throw new IllegalArgumentException("missing id");
