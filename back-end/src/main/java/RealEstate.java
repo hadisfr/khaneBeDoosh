@@ -18,10 +18,6 @@ public abstract class RealEstate extends User {
 
     public abstract House getHouse(String id) throws IOException;
 
-    public ArrayList<House> searchHouses(BuildingType buildingType, DealType dealType, int minArea, Price maxPrice) throws IOException {
-        return Utility.filterHouses(getHouses(), buildingType, dealType, minArea, maxPrice);
-    }
-
     public long getLastTimestamp() {
         return lastTimestamp;
     }

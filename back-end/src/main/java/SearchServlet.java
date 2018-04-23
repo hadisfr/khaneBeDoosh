@@ -79,7 +79,7 @@ public class SearchServlet extends HttpServlet {
                                 : Utility.illegalSearchValue
                 );
             }
-            houses.addAll(KhaneBeDoosh.getInstance().filterHouses(buildingType, dealType, minArea, price));
+            houses.addAll(KhaneBeDoosh.getInstance().searchHouses(buildingType, dealType, minArea, price));
             ArrayList<SearchHouseWrapper> wrappedHouses = new ArrayList<SearchHouseWrapper>();
             for (House house : houses) {
                 wrappedHouses.add(new SearchHouseWrapper(house));

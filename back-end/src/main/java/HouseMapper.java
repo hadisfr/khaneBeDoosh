@@ -245,4 +245,72 @@ public class HouseMapper {
         }
         return ret;
     }
+
+    private static PreparedStatement getSearchHousesStatement(BuildingType givenBuildingType, DealType givenDealType,
+                                                              int minArea, Price maxPrice, Connection connection) throws SQLException {
+        PreparedStatement stmt = connection.prepareStatement(String.format(
+                "select * from %s where %s=? and %s=? and %s>=?;", HouseTableName, BuildingTypeKey, DealTypeKey, AreaKey));
+        stmt.setQueryTimeout(30);
+        stmt.setString(1, givenBuildingType.toString());
+        stmt.setString(2, givenDealType.toString());
+        stmt.setInt(3, minArea);
+        return stmt;
+    }
+
+    public static ArrayList<House> searchHouses(BuildingType givenBuildingType, DealType givenDealType,
+                                                int minArea, Price maxPrice)
+            throws SQLException, IOException, ClassNotFoundException {
+        logger.info(String.format("get Houses(buildingType=%s, buildingType=%s, minArea=%s, maxPrice=%s) from %s",
+                givenBuildingType, givenDealType, minArea, maxPrice, dbUri));
+
+        updateRealEstates();
+
+        Class.forName("org.sqlite.JDBC");
+
+        Connection connection = null;
+        ArrayList<House> ret = new ArrayList<House>();
+        try {
+            connection = DriverManager.getConnection(dbUri);
+            PreparedStatement stmt = getSearchHousesStatement(givenBuildingType, givenDealType, minArea, maxPrice, connection);
+            ResultSet res = stmt.executeQuery();
+            String ownerId;
+            String houseId;
+            int area;
+            BuildingType buildingType;
+            DealType dealType;
+            String imageUrl;
+            Price price = null;
+            String address;
+            String phone = "";
+            String description = "";
+            while (res.next()) {
+                ownerId = res.getString(OwnerIdKey);
+                boolean isOwnerIndividual = !KhaneBeDoosh.getInstance().isUserRealEstate(ownerId);
+                houseId = res.getString(HouseIdKey);
+                area = res.getInt(AreaKey);
+                imageUrl = res.getString(ImageUrlKey);
+                address = res.getString(AddressKey);
+                buildingType = BuildingType.parseString(res.getString(BuildingTypeKey));
+                dealType = DealType.parseString(res.getString(DealTypeKey));
+                if (dealType == DealType.SELL)
+                    price = new PriceSell(res.getInt(PriceSellKey));
+                else if (dealType == DealType.RENT)
+                    price = new PriceRent(res.getInt(PriceBaseKey), res.getInt(PriceRentKey));
+                if (isOwnerIndividual) {
+                    phone = res.getString(PhoneKey);
+                    description = res.getString(DescriptionKey);
+                }
+                if (isOwnerIndividual)
+                    ret.add(new House(houseId, area, buildingType, imageUrl, ownerId, address, phone, description, price));
+                else
+                    ret.add(new House(houseId, area, buildingType, imageUrl, ownerId, address, price));
+            }
+            res.close();
+            stmt.close();
+        } finally {
+            if (connection != null)
+                connection.close();
+        }
+        return ret;
+    }
 }

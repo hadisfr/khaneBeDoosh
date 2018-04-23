@@ -71,19 +71,9 @@ public class KhaneBeDoosh {
         return payResult;
     }
 
-    private ArrayList<House> searchHouses(BuildingType buildingType, DealType dealType, int minArea, Price maxPrice) {
-        return Utility.filterHouses((new ArrayList<House>(houses.values())),
-                buildingType, dealType, minArea, maxPrice);
-    }
-
-    public ArrayList<House> filterHouses(BuildingType buildingType, DealType dealType, int minArea, Price maxPrice)
+    public ArrayList<House> searchHouses(BuildingType buildingType, DealType dealType, int minArea, Price maxPrice)
             throws IOException, SQLException, ClassNotFoundException {
-//        HouseMapper.updateRealEstates();
-        ArrayList<House> result = new ArrayList<House>(this.searchHouses(buildingType, dealType, minArea, maxPrice));
-        for (RealEstate realEstate : realEstates.values()) {
-            result.addAll(realEstate.searchHouses(buildingType, dealType, minArea, maxPrice));
-        }
-        return result;
+        return HouseMapper.searchHouses(buildingType, dealType, minArea, maxPrice);
     }
 
     boolean isUserRealEstate(String name) {
