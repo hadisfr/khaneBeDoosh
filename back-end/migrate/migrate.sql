@@ -28,8 +28,6 @@ CREATE TRIGGER "Individual_Update"
             SET "name" = NEW."username"
             WHERE "name" = OLD."username";
     END;
-INSERT INTO "Individual" ("username","balance","displayName")
-    VALUES ("behnam","بهنام همایون","200");
 
 CREATE TABLE "RealEstate" (
     "name" TEXT PRIMARY KEY NOT NULL REFERENCES "User",
@@ -71,8 +69,6 @@ CREATE TABLE "House" (
     PRIMARY KEY ("houseId", "ownerId"),
     FOREIGN KEY ("ownerId") REFERENCES "User" ("name")
 );
-INSERT INTO "House" ("houseId","ownerId","area","imageUrl","address","phone","description","buildingType","dealType","priceBase","priceRent","priceSell")
-    VALUES ('sdfghjkcxjhjkojhlkmknzvnsdjlkfalkdnamxjamoddmodm','behnam','100','','UT','09123456789','?!!','VILLA','SELL',0,0,'100');
 
 CREATE TABLE "PaidHouses" (
     "individualId" TEXT NOT NULL REFERENCES "Individual",
@@ -81,5 +77,10 @@ CREATE TABLE "PaidHouses" (
     PRIMARY KEY ("individualId", "ownerId", "houseId"),
     FOREIGN KEY ("houseId", "ownerId") REFERENCES "House" ON DELETE CASCADE
 );
+
+INSERT INTO "Individual" ("username","balance","displayName")
+    VALUES ("behnam","بهنام همایون","200");
+INSERT INTO "House" ("houseId","ownerId","area","imageUrl","address","phone","description","buildingType","dealType","priceBase","priceRent","priceSell")
+    VALUES ('sdfghjkcxjhjkojhlkmknzvnsdjlkfalkdnamxjamoddmodm','behnam','100','','UT','09123456789','?!!','VILLA','SELL',0,0,'100');
 INSERT INTO "PaidHouses" ("individualId","ownerId","houseId")
     VALUES ("behnam","behnam","sdfghjkcxjhjkojhlkmknzvnsdjlkfalkdnamxjamoddmodm");
