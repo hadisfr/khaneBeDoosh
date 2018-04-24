@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Logger;
@@ -87,7 +88,7 @@ public class SearchServlet extends HttpServlet {
             }
             response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().write((new Gson()).toJson(wrappedHouses));
-        } catch (IllegalArgumentException | JSONException e) {
+        } catch (IllegalArgumentException | JSONException | SQLException e) {
             logger.warning(org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(e));
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             HashMap<String, String> err_res = new HashMap<String, String>();

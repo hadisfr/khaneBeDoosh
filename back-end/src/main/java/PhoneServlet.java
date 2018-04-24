@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -71,7 +72,7 @@ public class PhoneServlet extends HttpServlet {
             } else {
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             }
-        } catch (IllegalArgumentException | JSONException e) {
+        } catch (IllegalArgumentException | JSONException | SQLException e) {
             logger.warning(org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(e));
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             res.put("msg", "Invalid Parameters: " + e.getMessage());

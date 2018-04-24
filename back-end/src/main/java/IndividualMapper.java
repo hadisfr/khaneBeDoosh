@@ -87,20 +87,15 @@ public class IndividualMapper {
 
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
-            statement.executeUpdate(String.format("drop table if exists %s;", IndividualTableName));
-            statement.executeUpdate(String.format(
-                    "create table %s ('%s' TEXT PRIMARY KEY NOT NULL, '%s' INTEGER, '%s' TEXT);",
-                    IndividualTableName, UsernameKey, BalanceKey, DisplayNameKey
-            ));
             connection.setAutoCommit(false);
             try {
                 PreparedStatement insertStatement = connection.prepareStatement(String.format(
                         "insert into %s (%s, %s, %s) values(?, ?, ?);",
-                        IndividualTableName, UsernameKey, BalanceKey, DisplayNameKey)
+                        IndividualTableName, UsernameKey, DisplayNameKey, BalanceKey)
                 );
                 insertStatement.setString(1, individual.getUsername());
-                insertStatement.setInt(2, individual.getBalance());
-                insertStatement.setString(3, individual.getDisplayName());
+                insertStatement.setString(2, individual.getDisplayName());
+                insertStatement.setInt(3, individual.getBalance());
                 insertStatement.setQueryTimeout(30);
                 ret = insertStatement.executeUpdate();
                 insertStatement.close();
