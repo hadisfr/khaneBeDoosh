@@ -5,7 +5,7 @@ CREATE TABLE "User" (
 );
 
 CREATE TABLE "Individual" (
-    "username" TEXT PRIMARY KEY NOT NULL REFERENCES "User",
+    "username" TEXT PRIMARY KEY NOT NULL REFERENCES "User" ON DELETE CASCADE ON UPDATE CASCADE,
     "displayName" TEXT,
     "balance" INTEGER DEFAULT 0
 );
@@ -30,7 +30,7 @@ CREATE TRIGGER "Individual_Update"
     END;
 
 CREATE TABLE "RealEstate" (
-    "name" TEXT PRIMARY KEY NOT NULL REFERENCES "User",
+    "name" TEXT PRIMARY KEY NOT NULL REFERENCES "User" ON DELETE CASCADE ON UPDATE CASCADE,
     "expireTime" INTEGER DEFAULT 0
 );
 CREATE TRIGGER "RealEstate_Creation"
@@ -71,11 +71,11 @@ CREATE TABLE "House" (
 );
 
 CREATE TABLE "PaidHouses" (
-    "individualId" TEXT NOT NULL REFERENCES "Individual",
+    "individualId" TEXT NOT NULL REFERENCES "Individual" ON DELETE CASCADE ON UPDATE CASCADE,
     "ownerId" TEXT NOT NULL,
     "houseId" TEXT NOT NULL,
     PRIMARY KEY ("individualId", "ownerId", "houseId"),
-    FOREIGN KEY ("houseId", "ownerId") REFERENCES "House" ON DELETE CASCADE
+    FOREIGN KEY ("houseId", "ownerId") REFERENCES "House" ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 INSERT INTO "Individual" ("username","balance","displayName")
