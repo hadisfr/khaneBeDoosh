@@ -66,6 +66,7 @@ CREATE TABLE "House" (
     "priceBase" INTEGER,
     "priceRent" INTEGER,
     "priceSell" INTEGER,
+    "toDelete" BOOLEAN DEFAULT 0,
     PRIMARY KEY ("houseId", "ownerId"),
     FOREIGN KEY ("ownerId") REFERENCES "User" ("name")
 );
@@ -78,9 +79,9 @@ CREATE TABLE "PaidHouses" (
     FOREIGN KEY ("houseId", "ownerId") REFERENCES "House" ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-INSERT INTO "Individual" ("username","balance","displayName")
+INSERT INTO "Individual" ("username","displayName","balance")
     VALUES ("behnam","بهنام همایون","200");
-INSERT INTO "House" ("houseId","ownerId","area","imageUrl","address","phone","description","buildingType","dealType","priceBase","priceRent","priceSell")
+REPLACE INTO "House" ("houseId","ownerId","area","imageUrl","address","phone","description","buildingType","dealType","priceBase","priceRent","priceSell")
     VALUES ('sdfghjkcxjhjkojhlkmknzvnsdjlkfalkdnamxjamoddmodm','behnam','100','','UT','09123456789','?!!','VILLA','SELL',0,0,'100');
 INSERT INTO "PaidHouses" ("individualId","ownerId","houseId")
     VALUES ("behnam","behnam","sdfghjkcxjhjkojhlkmknzvnsdjlkfalkdnamxjamoddmodm");

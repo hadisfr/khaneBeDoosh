@@ -23,6 +23,7 @@ public class HouseMapper {
     private static final String DescriptionKey = "description";
     private static final String RealEstateKey = "name";
     private static final String ExpireTimeKey = "expireTime";
+    private static final String ToDeleteKey = "toDelete";
 
     private static final Logger logger = Logger.getLogger(HouseMapper.class.getName());
     private static final String dbUri = String.format("jdbc:sqlite:%s", new File(new File(System.getProperty(
@@ -93,7 +94,8 @@ public class HouseMapper {
         Connection connection = DriverManager.getConnection(dbUri);
         boolean ret = false;
         try {
-            PreparedStatement stmt = connection.prepareStatement(String.format("select * from %s where %s=? and %s <= %s;",
+            PreparedStatement stmt = connection.prepareStatement(String.format(
+                    "select * from %s where %s=? and %s <= %s;",
                     RealEstateTableName, RealEstateKey, ExpireTimeKey, "strftime('%s000','now')"));
             stmt.setQueryTimeout(30);
             stmt.setString(1, name);
@@ -133,11 +135,12 @@ public class HouseMapper {
 
     private static PreparedStatement getHouseInsertStatement(Connection connection) throws SQLException {
         return connection.prepareStatement(String.format(
-                "insert into %s (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                        + "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
+                "replace into %s (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+                        + "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, %d);",
                 HouseTableName, HouseIdKey, OwnerIdKey,
                 AreaKey, ImageUrlKey, AddressKey, PhoneKey, DescriptionKey, BuildingTypeKey, DealTypeKey,
-                PriceBaseKey, PriceRentKey, PriceSellKey
+                PriceBaseKey, PriceRentKey, PriceSellKey,
+                ToDeleteKey, 0
         ));
     }
 
@@ -192,7 +195,8 @@ public class HouseMapper {
                 stmt.setString(2, realEstateName);
                 stmt.executeUpdate();
 
-                stmt = connection.prepareStatement(String.format("delete from %s where %s=?;", HouseTableName, OwnerIdKey));
+                stmt = connection.prepareStatement(String.format("update %s set %s=%d where %s=?;",
+                        HouseTableName, ToDeleteKey, 1, OwnerIdKey));
                 stmt.setString(1, realEstateName);
                 stmt.executeUpdate();
                 stmt.close();
@@ -202,6 +206,11 @@ public class HouseMapper {
                     fillStatementWithHouse(house, stmt);
                     ret += stmt.executeUpdate();
                 }
+                stmt.close();
+
+                stmt = connection.prepareStatement(String.format("delete from %s where %s=%d;",
+                        HouseTableName, ToDeleteKey, 1));
+                stmt.executeUpdate();
                 stmt.close();
 
                 connection.commit();
@@ -329,7 +338,8 @@ public class HouseMapper {
         ArrayList<House> ret = new ArrayList<House>();
         try {
             connection = DriverManager.getConnection(dbUri);
-            PreparedStatement stmt = getSearchHousesStatement(givenBuildingType, givenDealType, minArea, maxPrice, connection);
+            PreparedStatement stmt = getSearchHousesStatement(givenBuildingType, givenDealType, minArea, maxPrice,
+                    connection);
             ResultSet res = stmt.executeQuery();
             String ownerId;
             String houseId;
