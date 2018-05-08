@@ -23,6 +23,14 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     <filter>
+        <filter-name>XSSFilter</filter-name>
+        <filter-class>main.java.XSSFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>XSSFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter>
         <filter-name>CorsFilter</filter-name>
         <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
         <init-param>
