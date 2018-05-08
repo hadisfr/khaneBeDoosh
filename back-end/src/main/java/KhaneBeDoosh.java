@@ -110,4 +110,8 @@ public class KhaneBeDoosh {
     public ArrayList<Individual> getIndividuals() throws SQLException, ClassNotFoundException {
         return IndividualMapper.getIndividuals();
     }
+
+    public String getToken(String username, String password) throws SQLException, ClassNotFoundException {
+        return IndividualMapper.isAuthenticationValid(username, password) ? Utility.getToken(username) : null;
+    }
 }

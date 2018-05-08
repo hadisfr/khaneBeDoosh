@@ -27,4 +27,22 @@ public class Utility {
             throw new IllegalArgumentException("invalid id");
         }
     }
+
+    public static String getToken(String username) {
+        return Jwts.builder()
+                .claim("username", username)
+                .signWith(SignatureAlgorithm.HS256, secret.getBytes())
+                .compact();
+    }
+
+    public static String getUsernameFromToken(String token) {
+        try {
+            Claims claim = Jwts.parser()
+                    .setSigningKey(secret.getBytes())
+                    .parseClaimsJws(token).getBody();
+            return claim.get("username").toString();
+        } catch (JwtException e) {
+            throw new IllegalArgumentException("invalid token");
+        }
+    }
 }

@@ -224,4 +224,10 @@ public class IndividualMapper {
         return ret;
     }
 
+    public static boolean isAuthenticationValid(String username, String password)
+            throws SQLException, ClassNotFoundException {
+        logger.info(String.format("validate authentication (username=%s)", username));
+        // TODO: validate password
+        return getByUsername(username) != null;
+    }
 }
