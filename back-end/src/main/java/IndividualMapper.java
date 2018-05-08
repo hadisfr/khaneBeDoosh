@@ -53,19 +53,59 @@ public class IndividualMapper {
             res.close();
             stmt.close();
 
-            stmt = connection.prepareStatement(String.format("select %s, %s from %s where %s=?;",
-                    OwnerIdKey, HouseIdKey, PaidHousesTableName, PayerKey));
-            stmt.setString(1, userName);
+            ret = userName.isEmpty() ? null : new Individual(username, balance, displayName, isAdmin,
+                    getPaidHouses(userName, connection));
+        } finally {
+            if (connection != null)
+                connection.close();
+        }
+        return ret;
+    }
+
+    private static ArrayList<StringStringPair> getPaidHouses(String userName, Connection connection)
+            throws SQLException {
+        PreparedStatement stmt = connection.prepareStatement(String.format("select %s, %s from %s where %s=?;",
+                OwnerIdKey, HouseIdKey, PaidHousesTableName, PayerKey));
+        stmt.setString(1, userName);
+        stmt.setQueryTimeout(30);
+        ArrayList<StringStringPair> paidHouses = new ArrayList<StringStringPair>();
+        ResultSet res = stmt.executeQuery();
+        while (res.next()) {
+            paidHouses.add(new StringStringPair(res.getString(OwnerIdKey), res.getString(HouseIdKey)));
+        }
+        res.close();
+        stmt.close();
+        return paidHouses;
+    }
+
+    public static ArrayList<Individual> getIndividuals() throws SQLException, ClassNotFoundException {
+        logger.info(String.format("get Individuals from %s", dbUri));
+
+        Class.forName("org.sqlite.JDBC");
+
+        Connection connection = null;
+        ArrayList<Individual> ret = new ArrayList<Individual>();
+        try {
+            connection = DriverManager.getConnection(dbUri);
+
+            DatabaseMetaData md = connection.getMetaData();
+            ResultSet trs = md.getTables(null, null, "%", null);
+            while (trs.next())
+                logger.info("table: " + trs.getString(3));
+
+            PreparedStatement stmt = connection.prepareStatement(String.format("select * from %s;",
+                    IndividualTableName));
             stmt.setQueryTimeout(30);
-            ArrayList<StringStringPair> paidHouses = new ArrayList<StringStringPair>();
-            res = stmt.executeQuery();
+            ResultSet res = stmt.executeQuery();
+            String userName;
             while (res.next()) {
-                paidHouses.add(new StringStringPair(res.getString(OwnerIdKey), res.getString(HouseIdKey)));
+                userName = res.getString(UsernameKey);
+                if (!userName.isEmpty())
+                    ret.add(new Individual(userName, res.getInt(BalanceKey), res.getString(DisplayNameKey),
+                            res.getBoolean(IsAdminKey), getPaidHouses(userName, connection)));
             }
             res.close();
             stmt.close();
-
-            ret = userName.isEmpty() ? null : new Individual(username, balance, displayName, isAdmin, paidHouses);
         } finally {
             if (connection != null)
                 connection.close();

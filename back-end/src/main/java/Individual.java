@@ -16,7 +16,7 @@ public class Individual extends User {
             balance = 0;
         this.balance = balance;
         this.displayName = displayName;
-        this.isAdmin =isAdmin;
+        this.isAdmin = isAdmin;
     }
 
     public Individual(String username, int balance, String displayName, boolean isAdmin,

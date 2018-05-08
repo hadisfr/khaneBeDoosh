@@ -34,7 +34,7 @@ public class KhaneBeDoosh {
                 "catalina.base")).getAbsoluteFile(), "webapps/khaneBeDoosh/WEB-INF/khaneBeDoosh.db"));
     }
 
-    private static final String defaultUserUsername = "behnam";
+    private static final String defaultUserUsername = "admin";
 
     private KhaneBeDoosh() {
         Logger logger = Logger.getLogger(KhaneBeDoosh.class.getName());
@@ -105,5 +105,9 @@ public class KhaneBeDoosh {
             throws SQLException, IOException, ClassNotFoundException {
         HouseMapper.insertHouse(new House(id, area, buildingType, imageUrl, owner, address,
                 phone, description, new PriceRent(rentPrice, basePrice)));
+    }
+
+    public ArrayList<Individual> getIndividuals() throws SQLException, ClassNotFoundException {
+        return IndividualMapper.getIndividuals();
     }
 }
