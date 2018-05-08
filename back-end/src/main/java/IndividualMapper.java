@@ -15,6 +15,7 @@ public class IndividualMapper {
     private static final String OwnerIdKey = "ownerId";
     private static final String HouseIdKey = "houseId";
     private static final String PayerKey = "individualId";
+    private static final String IsAdminKey = "isAdmin";
     private static final Logger logger = Logger.getLogger(IndividualMapper.class.getName());
     private static final String dbUri = String.format("jdbc:sqlite:%s", new File(new File(System.getProperty(
             "catalina.base")).getAbsoluteFile(), "webapps/khaneBeDoosh/WEB-INF/khaneBeDoosh.db"));
@@ -42,10 +43,12 @@ public class IndividualMapper {
             String userName = "";
             int balance = 0;
             String displayName = "";
+            boolean isAdmin = false;
             if (res.next()) {
                 userName = res.getString(UsernameKey);
                 balance = res.getInt(BalanceKey);
                 displayName = res.getString(DisplayNameKey);
+                isAdmin = res.getBoolean(IsAdminKey);
             }
             res.close();
             stmt.close();
@@ -62,7 +65,7 @@ public class IndividualMapper {
             res.close();
             stmt.close();
 
-            ret = new Individual(username, balance, displayName, paidHouses);
+            ret = userName.isEmpty() ? null : new Individual(username, balance, displayName, isAdmin, paidHouses);
         } finally {
             if (connection != null)
                 connection.close();

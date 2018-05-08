@@ -46,6 +46,7 @@ public class UserServlet extends HttpServlet {
                 res.put("name", currentUser.getDisplayName());
                 res.put("username", currentUser.getUsername());
                 res.put("balance", "" + currentUser.getBalance());
+                res.put("isAdmin", "" + currentUser.getIsAdmin());
                 response.getWriter().write((new Gson()).toJson(res));
             } else {
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

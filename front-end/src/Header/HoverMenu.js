@@ -14,7 +14,10 @@ class HoverMenu extends Component {
                 </button>
                 <div className='hover-menu-wrapper'>
                     <div className='hover-menu'>
-                        <div>{this.props.user ? this.props.user.name : 'کاربر مهمان'}</div>
+                        <div>
+                            {this.props.user && this.props.user.isAdmin && <span class="far fa-star">&nbsp;</span>}
+                            {this.props.user ? this.props.user.name : 'کاربر مهمان'}
+                        </div>
                         {this.props.user &&
                             <div className='unimportant'>
                                 <span className='center-right w50'>اعتبار:</span>

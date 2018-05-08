@@ -6,21 +6,27 @@ public class Individual extends User {
 
     private int balance;
     private String displayName;
+    private boolean isAdmin;
 
     private ArrayList<StringStringPair> paidHouses = new ArrayList<StringStringPair>();
 
-    public Individual(String username, int balance, String displayName) {
+    public Individual(String username, int balance, String displayName, boolean isAdmin) {
         super(username);
         if (balance < 0)
             balance = 0;
         this.balance = balance;
         this.displayName = displayName;
+        this.isAdmin =isAdmin;
     }
 
-    public Individual(String username, int balance, String displayName,
+    public Individual(String username, int balance, String displayName, boolean isAdmin,
                       ArrayList<StringStringPair> paidHouses) {
-        this(username, balance, displayName);
+        this(username, balance, displayName, isAdmin);
         this.paidHouses = new ArrayList<StringStringPair>(paidHouses);
+    }
+
+    public boolean getIsAdmin() {
+        return isAdmin;
     }
 
     public boolean hasPaidforHouse(String houseId, String ownerId) {
