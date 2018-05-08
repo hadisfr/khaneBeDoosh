@@ -22,7 +22,7 @@ public class HousesServlet extends HttpServlet {
     /**
      * @api {get} /houses get bought houses
      * @apiGroup House
-     * @apiVersion 1.0.1
+     * @apiVersion 1.1.0
      * @apiName getHouses
      * @apiSuccess {object[]} _ array of objects with:
      * @apiSuccess {string} _.id
