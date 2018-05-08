@@ -18,10 +18,11 @@ import NewHouseForm from '../NewHouseForm/NewHouseForm'
 import backend_api from '../back-end-api.json'
 import frontend_api from '../front-end-api.json'
 
-function user(name, username, balance) {
+function user(name, username, balance, isAdmin) {
     this.name = name;
-    this.username= username;
-    this.balance= balance;
+    this.username = username;
+    this.balance = balance;
+    this.isAdmin = isAdmin;
 }
 
 class App extends Component {
@@ -58,7 +59,7 @@ class App extends Component {
             (res) => (res.status === HttpStatus.OK ? res.json() : null),
             (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR))
         ).then(function(res) {
-            this.setState(res ? { user: new user(res.name, res.username, res.balance) } : null);
+            this.setState(res ? { user: new user(res.name, res.username, res.balance, res.isAdmin) } : null);
         }.bind(this), (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR)));
     }
 
