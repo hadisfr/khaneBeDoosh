@@ -49,7 +49,7 @@ public class PayServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         HashMap<String, Boolean> res = new HashMap<String, Boolean>();
         try {
-            Individual currentUser = KhaneBeDoosh.getInstance().getDefaultUser();
+            Individual currentUser = (Individual) request.getAttribute(AuthenticationFilter.UserKey);
             if (currentUser != null) {
                 if (!request.getParameterMap().containsKey("balance"))
                     throw new IllegalArgumentException("missing balance");

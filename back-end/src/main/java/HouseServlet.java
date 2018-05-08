@@ -124,7 +124,7 @@ public class HouseServlet extends HttpServlet {
         try {
             String id = RandomStringUtils.randomAlphabetic(20);
             String imageUrl = "";
-            User currentUser = KhaneBeDoosh.getInstance().getDefaultUser();
+            User currentUser = (Individual) request.getAttribute(AuthenticationFilter.UserKey);
             if (currentUser != null) {
                 if (!request.getParameterMap().containsKey("dealType"))
                     throw new IllegalArgumentException("missing dealType");

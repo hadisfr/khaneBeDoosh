@@ -52,7 +52,7 @@ public class HousesServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         try {
-            Individual currentUser = KhaneBeDoosh.getInstance().getDefaultUser();
+            Individual currentUser = (Individual) request.getAttribute(AuthenticationFilter.UserKey);
             if (currentUser != null) {
                 if (currentUser.getIsAdmin()) {
                     HashMap<String, ArrayList<SearchHouseWrapper>> housesByUsers =

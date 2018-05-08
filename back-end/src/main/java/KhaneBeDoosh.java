@@ -43,10 +43,6 @@ public class KhaneBeDoosh {
         realEstates.put(RealEstateAcm.getInstance().getUsername(), RealEstateAcm.getInstance());
     }
 
-    public Individual getDefaultUser() throws SQLException, ClassNotFoundException {
-        return (Individual) (getUserById(defaultUserUsername));
-    }
-
     public boolean increaseBalance(Individual user, int amount)
             throws IllegalArgumentException, SQLException, ClassNotFoundException, IOException {
         if (amount < 0)
@@ -56,7 +52,7 @@ public class KhaneBeDoosh {
         request.addHeader("Content-Type", "application/json");
         request.addHeader("apiKey", bankAPIKey);
         request.setEntity(new StringEntity(String.format("{\"userId\": %s, \"value\": \"%d\"}",
-                getDefaultUser().getUsername(), amount)));
+                user.getUsername(), amount)));
         JSONObject response = new JSONObject(IOUtils.toString(client.execute(request).getEntity().getContent()));
 //        boolean payResult = response.getBoolean("success");
         boolean payResult = response.getString("result").equals("OK");
