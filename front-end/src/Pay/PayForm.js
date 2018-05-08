@@ -9,7 +9,7 @@ class PayForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            balance: "",
+            balance: '',
         };
     }
 
@@ -21,15 +21,15 @@ class PayForm extends Component {
     handleSubmit(event) {
         event.preventDefault();
         fetch(backend_api.pay, {
-            method: "POST",
-            body: new URLSearchParams("balance=" + this.state.balance),
+            method: 'POST',
+            body: new URLSearchParams('balance=' + this.state.balance),
             headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
+                'Content-Type': 'application/x-www-form-urlencoded',
             },
         }).then(
             function (res) {
                 if(res.status === HttpStatus.OK) {
-                    this.props.msgPresenter.showMsg("اعتبار شما افزایش یافت!");
+                    this.props.msgPresenter.showMsg('اعتبار شما افزایش یافت!');
                     this.props.history.goBack();
                 }
                 else {
@@ -48,21 +48,21 @@ class PayForm extends Component {
         return (
             <form onSubmit={(event) => this.handleSubmit(event)}>
                 <input
-                    type="number"
-                    name="balance"
-                    min="0"
-                    step="1"
-                    placeholder="مبلغ مورد نظر"
+                    type='number'
+                    name='balance'
+                    min='0'
+                    step='1'
+                    placeholder='مبلغ مورد نظر'
                     onChange={(event) => this.handleChange(event)}
                     value={this.state.balance}
                 />
-                <span className="pay-badge">تومان</span>
+                <span className='pay-badge'>تومان</span>
                 <input
-                    type="submit"
-                    value="افزایش اعتبار"
-                    className="btn btn-green"
+                    type='submit'
+                    value='افزایش اعتبار'
+                    className='btn btn-green'
                     required
-                    disabled={!(RegExp("^[0123456789]+$").test(this.state.balance))}
+                    disabled={!(RegExp('^[0123456789]+$').test(this.state.balance))}
                 />
             </form>
         );

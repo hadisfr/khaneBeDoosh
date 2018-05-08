@@ -12,7 +12,7 @@ class HouseDetails extends Component {
     }
 
     componentDidMount() {
-        fetch(backend_api.house_details + "?id=" + this.props.match.params.id)
+        fetch(backend_api.house_details + '?id=' + this.props.match.params.id)
         .then(
             (res) => (res.status === HttpStatus.OK ? res.json() : this.props.history.push(frontend_api.error + res.status)),
             (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR))
@@ -22,7 +22,7 @@ class HouseDetails extends Component {
     }
 
     getPhone(event) {
-        fetch(backend_api.get_phone + "?id=" + this.props.match.params.id)
+        fetch(backend_api.get_phone + '?id=' + this.props.match.params.id)
         .then(
             (res) => (res.status === HttpStatus.OK ? res.json() : this.props.history.push(frontend_api.error + res.status)),
             (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR))
@@ -35,50 +35,50 @@ class HouseDetails extends Component {
     render() {
         const det = this.state.house_details;
         return (
-            <div className="row">
-                <div className="col-12 col-lg-4">
-                    <button className={"btn " + (det && (
-                        det.dealType === "SELL" ? "btn-red" : det.dealType === "RENT" ? "btn-violet" : ""
+            <div className='row'>
+                <div className='col-12 col-lg-4'>
+                    <button className={'btn ' + (det && (
+                        det.dealType === 'SELL' ? 'btn-red' : det.dealType === 'RENT' ? 'btn-violet' : ''
                     ))}>{det && (
-                        det.dealType === "SELL" ? "خرید" : det.dealType === "RENT" ? "رهن و اجاره" : null
+                        det.dealType === 'SELL' ? 'خرید' : det.dealType === 'RENT' ? 'رهن و اجاره' : null
                     )}</button>
-                    <dl id="house-detail">
+                    <dl id='house-detail'>
                         <dt>نوع ساختمان</dt><dd>{det && (
-                            det.buildingType === "APARTMENT"
-                            ? "آپارتمان"
-                            : det.buildingType === "VILLA"
-                                ? "ویلایی"
+                            det.buildingType === 'APARTMENT'
+                            ? 'آپارتمان'
+                            : det.buildingType === 'VILLA'
+                                ? 'ویلایی'
                                 : det.buildingType
                         )}</dd>
                         {(det && (
-                            det.dealType === "SELL"
+                            det.dealType === 'SELL'
                             ? <dt>قیمت فروش</dt>
-                            : det.dealType === "RENT"
+                            : det.dealType === 'RENT'
                                 ? <dt>قیمت رهن</dt>
                                 : null
                         ))}
                         {(det && (
-                            det.dealType === "SELL"
+                            det.dealType === 'SELL'
                             ? <dd>{det.price.sellPrice} تومان</dd>
-                            : det.dealType === "RENT"
+                            : det.dealType === 'RENT'
                                 ? <dd>{det.price.basePrice} تومان</dd>
                                 : null
                         ))}
                         {(det && (
-                            det.dealType === "RENT"
+                            det.dealType === 'RENT'
                             ? <dt>قیمت اجاره</dt>
                             : null
                         ))}
                         {(det && (
-                            det.dealType === "RENT"
+                            det.dealType === 'RENT'
                             ? <dd>{det.price.rentPrice} تومان</dd>
                             : null
                         ))}
                         <dt>آدرس</dt><dd>{(det && det.address) || <span>&nbsp;</span>}</dd>
                         <dt>متراژ</dt><dd>{det && det.area} متر مربع</dd>
                         {!this.state.phone && <button
-                            id="change-number-status"
-                            className="btn btn-green"
+                            id='change-number-status'
+                            className='btn btn-green'
                             onClick={(event) => (this.getPhone(event))}
                         >نمایش شماره</button>}
                         {this.state.phone !== undefined && <dt>شماره</dt>}
@@ -86,8 +86,8 @@ class HouseDetails extends Component {
                         <dt>توضیحات</dt><dd>{(det && det.description) || <span>&nbsp;</span>}</dd>
                     </dl>
                 </div>
-                <div className="col-12 col-lg-8">
-                    <img id="house-pic" src={det && det.imageUrl} alt={det && det.imageUrl} />
+                <div className='col-12 col-lg-8'>
+                    <img id='house-pic' src={det && det.imageUrl} alt={det && det.imageUrl} />
                 </div>
             </div>
         );

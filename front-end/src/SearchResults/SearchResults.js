@@ -31,14 +31,14 @@ class SearchResults extends Component {
 
     render() {
         return (
-            <div className="row SearchResults">
-                <div className="center-align col-12 gray">برای مشاهدهٔ اطلاعات بیشتر دربارهٔ هر خانه روی آن کلیک کنید.</div>
-                <div className="search-results col-12"><div className="row">
+            <div className='row SearchResults'>
+                <div className='center-align col-12 gray'>برای مشاهدهٔ اطلاعات بیشتر دربارهٔ هر خانه روی آن کلیک کنید.</div>
+                <div className='search-results col-12'><div className='row'>
                     {this.state.houses.map((house) => <SearchResult key={house.id} house={house} />)}
                 </div></div>
-                <div className="search col-12"><div className="row">
-                    <div className="center-align col-12 gray">جست‌وجوی مجدد</div>
-                    <div className="box-wrapper col-12 gray"><div className="box-dark">
+                <div className='search col-12'><div className='row'>
+                    <div className='center-align col-12 gray'>جست‌وجوی مجدد</div>
+                    <div className='box-wrapper col-12 gray'><div className='box-dark'>
                         <SearchForm call_back={ this.fetchResults.bind(this) } />
                     </div></div>
                 </div></div>

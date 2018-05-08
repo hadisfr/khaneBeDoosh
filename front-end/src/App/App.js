@@ -64,23 +64,23 @@ class App extends Component {
 
     render() {
         return (
-            <div className="container-fluid main">
+            <div className='container-fluid main'>
                 <Header user={this.state.user} />
                 {
                     (this.state.msg && this.state.msg.length > 0)
-                    && <div className="msgbox">{this.state.msg.reduce((prev, curr) => [prev, <br />, curr])}</div>
+                    && <div className='msgbox'>{this.state.msg.reduce((prev, curr) => [prev, <br />, curr])}</div>
                 }
                 <Route exact path={frontend_api.root} component={LandingBackground} />
                 <Switch>
                     <Route exact path={frontend_api.root} />
-                    <Route exact path={frontend_api.pay} render={(props) => <PageTitle title="افزایش موجودی" />} />
-                    <Route path={frontend_api.new_house} render={(props) => <PageTitle title="ثبت ملک جدید" />} />
-                    <Route path={frontend_api.house_details + ":id"} render={(props) => <PageTitle title="مشخصات کامل ملک" />} />
-                    <Route path={frontend_api.search} render={(props) => <PageTitle title="نتایج جست‌وجو" />} />
-                    <Route path={frontend_api.error + ":id([0-9]{3})"} render={(props) => <PageTitle title="خطا" />} />
-                    <Redirect from="*" to={frontend_api.error + HttpStatus.NOT_FOUND} />
+                    <Route exact path={frontend_api.pay} render={(props) => <PageTitle title='افزایش موجودی' />} />
+                    <Route path={frontend_api.new_house} render={(props) => <PageTitle title='ثبت ملک جدید' />} />
+                    <Route path={frontend_api.house_details + ':id'} render={(props) => <PageTitle title='مشخصات کامل ملک' />} />
+                    <Route path={frontend_api.search} render={(props) => <PageTitle title='نتایج جست‌وجو' />} />
+                    <Route path={frontend_api.error + ':id([0-9]{3})'} render={(props) => <PageTitle title='خطا' />} />
+                    <Redirect from='*' to={frontend_api.error + HttpStatus.NOT_FOUND} />
                 </Switch>
-                <div className="cnt row"><div className="col-1"></div><div className="col-10 center-align">
+                <div className='cnt row'><div className='col-1'></div><div className='col-10 center-align'>
                     <Switch>
                         <Route exact path={frontend_api.root} render={(props) => <Landing />} />
                         <Route
@@ -104,13 +104,13 @@ class App extends Component {
                             )}
                         />
                         <Route
-                            path={frontend_api.house_details + ":id"}
+                            path={frontend_api.house_details + ':id'}
                             render={(props) => <HouseDetails callBack={this.updateUserInfo.bind(this)} />}
                         />
                         <Route path={frontend_api.search} render={(props) => <SearchResults />} />
-                        <Route path={frontend_api.error + ":id"} component={ErrorMsg} />
+                        <Route path={frontend_api.error + ':id'} component={ErrorMsg} />
                     </Switch>
-                </div><div className="col-1"></div></div>
+                </div><div className='col-1'></div></div>
                 <Footer />
             </div>
         );
