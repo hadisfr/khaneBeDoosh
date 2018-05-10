@@ -8,7 +8,9 @@ CREATE TABLE "Individual" (
     "username" TEXT PRIMARY KEY NOT NULL REFERENCES "User" ON DELETE CASCADE ON UPDATE CASCADE,
     "displayName" TEXT,
     "balance" INTEGER DEFAULT 0,
-    "isAdmin" BOOLEAN DEFAULT FALSE
+    "isAdmin" BOOLEAN DEFAULT FALSE,
+    "passwordHash" TEXT,
+    "passwordSalt" TEXT
 );
 CREATE TRIGGER "Individual_Creation"
     BEFORE INSERT ON "Individual"
@@ -80,10 +82,10 @@ CREATE TABLE "PaidHouses" (
     FOREIGN KEY ("houseId", "ownerId") REFERENCES "House" ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-INSERT INTO "Individual" ("username","displayName","balance", "isAdmin")
-    VALUES ("behnam","بهنام همایون","200", FALSE);
-INSERT INTO "Individual" ("username","displayName","balance", "isAdmin")
-    VALUES ("admin","ادمین","200", TRUE);
+INSERT INTO "Individual" ("username","displayName","balance","isAdmin","passwordHash","passwordSalt")
+    VALUES ("behnam","بهنام همایون","200", 0, "UM6RigwvZ2GbE5G5+fplRYcMHvUG38grN6lJmPfjanQ=", "smCGaStCKSYRr1aRSRdEEboMa4ectuC5lP1y42/nCVw=");
+INSERT INTO "Individual" ("username","displayName","balance","isAdmin","passwordHash","passwordSalt")
+    VALUES ("admin","ادمین","200", 1, "UM6RigwvZ2GbE5G5+fplRYcMHvUG38grN6lJmPfjanQ=", "smCGaStCKSYRr1aRSRdEEboMa4ectuC5lP1y42/nCVw=");
 REPLACE INTO "House" ("houseId","ownerId","area","imageUrl","address","phone","description","buildingType","dealType","priceBase","priceRent","priceSell")
     VALUES ('sdfghjkcxjhjkojhlkmknzvnsdjlkfalkdnamxjamoddmodm','behnam','100','','UT','09123456789','?!!','VILLA','SELL',0,0,'100');
 INSERT INTO "PaidHouses" ("individualId","ownerId","houseId")
