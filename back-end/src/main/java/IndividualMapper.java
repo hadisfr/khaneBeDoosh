@@ -3,6 +3,7 @@ package main.java;
 import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 public class IndividualMapper {
@@ -16,6 +17,8 @@ public class IndividualMapper {
     private static final String HouseIdKey = "houseId";
     private static final String PayerKey = "individualId";
     private static final String IsAdminKey = "isAdmin";
+    private static final String HashKey = "passwordHash";
+    private static final String SaltKey = "passwordSalt";
     private static final Logger logger = Logger.getLogger(IndividualMapper.class.getName());
     private static final String dbUri = String.format("jdbc:sqlite:%s", new File(new File(System.getProperty(
             "catalina.base")).getAbsoluteFile(), "webapps/khaneBeDoosh/WEB-INF/khaneBeDoosh.db"));
@@ -227,7 +230,32 @@ public class IndividualMapper {
     public static boolean isAuthenticationValid(String username, String password)
             throws SQLException, ClassNotFoundException {
         logger.info(String.format("validate authentication (username=%s)", username));
-        // TODO: validate password
-        return getByUsername(username) != null;
+
+        boolean result = false;
+
+        Class.forName("org.sqlite.JDBC");
+
+        Connection connection = null;
+        try {
+            connection = DriverManager.getConnection(dbUri);
+
+            PreparedStatement stmt = connection.prepareStatement(String.format("select %s, %s from %s where %s=?;",
+                    HashKey, SaltKey, IndividualTableName, UsernameKey));
+            stmt.setString(1, username);
+            stmt.setQueryTimeout(30);
+            ResultSet res = stmt.executeQuery();
+            while (res.next()) {
+                String savedHash = res.getString(HashKey);
+                String salt = res.getString(SaltKey);
+                result = Utility.checkHash(password, salt, savedHash);
+            }
+            res.close();
+            stmt.close();
+        } finally {
+            if (connection != null)
+                connection.close();
+        }
+//        return result; TODO: uncomment this!
+        return true;
     }
 }
