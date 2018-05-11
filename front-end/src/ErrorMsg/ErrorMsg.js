@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import './ErrorMsg.css';
+import frontend_api from '../front-end-api.json';
 
 const err_msg = {
     '400': 'درخواست اشتباه است',
@@ -15,6 +16,11 @@ const err_msg = {
 
 class ErrorMsg extends Component {
     render() {
+        if (this.props.match.params.id == 401) {
+            return (
+                <Redirect to={frontend_api.login} />
+            );
+        }
         return (
             <div className='error-msg'>
                 <h3>خطای {this.props.match.params.id}</h3>
