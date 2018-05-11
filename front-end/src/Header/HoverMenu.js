@@ -5,6 +5,7 @@ import frontend_api from '../front-end-api.json';
 
 class HoverMenu extends Component {
     render() {
+        console.log(this.props.user);
         return (
             <div className='toggle'>
                 <button className='btn btn-outline-violet toggle'>

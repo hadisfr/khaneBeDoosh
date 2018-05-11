@@ -24,7 +24,7 @@ public class AuthenticationFilter implements Filter {
 
     private String encoding;
 
-    public static final String UserKey = "USER";
+    public static final String UserKey = "User";
 
     public void init(FilterConfig config) throws ServletException {
         encoding = config.getInitParameter("requestEncoding");
