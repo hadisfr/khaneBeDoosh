@@ -25,7 +25,7 @@ class HouseDetails extends Component {
         fetch(backend_api.get_phone + '?id=' + this.props.match.params.id, {
             method: 'GET',
             headers: {
-                'Authorization': 'Bearer ' + this.getToken(),
+                'Authorization': 'Bearer ' + this.props.getToken(),
             },
         })
             .then(
