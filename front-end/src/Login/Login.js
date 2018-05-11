@@ -26,14 +26,23 @@ class Login extends Component {
         const query = Object.keys(this.state).filter((key) => (this.state[key]))
             .map((key) => (key + '=' + this.state[key])).join('&');
         fetch(backend_api.login + '?' + query)
-            .then(
-                (res) => (res.status === HttpStatus.OK ? res.json() : this.props.history.push(frontend_api.error + res.status)),
-                (err) => (this.props.msgPresenter.showMsg('ورود ناموفق بود.'))
-            ).then(function (res) {
-            this.props.msgPresenter.showMsg('خوش آمدید!');
-            localStorage.setItem("token", res.token);
-            this.props.callBack();
-            this.props.history.goBack();
+        .then(
+            (res) => (
+                res.status === HttpStatus.OK
+                ? res.json()
+                : res.status === HttpStatus.FORBIDDEN
+                    ? null
+                    : this.props.history.push(frontend_api.error + res.status)
+            ), (err) => (null)
+        ).then(function (res) {
+            if (res) {
+                this.props.msgPresenter.showMsg('خوش آمدید!');
+                localStorage.setItem("token", res.token);
+                this.props.callBack();
+                this.props.history.goBack();
+            } else {
+                this.props.msgPresenter.showMsg('ورود ناموفق بود.')
+            }
         }.bind(this), (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR)));
     }
 

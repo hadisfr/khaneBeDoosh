@@ -21,11 +21,12 @@ class SearchResults extends Component {
 
     fetchResults(query) {
         fetch(backend_api.search + query)
-            .then(
-                (res) => (res.status === HttpStatus.OK ? res.json() : this.props.history.push(frontend_api.error + res.status)),
-                (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR))
-            ).then(function (res) {
-            this.setState({houses: res});
+        .then(
+            (res) => (res.status === HttpStatus.OK ? res.json() : this.props.history.push(frontend_api.error + res.status)),
+            (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR))
+        ).then(function (res) {
+            if (res)
+                this.setState({houses: res});
         }.bind(this), (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR)));
     }
 
