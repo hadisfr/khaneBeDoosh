@@ -255,7 +255,7 @@ public class IndividualMapper {
             if (connection != null)
                 connection.close();
         }
-//        return result; TODO: uncomment this!
-        return true;
+        return result;
+//        return true;// TODO:don't uncomment this
     }
 }
