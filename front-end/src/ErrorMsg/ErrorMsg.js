@@ -16,7 +16,7 @@ const err_msg = {
 
 class ErrorMsg extends Component {
     render() {
-        if (this.props.match.params.id == 401) {
+        if (this.props.match.params.id === '401') {
             return (
                 <Redirect to={frontend_api.login} />
             );
