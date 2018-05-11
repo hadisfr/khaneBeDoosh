@@ -48,7 +48,7 @@ public class AuthenticationFilter implements Filter {
                     user = (Individual) KhaneBeDoosh.getInstance().getUserById(username);
                 } catch (IllegalArgumentException e) {
                     logger.warning(org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(e));
-                    ((HttpServletResponse) response).setStatus(HttpServletResponse.SC_FORBIDDEN);
+                    ((HttpServletResponse) response).setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                     HashMap<String, String> err_res = new HashMap<String, String>();
                     err_res.put("msg", e.getMessage());
                     response.getWriter().write((new Gson()).toJson(err_res));
