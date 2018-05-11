@@ -71,7 +71,7 @@ class App extends Component {
     }
 
     getToken() {
-        return window.localStorage.getItem('token');
+        return localStorage.getItem('token');
     }
 
     render() {
