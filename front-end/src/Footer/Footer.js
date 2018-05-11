@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 import './Footer.css';
-import SocialLogo from './SocialLogo'
-import CopyrightOwner from './CopyrightOwner'
+import SocialLogo from './SocialLogo';
+import CopyrightOwner from './CopyrightOwner';
 
 class Footer extends Component {
     render() {

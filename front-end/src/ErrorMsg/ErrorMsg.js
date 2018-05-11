@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom'
-import './ErrorMsg.css'
+import { withRouter } from 'react-router-dom';
+import './ErrorMsg.css';
 
 const err_msg = {
     '400': 'درخواست اشتباه است',

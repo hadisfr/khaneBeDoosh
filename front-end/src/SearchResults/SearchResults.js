@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import './SearchResults.css'
 import HttpStatus from 'http-status-codes';
-import SearchResult from './SearchResult'
-import SearchForm from '../SearchForm/SearchForm'
-import backend_api from '../back-end-api.json'
-import frontend_api from '../front-end-api.json'
+import SearchResult from './SearchResult';
+import SearchForm from '../SearchForm/SearchForm';
+import backend_api from '../back-end-api.json';
+import frontend_api from '../front-end-api.json';
 
 class SearchResults extends Component {
     constructor(props) {

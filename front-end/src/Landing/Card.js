@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom'
-import './Landing.css'
+import { withRouter } from 'react-router-dom';
+import './Landing.css';
 
 class Card extends Component {
     render() {

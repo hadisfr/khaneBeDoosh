@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
-import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import './main.css';
 import './boxes.css';
 import './boxes.css';
 import './btn.css';
 import HttpStatus from 'http-status-codes';
-import Header from '../Header/Header'
-import Footer from '../Footer/Footer'
-import PageTitle from '../PageTitle/PageTitle'
-import ErrorMsg from '../ErrorMsg/ErrorMsg'
-import Pay from '../Pay/Pay'
-import Login from '../Login/Login'
-import HouseDetails from '../HouseDetails/HouseDetails'
-import SearchResults from '../SearchResults/SearchResults'
-import Landing from '../Landing/Landing'
-import LandingBackground from '../Landing/LandingBackground'
-import NewHouseForm from '../NewHouseForm/NewHouseForm'
-import backend_api from '../back-end-api.json'
-import frontend_api from '../front-end-api.json'
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import PageTitle from '../PageTitle/PageTitle';
+import ErrorMsg from '../ErrorMsg/ErrorMsg';
+import Pay from '../Pay/Pay';
+import Login from '../Login/Login';
+import HouseDetails from '../HouseDetails/HouseDetails';
+import SearchResults from '../SearchResults/SearchResults';
+import Landing from '../Landing/Landing';
+import LandingBackground from '../Landing/LandingBackground';
+import NewHouseForm from '../NewHouseForm/NewHouseForm';
+import backend_api from '../back-end-api.json';
+import frontend_api from '../front-end-api.json';
 
 function user(name, username, balance, isAdmin) {
     this.name = name;

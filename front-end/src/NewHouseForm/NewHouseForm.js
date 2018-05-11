@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom'
-import './NewHouseForm.css'
+import { withRouter } from 'react-router-dom';
+import './NewHouseForm.css';
 import HttpStatus from 'http-status-codes';
-import backend_api from '../back-end-api.json'
-import frontend_api from '../front-end-api.json'
+import backend_api from '../back-end-api.json';
+import frontend_api from '../front-end-api.json';
 
 class NewHouseForm extends Component {
     constructor(props) {

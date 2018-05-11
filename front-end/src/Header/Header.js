@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom'
-import './Header.css'
-import Logo from './Logo'
-import HoverMenu from './HoverMenu'
+import { withRouter } from 'react-router-dom';
+import './Header.css';
+import Logo from './Logo';
+import HoverMenu from './HoverMenu';
 
 class Header extends Component {
     render() {

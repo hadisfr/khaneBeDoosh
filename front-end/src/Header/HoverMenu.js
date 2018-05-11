@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router-dom'
-import './Header.css'
-import HttpStatus from 'http-status-codes';
-import frontend_api from '../front-end-api.json'
+import { withRouter, Link } from 'react-router-dom';
+import './Header.css';
+import frontend_api from '../front-end-api.json';
 
 class HoverMenu extends Component {
     render() {

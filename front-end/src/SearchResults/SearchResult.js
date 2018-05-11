@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Link , withRouter } from 'react-router-dom'
-import './SearchResults.css'
-import frontend_api from '../front-end-api.json'
+import { Link , withRouter } from 'react-router-dom';
+import './SearchResults.css';
+import frontend_api from '../front-end-api.json';
 
 class SearchResult extends Component {
     render() {

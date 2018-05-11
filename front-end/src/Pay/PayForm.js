@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import HttpStatus from 'http-status-codes';
-import './Pay.css'
-import backend_api from '../back-end-api.json'
-import frontend_api from '../front-end-api.json'
+import './Pay.css';
+import backend_api from '../back-end-api.json';
+import frontend_api from '../front-end-api.json';
 
 class PayForm extends Component {
     constructor(props) {

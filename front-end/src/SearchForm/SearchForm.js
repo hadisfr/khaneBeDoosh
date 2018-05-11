@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom'
-import './SearchForm.css'
-import frontend_api from '../front-end-api.json'
+import { withRouter } from 'react-router-dom';
+import './SearchForm.css';
+import frontend_api from '../front-end-api.json';
 
 class SearchForm extends Component {
     constructor(props) {

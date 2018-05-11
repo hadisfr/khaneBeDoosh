@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom'
-import './Pay.css'
-import PayForm from './PayForm'
+import { withRouter } from 'react-router-dom';
+import './Pay.css';
+import PayForm from './PayForm';
 
 class Pay extends Component {
     render() {

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom'
-import './Landing.css'
-import SearchForm from '../SearchForm/SearchForm'
-import Card from './Card'
+import { withRouter } from 'react-router-dom';
+import './Landing.css';
+import SearchForm from '../SearchForm/SearchForm';
+import Card from './Card';
 
 class Landing extends Component {
     render() {
