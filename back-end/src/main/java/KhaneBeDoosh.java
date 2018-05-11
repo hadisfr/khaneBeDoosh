@@ -34,8 +34,6 @@ public class KhaneBeDoosh {
                 "catalina.base")).getAbsoluteFile(), "webapps/khaneBeDoosh/WEB-INF/khaneBeDoosh.db"));
     }
 
-    private static final String defaultUserUsername = "behnam";
-
     private KhaneBeDoosh() {
         Logger logger = Logger.getLogger(KhaneBeDoosh.class.getName());
         logger.info("Start KhaneBeDoosh");

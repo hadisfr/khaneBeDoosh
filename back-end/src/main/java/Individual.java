@@ -26,7 +26,7 @@ public class Individual extends User {
     }
 
     public boolean getIsAdmin() {
-        return isAdmin;
+        return this.isAdmin;
     }
 
     public boolean hasPaidforHouse(String houseId, String ownerId) {
