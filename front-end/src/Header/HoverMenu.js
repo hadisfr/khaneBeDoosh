@@ -25,7 +25,7 @@ class HoverMenu extends Component {
                             </div>
                         }
                         {!(this.props.user) &&
-                            <div><Link to={frontend_api.error + HttpStatus.NOT_IMPLEMENTED}>
+                            <div><Link to={frontend_api.login}>
                                 <button className='btn btn-red'>ورود به سایت</button>
                             </Link></div>
                         }

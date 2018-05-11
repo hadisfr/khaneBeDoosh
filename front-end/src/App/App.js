@@ -10,6 +10,7 @@ import Footer from '../Footer/Footer'
 import PageTitle from '../PageTitle/PageTitle'
 import ErrorMsg from '../ErrorMsg/ErrorMsg'
 import Pay from '../Pay/Pay'
+import Login from '../Login/Login'
 import HouseDetails from '../HouseDetails/HouseDetails'
 import SearchResults from '../SearchResults/SearchResults'
 import Landing from '../Landing/Landing'
@@ -74,6 +75,7 @@ class App extends Component {
                 <Route exact path={frontend_api.root} component={LandingBackground} />
                 <Switch>
                     <Route exact path={frontend_api.root} />
+                    <Route exact path={frontend_api.login} render={(props) => <PageTitle title='ورود به سایت' />} />
                     <Route exact path={frontend_api.pay} render={(props) => <PageTitle title='افزایش موجودی' />} />
                     <Route path={frontend_api.new_house} render={(props) => <PageTitle title='ثبت ملک جدید' />} />
                     <Route path={frontend_api.house_details + ':id'} render={(props) => <PageTitle title='مشخصات کامل ملک' />} />
@@ -84,6 +86,19 @@ class App extends Component {
                 <div className='cnt row'><div className='col-1'></div><div className='col-10 center-align'>
                     <Switch>
                         <Route exact path={frontend_api.root} render={(props) => <Landing />} />
+                        <Route
+                            exact path={frontend_api.login}
+                            render={(props) => (
+                                this.state.user 
+                                ? <Redirect to={frontend_api.root} />
+                                :
+                                <Login
+                                    user={this.state.user}
+                                    callBack={this.updateUserInfo.bind(this)}
+                                    msgPresenter={this.msgPresenter}
+                                />
+                            )}
+                        />
                         <Route
                             exact path={frontend_api.pay}
                             render={(props) => (

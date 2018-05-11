@@ -1,4 +1,5 @@
 {
+    "login": "/login",
     "pay": "/pay",
     "house_details": "/house/",
     "new_house": "/new_house",
