@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import React, {Component} from 'react';
+import {withRouter} from 'react-router-dom';
 import HttpStatus from 'http-status-codes';
 import './Login.css';
 import backend_api from '../back-end-api.json';
@@ -25,27 +25,16 @@ class Login extends Component {
         event.preventDefault();
         const query = Object.keys(this.state).filter((key) => (this.state[key]))
             .map((key) => (key + '=' + this.state[key])).join('&');
-        fetch(backend_api.login + '?' + query, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-        }).then(
-            function (res) {
-                if(res.status === HttpStatus.OK) {
-                    this.props.msgPresenter.showMsg('خوش آمدید!');
-                    this.props.history.goBack();
-                    this.props.callBack();
-                }
-                else {
-                    this.props.msgPresenter.showMsg('ورود ناموفق بود.');
-                }
-            }.bind(this),
-                (err) => (
-                    this.props.msgPresenter.showMsg(String(err))
-                    || this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR)
-                )
-            );
+        fetch(backend_api.login + '?' + query)
+            .then(
+                (res) => (res.status === HttpStatus.OK ? res.json() : this.props.history.push(frontend_api.error + res.status)),
+                (err) => (this.props.msgPresenter.showMsg('ورود ناموفق بود.'))
+            ).then(function (res) {
+            this.props.msgPresenter.showMsg('خوش آمدید!');
+            localStorage.setItem("token", res.token);
+            this.props.callBack();
+            this.props.history.goBack();
+        }.bind(this), (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR)));
     }
 
     render() {
@@ -71,7 +60,7 @@ class Login extends Component {
                         />
                         <input
                             type='submit'
-                            value='افزایش اعتبار'
+                            value='ورود'
                             className='btn btn-green'
                             required
                             disabled={!(RegExp('^[0123456789]+$').test(0))}

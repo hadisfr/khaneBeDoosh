@@ -1,9 +1,9 @@
 {
-    "login": "/login",
-    "pay": "/pay",
-    "house_details": "/house/",
-    "new_house": "/new_house",
-    "search": "/house",
-    "error": "/err/",
-    "root": "/"
+  "login": "/login",
+  "pay": "/pay",
+  "house_details": "/house/",
+  "new_house": "/new_house",
+  "search": "/house",
+  "error": "/err/",
+  "root": "/"
 }

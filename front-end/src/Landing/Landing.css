@@ -7,7 +7,7 @@
     padding-bottom: 36px;
 }
 
-#why-use-us div { 
+#why-use-us div {
     text-align: center;
 }
 
@@ -30,7 +30,6 @@
 #why-use-us div img {
     width: 80%;
 }
-
 
 .box-light {
     color: #4c4c4c;
@@ -88,6 +87,7 @@
     #logo-wrapper img.logo {
         width: 40%;
     }
+
     #logo-wrapper {
         margin-bottom: 30px;
         margin-top: 90px;

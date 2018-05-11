@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import React, {Component} from 'react';
+import {withRouter} from 'react-router-dom';
 import './Footer.css';
 import SocialLogo from './SocialLogo';
 import CopyrightOwner from './CopyrightOwner';
@@ -35,10 +35,10 @@ class Footer extends Component {
                     {copyright_owners.map((copyright_owner_inst) => (
                         <CopyrightOwner
                             key={copyright_owner_inst.name}
-                            name={copyright_owner_inst.name} 
+                            name={copyright_owner_inst.name}
                             website={copyright_owner_inst.url}
                         />
-                    )).reduce((prev , curr) => [prev, ' و ', curr])}
+                    )).reduce((prev, curr) => [prev, ' و ', curr])}
                     &nbsp;است.
                 </div>
                 <div className='col-sm-0 col-lg-5 vanish-sm'></div>

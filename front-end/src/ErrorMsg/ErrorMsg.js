@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Redirect, withRouter } from 'react-router-dom';
+import React, {Component} from 'react';
+import {Redirect, withRouter} from 'react-router-dom';
 import './ErrorMsg.css';
 import frontend_api from '../front-end-api.json';
 
@@ -18,7 +18,7 @@ class ErrorMsg extends Component {
     render() {
         if (this.props.match.params.id === '401') {
             return (
-                <Redirect to={frontend_api.login} />
+                <Redirect to={frontend_api.login}/>
             );
         }
         return (

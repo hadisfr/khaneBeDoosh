@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom'
+import React, {Component} from 'react';
+import {withRouter} from 'react-router-dom'
 import HttpStatus from 'http-status-codes';
 import './Pay.css';
 import backend_api from '../back-end-api.json';
@@ -28,7 +28,7 @@ class PayForm extends Component {
             },
         }).then(
             function (res) {
-                if(res.status === HttpStatus.OK) {
+                if (res.status === HttpStatus.OK) {
                     this.props.msgPresenter.showMsg('اعتبار شما افزایش یافت!');
                     this.props.history.goBack();
                     this.props.callBack();
@@ -37,11 +37,11 @@ class PayForm extends Component {
                     this.props.history.push(frontend_api.error + res.status);
                 }
             }.bind(this),
-                (err) => (
-                    this.props.msgPresenter.showMsg(String(err))
-                    || this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR)
-                )
-            );
+            (err) => (
+                this.props.msgPresenter.showMsg(String(err))
+                || this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR)
+            )
+        );
     }
 
     render() {

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import React, {Component} from 'react';
+import {withRouter} from 'react-router-dom';
 import './Landing.css';
 
 class LandingBackground extends Component {
@@ -12,7 +12,7 @@ class LandingBackground extends Component {
         ];
         const index = Math.floor(Math.random() * urls.length);
         return (
-            <div className='landing-background' style={{ backgroundImage: `url(${urls[index]})` }}></div>
+            <div className='landing-background' style={{backgroundImage: `url(${urls[index]})`}}></div>
         );
     }
 }

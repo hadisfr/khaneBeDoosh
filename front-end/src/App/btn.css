@@ -3,7 +3,6 @@
     transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out, border-color 0.35s ease-in-out, box-shadow 0.35s ease-in-out;
 }
 
-
 /*.btn-green-oldstyle */
 
 .btn-green-oldstyle {
@@ -73,7 +72,6 @@
 .show > .btn-outline-green-oldstyle.dropdown-toggle:focus {
     box-shadow: 0 0 0 0.2rem rgba(58, 210, 203, 0.5);
 }
-
 
 /*.btn-green */
 
@@ -149,7 +147,6 @@
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
 }
 
-
 /*.btn-red */
 
 .btn-red {
@@ -223,7 +220,6 @@
 .show > .btn-outline-red.dropdown-toggle:focus {
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
 }
-
 
 /*.btn-violet */
 
