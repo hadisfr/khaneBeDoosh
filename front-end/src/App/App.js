@@ -71,7 +71,7 @@ class App extends Component {
     }
 
     getToken() {
-        return localStorage.getItem('token');
+        return window.localStorage.getItem('token');
     }
 
     render() {
@@ -127,10 +127,12 @@ class App extends Component {
                             />
                             <Route
                                 path={frontend_api.new_house}
-                                getToken={this.getToken.bind(this)}
                                 render={(props) => (
                                     this.state.user
-                                        ? (<NewHouseForm msgPresenter={this.msgPresenter}/>)
+                                        ? (<NewHouseForm
+                                            msgPresenter={this.msgPresenter}
+                                            getToken={this.getToken.bind(this)}
+                                        />)
                                         : <Redirect to={frontend_api.error + HttpStatus.UNAUTHORIZED}/>
                                 )}
                             />

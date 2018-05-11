@@ -22,7 +22,12 @@ class HouseDetails extends Component {
     }
 
     getPhone(event) {
-        fetch(backend_api.get_phone + '?id=' + this.props.match.params.id)
+        fetch(backend_api.get_phone + '?id=' + this.props.match.params.id, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + this.getToken(),
+            },
+        })
             .then(
                 (res) => (res.status === HttpStatus.OK ? res.json() : this.props.history.push(frontend_api.error + res.status)),
                 (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR))

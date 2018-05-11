@@ -43,6 +43,7 @@ class NewHouseForm extends Component {
             body: new URLSearchParams(query),
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': 'Bearer ' + this.props.getToken(),
             },
         }).then(
             function (res) {

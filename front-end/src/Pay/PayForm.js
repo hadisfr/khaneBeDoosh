@@ -25,6 +25,7 @@ class PayForm extends Component {
             body: new URLSearchParams('balance=' + this.state.balance),
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': 'Bearer ' + this.props.getToken(),
             },
         }).then(
             function (res) {
