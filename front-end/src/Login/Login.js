@@ -35,11 +35,11 @@ class Login extends Component {
                 if(res.status === HttpStatus.OK) {
                     this.props.msgPresenter.showMsg('خوش آمدید!');
                     this.props.history.goBack();
+                    this.props.callBack();
                 }
                 else {
                     this.props.msgPresenter.showMsg('ورود ناموفق بود.');
                 }
-                this.props.callBack();
             }.bind(this),
                 (err) => (
                     this.props.msgPresenter.showMsg(String(err))

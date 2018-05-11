@@ -64,6 +64,10 @@ class App extends Component {
         }.bind(this), (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR)));
     }
 
+    getToken() {
+        return "TOKEN";
+    }
+
     render() {
         return (
             <div className='container-fluid main'>
@@ -105,6 +109,7 @@ class App extends Component {
                                 this.state.user 
                                 ? <Pay
                                     user={this.state.user}
+                                    getToken={this.getToken.bind(this)}
                                     callBack={this.updateUserInfo.bind(this)}
                                     msgPresenter={this.msgPresenter}
                                 />
@@ -113,6 +118,7 @@ class App extends Component {
                         />
                         <Route
                             path={frontend_api.new_house}
+                            getToken={this.getToken.bind(this)}
                             render={(props) => (
                                 this.state.user 
                                 ? (<NewHouseForm msgPresenter={this.msgPresenter} />)
@@ -121,9 +127,14 @@ class App extends Component {
                         />
                         <Route
                             path={frontend_api.house_details + ':id'}
-                            render={(props) => <HouseDetails callBack={this.updateUserInfo.bind(this)} />}
+                            render={(props) => <HouseDetails
+                                callBack={this.updateUserInfo.bind(this)}
+                                getToken={this.getToken.bind(this)}
+                            />}
                         />
-                        <Route path={frontend_api.search} render={(props) => <SearchResults />} />
+                        <Route path={frontend_api.search} render={(props) => <SearchResults
+                            getToken={this.getToken.bind(this)}
+                        />} />
                         <Route path={frontend_api.error + ':id'} component={ErrorMsg} />
                     </Switch>
                 </div><div className='col-1'></div></div>

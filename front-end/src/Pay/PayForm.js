@@ -31,11 +31,11 @@ class PayForm extends Component {
                 if(res.status === HttpStatus.OK) {
                     this.props.msgPresenter.showMsg('اعتبار شما افزایش یافت!');
                     this.props.history.goBack();
+                    this.props.callBack();
                 }
                 else {
                     this.props.history.push(frontend_api.error + res.status);
                 }
-                this.props.callBack();
             }.bind(this),
                 (err) => (
                     this.props.msgPresenter.showMsg(String(err))

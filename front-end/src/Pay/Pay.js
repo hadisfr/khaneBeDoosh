@@ -11,7 +11,11 @@ class Pay extends Component {
                     <span className='gray'>اعتبار کنونی </span> {this.props.user.balance} <span className='gray'> تومان</span>
                 </div>
                 <div className='col-12 col-lg-6'>
-                    <PayForm callBack={this.props.callBack} msgPresenter={this.props.msgPresenter} />
+                    <PayForm
+                        callBack={this.props.callBack}
+                        msgPresenter={this.props.msgPresenter}
+                        getToken={this.props.getToken}
+                    />
                 </div>
             </div>
         );
