@@ -56,16 +56,15 @@ class App extends Component {
 
     updateUserInfo() {
         fetch(backend_api.user, {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + this.getToken(),
-                },
-            }
-        )
-            .then(
-                (res) => (res.status === HttpStatus.OK ? res.json() : null),
-                (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR))
-            ).then(function (res) {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + this.getToken(),
+            },
+        })
+        .then(
+            (res) => (res.status === HttpStatus.OK ? res.json() : null),
+            (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR))
+        ).then(function (res) {
             this.setState(res ? {user: new user(res.name, res.username, res.balance, res.isAdmin)} : null);
         }.bind(this), (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR)));
     }

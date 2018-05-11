@@ -13,11 +13,12 @@ class HouseDetails extends Component {
 
     componentDidMount() {
         fetch(backend_api.house_details + '?id=' + this.props.match.params.id)
-            .then(
-                (res) => (res.status === HttpStatus.OK ? res.json() : this.props.history.push(frontend_api.error + res.status)),
-                (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR))
-            ).then(function (res) {
-            this.setState({house_details: res});
+        .then(
+            (res) => (res.status === HttpStatus.OK ? res.json() : this.props.history.push(frontend_api.error + res.status)),
+            (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR))
+        ).then(function (res) {
+            if (res)
+                this.setState({house_details: res});
         }.bind(this), (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR)));
     }
 
@@ -28,12 +29,14 @@ class HouseDetails extends Component {
                 'Authorization': 'Bearer ' + this.props.getToken(),
             },
         })
-            .then(
-                (res) => (res.status === HttpStatus.OK ? res.json() : this.props.history.push(frontend_api.error + res.status)),
-                (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR))
-            ).then(function (res) {
-            this.setState({phone: res.phone});
-            this.props.callBack();
+        .then(
+            (res) => (res.status === HttpStatus.OK ? res.json() : this.props.history.push(frontend_api.error + res.status)),
+            (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR))
+        ).then(function (res) {
+            if (res) {
+                this.setState({phone: res.phone});
+                this.props.callBack();
+            }
         }.bind(this), (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR)));
     }
 
