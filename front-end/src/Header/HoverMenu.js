@@ -5,6 +5,7 @@ import frontend_api from '../front-end-api.json';
 
 class HoverMenu extends Component {
     render() {
+        console.log(this.props.user);
         return (
             <div className='toggle'>
                 <button className='btn btn-outline-violet toggle'>
@@ -14,7 +15,7 @@ class HoverMenu extends Component {
                 <div className='hover-menu-wrapper'>
                     <div className='hover-menu'>
                         <div>
-                            {this.props.user && this.props.user.isAdmin && <span class="far fa-star">&nbsp;</span>}
+                            {this.props.user && this.props.user.isAdmin && <span className="far fa-star">&nbsp;</span>}
                             {this.props.user ? this.props.user.name : 'کاربر مهمان'}
                         </div>
                         {this.props.user &&

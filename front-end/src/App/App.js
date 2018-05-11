@@ -23,7 +23,7 @@ function user(name, username, balance, isAdmin) {
     this.name = name;
     this.username = username;
     this.balance = balance;
-    this.isAdmin = isAdmin;
+    this.isAdmin = isAdmin === true || isAdmin === 'true' || isAdmin === 'True' || isAdmin === 'TRUE';
 }
 
 class App extends Component {
