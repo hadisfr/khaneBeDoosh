@@ -31,7 +31,7 @@ class Login extends Component {
                 (err) => (this.props.msgPresenter.showMsg('ورود ناموفق بود.'))
             ).then(function (res) {
             this.props.msgPresenter.showMsg('خوش آمدید!');
-            window.sessionStorage.setItem("token", res.token);
+            window.localStorage.setItem("token", res.token);
             this.props.callBack();
             this.props.history.goBack();
         }.bind(this), (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR)));
