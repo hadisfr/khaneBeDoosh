@@ -4,11 +4,7 @@ var debug = require('debug')('khanebedoosh:routes');
 var HttpStatus = require('http-status-codes');
 
 router.get('/', (req, res) => {
-    res.redirect('doc');
-});
-
-router.get('/doc', (req, res) => {
-    res.sendStatus(HttpStatus.NOT_IMPLEMENTED).end();
+    res.send({ balance: 200, name: 'بهنام همایون', username: 'behnam' });
 });
 
 module.exports = router;

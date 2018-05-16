@@ -1,9 +1,9 @@
 {
-    "pay": "http://localhost:8080/khaneBeDoosh/pay",
-    "house_details": "http://localhost:8080/khaneBeDoosh/house",
-    "get_phone": "http://localhost:8080/khaneBeDoosh/phone",
-    "new_house": "http://localhost:8080/khaneBeDoosh/house",
-    "search": "http://localhost:8080/khaneBeDoosh/search",
-    "user": "http://localhost:8080/khaneBeDoosh/user",
-    "root": "http://localhost:8080/khaneBeDoosh"
+    "pay": "http://localhost:8000/pay",
+    "house_details": "http://localhost:8000/house",
+    "get_phone": "http://localhost:8000/phone",
+    "new_house": "http://localhost:8000/house",
+    "search": "http://localhost:8000/house",
+    "user": "http://localhost:8000/user",
+    "root": "http://localhost:8000"
 }

@@ -3,12 +3,10 @@ var router = express.Router();
 var debug = require('debug')('khanebedoosh:routes');
 var HttpStatus = require('http-status-codes');
 
-router.get('/', (req, res) => {
-    res.redirect('doc');
-});
-
-router.get('/doc', (req, res) => {
-    res.sendStatus(HttpStatus.NOT_IMPLEMENTED).end();
+router.post('/', (req, res) => {
+    var balance = req.body.balance;
+    if (balance === undefined) res.status(HttpStatus.BAD_REQUEST).end();
+    res.send({ succes: true });
 });
 
 module.exports = router;

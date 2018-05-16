@@ -12,7 +12,7 @@ class HouseDetails extends Component {
     }
 
     componentDidMount() {
-        fetch(backend_api.house_details + '?id=' + this.props.match.params.id)
+        fetch(backend_api.house_details + '/' + this.props.match.params.id)
         .then(
             (res) => (res.status === HttpStatus.OK ? res.json() : this.props.history.push(frontend_api.error + res.status)),
             (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR))
@@ -22,7 +22,7 @@ class HouseDetails extends Component {
     }
 
     getPhone(event) {
-        fetch(backend_api.get_phone + '?id=' + this.props.match.params.id)
+        fetch(backend_api.get_phone + '/' + this.props.match.params.id)
         .then(
             (res) => (res.status === HttpStatus.OK ? res.json() : this.props.history.push(frontend_api.error + res.status)),
             (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR))
