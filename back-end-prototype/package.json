@@ -1,0 +1,28 @@
+{
+    "name": "khanebedoosh",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "start": "LOG_LEVEL=tiny node ./bin/www",
+        "debug": "LOG_LEVEL=dev DEBUG=khanebedoosh:* nodemon ./bin/www",
+        "debug-verbose": "LOG_LEVEL=dev DEBUG=*:* nodemon ./bin/www"
+    },
+    "dependencies": {
+        "cookie-parser": "~1.4.3",
+        "debug": "~2.6.9",
+        "express": "~4.16.0",
+        "morgan": "~1.9.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://gitlab.com/hadi_sfr/khaneBeDoosh.git"
+    },
+    "author": "Hadi Safari & MohammadReza Tayaranina",
+    "bugs": {
+        "url": "https://gitlab.com/hadi_sfr/khaneBeDoosh/issues"
+    },
+    "homepage": "https://gitlab.com/hadi_sfr/khaneBeDoosh#README",
+    "devDependencies": {
+        "eslint": "^4.19.1"
+    }
+}
