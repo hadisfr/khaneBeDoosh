@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom'
-import './ErrorMsg.css'
+import { withRouter } from 'react-router-dom';
+import './ErrorMsg.css';
 
 const err_msg = {
     '400': 'درخواست اشتباه است',
@@ -10,15 +10,19 @@ const err_msg = {
     '404': 'صفحه پیدا نشد',
     '500': 'سرور مشکل پیدا کرده است',
     '501': 'پیاده‌سازی نشده است',
-    '502': 'دروازه مشکل دارد',
+    '502': 'دروازه مشکل دارد'
 };
 
 class ErrorMsg extends Component {
     render() {
         return (
-            <div className='error-msg'>
+            <div className="error-msg">
                 <h3>خطای {this.props.match.params.id}</h3>
-                <h4>{err_msg[this.props.match.params.id] ? err_msg[this.props.match.params.id] + '.' : ''}</h4>
+                <h4>
+                    {err_msg[this.props.match.params.id]
+                        ? err_msg[this.props.match.params.id] + '.'
+                        : ''}
+                </h4>
             </div>
         );
     }
