@@ -3,6 +3,7 @@ const Bank = require('./bank');
 const User = require('./user');
 const Individual = require('./individual');
 const RealEstate = require('./realEstate');
+const RealEstateAcm = require('./realEstateAcm');
 const House = require('./house');
 const BuildingType = require('../models/buildingType').BuildingType;
 const DealType = require('../models/dealType').DealType;
@@ -16,7 +17,10 @@ class KhaneBeDoosh {
                 'a1965d20-1280-11e8-87b4-496f79ef1988'
             );
             this.defaultUser = new Individual('behnam', 'بهنام همایون', 200);
-            this.houses = [];
+            this.realEstates = {};
+            this.realEstates[
+                new RealEstateAcm().username
+            ] = new RealEstateAcm();
             KhaneBeDoosh.instance = this;
         }
         return KhaneBeDoosh.instance;

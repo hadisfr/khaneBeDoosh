@@ -8,9 +8,9 @@ class RealEstate extends User {
         this._uri = uri;
         this._lastTimestamp = 0;
         this.getHouse = getHouse;
-        this.getHouses = () => {
-            var [houses, lastTimestamp] = getHouses();
-            this._lastTimestamp = lastTimestamp;
+        this.getHouses = async () => {
+            var { houses, expireTime } = await getHouses();
+            this._lastTimestamp = expireTime;
             return houses;
         };
     }
