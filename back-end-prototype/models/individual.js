@@ -32,7 +32,7 @@ class Individual extends User {
 
     get json() {
         var res = {};
-        res.displayName = this.displayName;
+        res.name = this.displayName;
         res.balance = this.balance;
         return { ...super.json, ...res };
     }
@@ -48,7 +48,7 @@ class Individual extends User {
         );
     }
 
-    payForHouse(houseId, ownerId) {
+    async payForHouse(houseId, ownerId) {
         try {
             this.balance -= PHONE_PRICE;
             if (!this.paidHouses.has(ownerId))

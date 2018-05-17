@@ -1,14 +1,34 @@
 var express = require('express');
 var router = express.Router();
-var debug = require('debug')('khanebedoosh:routes');
 var HttpStatus = require('http-status-codes');
+const khaneBeDoosh = require('../models/khaneBeDoosh');
+const decryptHouseId = require('../utility').decryptHouseId;
+var debug = require('debug')('khanebedoosh:routes');
 
 router.get('/:id', (req, res) => {
-    var houseId = req.params.id;
-    var hasPaid = true;
-    if (hasPaid) {
-        res.send({ phone: '686-04-0693' });
-    } else res.status(HttpStatus.PAYMENT_REQUIRED).end();
+    try {
+        var { ownerId, houseId } = decryptHouseId(req.params.id);
+        khaneBeDoosh
+            .getPhone(ownerId, houseId)
+            .then(phone => res.send({ phone: phone }))
+            .catch(err => {
+                if (err === 'Not Enough Balance') {
+                    debug(err);
+                    res.status(HttpStatus.PAYMENT_REQUIRED).end();
+                } else {
+                    debug(err.stack);
+                    res.status(HttpStatus.INTERNAL_SERVER_ERROR).end();
+                }
+            });
+    } catch (err) {
+        if (err.name === 'JsonWebTokenError') {
+            debug(err.name + ': ' + err.message);
+            res.status(HttpStatus.BAD_REQUEST).end();
+        } else {
+            debug(err.stack);
+            res.status(HttpStatus.INTERNAL_SERVER_ERROR).end();
+        }
+    }
 });
 
 module.exports = router;
