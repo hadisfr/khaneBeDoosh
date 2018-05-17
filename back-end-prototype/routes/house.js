@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var debug = require('debug')('khanebedoosh:routes');
 var HttpStatus = require('http-status-codes');
 const House = require('../models/house');
 const { BuildingType, toBuildingType } = require('../models/buildingType');
 const { DealType, toDealType } = require('../models/dealType');
 const decryptHouseId = require('../utility').decryptHouseId;
+var debug = require('debug')('khanebedoosh:routes');
 
 const h = new House(
     0,

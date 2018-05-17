@@ -1,6 +1,6 @@
 'use strict';
-var debug = require('debug')('khanebedoosh:utility');
 var jwt = require('jsonwebtoken');
+var debug = require('debug')('khanebedoosh:utility');
 
 const HOUSE_ID_SECRET = 'Shahrbaraaz';
 
