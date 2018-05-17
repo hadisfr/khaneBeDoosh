@@ -1,5 +1,6 @@
 'use strict';
 const User = require('../models/user');
+var debug = require('debug')('khanebedoosh:models');
 
 class RealEstate extends User {
     constructor(username, uri, getHouse, getHouses) {
@@ -13,15 +14,19 @@ class RealEstate extends User {
             return houses;
         };
     }
+
     get uri() {
         return this._uri;
     }
+
     get lastTimestamp() {
         return this._lastTimestamp;
     }
+
     set lastTimestamp(lastTimestamp) {
         this._lastTimestamp = lastTimestamp;
     }
+
     get json() {
         var res = {};
         res.uri = this.uri;
