@@ -1,5 +1,5 @@
 'use strict';
-const User = require('../models/user');
+const User = require('./user');
 var debug = require('debug')('khanebedoosh:models');
 
 class RealEstate extends User {
