@@ -3,7 +3,10 @@
     padding-top: 120px;
 }
 
-#why-use-us h1, #why-use-us h2, #why-use-us h3, #why-use-us h4 {
+#why-use-us h1,
+#why-use-us h2,
+#why-use-us h3,
+#why-use-us h4 {
     padding-bottom: 36px;
 }
 
@@ -21,8 +24,8 @@
 
 #why-use-us li::before {
     color: #5b539d;
-    content: "\f058";
-    font-family: "Font Awesome 5 Free";
+    content: '\f058';
+    font-family: 'Font Awesome 5 Free';
     font-weight: 900;
     padding: 0 16px;
 }
@@ -48,7 +51,10 @@
     text-align: center;
 }
 
-.box-light h1, .box-light h2, .box-light h3, .box-light h4 {
+.box-light h1,
+.box-light h2,
+.box-light h3,
+.box-light h4 {
     padding: 20px 3px;
 }
 
@@ -69,7 +75,8 @@
     width: 100vw;
 }
 
-#logo-wrapper, #logo-wrapper * {
+#logo-wrapper,
+#logo-wrapper * {
     text-align: center;
     text-shadow: 0 0 2px black;
 }

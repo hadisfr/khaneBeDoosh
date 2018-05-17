@@ -1,11 +1,16 @@
-.login input[type="text"], .login input[type="password"], .login input[type="number"], .login input[type="submit"] {
+.login input[type='text'],
+.login input[type='password'],
+.login input[type='number'],
+.login input[type='submit'] {
     display: inline-block;
     width: 100%;
     margin: 16px auto 0 auto;
     text-align: center;
 }
 
-.login input[type="text"], .login input[type="password"], .login input[type="number"] {
+.login input[type='text'],
+.login input[type='password'],
+.login input[type='number'] {
     border: 1px solid;
     border-radius: 6px;
     color: #9a9a9a;
@@ -13,12 +18,12 @@
     padding: 3px 16px;
 }
 
-.login input[type="radio"] {
+.login input[type='radio'] {
     margin: 6px;
     margin-right: 26px;
 }
 
-.login input[type="radio"]:first-child {
+.login input[type='radio']:first-child {
     margin-right: 6px;
 }
 
@@ -26,18 +31,22 @@
     text-align: center;
 }
 
-.login ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+.login ::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
     font-size: 0.8em;
 }
 
-.login ::-moz-placeholder { /* Firefox 19+ */
+.login ::-moz-placeholder {
+    /* Firefox 19+ */
     font-size: 0.8em;
 }
 
-.login :-ms-input-placeholder { /* IE 10+ */
+.login :-ms-input-placeholder {
+    /* IE 10+ */
     font-size: 0.8em;
 }
 
-.login :-moz-placeholder { /* Firefox 18- */
+.login :-moz-placeholder {
+    /* Firefox 18- */
     font-size: 0.8em;
 }

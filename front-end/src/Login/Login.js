@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {withRouter} from 'react-router-dom';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import HttpStatus from 'http-status-codes';
 import './Login.css';
 import backend_api from '../back-end-api.json';
@@ -23,60 +23,71 @@ class Login extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const query = Object.keys(this.state).filter((key) => (this.state[key]))
-            .map((key) => (key + '=' + this.state[key])).join('&');
+        const query = Object.keys(this.state)
+            .filter(key => this.state[key])
+            .map(key => key + '=' + this.state[key])
+            .join('&');
         fetch(backend_api.login + '?' + query)
-        .then(
-            (res) => (
-                res.status === HttpStatus.OK
-                ? res.json()
-                : res.status === HttpStatus.FORBIDDEN
-                    ? null
-                    : this.props.history.push(frontend_api.error + res.status)
-            ), (err) => (null)
-        ).then(function (res) {
-            if (res) {
-                this.props.msgPresenter.showMsg('خوش آمدید!');
-                localStorage.setItem("token", res.token);
-                this.props.callBack();
-                this.props.history.goBack();
-            } else {
-                this.props.msgPresenter.showMsg('ورود ناموفق بود.')
-            }
-        }.bind(this), (err) => (this.props.history.push(frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR)));
+            .then(
+                res =>
+                    res.status === HttpStatus.OK
+                        ? res.json()
+                        : res.status === HttpStatus.FORBIDDEN
+                            ? null
+                            : this.props.history.push(
+                                  frontend_api.error + res.status
+                              ),
+                err => null
+            )
+            .then(
+                function(res) {
+                    if (res) {
+                        this.props.msgPresenter.showMsg('خوش آمدید!');
+                        localStorage.setItem('token', res.token);
+                        this.props.callBack();
+                        this.props.history.goBack();
+                    } else {
+                        this.props.msgPresenter.showMsg('ورود ناموفق بود.');
+                    }
+                }.bind(this),
+                err =>
+                    this.props.history.push(
+                        frontend_api.error + HttpStatus.INTERNAL_SERVER_ERROR
+                    )
+            );
     }
 
     render() {
         return (
-            <div className='row login'>
-                <div className='col-0 col-lg-4'>&nbsp;</div>
-                <div className='col-12 col-lg-4'>
-                    <form onSubmit={(event) => this.handleSubmit(event)}>
+            <div className="row login">
+                <div className="col-0 col-lg-4">&nbsp;</div>
+                <div className="col-12 col-lg-4">
+                    <form onSubmit={event => this.handleSubmit(event)}>
                         <input
-                            type='text'
-                            name='username'
-                            dir='ltr'
-                            placeholder='نام کاربری'
-                            onChange={(event) => this.handleChange(event)}
+                            type="text"
+                            name="username"
+                            dir="ltr"
+                            placeholder="نام کاربری"
+                            onChange={event => this.handleChange(event)}
                             value={this.state.username}
                         />
                         <input
-                            type='password'
-                            name='password'
-                            placeholder='گذرواژه'
-                            onChange={(event) => this.handleChange(event)}
+                            type="password"
+                            name="password"
+                            placeholder="گذرواژه"
+                            onChange={event => this.handleChange(event)}
                             value={this.state.password}
                         />
                         <input
-                            type='submit'
-                            value='ورود'
-                            className='btn btn-green'
+                            type="submit"
+                            value="ورود"
+                            className="btn btn-green"
                             required
-                            disabled={!(RegExp('^[0123456789]+$').test(0))}
+                            disabled={!RegExp('^[0123456789]+$').test(0)}
                         />
                     </form>
                 </div>
-                <div className='col-0 col-lg-4'>&nbsp;</div>
+                <div className="col-0 col-lg-4">&nbsp;</div>
             </div>
         );
     }

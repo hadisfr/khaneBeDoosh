@@ -78,7 +78,8 @@
     text-align: center;
 }
 
-.toggle:hover + .hover-menu-wrapper, .hover-menu-wrapper:hover {
+.toggle:hover + .hover-menu-wrapper,
+.hover-menu-wrapper:hover {
     animation: fade_in 1s;
     display: block;
 }

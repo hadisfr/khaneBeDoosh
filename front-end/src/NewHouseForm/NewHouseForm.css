@@ -9,25 +9,30 @@
     text-align: center;
 }
 
-.new-house input[type="text"], .new-house input[type="number"], .new-house input[type="submit"], .new-house select {
+.new-house input[type='text'],
+.new-house input[type='number'],
+.new-house input[type='submit'],
+.new-house select {
     display: inline-block;
     margin-bottom: 16px;
     width: 100%;
 }
 
-.new-house input[type="text"], .new-house input[type="number"], .new-house select {
+.new-house input[type='text'],
+.new-house input[type='number'],
+.new-house select {
     border: 1px solid #ccc;
     border-radius: 6px;
     height: 40px;
     padding: 3px 16px;
 }
 
-.new-house input[type="radio"] {
+.new-house input[type='radio'] {
     margin: 6px;
     margin-right: 26px;
 }
 
-.new-house input[type="radio"]:first-child {
+.new-house input[type='radio']:first-child {
     margin-right: 6px;
 }
 
