@@ -5,6 +5,7 @@ var HttpStatus = require('http-status-codes');
 const House = require('../models/house');
 const { BuildingType, toBuildingType } = require('../models/buildingType');
 const { DealType, toDealType } = require('../models/dealType');
+const decryptHouseId = require('../utility').decryptHouseId;
 
 const h = new House(
     0,
@@ -45,11 +46,16 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     try {
-        var houseId = req.params.id;
+        var { ownerId, houseId } = decryptHouseId(req.params.id);
         res.send(h.json);
     } catch (err) {
-        debug(err.stack);
-        res.status(HttpStatus.INTERNAL_SERVER_ERROR).end();
+        if (err.name === 'JsonWebTokenError') {
+            debug(err.name + ': ' + err.message);
+            res.status(HttpStatus.BAD_REQUEST).end();
+        } else {
+            debug(err.stack);
+            res.status(HttpStatus.INTERNAL_SERVER_ERROR).end();
+        }
     }
 });
 

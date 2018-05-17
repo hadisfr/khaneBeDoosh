@@ -1,6 +1,7 @@
 'use strict';
 const BuildingType = require('./buildingType').BuildingType;
 const DealType = require('./dealType').DealType;
+const encryptHouseId = require('../utility').encryptHouseId;
 var debug = require('debug')('khanebedoosh:models');
 
 class House {
@@ -80,7 +81,7 @@ class House {
 
     get shortJson() {
         var res = {};
-        // res.id = f(this.ownerId, this.id);
+        res.id = encryptHouseId(this.id, this.ownerId);
         res.area = this.area;
         res.buildingType = this.buildingType;
         res.dealType = this.dealType;
