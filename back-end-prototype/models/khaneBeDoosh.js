@@ -14,6 +14,7 @@ class KhaneBeDoosh {
                 'a1965d20-1280-11e8-87b4-496f79ef1988'
             );
             this.defaultUser = new Individual('behnam', 'بهنام همایون', 200);
+            this.houses = [];
             KhaneBeDoosh.instance = this;
         }
         return KhaneBeDoosh.instance;
@@ -21,8 +22,12 @@ class KhaneBeDoosh {
 
     async increaseBalance(username, amount) {
         var res = await this.bank.increaseBalance(username, amount);
-        if (res) this.currentUser.balance += Number(amount);
+        if (res) (await this.getUser(username)).balance += Number(amount);
         return res;
+    }
+
+    async getUser(username) {
+        return username === this.currentUser.username ? this.currentUser : null;
     }
 
     get currentUser() {

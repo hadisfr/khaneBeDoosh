@@ -17,7 +17,9 @@ router.post('/', (req, res) => {
             )
             .catch(err => {
                 debug(err);
-                res.status(HttpStatus.INTERNAL_SERVER_ERROR).end();
+                if (err === 'Negative Amount' || err === 'Negative balance')
+                    res.status(HttpStatus.BAD_REQUEST).end();
+                else res.status(HttpStatus.INTERNAL_SERVER_ERROR).end();
             });
     } catch (err) {
         debug(err.stack);
