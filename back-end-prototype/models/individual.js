@@ -48,7 +48,7 @@ class Individual extends User {
         );
     }
 
-    payForHouse(houseId, ownerId) {
+    async payForHouse(houseId, ownerId) {
         try {
             this.balance -= PHONE_PRICE;
             if (!this.paidHouses.has(ownerId))

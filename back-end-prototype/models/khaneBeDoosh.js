@@ -4,6 +4,8 @@ const User = require('./user');
 const Individual = require('./individual');
 const RealEstate = require('./realEstate');
 const House = require('./house');
+const BuildingType = require('../models/buildingType').BuildingType;
+const DealType = require('../models/dealType').DealType;
 var debug = require('debug')('khanebedoosh:models');
 
 class KhaneBeDoosh {
@@ -32,6 +34,54 @@ class KhaneBeDoosh {
 
     get currentUser() {
         return this.defaultUser;
+    }
+
+    async searchHouses({ minArea, buildingType, dealType, maxPrice }) {
+        return [
+            new House(
+                this.defaultUser.username,
+                'ca27a86c-bf52-4d79-9834-90a48ff4be9b_1001',
+                161,
+                BuildingType.APARTMENT,
+                DealType.SELL,
+                { sellPrice: 109813 },
+                'https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Soweto_township.jpg/320px-Soweto_township.jpg',
+                'دروازه غار',
+                'از خانه برون آمد و بازار بیاراست، در وهم نگنجد که چه دلبند و چه شیرین',
+                '686-04-0693'
+            )
+        ];
+    }
+
+    async getHouse(houseId, ownerId) {
+        var house = new House(
+            this.defaultUser.username,
+            'ca27a86c-bf52-4d79-9834-90a48ff4be9b_1001',
+            161,
+            BuildingType.APARTMENT,
+            DealType.SELL,
+            { sellPrice: 109813 },
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Soweto_township.jpg/320px-Soweto_township.jpg',
+            'دروازه غار',
+            'از خانه برون آمد و بازار بیاراست، در وهم نگنجد که چه دلبند و چه شیرین',
+            '686-04-0693'
+        );
+        await house.getDetails();
+        return house;
+    }
+
+    async getPhone(ownerId, houseId) {
+        var user = this.currentUser;
+        if (
+            user.hasPaidForHouse(ownerId, houseId) ||
+            (await user.payForHouse(ownerId, houseId))
+        ) {
+            return (await this.getHouse(ownerId, houseId)).phone;
+        } else throw 'Not Enough Balance';
+    }
+
+    async isRealEstate(username) {
+        return (await this.getUser(username)) instanceof RealEstate;
     }
 }
 

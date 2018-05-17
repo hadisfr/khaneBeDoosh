@@ -1,4 +1,5 @@
 'use strict';
+const khaneBeDoosh = require('./khanebedoosh');
 const BuildingType = require('./buildingType').BuildingType;
 const DealType = require('./dealType').DealType;
 const encryptHouseId = require('../utility').encryptHouseId;
@@ -62,21 +63,24 @@ class House {
     }
 
     get description() {
-        if (this._description === undefined) this.getDetails();
         return this._description;
     }
 
     get phone() {
-        if (this._phone === undefined) this.getDetails();
         return this._phone;
     }
 
-    getDetails() {
-        // if (isRealEstate(this.ownerId)) {
-        //     var details = getOwner(this.ownerId).getDetails(this.id);
-        //     this._description = details.description;
-        //     this._phone = details.phone;
-        // }
+    async getDetails() {
+        if (this._description !== undefined && this._phone !== undefined)
+            return;
+        if (await khaneBeDoosh.isRealEstate(this.ownerId)) {
+            var house = await (await khaneBeDoosh.getUser(
+                this.ownerId
+            )).getHouse(this.id);
+            this._description = house.description;
+            this._phone = house.phone;
+            debug(this.json);
+        }
     }
 
     get shortJson() {
@@ -85,6 +89,7 @@ class House {
         res.area = this.area;
         res.buildingType = this.buildingType;
         res.dealType = this.dealType;
+        res.price = this.price;
         res.imageUrl = this.imageUrl;
         res.address = this.address;
         return res;
@@ -93,7 +98,6 @@ class House {
     get json() {
         var res = this.shortJson;
         res.description = this.description;
-        res.phone = this.phone;
         return res;
     }
 }
