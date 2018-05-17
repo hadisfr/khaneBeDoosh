@@ -7,12 +7,15 @@
     padding: 3px 16px;
 }
 
-.pay input[type="text"], .pay input[type="number"], .pay input[type="submit"] {
+.pay input[type='text'],
+.pay input[type='number'],
+.pay input[type='submit'] {
     display: inline-block;
     width: 100%;
 }
 
-.pay input[type="text"], .pay input[type="number"] {
+.pay input[type='text'],
+.pay input[type='number'] {
     border: 1px solid;
     border-radius: 6px;
     color: #9a9a9a;
@@ -21,12 +24,12 @@
     padding: 3px 16px;
 }
 
-.pay input[type="radio"] {
+.pay input[type='radio'] {
     margin: 6px;
     margin-right: 26px;
 }
 
-.pay input[type="radio"]:first-child {
+.pay input[type='radio']:first-child {
     margin-right: 6px;
 }
 
@@ -34,17 +37,21 @@
     text-align: center;
 }
 
-.pay ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  font-size: 0.8em;
+.pay ::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    font-size: 0.8em;
 }
-.pay ::-moz-placeholder { /* Firefox 19+ */
-  font-size: 0.8em;
+.pay ::-moz-placeholder {
+    /* Firefox 19+ */
+    font-size: 0.8em;
 }
-.pay :-ms-input-placeholder { /* IE 10+ */
-  font-size: 0.8em;
+.pay :-ms-input-placeholder {
+    /* IE 10+ */
+    font-size: 0.8em;
 }
-.pay :-moz-placeholder { /* Firefox 18- */
-  font-size: 0.8em;
+.pay :-moz-placeholder {
+    /* Firefox 18- */
+    font-size: 0.8em;
 }
 
 .pay-badge {

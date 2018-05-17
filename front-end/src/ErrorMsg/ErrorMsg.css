@@ -6,11 +6,14 @@
     color: Maroon;
 }
 
-.error-msg h1, .error-msg h2, .error-msg h3 {
+.error-msg h1,
+.error-msg h2,
+.error-msg h3 {
     font-weight: bold;
 }
 
-.error-msg, .error-msg * {
+.error-msg,
+.error-msg * {
     text-align: center;
 }
 

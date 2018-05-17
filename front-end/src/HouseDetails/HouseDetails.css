@@ -7,7 +7,8 @@
     font-weight: lighter;
 }
 
-#house-detail dt, #house-detail dd {
+#house-detail dt,
+#house-detail dd {
     border-bottom: 1px solid #ddd;
     display: inline-block;
     font-size: 0.7em;

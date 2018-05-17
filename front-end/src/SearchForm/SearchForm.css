@@ -3,35 +3,40 @@
 }
 
 .search form {
-    padding: 6px 26px;    
+    padding: 6px 26px;
     width: 100%;
 }
 
-.search form div{
+.search form div {
     padding: 6px;
     position: relative;
     text-align: center;
 }
 
-.search input[type="text"], .search input[type="number"], .search input[type="submit"], .search select {
+.search input[type='text'],
+.search input[type='number'],
+.search input[type='submit'],
+.search select {
     display: inline-block;
     margin-bottom: 16px;
     width: 100%;
 }
 
-.search input[type="text"], .search input[type="number"], .search select {
+.search input[type='text'],
+.search input[type='number'],
+.search select {
     border: none;
     border-radius: 6px;
     height: 40px;
     padding: 3px 16px;
 }
 
-.search input[type="radio"] {
+.search input[type='radio'] {
     margin: 6px;
     margin-right: 26px;
 }
 
-.search input[type="radio"]:first-child {
+.search input[type='radio']:first-child {
     margin-right: 6px;
 }
 
