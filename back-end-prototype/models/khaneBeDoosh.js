@@ -1,5 +1,9 @@
 'use strict';
 const Bank = require('./bank');
+const User = require('./user');
+const Individual = require('./individual');
+const RealEstate = require('./realEstate');
+const House = require('./house');
 var debug = require('debug')('khanebedoosh:models');
 
 class KhaneBeDoosh {
@@ -9,13 +13,20 @@ class KhaneBeDoosh {
                 'http://139.59.151.5:6664/bank/pay',
                 'a1965d20-1280-11e8-87b4-496f79ef1988'
             );
+            this.defaultUser = new Individual('behnam', 'بهنام همایون', 200);
             KhaneBeDoosh.instance = this;
         }
         return KhaneBeDoosh.instance;
     }
 
     async increaseBalance(username, amount) {
-        return await this.bank.increaseBalance(username, amount);
+        var res = await this.bank.increaseBalance(username, amount);
+        if (res) this.currentUser.balance += Number(amount);
+        return res;
+    }
+
+    get currentUser() {
+        return this.defaultUser;
     }
 }
 

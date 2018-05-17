@@ -17,7 +17,7 @@ class Bank {
     }
 
     async increaseBalance(username, amount) {
-        if (amount < 0) throw 'Negative Balance';
+        if (amount < 0) throw 'Negative Amount';
         return (
             (await (await fetch(this.uri, {
                 method: 'POST',
