@@ -31,7 +31,7 @@ class RealEstate extends User {
         var res = {};
         res.uri = this.uri;
         res.lastTimestamp = this.lastTimestamp;
-        return { ...super.json, ...res };
+        return { .  ..super.json, ...res };
     }
 }
 
