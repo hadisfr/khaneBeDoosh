@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var HttpStatus = require('http-status-codes');
-const khaneBeDoosh = require('../models/khaneBeDoosh');
+const khaneBeDoosh = require('../domain/khaneBeDoosh');
 var debug = require('debug')('khanebedoosh:routes');
 
 router.post('/', (req, res) => {

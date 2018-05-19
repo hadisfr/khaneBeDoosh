@@ -1,5 +1,5 @@
 'use strict';
-var debug = require('debug')('khanebedoosh:models');
+var debug = require('debug')('khanebedoosh:domain');
 
 class User {
     constructor(username) {

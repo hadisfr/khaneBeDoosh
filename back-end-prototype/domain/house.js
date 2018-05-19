@@ -3,7 +3,7 @@ const khaneBeDoosh = require('./khanebedoosh');
 const BuildingType = require('./buildingType').BuildingType;
 const DealType = require('./dealType').DealType;
 const encryptHouseId = require('../utility').encryptHouseId;
-var debug = require('debug')('khanebedoosh:models');
+var debug = require('debug')('khanebedoosh:domain');
 
 class House {
     constructor(

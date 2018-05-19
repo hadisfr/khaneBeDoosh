@@ -1,6 +1,6 @@
 'use strict';
 const User = require('./user');
-var debug = require('debug')('khanebedoosh:models');
+var debug = require('debug')('khanebedoosh:domain');
 
 class RealEstate extends User {
     constructor(username, uri, getHouse, getHouses) {

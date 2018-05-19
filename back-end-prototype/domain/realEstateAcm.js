@@ -1,10 +1,10 @@
 'use strict';
 const House = require('./house');
 const RealEstate = require('./realEstate');
-const { BuildingType, toBuildingType } = require('../models/buildingType');
-const { DealType, toDealType } = require('../models/dealType');
+const { BuildingType, toBuildingType } = require('../domain/buildingType');
+const { DealType, toDealType } = require('../domain/dealType');
 var fetch = require('node-fetch');
-var debug = require('debug')('khanebedoosh:models');
+var debug = require('debug')('khanebedoosh:domain');
 
 class RealEstateAcm extends RealEstate {
     constructor() {

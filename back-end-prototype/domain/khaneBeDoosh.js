@@ -5,9 +5,9 @@ const Individual = require('./individual');
 const RealEstate = require('./realEstate');
 const RealEstateAcm = require('./realEstateAcm');
 const House = require('./house');
-const BuildingType = require('../models/buildingType').BuildingType;
-const DealType = require('../models/dealType').DealType;
-var debug = require('debug')('khanebedoosh:models');
+const BuildingType = require('../domain/buildingType').BuildingType;
+const DealType = require('../domain/dealType').DealType;
+var debug = require('debug')('khanebedoosh:domain');
 
 class KhaneBeDoosh {
     constructor() {

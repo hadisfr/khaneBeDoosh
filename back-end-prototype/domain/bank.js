@@ -1,6 +1,6 @@
 'use strict';
 var fetch = require('node-fetch');
-var debug = require('debug')('khanebedoosh:models');
+var debug = require('debug')('khanebedoosh:domain');
 
 class Bank {
     constructor(uri, apiKey) {

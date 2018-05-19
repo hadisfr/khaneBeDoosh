@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var HttpStatus = require('http-status-codes');
-const khaneBeDoosh = require('../models/khanebedoosh');
-const House = require('../models/house');
-const { BuildingType, toBuildingType } = require('../models/buildingType');
-const { DealType, toDealType } = require('../models/dealType');
+const khaneBeDoosh = require('../domain/khanebedoosh');
+const House = require('../domain/house');
+const { BuildingType, toBuildingType } = require('../domain/buildingType');
+const { DealType, toDealType } = require('../domain/dealType');
 const decryptHouseId = require('../utility').decryptHouseId;
 var debug = require('debug')('khanebedoosh:routes');
 
