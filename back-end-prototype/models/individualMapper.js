@@ -1,4 +1,4 @@
-const dbconfig = require('./dbconfig.json');
+const dbconfig = require('./dbconfig');
 const sqlite3 = require('sqlite3').verbose();
 var debug = require('debug')('khanebedoosh:domain');
 
