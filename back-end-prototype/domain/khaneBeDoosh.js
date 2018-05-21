@@ -12,8 +12,6 @@ var Sequelize = require('sequelize');
 var debug = require('debug')('khanebedoosh:domain');
 const Op = Sequelize.Op;
 
-var realEstates = {};
-
 class KhaneBeDoosh {
     constructor() {
         if (!KhaneBeDoosh.instance) {
@@ -23,9 +21,8 @@ class KhaneBeDoosh {
             );
             this.defaultUser = new Individual('behnam', 'بهنام همایون', 200);
             this.realEstates = {};
-            this.realEstates[
-                new RealEstateAcm().username
-                ] = new RealEstateAcm();
+            // var realestateacm = new RealEstateAcm();
+            // this.realEstates[realestateacm.username] = realestateacm;
             KhaneBeDoosh.instance = this;
         }
         return KhaneBeDoosh.instance;
@@ -40,13 +37,7 @@ class KhaneBeDoosh {
     }
 
     async getRealEstate(username) {
-        // let result = models.Individual.findOne({
-        //     where: {
-        //         username: username
-        //     }
-        // });
-
-        return realEstates[username];
+        return this.realEstates[username];
     }
 
     get currentUser() {
@@ -67,10 +58,23 @@ class KhaneBeDoosh {
     }
 
     async updateRealEstate(id) {
-        if (realEstates.hasOwnProperty(id)) {
-            let thisRealEstate = realEstates[id];
-
+        if (this.realEstates.hasOwnProperty(id)) {
+            let thisRealEstate = this.realEstates[id];
+            let newHoueses = thisRealEstate.getHouses();
+            let modelRealEstate = await models.RealEstate.findOne({where:{
+                name: thisRealEstate.username
+            }});
+            modelRealEstate.expireTime = thisRealEstate.lastTimestamp;
+            await modelRealEstate.save();
             // refresh db with new timestamp
+            await models.House.destroy({where: {
+                ownerId: id
+            }});
+            let kasifnewHouses = [];
+            for(let i = 0; i < newHoueses.length; i++){
+                kasifnewHouses.push(newHoueses[i].modelJson);
+            }
+            await models.House.bulkCreate(kasifnewHouses);
             // add new houses to db
         }
     }
@@ -123,7 +127,7 @@ class KhaneBeDoosh {
     }
 
     isRealEstate(username) {
-        return (realEstates.hasOwnProperty(username));
+        return (this.realEstates.hasOwnProperty(username));
     }
 }
 

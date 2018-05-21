@@ -84,8 +84,25 @@ class House {
         }
     }
 
+    get modelJson(){
+        let res = {};
+        res.houseId = this.id;
+        res.ownerId = this.ownerId;
+        res.area = this.area;
+        res.imageUrl = this.imageUrl;
+        res.address = this.address;
+        res.phone = this.phone;
+        res.description = this.description;
+        res.buildingType = this.buildingType;
+        res.dealType = this.dealType;
+        res.priceBase = this.price.priceBase;
+        res.priceRent = this.price.priceRent;
+        res.priceSell = this.price.priceSell;
+        return res;
+    }
+
     get shortJson() {
-        var res = {};
+        let res = {};
         res.id = encryptHouseId(this.id, this.ownerId);
         res.area = this.area;
         res.buildingType = this.buildingType;
@@ -97,7 +114,7 @@ class House {
     }
 
     get json() {
-        var res = this.shortJson;
+        let res = this.shortJson;
         res.description = this.description;
         return res;
     }
