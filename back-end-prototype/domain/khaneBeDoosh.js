@@ -77,11 +77,13 @@ class KhaneBeDoosh {
                 kasifnewHouses.push(newHoueses[i].modelJson);
             }
             await models.House.bulkCreate(kasifnewHouses);
+            debug('is this a thing?');
             // add new houses to db
         }
     }
 
     async searchHouses({minArea, buildingType, dealType, maxPrice}) {
+        debug('i wonder');
         await this.updateRealEstates();
         let whereExp = {};
         if (dealType)
