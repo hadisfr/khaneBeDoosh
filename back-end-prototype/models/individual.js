@@ -44,6 +44,13 @@ module.exports = (sequelize, DataTypes) => {
                         (paidHouses[i].getDataValue(ownerId) === ownerId)) return true;
                 }
                 return false;
+            },
+            json() {
+                let res = {};
+                res.username = this.username;
+                res.balance = this.balance;
+                res.name = this.displayName;
+                return res;
             }
         },
         setterMethods: {

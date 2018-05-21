@@ -2,7 +2,7 @@
 const {BuildingType, toBuildingType} = require('../domain/buildingType').BuildingType;
 const {DealType, toDealType} = require('../domain/dealType');
 const encryptHouseId = require('../utility').encryptHouseId;
-const khaneBeDoosh = require('../domain/khaneBeDoosh');
+// const khaneBeDoosh = require('../domain/khaneBeDoosh');
 
 module.exports = (sequelize, DataTypes) => {
     var House = sequelize.define('House', {
@@ -60,13 +60,13 @@ module.exports = (sequelize, DataTypes) => {
             async details() {
                 if (this.description !== undefined && this.phone !== undefined)
                     return;
-                if (khaneBeDoosh.isRealEstate(this.ownerId)) {
-                    let house = await (await khaneBeDoosh.getRealEstate(
-                        this.ownerId
-                    )).getHouse(this.id);
-                    await this.setDataValue('description', house.description);
-                    await this.setDataValue('phone', house.phone);
-                }
+                // if (khaneBeDoosh.isRealEstate(this.ownerId)) {
+                //     let house = await (await khaneBeDoosh.getRealEstate(
+                //         this.ownerId
+                //     )).getHouse(this.id);
+                //     await this.setDataValue('description', house.description);
+                //     await this.setDataValue('phone', house.phone);
+                // }
             }
         },
         setterMethods: {

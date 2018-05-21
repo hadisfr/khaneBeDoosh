@@ -16,4 +16,11 @@ router.get('/doc', (req, res) => {
 //     debug(house.get('shortJson'));
 // });
 
+// models.Individual.create({
+//     username: 'behnam',
+//     displayName: 'بهنام همایون',
+//     balance: 2000,
+//     isAdmin: false
+// });
+
 module.exports = router;

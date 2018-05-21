@@ -9,7 +9,7 @@ router.post('/', (req, res) => {
         var balance = req.body.balance;
         if (balance === undefined) res.status(HttpStatus.BAD_REQUEST).end();
         khaneBeDoosh
-            .increaseBalance(khaneBeDoosh.currentUser.username, balance)
+            .increaseBalance(khaneBeDoosh.getCurrentUser.username, balance)
             .then(ret =>
                 res
                     .status(ret ? HttpStatus.OK : HttpStatus.BAD_GATEWAY)

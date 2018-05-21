@@ -1,25 +1,20 @@
 'use strict';
-const models = require('../models');
+let models = require('../models');
 const Bank = require('./bank');
-const User = require('./user');
 const Individual = require('./individual');
-const RealEstate = require('./realEstate');
-const RealEstateAcm = require('./realEstateAcm');
-const House = require('./house');
-const BuildingType = require('../domain/buildingType').BuildingType;
-const DealType = require('../domain/dealType').DealType;
-var Sequelize = require('sequelize');
-var debug = require('debug')('khanebedoosh:domain');
+const Sequelize = require('sequelize');
+const debug = require('debug')('khanebedoosh:domain');
 const Op = Sequelize.Op;
 
 class KhaneBeDoosh {
     constructor() {
         if (!KhaneBeDoosh.instance) {
+            // models.House.create({houseId : 'allah', dealType: 'SELL', buildingType: 'VILLA'});
             this.bank = new Bank(
                 'http://139.59.151.5:6664/bank/pay',
                 'a1965d20-1280-11e8-87b4-496f79ef1988'
             );
-            this.defaultUser = new Individual('behnam', 'بهنام همایون', 200);
+            this.defaultUsername  = 'behnam';
             this.realEstates = {};
             // var realestateacm = new RealEstateAcm();
             // this.realEstates[realestateacm.username] = realestateacm;
@@ -29,9 +24,11 @@ class KhaneBeDoosh {
     }
 
     async increaseBalance(username, amount) {
-        var res = await this.bank.increaseBalance(username, amount);
+        let currentUser = await models.Individual.findOne({where: {username: this.defaultUsername}});
+        let res = await this.bank.increaseBalance(username, amount);
         if (res) {
-            await models.Individual.set('balance', amount);
+            currentUser.balance += parseInt(amount);
+            await currentUser.save();
         }
         return res;
     }
@@ -40,8 +37,9 @@ class KhaneBeDoosh {
         return this.realEstates[username];
     }
 
-    get currentUser() {
-        return this.defaultUser;
+    async getCurrentUser() {
+        let user = await models.Individual.findOne({where: {username: this.defaultUsername}});
+        return user;
     }
 
     async updateRealEstates() {
@@ -53,7 +51,7 @@ class KhaneBeDoosh {
         let result = await models.RealEstate.findAll({where: whereExp});
         let i;
         for (i = 0; i < result.length; i++) {
-            await this.updateRealEstate(result[i].getDataValue('name'));
+            await this.updateRealEstate(result[i].name);
         }
     }
 
@@ -61,17 +59,21 @@ class KhaneBeDoosh {
         if (this.realEstates.hasOwnProperty(id)) {
             let thisRealEstate = this.realEstates[id];
             let newHoueses = thisRealEstate.getHouses();
-            let modelRealEstate = await models.RealEstate.findOne({where:{
-                name: thisRealEstate.username
-            }});
+            let modelRealEstate = await models.RealEstate.findOne({
+                where: {
+                    name: thisRealEstate.username
+                }
+            });
             modelRealEstate.expireTime = thisRealEstate.lastTimestamp;
             await modelRealEstate.save();
             // refresh db with new timestamp
-            await models.House.destroy({where: {
-                ownerId: id
-            }});
+            await models.House.destroy({
+                where: {
+                    ownerId: id
+                }
+            });
             let kasifnewHouses = [];
-            for(let i = 0; i < newHoueses.length; i++){
+            for (let i = 0; i < newHoueses.length; i++) {
                 kasifnewHouses.push(newHoueses[i].modelJson);
             }
             await models.House.bulkCreate(kasifnewHouses);
@@ -114,13 +116,13 @@ class KhaneBeDoosh {
                 ownerId: ownerId
             }
         });
-        await house.get('details');
+        await house.details;
         return house;
     }
 
     async getPhone(ownerId, houseId) {
-        if (!(await models.Individual.get('hasPaidForHouse')(houseId, ownerId))) {
-            if(await models.Individual.set('payForHouse')(houseId, ownerId))
+        if (!(await this.getCurrentUser().get('hasPaidForHouse')(houseId, ownerId))) {
+            if (await this.getCurrentUser().set('payForHouse')(houseId, ownerId))
                 return await this.getHouse(houseId, ownerId).get('phone');
         }
         throw 'Not Enough Balance';
