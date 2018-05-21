@@ -71,10 +71,11 @@ class House {
     }
 
     async getDetails() {
+        // has infinite loop with getDetails
         if (this._description !== undefined && this._phone !== undefined)
             return;
-        if (await khaneBeDoosh.isRealEstate(this.ownerId)) {
-            var house = await (await khaneBeDoosh.getUser(
+        if (khaneBeDoosh.isRealEstate(this.ownerId)) {
+            let house = await (await khaneBeDoosh.getRealEstate(
                 this.ownerId
             )).getHouse(this.id);
             this._description = house.description;

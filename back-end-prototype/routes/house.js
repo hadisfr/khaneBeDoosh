@@ -27,7 +27,7 @@ router.get('/', (req, res) => {
         }
         khaneBeDoosh
             .searchHouses(filter)
-            .then(ret => res.send(ret.map(house => house.shortJson)))
+            .then(ret => res.send(ret.map(house => house.get('shortJson'))))
             .catch(err => {
                 debug(err.stack);
                 res.status(HttpStatus.INTERNAL_SERVER_ERROR).end();
@@ -43,7 +43,7 @@ router.get('/:id', (req, res) => {
         var { ownerId, houseId } = decryptHouseId(req.params.id);
         khaneBeDoosh
             .getHouse(ownerId, houseId)
-            .then(house => res.send(house.json))
+            .then(house => res.send(house.get('json')))
             .catch(err => {
                 debug(err.stack);
                 res.status(HttpStatus.INTERNAL_SERVER_ERROR).end();
