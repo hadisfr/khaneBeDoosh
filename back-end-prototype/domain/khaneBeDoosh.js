@@ -36,7 +36,7 @@ class KhaneBeDoosh {
         return res;
     }
 
-    getRealEstate(username) {
+    async getRealEstate(username) {
         return this.realEstates[username];
     }
 
