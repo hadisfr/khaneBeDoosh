@@ -27,7 +27,7 @@ class KhaneBeDoosh {
 
     async increaseBalance(username, amount) {
         let currentUser = await models.Individual.findOne({
-            where: {username: this.defaultUsername}
+            where: { username: this.defaultUsername }
         });
         let res = await this.bank.increaseBalance(username, amount);
         if (res) {
@@ -43,7 +43,7 @@ class KhaneBeDoosh {
 
     async getCurrentUser() {
         let user = await models.Individual.findOne({
-            where: {username: this.defaultUsername}
+            where: { username: this.defaultUsername }
         });
         return user;
     }
@@ -54,7 +54,7 @@ class KhaneBeDoosh {
                 [Op.lt]: new Date().getTime()
             }
         };
-        let result = await models.RealEstate.findAll({where: whereExp});
+        let result = await models.RealEstate.findAll({ where: whereExp });
         debug(result);
         let i;
         for (i = 0; i < result.length; i++) {
@@ -88,7 +88,7 @@ class KhaneBeDoosh {
         }
     }
 
-    async searchHouses({minArea, buildingType, dealType, maxPrice}) {
+    async searchHouses({ minArea, buildingType, dealType, maxPrice }) {
         await this.updateRealEstates();
         let whereExp = {};
         if (dealType) whereExp.dealType = dealType;
@@ -111,7 +111,7 @@ class KhaneBeDoosh {
                 };
             }
         }
-        return await models.House.findAll({where: whereExp});
+        return await models.House.findAll({ where: whereExp });
     }
 
     async getHouse(houseId, ownerId) {
@@ -126,13 +126,16 @@ class KhaneBeDoosh {
     }
 
     async getPhone(ownerId, houseId) {
-        let currentUser = await this.getCurrentUser();
         if (
-            !(await (currentUser.hasPaidForHouse(houseId, ownerId)))) {
+            !(await ((await this.getCurrentUser()).hasPaidForHouse)(
+                houseId,
+                ownerId
+            ))
+        ) {
             if (
-                await (await this.getCurrentUser()).payForHouse(houseId, ownerId)
+                await this.getCurrentUser().set('payForHouse')(houseId, ownerId)
             )
-                return await this.getHouse(houseId, ownerId).phone;
+                return await this.getHouse(houseId, ownerId).get('phone');
         }
         throw 'Not Enough Balance';
     }
