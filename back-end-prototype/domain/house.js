@@ -118,6 +118,14 @@ class House {
         res.description = this.description;
         return res;
     }
+
+    isRealEstate(username){
+        return khaneBeDoosh.isRealEstate(username);
+    }
+
+    getRealEstate(username){
+        return khaneBeDoosh.getRealEstate(username);
+    }
 }
 
 module.exports = House;
