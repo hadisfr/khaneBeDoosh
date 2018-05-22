@@ -12,7 +12,11 @@ router.get('/doc', (req, res) => {
     res.sendStatus(HttpStatus.NOT_IMPLEMENTED).end();
 });
 
-// models.House.create({houseId : 'allah', dealType: 'SELL', buildingType: 'VILLA'}).then(house => {
+// models.House.create({
+//     houseId: 'allah',
+//     dealType: 'SELL',
+//     buildingType: 'VILLA'
+// }).then(house => {
 //     debug(house.get('shortJson'));
 // });
 

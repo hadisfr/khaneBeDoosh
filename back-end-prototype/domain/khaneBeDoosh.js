@@ -15,7 +15,7 @@ class KhaneBeDoosh {
                 'http://139.59.151.5:6664/bank/pay',
                 'a1965d20-1280-11e8-87b4-496f79ef1988'
             );
-            this.defaultUsername  = 'behnam';
+            this.defaultUsername = 'behnam';
             this.realEstates = {};
             var realestateacm = new RealEstateAcm();
             this.realEstates[realestateacm.username] = realestateacm;
@@ -25,7 +25,9 @@ class KhaneBeDoosh {
     }
 
     async increaseBalance(username, amount) {
-        let currentUser = await models.Individual.findOne({where: {username: this.defaultUsername}});
+        let currentUser = await models.Individual.findOne({
+            where: { username: this.defaultUsername }
+        });
         let res = await this.bank.increaseBalance(username, amount);
         if (res) {
             currentUser.balance += parseInt(amount);
@@ -39,7 +41,9 @@ class KhaneBeDoosh {
     }
 
     async getCurrentUser() {
-        let user = await models.Individual.findOne({where: {username: this.defaultUsername}});
+        let user = await models.Individual.findOne({
+            where: { username: this.defaultUsername }
+        });
         return user;
     }
 
@@ -49,7 +53,7 @@ class KhaneBeDoosh {
                 [Op.lt]: new Date().getTime()
             }
         };
-        let result = await models.RealEstate.findAll({where: whereExp});
+        let result = await models.RealEstate.findAll({ where: whereExp });
         let i;
         for (i = 0; i < result.length; i++) {
             await this.updateRealEstate(result[i].name);
@@ -83,14 +87,12 @@ class KhaneBeDoosh {
         }
     }
 
-    async searchHouses({minArea, buildingType, dealType, maxPrice}) {
+    async searchHouses({ minArea, buildingType, dealType, maxPrice }) {
         debug('i wonder');
         await this.updateRealEstates();
         let whereExp = {};
-        if (dealType)
-            whereExp.dealType = dealType;
-        if (buildingType)
-            whereExp.buildingType = buildingType;
+        if (dealType) whereExp.dealType = dealType;
+        if (buildingType) whereExp.buildingType = buildingType;
         if (minArea)
             whereExp.area = {
                 [Op.gte]: minArea
@@ -109,7 +111,7 @@ class KhaneBeDoosh {
                 };
             }
         }
-        return await models.House.findAll({where: whereExp});
+        return await models.House.findAll({ where: whereExp });
     }
 
     async getHouse(houseId, ownerId) {
@@ -124,15 +126,22 @@ class KhaneBeDoosh {
     }
 
     async getPhone(ownerId, houseId) {
-        if (!(await this.getCurrentUser().get('hasPaidForHouse')(houseId, ownerId))) {
-            if (await this.getCurrentUser().set('payForHouse')(houseId, ownerId))
+        if (
+            !(await this.getCurrentUser().get('hasPaidForHouse')(
+                houseId,
+                ownerId
+            ))
+        ) {
+            if (
+                await this.getCurrentUser().set('payForHouse')(houseId, ownerId)
+            )
                 return await this.getHouse(houseId, ownerId).get('phone');
         }
         throw 'Not Enough Balance';
     }
 
     isRealEstate(username) {
-        return (this.realEstates.hasOwnProperty(username));
+        return this.realEstates.hasOwnProperty(username);
     }
 }
 

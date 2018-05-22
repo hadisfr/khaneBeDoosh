@@ -84,7 +84,7 @@ class House {
         }
     }
 
-    get modelJson(){
+    get modelJson() {
         let res = {};
         res.houseId = this.id;
         res.ownerId = this.ownerId;
