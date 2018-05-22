@@ -34,22 +34,6 @@ module.exports = (sequelize, DataTypes) => {
         },
         {
             getterMethods: {
-                async hasPaidForHouse(houseId, ownerId) {
-                    let paidHouses = await models.PaidHouse.findAll({
-                        where: {
-                            individualId: this.getDataValue('username')
-                        }
-                    });
-                    let i;
-                    for (i = 0; i < paidHouses.length; i++) {
-                        if (
-                            paidHouses[i].getDataValue(houseId) === houseId &&
-                            paidHouses[i].getDataValue(ownerId) === ownerId
-                        )
-                            return true;
-                    }
-                    return false;
-                },
                 json() {
                     let res = {};
                     res.username = this.username;

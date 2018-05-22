@@ -8,6 +8,8 @@ const debug = require('debug')('khanebedoosh:domain');
 const realEstateList = require('./realEstateList');
 const Op = Sequelize.Op;
 
+const PHONE_PRICE = 100;
+
 class KhaneBeDoosh {
     constructor() {
         if (!KhaneBeDoosh.instance) {
@@ -126,22 +128,63 @@ class KhaneBeDoosh {
     }
 
     async getPhone(ownerId, houseId) {
-        if (
-            !(await ((await this.getCurrentUser()).hasPaidForHouse)(
-                houseId,
-                ownerId
-            ))
-        ) {
-            if (
-                await this.getCurrentUser().set('payForHouse')(houseId, ownerId)
-            )
-                return await this.getHouse(houseId, ownerId).get('phone');
+        if (!(await this.hasPaidForHouse(houseId,ownerId))){
+            if (await this.payForHouse(houseId, ownerId))
+                return (await this.getHouse(houseId, ownerId)).phone;
         }
-        throw 'Not Enough Balance';
+        else {
+            return (await this.getHouse(houseId, ownerId)).phone;
+        }
+        return null;
     }
 
     isRealEstate(username) {
         return realEstateList.isRealEstate(username);
+    }
+
+    async hasPaidForHouse(houseId, ownerId) {
+        let paidHouses = await models.PaidHouse.findAll({
+            where: {
+                individualId: this.defaultUsername
+            }
+        });
+        let i;
+        for (i = 0; i < paidHouses.length; i++) {
+            if (
+                paidHouses[i].houseId === houseId &&
+                paidHouses[i].ownerId === ownerId
+            )
+                return true;
+        }
+        return false;
+    }
+
+    async payForHouse(houseId, ownerId) {
+        try {
+            let paidBefore = await this.hasPaidForHouse(
+                houseId,
+                ownerId
+            );
+            debug('paid before ' + paidBefore);
+            let currUser =  await this.getCurrentUser();
+            if (!paidBefore) {
+                if(currUser.balance > PHONE_PRICE) {
+                    await models.PaidHouse.create({
+                        individualId: this.defaultUsername,
+                        ownerId: ownerId,
+                        houseId: houseId
+                    });
+                    currUser.balance -= PHONE_PRICE;
+                    await currUser.save();
+                }
+                else{
+                    throw 'Not Enough Balance';
+                }
+            }
+            return true;
+        } catch (err) {
+            return false;
+        }
     }
 }
 
