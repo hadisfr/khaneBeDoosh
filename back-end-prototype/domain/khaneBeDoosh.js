@@ -19,7 +19,6 @@ class KhaneBeDoosh {
             this.defaultUsername = 'behnam';
             var realestateacm = new RealEstateAcm();
             realEstateList.addMember(realestateacm, realestateacm.username);
-            debug('allah ' + realEstateList.isRealEstate(realestateacm.username));
             this.updateRealEstate(realestateacm.username);
             KhaneBeDoosh.instance = this;
         }
@@ -65,9 +64,8 @@ class KhaneBeDoosh {
 
     async updateRealEstate(id) {
         if (realEstateList.isRealEstate(id)) {
-            debug('yar migooyad allah');
             let thisRealEstate = realEstateList.getRealEstate(id);
-            let newHoueses = thisRealEstate.getHouses();
+            let newHoueses = await thisRealEstate.getHouses();
             let modelRealEstate = await models.RealEstate.findOne({
                 where: {
                     name: thisRealEstate.username
