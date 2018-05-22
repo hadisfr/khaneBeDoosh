@@ -95,9 +95,10 @@ class House {
         res.description = this.description;
         res.buildingType = this.buildingType;
         res.dealType = this.dealType;
-        res.priceBase = this.price.priceBase;
-        res.priceRent = this.price.priceRent;
-        res.priceSell = this.price.priceSell;
+        // res.priceBase = this.price.priceBase;
+        // res.priceRent = this.price.priceRent;
+        // res.priceSell = this.price.priceSell;
+        res.price = this.price;
         return res;
     }
 

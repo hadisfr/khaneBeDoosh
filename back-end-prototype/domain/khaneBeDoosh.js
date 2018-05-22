@@ -127,7 +127,7 @@ class KhaneBeDoosh {
 
     async getPhone(ownerId, houseId) {
         if (
-            !(await this.getCurrentUser().get('hasPaidForHouse')(
+            !(await ((await this.getCurrentUser()).hasPaidForHouse)(
                 houseId,
                 ownerId
             ))
