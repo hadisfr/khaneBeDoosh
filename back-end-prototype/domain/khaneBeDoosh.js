@@ -2,6 +2,7 @@
 let models = require('../models');
 const Bank = require('./bank');
 const Individual = require('./individual');
+const RealEstateAcm = require('./RealEstateAcm');
 const Sequelize = require('sequelize');
 const debug = require('debug')('khanebedoosh:domain');
 const Op = Sequelize.Op;
@@ -16,8 +17,8 @@ class KhaneBeDoosh {
             );
             this.defaultUsername  = 'behnam';
             this.realEstates = {};
-            // var realestateacm = new RealEstateAcm();
-            // this.realEstates[realestateacm.username] = realestateacm;
+            var realestateacm = new RealEstateAcm();
+            this.realEstates[realestateacm.username] = realestateacm;
             KhaneBeDoosh.instance = this;
         }
         return KhaneBeDoosh.instance;
