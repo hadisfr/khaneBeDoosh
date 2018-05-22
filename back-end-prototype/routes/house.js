@@ -42,7 +42,7 @@ router.get('/:id', (req, res) => {
     try {
         var { ownerId, houseId } = decryptHouseId(req.params.id);
         khaneBeDoosh
-            .getHouse(ownerId, houseId)
+            .getHouse(houseId, ownerId)
             .then(house => res.send(house.get('json')))
             .catch(err => {
                 debug(err.stack);

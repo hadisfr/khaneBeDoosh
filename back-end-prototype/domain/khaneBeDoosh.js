@@ -115,6 +115,7 @@ class KhaneBeDoosh {
     }
 
     async getHouse(houseId, ownerId) {
+        debug('kire khari ' + houseId + ' allah ' + ownerId);
         let house = await models.House.findOne({
             where: {
                 houseId: houseId,
