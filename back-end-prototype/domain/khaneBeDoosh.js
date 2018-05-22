@@ -5,6 +5,7 @@ const Individual = require('./individual');
 const RealEstateAcm = require('./RealEstateAcm');
 const Sequelize = require('sequelize');
 const debug = require('debug')('khanebedoosh:domain');
+const realEstateList = require('./realEstateList');
 const Op = Sequelize.Op;
 
 class KhaneBeDoosh {
@@ -16,9 +17,10 @@ class KhaneBeDoosh {
                 'a1965d20-1280-11e8-87b4-496f79ef1988'
             );
             this.defaultUsername = 'behnam';
-            this.realEstates = {};
             var realestateacm = new RealEstateAcm();
-            this.realEstates[realestateacm.username] = realestateacm;
+            realEstateList.addMember(realestateacm, realestateacm.username);
+            debug('allah ' + realEstateList.isRealEstate(realestateacm.username));
+            this.updateRealEstate(realestateacm.username);
             KhaneBeDoosh.instance = this;
         }
         return KhaneBeDoosh.instance;
@@ -37,7 +39,7 @@ class KhaneBeDoosh {
     }
 
     async getRealEstate(username) {
-        return this.realEstates[username];
+        return realEstateList.getRealEstate(username);
     }
 
     async getCurrentUser() {
@@ -54,6 +56,7 @@ class KhaneBeDoosh {
             }
         };
         let result = await models.RealEstate.findAll({ where: whereExp });
+        debug(result);
         let i;
         for (i = 0; i < result.length; i++) {
             await this.updateRealEstate(result[i].name);
@@ -61,8 +64,9 @@ class KhaneBeDoosh {
     }
 
     async updateRealEstate(id) {
-        if (this.realEstates.hasOwnProperty(id)) {
-            let thisRealEstate = this.realEstates[id];
+        if (realEstateList.isRealEstate(id)) {
+            debug('yar migooyad allah');
+            let thisRealEstate = realEstateList.getRealEstate(id);
             let newHoueses = thisRealEstate.getHouses();
             let modelRealEstate = await models.RealEstate.findOne({
                 where: {
@@ -82,13 +86,11 @@ class KhaneBeDoosh {
                 kasifnewHouses.push(newHoueses[i].modelJson);
             }
             await models.House.bulkCreate(kasifnewHouses);
-            debug('is this a thing?');
             // add new houses to db
         }
     }
 
     async searchHouses({ minArea, buildingType, dealType, maxPrice }) {
-        debug('i wonder');
         await this.updateRealEstates();
         let whereExp = {};
         if (dealType) whereExp.dealType = dealType;
@@ -141,7 +143,7 @@ class KhaneBeDoosh {
     }
 
     isRealEstate(username) {
-        return this.realEstates.hasOwnProperty(username);
+        return realEstateList.isRealEstate(username);
     }
 }
 

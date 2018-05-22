@@ -1,5 +1,4 @@
 'use strict';
-const RealEstateAcm = require('./RealEstateAcm');
 
 class RealEstateList {
     constructor() {

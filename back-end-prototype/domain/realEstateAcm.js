@@ -31,6 +31,7 @@ class RealEstateAcm extends RealEstate {
                 },
                 async () => {
                     var res = await (await fetch(this.uri)).json();
+                    this.lastTimestamp = res.expireTime;
                     return {
                         houses: res.data.map(
                             house =>
