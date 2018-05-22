@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
         {}
     );
     Individual.prototype.hasPaidForHouse = async function (houseId, ownerId) {
-        let paidHouses = await models.PaidHouse.findAll({
+        let paidHouses = await models.sequelize.models.PaidHouse.findAll({
             where: {
                 individualId: this.getDataValue('username')
             }

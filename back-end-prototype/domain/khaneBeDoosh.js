@@ -127,7 +127,6 @@ class KhaneBeDoosh {
 
     async getPhone(ownerId, houseId) {
         let currentUser = await this.getCurrentUser();
-        debug(currentUser);
         if (
             !(await (currentUser.hasPaidForHouse(houseId, ownerId)))) {
             if (
