@@ -68,16 +68,16 @@ module.exports = (sequelize, DataTypes) => {
                     return res;
                 },
                 async details() {
-                    if (
-                        this.description !== null &&
-                        this.phone !== null
-                    )
+                    if (this.description !== null && this.phone !== null)
                         return;
                     if (realEstateList.isRealEstate(this.ownerId)) {
                         let house = await (await realEstateList.getRealEstate(
                             this.ownerId
                         )).getHouse(this.houseId);
-                        await this.setDataValue('description', house.description);
+                        await this.setDataValue(
+                            'description',
+                            house.description
+                        );
                         await this.setDataValue('phone', house.phone);
                     }
                 }

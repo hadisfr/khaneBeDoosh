@@ -13,7 +13,6 @@ const PHONE_PRICE = 100;
 class KhaneBeDoosh {
     constructor() {
         if (!KhaneBeDoosh.instance) {
-            // models.House.create({houseId : 'allah', dealType: 'SELL', buildingType: 'VILLA'});
             this.bank = new Bank(
                 'http://139.59.151.5:6664/bank/pay',
                 'a1965d20-1280-11e8-87b4-496f79ef1988'
@@ -128,11 +127,10 @@ class KhaneBeDoosh {
     }
 
     async getPhone(ownerId, houseId) {
-        if (!(await this.hasPaidForHouse(houseId,ownerId))){
+        if (!(await this.hasPaidForHouse(houseId, ownerId))) {
             if (await this.payForHouse(houseId, ownerId))
                 return (await this.getHouse(houseId, ownerId)).phone;
-        }
-        else {
+        } else {
             return (await this.getHouse(houseId, ownerId)).phone;
         }
         return null;
@@ -161,14 +159,11 @@ class KhaneBeDoosh {
 
     async payForHouse(houseId, ownerId) {
         try {
-            let paidBefore = await this.hasPaidForHouse(
-                houseId,
-                ownerId
-            );
+            let paidBefore = await this.hasPaidForHouse(houseId, ownerId);
             debug('paid before ' + paidBefore);
-            let currUser =  await this.getCurrentUser();
+            let currUser = await this.getCurrentUser();
             if (!paidBefore) {
-                if(currUser.balance > PHONE_PRICE) {
+                if (currUser.balance > PHONE_PRICE) {
                     await models.PaidHouse.create({
                         individualId: this.defaultUsername,
                         ownerId: ownerId,
@@ -176,8 +171,7 @@ class KhaneBeDoosh {
                     });
                     currUser.balance -= PHONE_PRICE;
                     await currUser.save();
-                }
-                else{
+                } else {
                     throw 'Not Enough Balance';
                 }
             }

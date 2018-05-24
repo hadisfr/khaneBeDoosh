@@ -11,7 +11,7 @@ class RealEstate extends User {
         this._lastTimestamp = 0;
         this.getHouse = getHouse;
         this.getHouses = async () => {
-            let {houses, expireTime} = await getHouses();
+            let { houses, expireTime } = await getHouses();
             this._lastTimestamp = expireTime;
             return houses;
         };
@@ -42,7 +42,7 @@ class RealEstate extends User {
         var res = {};
         res.uri = this.uri;
         res.lastTimestamp = this.lastTimestamp;
-        return {...super.json, ...res};
+        return { ...super.json, ...res };
     }
 }
 

@@ -10,7 +10,7 @@ class RealEstateList {
     }
 
     addMember(member, key) {
-        (this.list)[key] = member;
+        this.list[key] = member;
     }
 
     isRealEstate(name) {
