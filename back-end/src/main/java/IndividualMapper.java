@@ -256,6 +256,5 @@ public class IndividualMapper {
                 connection.close();
         }
         return result;
-//        return true;// TODO:don't uncomment this
     }
 }

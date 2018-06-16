@@ -37,9 +37,6 @@ public class KhaneBeDoosh {
     private KhaneBeDoosh() {
         Logger logger = Logger.getLogger(KhaneBeDoosh.class.getName());
         logger.info("Start KhaneBeDoosh");
-        String salt = Utility.generateSalt();
-
-//        logger.info("allah :" + Utility.hash("maytheforcebewithyou", salt));
 
         realEstates.put(RealEstateAcm.getInstance().getUsername(), RealEstateAcm.getInstance());
     }
